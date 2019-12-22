@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>ES6 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">ES6</h2>
+            <div class="post-date">2019-06-28</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/es6.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h4 id="跟冴羽大佬比我以前那篇就是个渣渣">跟冴羽大佬比，我以前那篇就是个渣渣</h4>
+</blockquote>
+<br/>
+#### [ES6完全使用手册](https://juejin.im/post/5bfe05505188252098022400)
+<br/>
+<blockquote>
+<h3 id="1-let-和-const">1. let 和 const</h3>
+</blockquote>
+<ul>
+<li>
+<h4 id="在我们开发的时候可能认为应该默认使用let而不是var这种情况下对于需要写保护的变量要使用const">在我们开发的时候，可能认为应该默认使用let而不是var，这种情况下，对于需要写保护的变量要使用const</h4>
+</li>
+<li>
+<h4 id="然而另一种做法日益普及默认使用const只有当确实需要改变变量的值的时候才使用let这是因为大部分的变量的值在初始化之后不应再改变而预料之外的变量的修改是许多bug的来源">然而另一种做法日益普及：默认使用const,只有当确实需要改变变量的值的时候才使用let.这是因为大部分的变量的值在初始化之后不应再改变，而预料之外的变量的修改是许多bug的来源。</h4>
+</li>
+</ul>
+<blockquote>
+<p>值得一提的是  const 可以修改值 但是不允许修改绑定</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1563171827011.PNG" alt=""></figure>
+<blockquote>
+<h3 id="2模板字符串">2.模板字符串</h3>
+</blockquote>
+<ul>
+<li>
+<h4 id="模板字符串需要拼接字符串的时候尽量改成使用模板字符串">模板字符串，需要拼接字符串的时候尽量改成使用模板字符串</h4>
+</li>
+</ul>
+<pre><code>//bad
+const foo = 'this is a' + example;
+
+//good
+const foo = `this is a ${example}`;
+</code></pre>
+<ul>
+<li>
+<h4 id="标签模板-可以借助标签模板优化书写方式">标签模板 可以借助标签模板优化书写方式</h4>
+</li>
+</ul>
+<pre><code>let url = oneLine`
+	www.taobao.com/example/index.html
+	?foo=${foo}
+	&amp;bar=${bar}
+`;
+</code></pre>
+<p>2.<strong>箭头函数</strong></p>
+<pre><code>function sum2(...m){//表示不确定输入变量个数
+	let total = 0;
+	for(var i of m){
+		total+=i;
+	}
+	console.log(`total:${total}`)
+}
+sum2(4,8,9,10);
+
+let sum3 = (...m)=&gt;{
+	let total = 0;
+	for(var i of m){
+		total+=i;
+	}
+	console.log(`total:${total}`)
+}
+sum3(4,8,9,10);
+</code></pre>
+<p><br/><br/></p>
+<p>3.<strong>函数扩展</strong></p>
+<pre><code>var [x,y] = [4,8];
+console.log(...[4,8]);
+//输出为 4 8
+
+//目的:将arr1和arr2合并
+1.利用concat
+let arr1 = [1,3];let arr2 = [4,8];
+console.log(&quot;concat:&quot;+arr1.concat(arr2));
+
+2.利用数组扩展
+[...arr1,...arr2]
+
+var [x,...y] = [4,8,10,30]
+//y = [8,10,30]
+
+let [a,b,c] = &quot;ES6&quot;;
+
+let xy = [...,&quot;ES6&quot;];
+//xy = [&quot;E&quot;,&quot;S&quot;,&quot;6&quot;];
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/chrome-diao-shi">
+                  <h3 class="post-title">
+                    chrome调试
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

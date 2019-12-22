@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>前端学习路线 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">前端学习路线</h2>
+            <div class="post-date">2019-06-11</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/Front-end_learning_path.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="基础三驾马车">基础三驾马车：</h3>
+</blockquote>
+<p>首先三架马车要跑起来<strong>html css js</strong>要学好，但是初期学习的时候不建议花太多时间去背标签，用到再查就好，查询可以通过<a href="https://developer.mozilla.org/zh-CN/docs/Web">MDN</a><br/><br/><br>
+推荐一个初期入门网站<a href="https://biaoyansu.com/">表严肃</a>，缺点就是这个网站的东西有点老，在这个上面把js看完就好，不过老实讲js是核心，表严肃讲的不够，可以再看看b站上的其他js的<a href="https://www.bilibili.com/video/av53323543?from=search&amp;seid=6759301966689535607">视频</a>, 学习的时候记得把表严肃上面的<a href="https://biaoyansu.com/10.x">极简博客</a>和<a href="https://biaoyansu.com/11.x">电商网站</a>敲出来哦!<br/><br/></p>
+<blockquote>
+<h3 id="框架学习">框架学习：</h3>
+</blockquote>
+<p>然后前端就基本算是入门了，可以接触一些框架了，<a href="https://www.bootcss.com/">bootstrap</a>, css开发框架，里头有挺多好看的按钮啦，导航栏啦之类的东西，可以不用写那么多的样式就呈现挺好看的界面。<br/><br>
+然后就可以接触js的库和框架了，<a href="https://jquery.com/">jQuery</a>可以极大的简化js编程，而且里面还封装有ajax等实用工具,<a href="https://cn.vuejs.org/">vue</a>这个以构建数据驱动的web界面框架是尤雨溪捣鼓出来的，它的文档对国人相当友好，vue可以提供数据绑定，避免直接操作dom等功能，当前<a href="https://www.nowcoder.com/discuss/153822?type=1">推荐使用Vue,而暂时不学jQuery</a>,至于其他的与vue更加相似的react,angula也可以暂时跳过。<br/><br>
+vue的学习可以通过b站来进行学习，这里推荐一个老师<a href="https://search.bilibili.com/all?keyword=%E5%8F%B6%E5%BB%BA%E5%8D%8E&amp;from_source=banner_search&amp;spm_id_from=333.334.b_62616e6e65725f6c696e6b.1">叶建华</a>，这个老师讲课的逻辑性不错，整体感觉挺好。<br/></p>
+<h4 id="现在感觉大公司里技术栈用react的多但国内还是vue使用的多看自己权衡吧不过迟早都要学也没得啥子影响">现在感觉大公司里技术栈用react的多，但国内还是vue使用的多，看自己权衡吧，不过迟早都要学，也没得啥子影响。</h4>
+<br/>
+<blockquote>
+<h3 id="零散学习">零散学习：</h3>
+</blockquote>
+<p>学那些一块一块的东西的时候，可以参杂着学一些零零散散的东西，例如:</p>
+<ol>
+<li>动画库<a href="https://daneden.github.io/animate.css/">annimate.css</a></li>
+<li>填坑的<a href="https://www.cnblogs.com/zhaosijia----1234/p/9376262.html">normalize.css</a></li>
+<li>好玩的抖动库<a href="http://elrumordelaluz.github.io/csshake/">csshake</a></li>
+<li>包管理工具<a href="https://www.npmjs.cn/">npm</a>以及速度更快的淘宝镜像<a href="http://npm.taobao.org/">cnpm</a>,还有为npm填坑的<a href="https://yarn.bootcss.com/">yarn</a></li>
+<li>经常被处理的数据类型<a href="https://baike.baidu.com/item/JSON/2462549?fr=aladdin">json</a></li>
+<li>能使网站异步更新的<a href="https://www.bilibili.com/video/av22807707?from=search&amp;seid=888899966084606529"><strong>ajax</strong></a></li>
+<li>百度家的很强大的数据展示框架echarts,<a href="https://echarts.baidu.com/">echarts官网</a>,可以通过<a href="https://www.bilibili.com/video/av48008013?from=search&amp;seid=290274393053360537">这个视频</a>跟着学一下，里头一堆神奇的操作。<br/><br/></li>
+<li>git及github操作，github作为全球最大同性交友网站，不得不说内容极好极多。又要去神奇的b站啦！<a href="https://www.bilibili.com/video/av10475153?from=search&amp;seid=2693117670761065501">学会Git玩转Github</a></li>
+<li>闲着没事搭个博客啥的还是极好的对吧。 <a href="https://github.com/b3log/solo">solo一款小而美的博客系统</a></li>
+<li>提及博客就不得不说<a href="http://wuxiaolong.me/2016/10/11/markdownGuide/">markdown语法</a>了,这个是真的方便，排版真的快乐。</li>
+</ol>
+<br/>
+<blockquote>
+<h3 id="用js写后台nodejs">用js写后台,nodeJs:</h3>
+</blockquote>
+<p>这是个用js写后台代码的js运行环境，据说基于v8引擎，站在巨人的肩膀上，挺厉害的，<a href="http://nodejs.cn/">node.js中文网</a>可以了解一下,依旧是b站，神奇的b站，依旧是叶建华=&gt;<a href="https://www.bilibili.com/video/av24951408?from=search&amp;seid=17442659360413088705">视频地址</a>,老实讲这又是一个挺大的工程<br/><br/></p>
+<hr>
+<blockquote>
+<h3 id="前端进阶虽然笔者也是个弱鸡">前端进阶(虽然笔者也是个弱鸡):</h3>
+</blockquote>
+<p>css进阶：</p>
+<ol>
+<li>推荐张鑫然的《css世界》，这有个总结版的，老实讲比不得实体书，<a href="https://juejin.im/post/5ce607a7e51d454f6f16eb3d">前端基础篇之CSS世界</a>，可以参照看看再决定买不买实体书，这本书讲的基本没得css3，据说作者快有一本《css新世界》要出来了，讲的是css3的新特性。<br/><br/></li>
+</ol>
+<p>js进阶：</p>
+<ol>
+<li>ES6当然要着重学习啦,推荐阮一峰的(ECMAScript6 入门)[http://es6.ruanyifeng.com/#README]</li>
+<li>lodash源码阅读，lodash是个js实用程序库,这里推荐<a href="https://yeyuqiudeng.gitbooks.io/pocket-lodash/content/">对角大佬的lodash源码阅读</a>啦</li>
+<li>underscore 源码阅读，underscore  跟 lodash 差不多，可以多了解点 函数式编程思想啦，<a href="https://yoyoyohamapi.gitbooks.io/undersercore-analysis/content/">underscore 源码阅读</a></li>
+<li>wtfjs,里头有一堆神奇的操作，可以通过它比较深入了解到ECMA规范。<a href="https://github.com/denysdovhan/wtfjs">wtfjs</a><br>
+5.《你不知道的javaScript》上中下都很赞哦！<br>
+ps:所有的链接都是指向对应文字指向的网站的哦！一起努力吧！</li>
+</ol>
+<hr>
+<p>** 以下是一些大佬分享的学习博文</p>
+<ul>
+<li><a href="https://juejin.im/post/5d0878aaf265da1b83338f74#heading-27">8年前端开发的知识点沉淀</a></li>
+<li><a href="https://juejin.im/post/5d003f51e51d454fbe24a661">前端工作学习相关网站收集整理</a></li>
+<li><a href="https://github.com/mqyqingfeng/Blog">冴羽写博客的地方</a></li>
+</ul>
+<br/>
+<br/>
+<blockquote>
+<h3 id="写在后面大家一起加油丫前端路漫漫大家一起冲冲冲">写在后面，大家一起加油丫，前端路漫漫，大家一起冲冲冲！</h3>
+</blockquote>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/vscode_shortcuts">
+                  <h3 class="post-title">
+                    vscode 快捷操作
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

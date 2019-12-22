@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-第k小_快排 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-第k小_快排</h2>
+            <div class="post-date">2019-06-13</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-di-k-xiao-_-kuai-pai.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>快排</strong><br/><br/><br>
+要排a[0].....a[n-1]<br/><br>
+先选取一个元素（如最左侧的元素）作为中轴元素<br/><br>
+经过n-1次比较<br/><br>
+得<br/><br>
+元素&lt;=中轴  中轴元素   &gt;=中轴<br/><br>
+分析 ： Tmin(n) = 2* T(n/2)+n-1  = θ(n* logn)<br/><br>
+最坏 ： Tmax(n) = T(0)+T(n-1)+n-1 = θ(n^2)<br/><br>
+<br/><br/><br>
+快排中的分区算法（原地分区）</p>
+<pre><code>Paritition(A,p,q)
+{
+	x&lt;-A[p] ;//分支点
+	i= p//分界点的位置
+	for(j  =p;j&lt;=q;j++)
+	{
+		if(A[j]&lt;=x)//比x大的依次放左边
+		{
+			i++;
+			Swap(A[i],A[j]);//交换
+		}
+	}//end for
+	Swap(A[i],A[p]);
+	return i;
+}
+template&lt;class T&gt;
+int Partition (T *a,int p,int q)
+{
+	//对于a[p]...a[q]
+	//以a[p]作为分界元素
+	T x = a[p]; //记录下分界点的值
+	int i = p;//用于记录分界点的位置
+	for(int j = p + 1;j&lt;=q;j++)
+	{
+		if(!x&lt;a[j])
+		{
+			i++;
+			Swap(a[i],a[j]);
+		}
+	}
+	swap(a[p],a[i]);
+	return i;
+}
+template &lt;class T&gt;
+void Qsort(T *a,int l,int r)
+{
+	if(r&lt;=l)  return;
+	int m = paritition(a,l,r)l//n-1次比较
+	//l....m...r
+	Qsort(a,l,m-1);
+	Qsort(a,m+1,r);
+}
+</code></pre>
+<p><strong>第k小问题</strong><br/><br/><br>
+在一个序列或集合中找出&quot;第k小&quot;元素<br/><br>
+解题方法：类快排<br/><br>
+若 k =m 则找到  即是 a[m-1]<br/><br>
+否则或左或右的去查找<br/></p>
+<pre><code>template &lt;class T&gt;
+T kthElement( T *n, int l, int r,int k)
+{
+	//从a[l]....a[r]中找第k小
+	if(r&lt;=l)  return a[l];
+	int m = paritition(a,l,r);//分区（如原地分区）
+	int kk = m- l +1;
+	if(k==kk)  return a[m];
+	else if( k&lt;kk)
+	{
+		return kthElement(a,l,m-1,k);
+	}
+	else
+	{
+		return kthElement(a,m+1,r,k-kk);
+	}
+}
+</code></pre>
+<p>分析：</p>
+<ul>
+<li>最好：经过n-1比较分区后，分界点即是</li>
+<li>最坏：T(n) = (n-1)+T(n-1)</li>
+</ul>
+<p>设：分区后，分界点所处的位置有<strong>比例</strong>，如1/3* n,2/3* n<br>
+则 T(n) = (n-1) + T(2/3* n) = θ(n)  线性级别<br>
+<br/><br/></p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-gui-bing-pai-xu">
+                  <h3 class="post-title">
+                    algorithm-归并排序
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

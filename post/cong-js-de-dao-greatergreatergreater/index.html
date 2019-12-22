@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>从js的=== 到 &gt;&gt;&gt; | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">从js的=== 到 &gt;&gt;&gt;</h2>
+            <div class="post-date">2019-08-10</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/cong-js-de-dao-greatergreatergreater.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="有很多文章都有在看js-的-与-的区别突然-看-读lodash源码之从slice看稀疏数组与密集数组-时看到-就有想知道-与-有什么区别呢">有很多文章都有在看js 的 === 与 == 的区别，突然 看 <a href="%E8%AF%BBlodash%E6%BA%90%E7%A0%81%E4%B9%8B%E4%BB%8Eslice%E7%9C%8B%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AF%86%E9%9B%86%E6%95%B0%E7%BB%84">读lodash源码之从slice看稀疏数组与密集数组</a> 时，看到 &gt;&gt;&gt; ,就有想知道 &gt;&gt;&gt; 与 &gt;&gt; 有什么区别呢？</h3>
+</blockquote>
+<br/>
+<h4 id="从ecmascript-2019中-与-的描述大体相同">从ECMAScript 2019中 &gt;&gt; 与 &gt;&gt;&gt; 的描述大体相同，</h4>
+<br/>
+<h4 id="12941runtime-semantics-evaluation-br">12.9.4.1Runtime Semantics: Evaluation <br/></h4>
+<p>ShiftExpression : ShiftExpression&gt;&gt;AdditiveExpression</p>
+<ol>
+<li>Let lref be the result of evaluating ShiftExpression.</li>
+<li>Let lval be ? GetValue(lref).</li>
+<li>Let rref be the result of evaluating AdditiveExpression.</li>
+<li>Let rval be ? GetValue(rref).</li>
+<li>Let lnum be ? ToInt32(lval).</li>
+<li>Let rnum be ? ToUint32(rval).</li>
+<li>Let shiftCount be the result of masking out all but the least significant 5 bits of rnum, that is, compute rnum &amp; 0x1F.</li>
+<li>Return the result of performing a sign-extending right shift of lnum by shiftCount bits. The most significant bit is propagated. The result is a signed 32-bit integer.</li>
+</ol>
+<br/>
+<h4 id="12951runtime-semantics-evaluation-br">12.9.5.1Runtime Semantics: Evaluation <br/></h4>
+<p>ShiftExpression : ShiftExpression&gt;&gt;&gt;AdditiveExpression</p>
+<ol>
+<li>Let lref be the result of evaluating ShiftExpression.</li>
+<li>Let lval be ? GetValue(lref).</li>
+<li>Let rref be the result of evaluating AdditiveExpression.</li>
+<li>Let rval be ? GetValue(rref).</li>
+<li>Let lnum be ? ToUint32(lval).</li>
+<li>Let rnum be ? ToUint32(rval).</li>
+<li>Let shiftCount be the result of masking out all but the least significant 5 bits of rnum, that is, compute rnum &amp; 0x1F.</li>
+<li>Return the result of performing a zero-filling right shift of lnum by shiftCount bits. Vacated bits are filled with zero. The result is an unsigned 32-bit integer.</li>
+</ol>
+<br/>
+<hr>
+<br/>
+<h4 id="具体讲就是最后一句有区别谷歌翻译分别为">具体讲就是最后一句有区别，谷歌翻译分别为</h4>
+ <br/>
+<ol>
+<li>
+<blockquote>
+<blockquote>
+<p>为 返回通过shiftCount位执行lnum的符号扩展右移的结果。传播最重要的位。结果是带符号的32位整数。</p>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>为 返回通过shiftCount位执行lnum的零填充右移的结果。空位用零填充。结果是无符号的32位整数。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<br/>
+<blockquote>
+<h3 id="到这里就比较明确了-与-返回结果均为32位数字但是-是带符号扩展-而-是无符号位移">到这里就比较明确了，&gt;&gt; 与 &gt;&gt;&gt; 返回结果均为32位数字，但是 &gt;&gt; 是带符号扩展 ， 而 &gt;&gt;&gt; 是无符号位移</h3>
+</blockquote>
+<h4 id="搜了下无符号右移发现好像是惯例~~-emmm打扰了不过也是自己第一次不靠度娘通过规范知道的呢还是记录一下">搜了下无符号右移，发现好像是惯例，~~ emmm打扰了，不过也是自己第一次不靠度娘，通过规范知道的呢，还是记录一下。</h4>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/css-displayinline-table">
+                  <h3 class="post-title">
+                    css display:inline-table
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

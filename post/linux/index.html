@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>linux | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">linux</h2>
+            <div class="post-date">2019-06-17</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/linux.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>ls /  会出现树状目录结构<br/><br>
+ls -l 显示有多少该文件夹下有多少目录存在<br/><br>
+cd   切换目录<br/><br>
+pwd 显示目前的目录<br/><br>
+mkdir  删除一个空的目录<br/><br>
+cp  复制文件或目录<br/><br>
+rm  移除文件或目录<br/><br>
+mv 移动文件与目录，或修改文件与目录的名称<br/><br>
+mv abc.txt 1234.txt改变文件名<br/><br>
+rm -rf /var/log/httpd/access 删除</p>
+<ul>
+<li>-r 就是向下递归，不管有多少级目录，一并删除</li>
+<li>-f 就是直接强行删除，不作任何提示的意思删除文件<br/></li>
+</ul>
+<p>cd .. 有空格返回上一级<br/><br>
+cat [文件名] 显示文件内容<br/><br>
+文件基本属性<br>
+<img src="https://heihei12305.github.io/post-images/1560729932382.png" alt=""><br/></p>
+<p>mkdir [-mp] 目录名称  创建新目录</p>
+<ul>
+<li>-m : 配置文件的权限!直接配置，不需要看默认权限（umask） 例：mkdir -m 711 test</li>
+<li>-p : 帮助你直接将所需的目录（包含上一级目录）递归创建起来！<br/></li>
+</ul>
+<p>rmdir  删除空的目录<br>
+rmir [-p] 目录名称</p>
+<ul>
+<li>-p:连同上一级[空的]目录也一起删除<br/></li>
+</ul>
+<p>cp  [-adfilprsu] 来源档（source）目标档（destination）  复制文件或目录</p>
+<ul>
+<li>-a：相当于 -pdr 的意思，至于 pdr 请参考下列说明；(常用)</li>
+</ul>
+<hr>
+<p><strong>开始比较系统学习</strong>emmm<br/><br/><br>
+<strong>1. linux基础</strong><br/><br>
+目录结构  <br/></p>
+<ul>
+<li>/  根目录，下面有很多子目录  一句经典:&quot;在linux世界中，一切皆为文件。&quot;</li>
+<li>/boot 存放的是启动linux时使用的一些核心文件，包括一些连接文件以及镜像文件。</li>
+<li>/media linux系统会自动识别一些设备，例如U盘，光驱等待，当识别后，linux会把识别的设备挂载到这个目录下。</li>
+<li>/mnt 系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将外部的存储挂载在/mnt上，然后进入该目录就可以查看里的内容了。</li>
+<li>/user/loacl   这是另一个给主机额外安装软件所安装的目录，一般是通过编译源码方式安装的程序。</li>
+<li>/var 这个目录中存放着在不断扩充的东西，习惯将被修改过的目录放在这个目录下，包括各种日志文件。</li>
+</ul>
+<br/>
+<p><strong>总结一下</strong><br>
+<br/></p>
+<ol>
+<li>linux的目录中有且只有一个根目录</li>
+<li>linux的各个目录中存放的东西都是事先规划好的，不用乱发文件</li>
+<li>linux是以文件的形式管理我们的设备，因此linux系统，一切皆为文件</li>
+<li>linux的各个文件目录下存放什么内容，大家必须有一个认识</li>
+<li>学习后，你脑海中应该有一棵linux目录树</li>
+</ol>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
+                    others
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-hui-su-tu-de-zhao-se-wen-ti">
+                  <h3 class="post-title">
+                    algorithm-回溯图的着色问题
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>cssWorld-利用margin外部尺寸实现等高布局 || 利用border实现等高布局 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">cssWorld-利用margin外部尺寸实现等高布局 || 利用border实现等高布局</h2>
+            <div class="post-date">2019-08-22</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/cssworld-li-yong-margin-wai-bu-chi-cun-shi-xian-deng-gao-bu-ju.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="此布局多出现在分栏有背景色或者中间有分割线的布局中有可能左边内容多有可能右边内容多-但无论内容多少两栏背景色都和容器一样高">此布局多出现在分栏有背景色或者中间有分割线的布局中，有可能左边内容多，有可能右边内容多。但无论内容多少，两栏背景色都和容器一样高；</h3>
+</blockquote>
+<br/>
+<pre><code>margin-bottom: -9999px;
+padding-bottom: 9999px;
+</code></pre>
+<h3 id="解释-垂直方向的-margin-无法改变元素的内部尺寸但却能改变外部尺寸这里我们设置margin-bottom-9999px意味着元素的外部尺寸在垂直方向上小了9999px-默认情况下垂直方向元素上下距离都是0这种情况下也即后面元素向上移动了9999px-此时通过-padding-bottom-9999px增加元素高度正负抵消对布局层没得影响但是却使得视觉层多了9999px高度可用的背景色-再配合父元素的-overflowhidden实现了视觉上的等高布局效果">解释： 垂直方向的 margin 无法改变元素的内部尺寸，但却能改变外部尺寸，这里我们设置<code>margin-bottom:-9999px</code>意味着元素的外部尺寸在垂直方向上小了9999px。默认情况下，垂直方向元素上下距离都是0,这种情况下，也即后面元素向上移动了9999px。此时，通过 <code>padding-bottom: 9999px;</code>,增加元素高度，正负抵消，对布局层没得影响，但是却使得视觉层多了9999px高度可用的背景色。再配合父元素的 <code>overflow:hidden</code>,实现了视觉上的等高布局效果。</h3>
+<br/>
+<hr>
+<br/>
+<h4 id="效果">效果：</h4>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1566462274988.PNG" alt=""></figure>
+<br/>
+<h4 id="代码">代码：</h4>
+<pre><code>&lt;div class=&quot;column-box&quot;&gt;
+        &lt;div id=&quot;colLeft&quot; class=&quot;column-left&quot;&gt;
+            &lt;h4&gt;正方观点&lt;/h4&gt;
+            &lt;p&gt;观点1&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;colRight&quot; class=&quot;column-right&quot;&gt;
+            &lt;h4&gt;反方观点&lt;/h4&gt;
+            &lt;p&gt;观点1&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;column-box&quot;&gt;
+           &lt;div class=&quot;half&quot;&gt;
+                &lt;input type=&quot;button&quot;  id=&quot;leftMore&quot; value=&quot;更多正方观点&quot;&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;half&quot;&gt;
+                &lt;input type=&quot;button&quot;  id=&quot;rightMore&quot; value=&quot;更多反方观点&quot;&gt;
+           &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;style&gt;
+        .column-box{
+            overflow: hidden;
+            margin: auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        .column-left,
+        .column-right{
+            
+            margin-bottom: -9999px;
+            padding-bottom: 9999px;
+            float: left;
+            width: 50%;
+            color: aliceblue
+        }
+        .column-left{
+            background-color: #34538b;
+        }
+        .column-right{
+            background-color: #cd0000;
+        }
+        button,input{
+            font-size: 1em;
+            font-family: inherit;
+        }
+        p{
+            margin:0;
+        }
+        .half{
+            float: left;
+            width: 50%;
+        }
+    &lt;/style&gt;
+
+    &lt;script&gt;
+        let $ = function(id){
+            return document.getElementById(id);
+        }
+
+        let colLeft = $('colLeft'),colRight = $('colRight');
+
+        let leftMore = $('leftMore'),rightMore = $('rightMore');
+
+        let indexLeft = 1,indexRight = 1;
+
+        if(colLeft &amp;&amp; colRight &amp;&amp; leftMore &amp;&amp; rightMore){
+            leftMore.onclick = function(){
+                indexLeft++;
+                colLeft.insertAdjacentHTML('beforeend','&lt;p&gt;观点'+indexLeft+'&lt;/p&gt;');
+            };
+            rightMore.onclick = function(){
+                indexRight++;
+                colRight.insertAdjacentHTML('beforeend','&lt;p&gt;观点'+indexRight+'&lt;/p&gt;');
+            };
+        }
+    &lt;/script&gt;
+</code></pre>
+<hr>
+<br/>
+<blockquote>
+<h3 id="insertadjacenthtml">insertAdjacentHTML</h3>
+</blockquote>
+<h3 id="mdn-上这样介绍-链接">MDN 上这样介绍-&gt;<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/insertAdjacentHTML">链接</a>：</h3>
+<br/>
+<p>将指定的文本解析为HTML或XML，并将结果节点插入到DOM树中的指定位置。它不会重新解析它正在使用的元素，因此它不会破坏元素内的现有元素。这避免了额外的序列化步骤，使其比直接innerHTML操作更快。</p>
+<blockquote>
+<p><code>element.insertAdjacenHTML(position, text)</code></p>
+</blockquote>
+<br/>
+<blockquote>
+<p>position是相对于元素的位置，必须是以下字符串之一：</p>
+</blockquote>
+<ul>
+<li><code>'beforebegin'</code> 元素自身的前面</li>
+<li><code>'afterbegin'</code> 插入元素内部的第一个子节点之前</li>
+<li><code>'beforeend'</code> 插入元素内部的最后一个子节点之后</li>
+<li><code>'afterend'</code> 元素自身的后面</li>
+</ul>
+<br/>
+<blockquote>
+<p>text是要被解析成html或xml，并插入DOM树的字符串。</p>
+</blockquote>
+<br/>
+<br/>
+<blockquote>
+<h3 id="利用border实现等高布局">利用border实现等高布局:</h3>
+</blockquote>
+<p>左侧深色背景区域是由<code>border-left</code>属性生成，元素边框高度总是和元素自身高度保持一致，因此可以巧妙实现等高布局。</p>
+<br/>
+<figure data-type="image" tabindex="2"><img src="https://heihei12305.github.io/post-images/1566920215459.PNG" alt=""></figure>
+<br/>
+<p>代码：</p>
+<pre><code> &lt;div class=&quot;box&quot;&gt;
+    &lt;nav&gt;
+      &lt;h3 class=&quot;nav&quot;&gt;导航1&lt;/h3&gt;
+    &lt;/nav&gt;
+    &lt;section&gt;
+        &lt;div class=&quot;module&quot;&gt;模块1&lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;
+      &lt;input type=&quot;button&quot; id=&quot;navMore&quot; value=&quot;更多导航&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;
+        &lt;input type=&quot;button&quot; id=&quot;moduleMore&quot; value=&quot;更多模块&quot;&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;style&gt;
+    .box{
+      line-height: 40px;
+      border-left: 150px solid #333;
+      background-color: #f0f3f9;
+    }
+
+    .box &gt; nav{
+      width: 150px;
+      /* margin-left: -150px; */
+      margin:0;
+       margin-left: -150px;
+      float: left;
+      text-align: center;
+      color: #f0f3f9;
+    }
+    h3{
+      margin: 0;
+    }
+    .box &gt; section{
+      overflow:hidden;
+      text-align: center;
+    }
+    /* 消除浮动 */
+    .box::after{
+      content: &quot;&quot;;
+      display: block;
+      clear: both;
+    }
+    .container{
+      margin: auto;
+      padding: 10px 0;
+      max-width: 600px;
+      overflow: hidden;
+    }
+    .left{
+      width: 150px;
+      float: left;
+      text-align: center;
+    }
+    .right{
+      display: table-cell;
+      width: 600px;
+      text-align: center;
+    }
+  &lt;/style&gt;
+  &lt;script&gt;
+    let navMore = document.getElementById('navMore'),
+        moduleMore = document.getElementById('moduleMore');
+
+    if(navMore &amp;&amp; moduleMore){
+      let nav = document.querySelector('nav'),
+          section = document.querySelector('section');
+      let navIndex = 1,  sectionIndex = 1;
+      let rand = function(){
+        //输出样例 'f6'
+        return (Math.random()&gt; 0.5 ? 'f' : 'e') + (Math.random()+'').slice(-1);
+      };
+      navMore.onclick = function(){
+        navIndex++;
+        nav.insertAdjacentHTML('beforeEnd','&lt;h3 class=&quot;nav&quot;&gt;导航'+navIndex+'&lt;/h3&gt;');
+      }
+      moduleMore.onclick = function(){
+        sectionIndex++;
+        // 生成随机颜色
+        section.insertAdjacentHTML('beforeEnd','&lt;div class=&quot;module&quot; style=&quot;background:#'
+          +[rand(),rand(),rand()].join('')+'&quot;&gt;模块'+sectionIndex+'&lt;/div&gt;');
+      };
+    }
+  &lt;/script&gt;
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/leetcode-725-fen-ge-lian-biao">
+                  <h3 class="post-title">
+                    leetcode 725 分隔链表
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

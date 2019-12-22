@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-dp最长公共子序列及最大子段和 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-dp最长公共子序列及最大子段和</h2>
+            <div class="post-date">2019-06-13</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-dp-zui-chang-gong-gong-zi-xu-lie.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>动态规划</strong><br/><br/><br>
+<strong>动态规划的基本思想是将待求解问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，其经过分解的子问题往往不是相互独立的</strong></p>
+<ul>
+<li>其解依赖于子问题</li>
+<li>子问题的求解是重复的</li>
+<li>采用重递归出现的大量重复运算<br>
+<br/>如 Fib 数列<br/><br/><br>
+采用动态规划方法<br/></li>
+</ul>
+<ol>
+<li>构造所有子问题的一个表格</li>
+<li>采用自底向上的方法依次求解子问题</li>
+<li>也可以采用自上而下，为避免重复运算，采用 备忘录 或称为 记忆递归 <br/></li>
+</ol>
+<pre><code>F[1] = F[0] = 1;//最简单的子问题
+for(int i  = 2;i&lt;=n;i++)
+{
+	F[i] = F[i-1] + F[i-2];
+}
+
+//备忘录
+long *F = new long[n+1];
+//备忘录标志
+for(int i = 0;i&lt;=n;i++)
+{
+	F[i] = 0;
+}
+long Fi(int n)
+{
+	if(F(n)&gt;0) return F[n];
+	if(n==0||n==1)
+	{
+		F[n] = 1;
+		return F[n];
+	}
+	return F[n-1]+F[n-2];
+}
+</code></pre>
+<p><br/><strong>最长公共子序列</strong><br/></p>
+<ul>
+<li>子序列  &lt;X1,X3,X10&gt; 是一个子序列</li>
+<li>子串  Xi,Xi+1,Xi+2,Xi+3.....Xi+k   <br/><br/></li>
+</ul>
+<p>要找到  X = {x1,x2...xm } 和 Y= {y1,y2...yn} 的最长公共子序列<br/></p>
+<ul>
+<li>当 xi = yj 时，找到Xi-1和Yj-1的最长公共子序列，然后在尾部加上xi(yj）即可得X和Y的最长公共子序列。</li>
+<li>当 xi  != yj 时  找到Xi-1 和 Yj的最长子序列 和 Yj-1 和 Xi的最长子序列中的较大值<br/></li>
+</ul>
+<p>c[i][j] = 0  i=0,j=0<br/><br>
+c[i][j] = c[i-1][j-1]+1   Xi= Yj<br/><br>
+c[i][j] = max(c[i][j-1],c[i-1][j])  Xi != Yj<br/></p>
+<pre><code>void LCSLength(int m,int n,char *x,char *y,int **c,int **b)
+{
+	int i,j;
+	for( i = 1;i&lt;=m;i++)//初始化
+		c[i][0] = 0;
+	for(i = 1;i&lt;=n;i++)
+		c[0][i] = 0;
+	for(i = 1;i&lt;=m;i++)
+	{
+		for(j = 1;j&lt;=n;j++)
+		{
+			if(x[i]==y[j])
+			{
+				c[i][j] = c[i-1][j-1] + 1;
+				b[i][j] = 1;//标志位
+			}
+			else if(c[i-1][j]&gt;=c[i][j-1])
+			{
+				c[i][j] = c[i-1][j];
+				b[i][j] = 2;
+			}
+			else
+			{
+				c[i][j] = c[i][j-1];
+				b[i][j] = 3;
+			}
+		}
+	}
+}
+
+
+//打印出最长公共子序列
+void LCS(int i,int j,char *x,int **b)
+{
+	if(i==0||j==0)
+		return ;
+	if(b[i][j]==1){
+		LCS(i-1,j-1,x,b);
+		cout&lt;&lt;x[i];
+	}
+	else if(b[i][j]==2)
+		LCS(i-1,j,x,b);
+	else
+		LCS(i,j-1,x,b);
+}
+</code></pre>
+<p><br/><br/><strong>and CJdl 代码送上</strong><br/><br/></p>
+<pre><code>/*
+二维数组的解法中的最优值二维数组 K 中，每一个K[i][j]的值仅与前一列、上一行、对角线的值有关
+可将二维数组 K 压缩成一维数组 Z ，Z[j]对应 K[i][j]；Z[0]存储 K[i][j]对角线的值，Z[j-1]对应 K[i][j]前一列值 K[i][j-1]，Z[j]未改变前的值即对应 K[i][j]上一行的值K[i-1][j] 
+*/
+int LCS(string X,string Y,int m,int n,string s[]) 
+{
+	// Z 记录最优值，s 记录最优解 
+	int Z[n+1];
+	for(int i=0;i&lt;=n;i++)
+	{
+		Z[i]=0;
+		s[i]=&quot;&quot;;
+	}
+	for(int i=1;i&lt;=m;i++)
+	{
+		//Z[0]暂存K[i][j]对角线位置的最优值，s[0]暂存对角线位置的最优解 
+		Z[0]=0; 
+		s[0]=&quot;&quot;;
+		for(int j=1;j&lt;=n;j++)
+		{
+			if(X[i]==Y[j])
+			{
+				swap(s[j],s[0]);
+				swap(Z[j],Z[0]);
+				Z[j]++;
+				s[j]=s[j]+X[i];
+			}
+			else
+			{
+				Z[0]=Z[j];
+				s[0]=s[j];
+				if(Z[j]&lt;Z[j-1])
+				{
+					Z[j]=Z[j-1];
+					s[j]=s[j-1];
+				}
+			}
+		}
+	}
+	return Z[n];
+}
+</code></pre>
+<p><br/><strong>最大子段和</strong><br/><br/><br>
+问题描述:给定由n个整数(可能为非负数)组成的序列a1,a2,a3,a4......an,求该序列的子段和的最大值.<br/><br/><br>
+<strong>动态规划核心更新公式:b[j] = max(b[j-1],0)+a[j]</strong><br/></p>
+<pre><code>int MaxSum(int n,vector&lt;int&gt; &amp;a)
+{
+	vector&lt;int&gt; b(0,a.size());
+	int sum = 0,b = 0;
+	for(int i = 1;i&lt;n;i++)
+	{
+		b[i] = max(b[i-1],0) + a[i];
+		sum = max(sum,b[i]); 
+	}
+	return sum;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-di-k-xiao-_-kuai-pai">
+                  <h3 class="post-title">
+                    algorithm-第k小_快排
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

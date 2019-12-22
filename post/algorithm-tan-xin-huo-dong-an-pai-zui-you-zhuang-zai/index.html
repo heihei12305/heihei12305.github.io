@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-贪心活动安排+最优装载 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-贪心活动安排+最优装载</h2>
+            <div class="post-date">2019-06-15</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-tan-xin-huo-dong-an-pai-zui-you-zhuang-zai.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>贪心算法通过一系列的选择来得到问题的解，它所做的每个选择都是对当前状态下局部最好选择，即贪心选择。贪心算法求解问题的两个重要性质：贪心选择性质和最优子结构性质</strong><br/><br/><br>
+<strong>活动安排</strong><br/><br/><br>
+每个活动均有其开始时间与结束时间，两个活动相容，即[si,fi)与[sj,fj)交集为空.<br/></p>
+<p>求最大相容集合，即求活动数最多<br/></p>
+<p><strong>解决办法   按照结束时间排序，降序排序</strong><br/><br/></p>
+<pre><code>struct TActivity
+{
+	int id;
+	float s,f;
+	bool b; //选中最优解的标志
+	TActivity():b(false){}
+};
+bool bGreader(const TActivity &amp; x,const TActivity &amp; y)
+{  return x.f&gt;y.f; }
+
+int n  =...;
+TActivity *a  = new TActivity[n];
+std::sort(a,a+n,bGreader);
+int last = 0;//最后选中的标号
+a[0].b = true;
+for(int i = 1;i&lt;n;i++)
+{
+	if(a[i].s&gt;=a[last].f)
+	{
+		last = i;
+		a[i].b = true;
+	}
+}
+</code></pre>
+<p><br/><br/><strong>最优装载问题</strong><br/><br/><br>
+问题描述：有一批集装箱要装上一艘载重量为c的轮船，若体积不受限，求最大装载方案（指的是最多箱子数）<br/><br>
+方法：</p>
+<ol>
+<li>按重量升序排序</li>
+<li>依次装船（只要不超重）</li>
+</ol>
+<pre><code>template&lt;class Type&gt;
+void Loading(int x[],Type w[],Type c,int n)
+{
+	int *t =new int[n+1];
+	Sort(W,t,n);
+	for(int i = 1;i&lt;=n;i++)
+	{
+		x[i] = 0;
+	}
+	for(int i = 1;i&lt;=n&amp;&amp;w[t[i]]&lt;=c;i++)
+	{
+		x[t[i]] = 1;
+		c-=w[t[i]];
+	}
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-dp01-bei-bao-tan-xin-bei-bao-hui-su-bei-bao">
+                  <h3 class="post-title">
+                    algorithm-dp01背包+贪心背包
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

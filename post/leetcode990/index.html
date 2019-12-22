@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>leetcode990-并查集使用 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">leetcode990-并查集使用</h2>
+            <div class="post-date">2019-08-28</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/leetcode990.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="并查集">并查集</h3>
+</blockquote>
+<ol>
+<li>初始化<br>
+把每个点所在集合初始化为自身<br/><br>
+通常来说，这个步骤在每次使用该数据结构时只需要执行一次，无论何种实现方式，时间复杂度为O(n)。</li>
+<li>查找<br>
+查找元素所在的集合，即根节点。</li>
+<li>合并<br>
+把元素所在集合合并为一个集合。<br/><br>
+通常来说</li>
+</ol>
+<br/>
+<blockquote>
+<h3 id="990-等式方程的可满足性">990. 等式方程的可满足性：</h3>
+</blockquote>
+<p><br/>给定一个由表示变量之间关系的字符串方程组成的数组，每个字符串方程 equations[i] 的长度为 4，并采用两种不同的形式之一：&quot;a<mark>b&quot; 或 &quot;a!=b&quot;。在这里，a 和 b 是小写字母（不一定不同），表示单字母变量名。<br>
+<br/><br>
+<br/>只有当可以将整数分配给变量名，以便满足所有给定的方程时才返回 true，否则返回 false。 <br>
+<br/><br>
+<br/>示例 1：<br>
+<br/><br>
+<br/>输入：[&quot;a</mark>b&quot;,&quot;b!=a&quot;]<br>
+<br/>输出：false<br>
+<br/>解释：如果我们指定，a = 1 且 b = 1，那么可以满足第一个方程，但无法满足第二个方程。没有办法分配变量同时满足这两个方程。</p>
+<pre><code>var equationsPossible = function(equations) {
+    let i = 0;
+    let p = new Array(26).fill(0);
+    p = p.map(item=&gt;i++);//初始化
+    
+    function find(x){//标准并查集
+        if(x === p[x]){
+            return p[x];
+        }else{
+            p[x] = find(p[x]);
+            return p[x];
+        }
+    }
+    
+    
+    for(item of equations ){
+        if(item[1] === '='){
+            let r1 = find(item[0].charCodeAt()-'a'.charCodeAt());
+            let r2 = find(item[3].charCodeAt()-'a'.charCodeAt());
+            if(r1!=r2){
+                p[r2] = r1;
+            }
+        }
+    }
+    
+    for(item of equations){
+        if(item[1] === '!'){
+            let r1 = find(item[0].charCodeAt()-'a'.charCodeAt());
+            let r2 = find(item[3].charCodeAt()-'a'.charCodeAt());
+            if(r1===r2){
+                return false;
+            }
+        }
+    }
+    
+    return true;
+    
+};
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
+                    others
+                  </a>
+                
+                  <a href="https://heihei12305.github.io/tag/-_Te1R3KSt" class="tag">
+                    leetcode
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/js-li-de-~-yi-ji-jia-zhi">
+                  <h3 class="post-title">
+                    js里的 ~ 以及 假值 and &amp;&amp; || 
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>ejs-node.js | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">ejs-node.js</h2>
+            <div class="post-date">2019-06-11</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/ejs-nodejs.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>ejs js模板引擎，EJS 是一套简单的模板语言，帮你利用普通的 JavaScript 代码生成 HTML 页面。</strong><br>
+<br/><br/><br>
+所有的模板都要成长为图灵完备的语言，也就是要增加一个中间层何必呢，直接用js吧<br>
+<br/><br/><br>
+优点 ：1.快速开发  2：语法简单 3：执行速度 4：易于调试<br>
+<br/><br/></p>
+<ol>
+<li>入门
+<ul>
+<li>安装  <code>npm install ejs</code><br/><br/></li>
+<li>使用</li>
+</ul>
+<pre><code>http.createServer((req,res)=&gt;{
+	var ejs = require('ejs');//引入ejs
+	http.creatServer((req,res)=&gt;{
+		//1.读取数据
+		getDataJson((dataJson)=&gt;{//dataJson由getDataJson取得
+			//2.读取模块
+			fs.readFile(&quot;ejsStudy\\list.ejs&quot;,(err,data)=&gt;{
+				if(!err){
+					let ejsList = data.toString();//输出为.ejs中的内容
+					//3.实例化模板
+					let tmp = ejs.render(ejsList,dataJson);//输出为将json数据填入后的，跟浏览器解析后的源文件一样了
+					//4.返回页面
+					res.writeHead(200,{&quot;Content-Type&quot;:&quot;text/html;charset=UTF-8&quot;});
+					res.end(tmp);
+			}
+			else{
+					throw err;
+			}
+		});
+	});
+}.listen(80,&quot;127.0.0.1&quot;);
+</code></pre>
+<code>ejs.render(str,data,options)</code>
+<ul>
+<li>str  用来渲染数据的展示区域<br/><br/></li>
+<li>data 这个是渲染的数据，可以是对象或数组<br/><br/></li>
+<li>opstions <br/><br>
+cache 缓存编译后的函数，需要提供 filename<br/><br>
+filename 被 cache 参数用做键值，同时也用于 include 语句<br/><br>
+context 函数执行时的上下文环境<br/><br>
+compileDebug 当为 false 时不编译调试语句<br/><br>
+client 返回独立的编译后的函数<br/><br>
+delimiter 放在角括号中的字符，用于标记标签的开与闭<br/><br>
+debug 将生成的函数体输出<br/><br>
+_with 是否使用 with() {} 结构。如果为 false，所有局部数据将存储在 locals 对象上。<br/><br>
+localsName 如果不使用 with ，localsName 将作为存储局部变量的对象的名称。默认名称是 locals<br/><br>
+rmWhitespace 删除所有可安全删除的空白字符，包括开始与结尾处的空格。对于所有标签来说，它提供了一个更安全版本的 -%&gt; (在一行的中间并不会剔除标签后面的换行符)。<br/><br>
+escape 为 &lt;%= 结构设置对应的转义（escape）函数。它被用于输出结果以及在生成的客户端函数中通过 .toString() 输出。(默认转义 XML)。<br/><br>
+ps:从.json中取得json数据可以通过下述操作进行<br>
+fs.readFile(&quot;ejsStudy\tmp.json&quot;,(err,data)=&gt;{//Json文件的文件路径<br>
+if(!err)<br>
+{<br>
+let jsonData = JSON.parse(data);<br>
+callBack(jsonData);<br>
+}<br>
+else{<br>
+throw err;<br>
+}<br>
+})</li>
+</ul>
+</li>
+</ol>
+<div></div>
+	2.  ejs语法
+		*  <%     "脚本"标签，用于流程控制，无输出
+		*  <%_   删除前面的空格符
+		*  <%=  输出数据到模板（输出是转义HTML标签）
+		*  <%-   输出非转义的数据到模板
+		*  <%#  注释标签，不执行，不输出内容
+		*  <%% 输出字符串'<%'
+		*  %>    一般结束标签
+		*  -%>  删除紧随其后的换行符
+		*  _%>  将结束标签后面的空格符删除
+<p>附一个 .ejs  文件的部分</p>
+<pre><code>		&lt;body&gt;
+			&lt;% 
+				for(var i = 0;i&lt;lists.length;i++){
+			%&gt;
+			&lt;div&gt;
+				&lt;li&gt;
+					&lt;div&gt;
+						&lt;span&gt;&lt;%= (i+1) %&gt;&lt;/span&gt;
+						&lt;span&gt;
+							&lt;%= lists[i].title %&gt;
+						&lt;/span&gt;
+					&lt;/div&gt;
+					&lt;div&gt;
+						&lt;span&gt;&lt;%= lists[i].count %&gt;&lt;/span&gt;
+					&lt;/div&gt;
+				&lt;/li&gt;
+			&lt;/div&gt;
+			&lt;% 
+				}
+			%&gt;
+			&lt;span&gt;
+				&lt;%= source %&gt;
+			&lt;/span&gt;
+		&lt;/body&gt;
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/LNUW6J11_n" class="tag">
+                    node
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/Front-end_learning_path">
+                  <h3 class="post-title">
+                    前端学习路线
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

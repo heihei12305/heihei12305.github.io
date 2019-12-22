@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>js-最大安全数 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">js-最大安全数</h2>
+            <div class="post-date">2019-09-02</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-zui-da-an-quan-shu.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="leetcode5173质数排列">leetcode5173.质数排列</h3>
+</blockquote>
+<p><br/>先来道leetcode题目指路：<br>
+<br/>leetcode5173.质数排列<br>
+<br/>请你帮忙给从 1 到 n 的数设计排列方案，使得所有的「质数」都应该被放在「质数索引」（索引从 1 开始）上；你<br/>需要返回可能的方案总数。</p>
+<p><br/>让我们一起来回顾一下「质数」：质数一定是大于 1 的，并且不能用两个小于它的正整数的乘积来表示。<br>
+<br/>由于答案可能会很大，所以请你返回答案 模 mod 10^9 + 7 之后的结果即可。<br>
+<br/><br>
+<br/>输入：n = 5<br>
+<br/>输出：12<br>
+<br/>解释：举个例子，[1,2,5,4,3] 是一个有效的排列，但 [5,2,3,4,1] 不是，因为在第二种情况里质数 5 被错误地放在索引<br/>为 1 的位置上。</p>
+<p><br/>答案倒是好想，贴一下js代码：</p>
+<pre><code>var numPrimeArrangements = function(n) {
+    let baseNum = Math.pow(10,9) + 7;
+    let nums = new Array(n+1).fill(0);
+    
+    if(n &lt;= 2){ return 1; }
+    
+    nums[2] = 1;
+    
+    let PrimeNum = function(i){//为了求出[0-i]中质数个数
+        for(let j = 2;j &lt; i ;j++){
+            if(i % j === 0){
+                nums[i] = nums[i-1];
+                return ;
+            }
+        }
+        nums[i] = nums[i-1] + 1;
+    }
+    
+   let vec = new Array(n).fill(1);//为了求出i的全排列
+    for(let i = 2;i&lt;n ;i++){
+        vec[i] = vec[i-1]*i%baseNum;
+    }
+    
+    for(let i = 3 ; i &lt;= n; i++){
+        PrimeNum(i);
+    }
+    
+    return ( vec[nums[n]]*vec[n - nums[n]] ) % baseNum;//全排列乘积
+};
+</code></pre>
+<br/>
+<p>但是，挂了emmm</p>
+<br/>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1567418251877.PNG" alt=""></figure>
+<hr>
+<blockquote>
+<p>js 中有最大安全数，精度位数是 53bit。 安全数的意思是在<code>-2^53 ~ 2^53</code>内的整数（不包括边界）</p>
+</blockquote>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://github.com/camsong/blog/issues/9">JavaScript 浮点数陷阱及解法</a>   （大赞）</li>
+<li><a href="https://www.zhihu.com/question/29010688">JavaScript 里最大的安全的整数为什么是2的53次方减一？</a></li>
+</ol>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/cssworld-mo-gui-shu-xing-float-or-ji-suo-bu-yu-clear">
+                  <h3 class="post-title">
+                    cssWorld-魔鬼属性float || 己所不欲clear
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

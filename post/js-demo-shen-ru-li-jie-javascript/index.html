@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>js--demo-待整理-深入理解JavaScript | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">js--demo-待整理-深入理解JavaScript</h2>
+            <div class="post-date">2019-10-19</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-demo-shen-ru-li-jie-javascript.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>typeof主要用于原始值，instanceof主要用于对象。<br/></p>
+<p>typeof null 返回object是一个不能去修正的bug，因为这会破坏现有代码，但这并不代表null是一个对象。</p>
+<br/>
+<p>函数声明具有提升特性——它们地实体会被移动到所在作用域地开始处。这使得我们可以引用后面声明地函数。</p>
+<pre><code>function foo(){
+	bar();
+	function bar(){
+	
+	}
+}
+</code></pre>
+<p>有时候你会想要引入一个新的作用域，例如，防止一个变量变成全局变量。在JavaScript中，不能用块来做，必须使用函数。IIFE可以把函数做当类似的方式来使用。</p>
+<br/>
+<p>JavaScript的本质可以概括如下：</p>
+<ul>
+<li>它是动态的：
+<ul>
+<li>许多东西可以改变。例如，你可以在对象被创建之后自由地添加或者删除对象的属性（字段）。你可以直接创建对象，而无须先创建一个对象工厂（例如，一个类）。</li>
+</ul>
+</li>
+<li>它是动态类型
+<ul>
+<li>变量和属性值可以保存任意类型。</li>
+</ul>
+</li>
+<li>它是函数式和面向对象的。
+<ul>
+<li>JavaScript编程语言支持两种范式：函数式编程（一类函数，闭包，部分程序通过bind()，数组对象内建map()以及reduce()等）以及面向对象编程（可变状态，对象，继承等）</li>
+</ul>
+</li>
+<li>它静默失败
+<ul>
+<li>JavaScript直到ECMAScript3之前都没有异常处理。这就解释了为什么语言经常静默失败并自动转换argument和操作符：它最初不抛出异常。</li>
+</ul>
+</li>
+<li>它部署的是开源代码
+<ul>
+<li>JavaScript总是以JavaScript引擎编译并且以开源发布。源代码的好处是灵活的交付格式和抽象不同引擎之前的差异。有两种技术来保证文件足够小：压缩（主要是gzip）和精简（通过重命名变量，删除注释等操作使得源代码更加小巧）</li>
+</ul>
+</li>
+<li>它是网络平台的一部分
+<ul>
+<li>JavaScript是一个如此重要的网络平台（HTML5 API，DOM等）以致于人们很容易遗忘，即使没有后者前者也可以正常使用，然而，JavaScript更多地用于非浏览器的设置（诸如node.js）这些变得越来越明显。</li>
+</ul>
+</li>
+</ul>
+<br/>
+<p>Ajax载入的两大基石包括：在背后异步加载内容（通过XMLHttpRequest），以及动态更新当前网页（通过动态HTML）。相比之前每次都要刷新页面，这是一个相当大的易用性改善。</p>
+<br/>
+<p>自动分号插入：</p>
+<p>ASI帮助解析器来确定语句的结束。通常情况下会是分号，ASI在遇到如下情形时也会认定语句结束。</p>
+<ul>
+<li>行结束符后（如换行符）跟着一个非法token</li>
+<li>遇到一个结束的花括号</li>
+<li>文件已达结尾</li>
+</ul>
+<p>在调用数字变量的方法时，区分是浮点数的小数点还是调用方法的点运算符是非常重要的。因此，你不可以书写类似<code>1.toString()</code>这样的代码；你必须使用另一种方式：</p>
+<pre><code>1..toString()
+1 .toString()
+(1).toString()
+1.0.toString()
+</code></pre>
+<br/>
+<blockquote>
+<h3 id="严格模式">严格模式</h3>
+</blockquote>
+<p>注意：</p>
+<ul>
+<li>启用严格模式可能会破坏现有代码</li>
+<li>细心打包：在合并或者压缩代码的时候，必须留心观察需要启动严格模式的时候它是否被关掉，反之亦然。</li>
+</ul>
+<p>特性：</p>
+<ul>
+<li>在严格模式中，所有变量都必须被显式声明。这有助于防止拼写错误。在宽松模式中，未显式声明的变量将会创建一个全局变量。</li>
+<li>在严格模式中，函数只能在顶部声明或者在另一个函数内立即声明。</li>
+</ul>
+<pre><code>function strictFunc(){
+	'use strict';
+	{
+		//syntaxError:
+		function nested(){
+			
+		}
+	}
+}
+</code></pre>
+<p>上面的代码是无效的，因为函数需要被创建于包围函数的作用域中，而不是在块内。你可以通过一个变量声明和函数表达式在块内创建函数：</p>
+<pre><code>function strictFunc(){
+	'use strict'
+	{
+		var nested = fucntion(){
+			
+		};
+	}
+}
+</code></pre>
+<ul>
+<li>对参数的规定更加严格：参数禁止同名，因为会存在与参数同名的局部变量。</li>
+<li>arguments对象拥有更少的属性：<code>arguments.callee</code>和<code>arguments.caller</code>被取消了，你不能指定arguments变量并且arguments不会跟踪到参数的变化（当一个参数变化时，对应的数组元素不会改变）。</li>
+<li>无方法的函数中this的值为undefined</li>
+<li>严格模式中，设置或者删除不可改变的属性会抛出异常。</li>
+<li>严格模式中不合格标识符不能删除</li>
+<li>严格模式中，eval更加简洁：要执行的字符串中声明的变量将不会被添加到eval()所在的作用域中。</li>
+<li>with语句不能被调用。编译（代码加载时）将会抛出一个语法错误。</li>
+<li>没有八进制数字，在宽松模式中，一个以0开头的数字会被解读成八进制数字,而在严格模式中则会报错</li>
+</ul>
+<pre><code>010 === 8 //true
+
+'use strict'
+010===8//Uncaught SyntaxError: Unexpected number
+</code></pre>
+<h3 id="undefined出现的场景">undefined出现的场景</h3>
+<ul>
+<li>未初始化的变量是undefined</li>
+<li>缺失参数的是undefined</li>
+<li>如果访问一个不存在的属性，会返回undefined</li>
+<li>如果函数中没有显式地返回任何值，函数会隐式返回undefined</li>
+</ul>
+<h3 id="null的出现场景">null的出现场景</h3>
+<ul>
+<li>null是原型链最顶端的元素</li>
+</ul>
+<pre><code>Object.getPrototypeOf(Object.prototype) //null
+</code></pre>
+<ul>
+<li>当字符串中没有匹配到正则表达式的结果时，<code>RegExp.prototype.exec()</code>会返回null</li>
+</ul>
+<p>大多数函数允许undefined或null来表示缺省值</p>
+<br/>
+<p>当你需要对一个原始值增加属性时，首先要对这个原始值进行包装并且给包装后的对象增加属性，当你要使用值之前需要先对它进行去包装。</p>
+<pre><code>new Boolean(true).valueOf();//true
+new Number(123).valueOf();123
+new String('abc').valueOf();//abc
+</code></pre>
+<p>将包装对象转换为原始值时只能正确地提取出数字和字符串，而布尔值则不能/</p>
+<pre><code>Boolean(new Boolean(false));//true
+Number(new Number(123));//123
+String(new String('abc'));//'abc'
+</code></pre>
+<p>原始值没有私有方法，但是它们会从各自的包装器中借调方法：</p>
+<pre><code>'abc'.charAt  === String.prototype.charAt
+</code></pre>
+<p>宽松模式和严格模式会以不同的方式处理&quot;借调&quot;过程。在宽松模式下，原始值会在运行过程中转换为包装器：</p>
+<pre><code>String.prototype.sloppyMethod = function () {
+	console.log(typeof this);//object
+	console.log(this instanceof String); //true
+};
+''.sloppyMethod()//call the above method
+</code></pre>
+<p>在严格模式中，对包装器原型方法的调用是透明的。</p>
+<pre><code>String.prototype.strictMethod = function () {
+	'use strict';
+	console.log(typeof this);//string
+	console.log(this instanceof String);//false
+}
+''.strictMethod(); //call the above method
+</code></pre>
+<p>void expr 中 expr会被执行，并返回undefined。</p>
+<pre><code>void 0 //undefined
+void 4+7 //same as (void 4) + 7  NaN
+</code></pre>
+<p>type null 的历史: 第一代JavaScript引擎中的JavaScript值表示为32位的字符。最低的3位作为一种标识，表示值是对象，整数，浮点数或者布尔值（正如你所了解的那样，即使这些早期的引擎，都已经尽可能把数字存储为整数了）。<br/></p>
+<p>对象的标识是000。而为了表示null值，引擎使用了机器语言NULL指针，该字符的所有位都是0。而typeof就是检测位的标志位，这就是为什么它会认为null是一个对象。</p>
+<br/>
+<p>JavaScript对所有的数字只有一种类型：它把所有的数字都作为浮点数。不过如果小数点后没有数字，这个点也不会显示出来。</p>
+<br/>
+<p>大部分JavaScript引擎会在内部做优化并区分浮点数字和整数。</p>
+<br/>
+<p>比较parseFloat()和Number()如下：</p>
+<ul>
+<li>对非字符使用parseFloat()的效率较低，因为在解析之前它会将参数强制转换为字符串。因此，许多被Number()转换成实际的数字的值被parseFloat()转换成了NaN.</li>
+</ul>
+<pre><code>parseFloat(true) // same as ParseFloat('true')
+//NaN
+Number(true) //1
+</code></pre>
+<ul>
+<li>parseFloat()会一直解析到最后一个合法的字符，这意味着最后得到的可能是不想要得到的结果。</li>
+</ul>
+<pre><code>parseFloat('123.45#')//123.45
+Number('123.45#') //NaN
+</code></pre>
+<ul>
+<li>parseFloat()会忽略开头的空格，并且在非法的字符（包括空格）前停止；Number()会忽略开头和结尾的空格（不过其他非法的字符都会导致NaN）。</li>
+</ul>
+<br/>
+<p>判断两个0不同的权威方法是除以0。因此，一个用来检测-0的函数大概会是这样：</p>
+<pre><code>function isNegativeZero(x) {
+	return x === 0 &amp;&amp; ( 1/x &lt;0 );
+}
+isNegativeZero(-0) //true
+</code></pre>
+<p>利用二进制或Or(|)：如果掩码，即第二个操作数为0，那么不会改变任何位，结果为第一个操作数，被强制转换成了一个有符号的32位整数。这是执行且用于这种强制转换的典型方式。</p>
+<pre><code>function ToInt32(x) {
+	return x|0;
+}
+</code></pre>
+<p>移位操作符：如果移动0位，移位操作的结果位第一个操作数，它被强制转换成了32位整数。</p>
+<pre><code>function ToInt32(x){
+	return x &lt;&lt; 0;
+}
+ToInt32(Math.pow(2,31)-1)//2147483647
+ToInt32(Math.pow(2,31))//-2147483648
+</code></pre>
+<h3 id="是否应该使用位运算操作符强制转换整数br">是否应该使用位运算操作符强制转换整数？<br/></h3>
+<p>需要评估牺牲代码可读性的性能提升是否值当。还要注意位操作符只限于32位，这通常不是必须的而且也没什么用。使用除Math.abs()之外的其他Math函数可能是更好的选择，也更容易理解。</p>
+<br/>
+<p>求余操作符（%）不是取模：取余操作符的结果通常和第一个操作数的符号相同（而取模和第二个操作数的符号相同）。</p>
+<p>位运算移位操作符：</p>
+<ul>
+<li>number &lt;&lt; digitCount(左移)</li>
+<li>number &gt;&gt; digitCount(有符号右移)</li>
+<li>number &gt;&gt;&gt; digitCount(无符号右移)</li>
+</ul>
+<br/>
+<p>对于基数10，toString()在两种情况下使用指数标注（在小数点前只有1个数字）。* * 第一种情况，如果在一个数字的小数点前有多于21个数字</p>
+<ul>
+<li>第二种情况，如果一个数字以0开头，并且紧随了超过多于5个0和一个非0的数字。</li>
+</ul>
+<br/>
+<p>with语句产生的三种问题：</p>
+<ul>
+<li>性能问题：变量查找会变得很慢，因为对象是临时性地插入到作用域中的。</li>
+<li>代码可能会产生不可预期的结果：仅仅通过标识符周围的上下文，你无法预知一个标识符会指向什么。据BrendanEich的解释，这就是with被废弃的真正原因，而非是性能上的问题。<b>with可能会违背当前的代码上下文，使得程序的解析（例如安全性）变得困难而繁琐。</b></li>
+<li>代码压缩工具不会压缩with语句中的变量名。</li>
+</ul>
+<h3 id="环境变量的管理">环境：变量的管理：</h3>
+<p>当程序运行到变量所在的作用域时，变量被创建。这时它们需要一个存储的空间。而JavaScript中提供存储空间的数据结构被称为环境，它将变量名和变量的值做映射。其结构与JavaScript对象非常类似。有时候在你离开作用域时，环境还依然会存在。因此，它们是被存储于堆中，而非栈。<br/></p>
+<p>变量有两种传递方式，如果有必要，有两种维度：</p>
+<ul>
+<li>动态维度：执行上下文的栈：
+<ul>
+<li>函数每调用一次，就会创建一个新的环境将（变量和参数的）标识符和变量做映射。对于递归的情况，执行上下文，即环境的引用是在栈中进行管理的。这里的栈对应了调用栈。</li>
+</ul>
+</li>
+<li>词法维度：环境链：
+<ul>
+<li>为了支持这一维度，JavaScript会通过内部属性[[Scope]]来记录函数的作用域。在函数调用时，JavaScript会为这个函数所在的新作用域创建一个环境。这个环境有一个外层域（outer），它通过[[Scope]]创建并指向了外部作用域的环境。因此，在JavaScript中一直存在一个环境链，它以当前环境为起点，连接了一层外部的环境。每一个环境链最终都会在全局环境（它是所有函数初始化调用的作用域）终结。而全局环境的外部环境指向了null。</li>
+</ul>
+</li>
+</ul>
+<h3 id="prototype-在javascript中术语prototype使用意义模糊不清">prototype : 在JavaScript中术语prototype使用意义模糊不清</h3>
+<ul>
+<li>原型1 ： 原型关系 ： 一个对象可以是另一个对象的原型</li>
+</ul>
+<pre><code>var proto = {};
+var obj = Object.create(proto);
+Object.getPrototypeOf(obj) === proto; //true
+</code></pre>
+<ul>
+<li>原型2 ：prototype属性的值<br>
+每个构造函数c都有一个prototype属性，它指向一个对象。该对象成为构造函数C的所有实例的原型。</li>
+</ul>
+<pre><code>function c(){}
+Object.getPrototypeOf(new c()) === c.prototype//true
+</code></pre>
+<p>一般这两个原型的意义在上下文环境中会更加清晰。我们有必要消除歧义，然后用prototype来描述对象间的关系，因此这个名字已经通过getPrototypeOf和isPrototypeOf进入标准库。因此我们需要为prototype属性所引用的对象找一个不同的名称。一个可能称为构造函数原型(constructor prototype)，但由于构造函数也有原型，所以这也是有问题的。因此，实例原型(instance prototype)这个名称是最好的选择。</p>
+<br/>
+<pre><code>function c(){}
+c.prototype.constructor === c //true
+var o = new c();
+o.constructor;//[Function: C]
+</code></pre>
+<p>instanceof 对基本类型的值总是false</p>
+<br/>
+<p>对象不是Object的实例:<br>
+<br/></p>
+<pre><code>Object.create(null) instanceof Object //false
+Object,prototype instanceof Object //false
+</code></pre>
+<p>没有原型的对象，也即它们是大多数原型链的末端</p>
+<pre><code>Object.getPrototypeOf(Object.create(null)) //null
+Object.getPrototypeOf(Object.prototype) //null
+</code></pre>
+<p>但是typeof 可以正确的把这些对象归类为对象。</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/js-demo-dai-zheng-li-javascript-he-xin-gai-lun-ji-shi-jian">
+                  <h3 class="post-title">
+                    js-demo--待整理-JavaScript核心概论及实践
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

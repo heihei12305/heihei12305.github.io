@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>webpack基础核心概念 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">webpack基础核心概念</h2>
+            <div class="post-date">2019-09-18</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/webpack-ji-chu-he-xin-gai-nian.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <ol>
+<li>
+<p>直接打包（在bash中）<code>./node_modules/.bin/webpack</code></p>
+</li>
+<li>
+<p>在config.json中 的&quot;scripts&quot;中添加<code>build: &quot;webpack&quot;</code>,然后执行 <code>run build</code></p>
+</li>
+</ol>
+<p>原理：模块局部安装会在<code>node_modules/.bin</code>目录创建软链接</p>
+<blockquote>
+<p>Entry 用来指定 webpack 的打包入口</p>
+</blockquote>
+<ol>
+<li>单入口</li>
+</ol>
+<p>适合单页面</p>
+<pre><code>module.exports = {
+	entry:'./path/to/my/entry/file.js'
+};
+</code></pre>
+<ol start="2">
+<li>多入口</li>
+</ol>
+<p>适合多页面场景</p>
+<pre><code>module.exports = {
+	entry:{
+		app:'./src/app.js',
+		adminApp:'./src/adminApp.js'
+	}
+};
+
+</code></pre>
+<blockquote>
+<p>Output 用来告诉webpack如何将编译后的文件输出到磁盘</p>
+</blockquote>
+<ol>
+<li>单入口配置：</li>
+</ol>
+<pre><code>module.exports = {
+	entry:'./path/to/my/entry/filr.js'
+	output:{
+		filename:'bundle.js',
+		path:_dirname+'dist'
+	}
+}
+</code></pre>
+<p>2 多入口配置：</p>
+<pre><code>mudule.exports = {
+	entry:{
+		app:'./src/app.js',
+		search:'./src/search.js'
+	},
+	output:{
+		filename:'[name].js',  //通过占位符来确保文件名的唯一
+		path:_dirname+'/dist'
+	}
+};
+
+</code></pre>
+<blockquote>
+<p>Loaders 本身是个函数，接受源文件作为参数，返回转换结果。</p>
+</blockquote>
+<p>webpack 开箱即用只支持js和json两种文件类型，通过Loaders 去支持其他文件类型并且把它们转化成有效的模块，并且可以添加到依赖图中。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>babel-loader</td>
+<td>转换ES6，ES7等JS新特性语法</td>
+</tr>
+<tr>
+<td>css-loader</td>
+<td>支持.css文件的加载和解析</td>
+</tr>
+<tr>
+<td>less-loader</td>
+<td>将less文件转换成css</td>
+</tr>
+<tr>
+<td>ts-loader</td>
+<td>将TS转换成JS</td>
+</tr>
+<tr>
+<td>file-loader</td>
+<td>进行图片，字体等的打包</td>
+</tr>
+<tr>
+<td>raw-loader</td>
+<td>将文件以字符串的形式导入</td>
+</tr>
+<tr>
+<td>thread-loader</td>
+<td>多进程打包JS和CSS</td>
+</tr>
+</tbody>
+</table>
+<pre><code>const path = require('path');
+
+module.exports = {
+	output: {
+		filename:'bundle.js'
+	},
+	module: {
+		rules:[
+			{test:/\.txt$/,use:'raw-loader'} //test指定匹配规则，use指定使用的loader名称
+		]
+	}
+};
+</code></pre>
+<blockquote>
+<p>Plugins 用于 bundle 文件的优化，资源管理和环境变量注入，作用于整个构建过程</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CommonsChunkPlugin</td>
+<td>将chunks相同的模块代码提取成公共js</td>
+</tr>
+<tr>
+<td>CleanWebpackPlugin</td>
+<td>清理构建目录</td>
+</tr>
+<tr>
+<td>ExtractTextWebpackPlugin</td>
+<td>将css从bundle文件里提取成一个独立的css文件</td>
+</tr>
+<tr>
+<td>CopyWebpackPlugin</td>
+<td>将文件或者文件夹拷贝到构建的输出目录</td>
+</tr>
+<tr>
+<td>HtmlWebpackPlugin</td>
+<td>创建html文件去承载输出的bundle</td>
+</tr>
+<tr>
+<td>UglifyjsWebpackPlugin</td>
+<td>压缩JS</td>
+</tr>
+<tr>
+<td>ZipWebpackPlugin</td>
+<td>将打包出的资源生成一个zip包</td>
+</tr>
+</tbody>
+</table>
+<pre><code>const path = require('path');
+
+module.exports = {
+	output:{
+		filename:'bundle.js'
+	},
+	plugins;[
+		new HtmlWebpackPlugin({template:'./src/index.html'})//放到plugins数组里
+	]
+};
+
+</code></pre>
+<blockquote>
+<p>Mode 用来指定当前的构建环境是： production,development 还是 none</p>
+</blockquote>
+<p>设置mode可以使用webpack内置的函数，默认值为production</p>
+<br/>
+<ul>
+<li>Mode的内置函数的功能</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>development</td>
+<td>设置<code>process.env.NODE_ENV</code>的值为<code>development</code>.开启<code>NamedChunksPlugin</code>和<code>NamedModulesPlugin</code></td>
+</tr>
+<tr>
+<td>production</td>
+<td>设置<code>process.env.NODE_ENV</code>的值为<code>production</code>.开启<code>FlagDependcyUsagePlugin</code>,<code>FlagIncludedChunksPlugin</code>,<code>ModuleConcatenationPlugin</code>,<code>NoEmitOnErrorsPlugin</code>,<code>OccurrenceOrderPlugin</code>,<code>SiderEffectsFlagPlugin</code>和<code>TerserPlugin</code>.</td>
+</tr>
+<tr>
+<td>none</td>
+<td>不开启任何优化选项</td>
+</tr>
+</tbody>
+</table>
+<br/>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/js-this-ji-zhi">
+                  <h3 class="post-title">
+                    js-this机制
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

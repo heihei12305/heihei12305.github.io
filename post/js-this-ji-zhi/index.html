@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>js-this机制 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">js-this机制</h2>
+            <div class="post-date">2019-09-06</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-this-ji-zhi.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="js-最复杂的机制之一this终于来了">js 最复杂的机制之一，this终于来了！</h3>
+</blockquote>
+<br/>
+<h3 id="1-调用位置寻找调用位置最重要的是分析调用栈为了到达当前执行位置所调用的所有函数-我们关心的调用位置就在当前正在执行的函数的前一个调用中">1. 调用位置：寻找调用位置最重要的是分析调用栈（为了到达当前执行位置所调用的所有函数）。我们关心的调用位置就在当前正在执行的函数的前一个调用中。</h3>
+<pre><code>function first() {
+	//当前调用栈是： first
+	//因此，当前调用位置是全局作用域
+	
+	console.log(&quot;first&quot;) ;
+	second(); //&lt;-- second 的调用位置
+}
+
+
+function second() {
+	//当前调用位置是 first -&gt; second
+	// 因此，当前调用位置在 first 中
+	
+	console.log('second');
+	third(); // third调用位置
+}
+
+function third() {
+	//当前调用位置在 first -&gt; second -&gt; third
+	// 当前调用位置在 second 中
+	
+	console.log(&quot;third&quot;);
+}
+
+first(); // first调用位置
+</code></pre>
+<br/>
+<h3 id="2-绑定规则">2. 绑定规则：</h3>
+<ul>
+<li>
+<h3 id="默认规则">默认规则：</h3>
+</li>
+</ul>
+<p>独立函数调用时，可以把这条规则看作是无法应用其他规则时的默认规则。</p>
+<pre><code>function foo() {
+	console.log(this.a)
+}
+
+var a  = 1;
+
+foo(); // 1
+
+</code></pre>
+<p>解释：</p>
+<ul>
+<li><code>foo()</code>是直接使用不带任何修饰的函数引用进行调用的，因此只能使用默认绑定，无法应用其他规则。</li>
+<li>如果使用严格模式，则不能将全局变量用于默认绑定，因此this会绑定到<code>undefined</code>
+<ul>
+<li>虽然this的绑定规则完全取决于调用位置，但是只有foo()运行在非<code>struct mode</code>时，默认绑定才能绑定到全局对象；在严格模式下调用<code>foo()</code>则不影响默认绑定；</li>
+</ul>
+</li>
+</ul>
+<pre><code>function foo(){
+	console.log(this.a);
+}
+var a = 2;
+(function(){
+	&quot;use strict&quot;;
+	
+	foo(); // 2
+});
+</code></pre>
+<br/>
+<ul>
+<li>
+<h3 id="隐式绑定">隐式绑定</h3>
+</li>
+</ul>
+<p>另外一条需要考虑的规则是调用位置是否有上下文对象，或者说是否被某个对象拥有或者包含，不过这种说法可能会造成一些误导。</p>
+<pre><code>function foo(){
+	console.log( this.a );
+}
+
+var obj = {
+	a : 2,
+	foo : foo
+}
+
+obj.foo(); //2
+
+</code></pre>
+<p>需要注意的是，无论直接在obj中定义，还是先定义再添加为引用属性，这个函数严格来说都不属于obj对象。</p>
+<br/>
+<p>然而，调用位置会使用obj上下文来引用函数，因此你可以说函数被调用时obj对象&quot;拥有&quot;或者&quot;包含&quot;函数引用。</p>
+<br/>
+<p>对象属性引用链中只有上一层或者说最后一层在调用位置中起作用。</p>
+<pre><code>function foo(){ 
+	console.log( this.a ); 
+}
+
+var obj2 = {
+	a : 42,
+	foo : foo
+};
+
+var obj1 = {
+	a : 2,
+	obj2:obj2
+};
+
+obj1.obj2.foo();//42
+</code></pre>
+<br/>
+<h3 id="隐式丢失">隐式丢失</h3>
+<br/>
+<p>一个常见的this绑定问题就是被隐式绑定的函数会丢失绑定对象，也就是说它会应用默认绑定，从而将this绑定到全局对象或者undefined上，取决于是否是严格模式。</p>
+<br/>
+<pre><code>function foo(){
+	console.log( this.a );
+}
+
+var obj = {
+	a : 2,
+	foo : foo
+};
+
+var bar = obj.foo; //函数别名
+
+var a = 'global';
+
+bar();//'global'
+</code></pre>
+<p>虽然bar是<code>obj.foo</code>的一个引用，但是实际上，它引用的是foo函数本身，因此此时的<code>bar()</code>其实是一个不带任何修饰的函数调用，因此应用了默认绑定。</p>
+<br/>
+<pre><code>function foo(){
+	console.log( this.a );
+}
+
+function doFoo(fn){
+	// fn 其实引用的是foo
+	fn();
+}
+
+var obj = {
+	a : 2,
+	foo : foo
+};
+
+var a = &quot;global&quot;;
+doFoo( obj.foo );//'global'
+
+</code></pre>
+<p>参数传递其实就是一种隐式赋值，因此我们传入函数时也会被隐式赋值，所以结果和上一个例子一样。</p>
+<br/>
+<p>如果把函数传入语言内置函数而不是传入自己定义的函数，结果是一样的，没有区别。<br>
+<br/></p>
+<pre><code>function foo(){
+	console.log(this.a);
+}
+
+var obj = {
+	a:2,
+	foo:foo
+};
+
+var a = &quot;global&quot; //a是全局对象的属性
+
+setTimeout( obj.foo ,100);//'global'
+
+</code></pre>
+<p>JavaScript 环境中内置的<code>setTimeout()</code>函数实现和下面的伪代码类似：</p>
+<pre><code>function setTimeout(fn,delay){
+	//等待delay毫秒
+	fn(); // &lt;--调用位置
+}
+
+</code></pre>
+<p>回调函数丢失 this 绑定是非常常见的。除此之外，调用回调函数的函数可能会修改this,在一些流行的JavaScript库中处理器常会把回调函数的this强制绑定到触发事件的DOM元素上。</p>
+<ul>
+<li>
+<h3 id="显式绑定">显式绑定</h3>
+</li>
+<li>
+<p>call 和 apply方法</p>
+</li>
+</ul>
+<p>它们的第一个参数是一个对象，是给this准备的，接着在调用函数时将其绑定到this。因此你可以直接指定this的绑定对象。</p>
+<br/>
+<pre><code>function foo() {
+	console.log( this.a ); 
+}
+
+var obj = {
+	a:2
+};
+
+foo.call( obj ); //2
+</code></pre>
+<p>通过 <code>foo.call(...)</code> ,我们可以在调用foo时强制把它的this绑定到obj上。<br/></p>
+<p>如果你传入了一个原始值（ 字符串类型，布尔类型或者数字类型）来当作this的绑定对象，这个原始值会被转换成它的对象形式，这通常被称为“装箱”。</p>
+<br/>
+<h3 id="硬绑定">硬绑定</h3>
+<pre><code>function foo(){
+	console.log( this.a );
+}
+
+var obj = {
+	a:2
+};
+
+var bar = function(){
+	foo.call(obj);
+};
+
+bar();
+
+setTimeout(bar,100); //2
+
+//硬绑定的bar不可能再修改它的this
+bar.call( window ); // 2
+//传参又没用上~~
+
+</code></pre>
+<p>硬绑定的典型应用场景就是创建一个包裹函数，负责接受参数并返回值：</p>
+<pre><code>function foo(something){
+	console.log( this.a, something);
+	return this.a + something;
+}
+
+var obj = {
+	a:2
+};
+
+var bar = function() {
+	return foo.apply( obj, arguments );
+};
+
+var b = bar( 3 );//  2 3
+console.log( b );//5
+
+</code></pre>
+<p>另一种使用方法是创建一个可以重复使用的辅助函数：</p>
+<pre><code>function foo(something){
+	console.log( this.a, something);
+	return this.a + something;
+}
+
+//简单辅助绑定函数
+function bind(fn, obj){
+	return function(){
+		return fn.apply( obj , arguments );
+	};
+}
+
+var obj = {
+	a:2
+};
+
+var bar = bind( foo ,obj );
+
+var b = bar( 3 );//2 3 
+console.log( b ); // 5
+
+</code></pre>
+<p>ES5提供了内置的方法<code>Function.prototype.bind</code>,用法如下：</p>
+<pre><code>function foo(something) {
+	console.log( this.a, something);
+	return this.a + something;
+}
+
+var obj = {
+	a:2
+};
+
+var bar = foo.bind( obj );
+var b = bar( 3 ); //2 3
+console.log( b ); // 5
+</code></pre>
+<p>bind( ... )会返回一个硬绑定的新函数，它会把你指定的参数设置为this的上下文并调用原始函数。</p>
+<br/>
+<p>第三方库的许多函数，以及JavaScript语言和宿主环境中许多新的内置函数，都提供了一个可选的参数，通常被称为“上下文”，其作用和bind(...)一样，确保你的回调函数使用指定的this.</p>
+<pre><code>function foo(el){
+	console.log( el, this.id );
+}
+
+var obj = {
+	id : &quot;awesome&quot;
+};
+
+//调用foo(...)时把this绑定到obj
+[1,2,3].forEach(foo,obj);
+//1 awesome 2 awesome 3 awesome
+
+</code></pre>
+<ul>
+<li>
+<h3 id="new绑定">new绑定</h3>
+</li>
+</ul>
+<p>在传统的面向对象的语言中，“构造函数”是类中的一些特殊方法，使用new初始化类时会调用类中的构造函数。但是JavaScript中的new的机制实际上和面向类的语言完全不同。<br/></p>
+<p>在JavaScript中，构造函数只是一些使用new操作符时被调用的函数。它们并不会属于某个类，也不会实例化一个类。实际上，它们甚至都不能说是一种特殊的函数类型，它们只是被new操作符调用的普通函数而已。</p>
+<br/>
+<p>也即，实际上并不存在所谓的“构造函数”，只有对于函数的“构造调用”。<br/></p>
+<p>使用new来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。</p>
+<ol>
+<li>创建（或者说构造）一个全新的对象。</li>
+<li>这个新对象会被执行<code>[[prototype]]</code>连接。</li>
+<li>这个新对象会绑定到函数调用的this。</li>
+<li>如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回这个新对象。</li>
+</ol>
+<pre><code>function foo(a){
+	this.a = a;
+}
+
+var bar = new foo(2);
+console.log( bar.a ); //2
+
+</code></pre>
+<p>使用new来调用foo(...)时，我们会构造一个新对象并把它绑定到foo(...)调用中的this上。new时最后一种可以影响到函数调用时this绑定行为的方法，我们称之为new绑定。</p>
+<br/>
+<ol start="3">
+<li>
+<h3 id="优先级">优先级</h3>
+</li>
+</ol>
+<p>毫无疑问，默认绑定的优先级时四条规则中最低的，所以我们可以先不考虑它。</p>
+<pre><code>function foo() {
+	console.log( this.a );
+}
+
+var obj1 = {
+	a : 2,
+	foo : foo
+}
+
+var obj2 = {
+	a : 3,
+	foo : foo
+}
+
+obj1.foo(); // 2
+obj2.foo();// 3
+
+obj1.foo.call( obj2 ); // 3
+obj2.foo.call( obj1 ); // 2
+
+</code></pre>
+<p>可以看到，显示绑定优先级更高，也就是说在判断时应当先考虑是否可以存在显示绑定。</p>
+<br/>
+<pre><code>function foo(something){
+	this.a = something;
+}
+
+var obj1 = {
+	foo: foo
+};
+
+var obj2 = {};
+
+obj1.foo(2);
+console.log( obj1.a ) ;//2
+
+obj1.foo.call( obj2, 3);
+console.log( obj2.a ) ;//3
+
+var bar = new obj1.foo(4);
+console.log( obj1.a )； // 2
+console.log( bar.a ); //4
+
+</code></pre>
+<p>可以看到 new 绑定比隐式绑定优先级高。</p>
+<br/>
+<p>new 和 call/apply 无法一起使用，因此无法通过 new foo.call(obj) 来直接进行测试，但是我们可以通过使用 硬绑定 来测试它俩的优先级。</p>
+<blockquote>
+<h3 id="被忽略的this">被忽略的this</h3>
+</blockquote>
+<p>如果你把 null 或者 undefined 作为 this 的绑定对象传入 call ，apply 或者 bind ，这些值在调用的时候会被忽略，实际应用的是默认绑定规则：</p>
+<pre><code>
+function foo(){
+	console.log( this.a );
+}
+
+var a = 2;
+
+foo.call( null ); //2
+</code></pre>
+<p>一种非常常见的做法是使用 apply(..)来“展开”一个数组，并当作参数传入一个参数，类似的，bind(..)可以对参数进行柯里化。</p>
+<pre><code>
+function foo(a,b){
+	console.log(&quot;a:&quot;+a,&quot;,b：&quot;+b;
+}
+
+//将数组“展开”成参数
+foo.apply( null ,[2,3]);//a:2,b:3
+
+//使用bind(..)进行柯里化
+let bar = foo.bind( null,2 );
+bar( 3 ); //a:2,b:3
+
+
+</code></pre>
+<br/>
+<p>总是使用 null 来忽略 this 绑定可能会产生一些副作用。默认绑定会把this绑定到全局对象，如果某个函数确实使用了this，这将导致不可预计的后果（比如修改全局对象）。</p>
+<h3 id="更安全的this">更安全的this</h3>
+<p>一种&quot;更安全&quot;的做法是传入一个特殊的对象，把this绑定到这个对象不会对你的程序产生任何副作用，就像网络一样，我们可以创建一个&quot;DMZ&quot;（非军事区）对象--它就是一个空的非委托的对象。</p>
+<br/>
+<p>如果我们在忽略this绑定的时总是传入一个DMZ对象，那就什么都不用担心了，因为任何对于this的使用都会被限制在这个空对象中，不会对全局对象产生任何影响。</p>
+<br/>
+<blockquote>
+<h3 id="间接引用">间接引用</h3>
+</blockquote>
+<p>你可能创建一个函数的“间接引用”，在这种情况下，调用这个函数会应用默认绑定规则。</p>
+<pre><code>function foo(){
+	console.log( this.a );
+}
+var a = 2;
+var o = { a : 3,foo:foo};
+var p = { a : 4 };
+
+o.foo(); //3
+(p.foo = o.foo)(); //2
+</code></pre>
+<p>赋值表达式 <code>p.foo = o.foo</code>的返回值是目标函数的引用，因此调用位置是 foo()。</p>
+<br/>
+<p>注意： 对于默认绑定，决定this绑定对象的并不是调用位置是否处于严格模式，而是函数体是否处于严格模式。如果函数体处于严格模式，this会被绑定到undefined，否则this会被绑定到全局对象。</p>
+<br/>
+<blockquote>
+<h3 id="软绑定">软绑定</h3>
+</blockquote>
+<p>硬绑定这种方式可以把this强制绑定到指定的对象，防止函数调用应用默认绑定规则。硬绑定会大大降低函数的灵活性，使用硬绑定之后无法使用应隐式绑定或显式绑定来修改this。</p>
+<br/>
+<p>如果可以给默认绑定指定一个全局对象和undefined以外的值，那就可以实现和硬绑定相同的效果，同时保留隐式绑定或者显示绑定修改this的能力。</p>
+<br/>
+<pre><code>//软绑定代码
+if( !Function.prototype.softBind) { 
+	Function.prototype.softBind = function(obj){
+		var fn = this;
+		//捕获所有curried 参数
+		var curried = [].slice.call(arguments,1);
+		var bound = function() {
+			return fn.apply(
+				(!this || this === (window || global))?
+					obj : this,
+					curried.concat.apply( curried,arguments);
+			);
+			
+		};
+		bound.prototype = Object.creat( fn.prototype );
+		return bound;
+	}
+}
+
+</code></pre>
+<p>softBind(...)的原理和ES5内置的bind(..）类似。它会对指定的函数进行封装，首先检查调用时的this，如果this绑定到全局对象或者undefined，那就把指定的默认对象obj绑定到this，否则不会修改this.此外，这段代码还支持可选的柯里化。</p>
+<br/>
+<blockquote>
+<h3 id="箭头函数this词法">箭头函数this词法</h3>
+</blockquote>
+<p>箭头函数不使用this的四种标准规则，而是根据外层（函数或者全局）<br>
+作用域来决定this。</p>
+<pre><code>function foo(){
+	//返回一个箭头函数
+	return (a)=&gt;{
+		//this 继承自 foo()
+		console.log( this.a );
+	}
+}
+
+var obj1 ={
+	a : 2
+};
+
+var obj2 = {
+	a : 3
+};
+
+var bar = foo.call( obj1 );
+bar.call( obj2 ); //2
+
+</code></pre>
+<p>foo() 内部创建的箭头函数会捕获调用时foo()的 this。由于foo()的this绑定到obj1,bar(引用箭头函数)的this, bar (引用箭头函数)的this也会绑定到obj1，箭头函数的绑定无法被修改。</p>
+<br/>
+<p>箭头函数最常用于回调函数，例如事件处理器或者定时器：</p>
+<pre><code>function foo() {
+	setTimeout( ()=&gt;{
+		//这里的this在词法上继承自foo()
+		console.log( this.a );
+	},1000);
+}
+
+var obj = {
+	a:2
+}
+
+foo.call( obj ); //2 
+</code></pre>
+<p>箭头函数可以像bind()一样确保函数的this被绑定到指定对象，此外，其重要性还体现在它用更常见的词法作用域取代了传统的this机制。实际上，在ES6之前我们就已经在使用一种几乎和箭头函数完全一样的模式。</p>
+<pre><code>function foo(){
+	var self = this;
+	setTimeout( fucntion(){
+		console.log(self.a)
+	},1000)
+}
+
+var obj = {
+	a : 2
+};
+
+foo.call( obj ); //2
+</code></pre>
+<blockquote>
+<h2 id="遗留问题硬绑定无法被改绑的原理是什么">遗留问题：硬绑定无法被改绑的原理是什么？</h2>
+</blockquote>
+<pre><code>var obj1 = {
+    a:1
+
+};
+var obj2 = {
+    a:2
+};
+
+function foo(){
+    console.log(this.a);
+}
+
+var bar = foo.bind(obj1);
+bar();//1
+bar.call(obj2);//1 硬绑定无法被改绑
+
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/cssworld-jue-dui-bu-ju-positionabsolute">
+                  <h3 class="post-title">
+                    cssWorld-绝对布局position:absolute
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>react-jsx 备忘 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">react-jsx 备忘</h2>
+            <div class="post-date">2019-12-19</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/react-jsx-bei-wang.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h2 id="本文仅作备忘详情请查看官方文档">本文仅作备忘，详情请查看<a href="https://zh-hans.reactjs.org/docs/jsx-in-depth.html">官方文档</a></h2>
+</blockquote>
+<h3 id="用户定义的组件必须以大写字母开头">用户定义的组件必须以大写字母开头</h3>
+<p>以小写字母开头的元素代表一个HTML内置组件，比如<code>&lt;div&gt;</code>或者<code>&lt;span&gt;</code>会生成对应的字符串<code>'div'</code>或者<code>'span'</code>传递给<code>React.createElement</code>（作为参数）。大写字母开头的元素则对应着在JavaScript引入或自定义的组件，如<code>&lt;Foo /&gt;</code>会编译为<code>React.createElement(Foo)</code>。</p>
+<br/>
+<p>我们建议使用大写字母开头命名自定义组件。如果你确实需要一个以小写字母开头的组件，则在JSX中使用它之前，必须将它赋值给一个小写字母开头的变量。</p>
+<br/>
+<p>例如，以下的代码将无法按预期进行：</p>
+<pre><code>import React from 'react';
+
+//错误！组件应该以大写字母开头：
+function hello(props) {
+	//正确！这种&lt;div&gt;的使用是合法的，因为div是一个有效的HTML标签
+	return &lt;div&gt;Hello {props.toWhat}&lt;/div&gt;
+}
+
+function HelloWorld() {
+	//错误！React会认为&lt;hello /&gt;是一个HTML标签，因为它没有以大写字母开头；
+	return &lt;hello toWhat=&quot;World&quot; /&gt;
+}
+</code></pre>
+<h3 id="属性展开">属性展开</h3>
+<br/>
+<p>如果你已经有了一个props对象，你可以使用展开运算符<code>...</code>来在JSX中传递整个props对象。以下两个组件是等价的：</p>
+<pre><code>function App1() {
+	return &lt;Greeting firstName=&quot;Ben&quot; lastName=&quot;Hector&quot;&gt;;
+}
+function App2() {
+	const props = {firstName: 'Ben',lastName: 'Hector'};
+	return &lt;Greeting {...props} /&gt;
+}
+</code></pre>
+<p>你还可以选择只保留当前组件需要接收的props，并使用展开运算符将其他props传递下去。</p>
+<pre><code>const Button = props =&gt; {
+	const { kind,...other } = props;
+	const className = kind === 'primary' ? 'primaryButton' : 'SecondaryButton';
+	return &lt;button className={className} {...other} /&gt;;
+};
+
+const App = () =&gt; {
+	return (
+		&lt;div&gt;
+			&lt;Button kind=&quot;primary&quot; onClick={() =&gt; console.log(&quot;clicked!&quot;)}&gt;
+				Hello World!
+			&lt;/Button&gt;
+		&lt;/div&gt;
+	);
+};
+</code></pre>
+<h3 id="布尔类型null以及undefined将被忽略">布尔类型，Null以及Undefined将被忽略</h3>
+<br/>
+<p><code>false</code>,<code>null</code>,<code>undefined</code>.<code>true</code>是合法的子元素。但它们并不会被渲染。以下的JSX表达式渲染结果相同：</p>
+<pre><code>&lt;div /&gt;
+
+&lt;div&gt;&lt;/div&gt;
+
+&lt;div&gt;{false}&lt;/div&gt;
+
+&lt;div&gt;{null}&lt;/div&gt;
+
+&lt;div&gt;{undefined}&lt;/div&gt;
+
+&lt;div&gt;{true}&lt;/div&gt;
+</code></pre>
+<p>这有助于依据特定条件来渲染其他的React元素。例如，在以下JSX中，仅当<code>showHeader</code>为<code>true</code>时，才会渲染<code>&lt;Header /&gt;</code>组件：</p>
+<pre><code>&lt;div&gt;
+	{showHeader &amp;&amp; &lt;Header /&gt;}
+	&lt;Content /&gt;
+&lt;/div&gt;
+</code></pre>
+<p>值得注意的是一些&quot;falsy&quot;值，仍然会被React渲染。例如，以下代码并不会像你预期那样工作，因为当<code>props.messages</code>是空数组时，<code>0</code>仍然会被渲染：</p>
+<pre><code>&lt;div&gt;
+	{props.message.length &amp;&amp;
+		&lt;MessageList messages={props.messages} /&gt;
+	}
+&lt;/div&gt;
+</code></pre>
+<p>要解决这个问题，确保 &amp;&amp; 之前的布尔表达式总是布尔值：</p>
+<pre><code>&lt;div&gt;
+	{props.message.length &gt;0  &amp;&amp;
+		&lt;MessageList messages={props.messages} /&gt;
+	}
+&lt;/div&gt;
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/eqlIhN1ck" class="tag">
+                    react
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/react-xue-xi-bi-ji">
+                  <h3 class="post-title">
+                    react 学习笔记
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

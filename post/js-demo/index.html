@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>js--demo-待整理-JavaScript学习指南（犀牛书） | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">js--demo-待整理-JavaScript学习指南（犀牛书）</h2>
+            <div class="post-date">2019-10-16</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-demo.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <pre><code>const a = `line1
+	line2\n
+	line3
+`;
+</code></pre>
+<p>问题：除了换行还存在缩进空格，</p>
+<pre><code>const multiline = &quot;line1\n&quot;+
+	&quot;line2\n&quot;+
+	&quot;line3&quot;;
+</code></pre>
+<p>一般经验是，null是给开发者用的，而undefined则是留给JavaScript用的，用来表示未赋值的内容。<br/><br>
+在以往的经验中，只有在有意的模仿变量未被赋值的时候，才会使用undefined。当需要表示一个变量的值未知或者不适用的时候，常见的做法是使用null。<br>
+<br/></p>
+<pre><code>const s = &quot;hello&quot;;
+s.toUpperCase();//&quot;HELLO&quot;
+
+</code></pre>
+<p>在这个例子里s看起来像是一个对象（就好像它有一个函数属性，这里在访问它的函数属性）。但事实很清楚：s是基本的字符串类型。JavaScript所做的事情就是创建一个临时的string对象（该对象有一个yoUpperCase函数）。一旦这个函数被调用看，该临时对象就会被删除。</p>
+<pre><code>const s  ='hello';
+s.rating = 3;
+s.rating;//undefined
+</code></pre>
+<p>表达式是一个特殊的语句，它可以计算出一个值。可以认为非表达式语言是一条指令，而表达式语言是一个请求。<br>
+<br/></p>
+<p>也即： 你不仅仅接收到一个命令，而且执行完命令后要返回结果。<br/></p>
+<p>表达式会产生一个值。运算符就是产生这个值所要做的事情。</p>
+ <br/>
+<p>一元正号（+）强制把字符串转换成数字，或者调整那些否定的值。</p>
+ <br/>
+<p>负数取余会带上被除数的符号，而不是除数的，这就防止这个运算符成为一个真正的模运算符。<br/></p>
+<pre><code>10 % -3 //1
+-10 % 3 //-1
+</code></pre>
+<p>短路求值：如果x是false,不管y的值是什么，结果都是false。同样，对于x||y,一旦x是true,就不用在计算y的值是什么，结果都是true.</p>
+ <br/>
+<p>逗号运算符：逗号运算符可以简单的将表达式组合起来：它会按顺序执行两个表达式，并返回第二个表达式的结果。如果想执行多个表达式，但只关心最后一个表达式的结果，使用逗号运算符就很方便。</p>
+<pre><code>let [x,y] = [1,2]
+let z = (x++,y++);
+console.log(z);//2
+</code></pre>
+<p>因为JavaScript 中所有数字都是双精度，JavaScript在执行位运算前先将数字转换成32位的整形，并在返回结果之前转换回来。</p>
+ <br/>
+<p>解构赋值语句一般有声明也有赋值/对象解构也可以在一个赋值语句中完成，但是这个语句必须被括号括起来。否则，JavaScript解释器会认为左边的部分是一个代码块。</p>
+<pre><code>const obj = {a:1,b:2,c:4,d:4};
+// const {a,b,c} = obj; 
+// const a,b,c ;
+let a,b,c;
+({a,b,c} = obj);
+console.log(a,b,c);
+</code></pre>
+<p>有时候写function会这样创立：</p>
+<pre><code>const g = function f(s){
+   	 //...
+}
+</code></pre>
+<p>当一个函数被这样创立时，g这个名字具有较高的优先级，在引用函数时（在函数外），应该使用g；如果使用f引用函数则会得到一个undefined variable的错误。但我们可以在函数内部用f。也即在函数内部引用它本身的时候（称为递归调用）。</p>
+<pre><code>const g = function f(s) {
+   if(s) console.log('f stopped');
+   else {
+       console.log('continue')
+       f(true);
+   }
+}
+f(1);//error
+g(false);
+</code></pre>
+<p>bind方法可以给一个函数永久绑定this值。给函数绑定一个永久的this值可能会成为一个潜在的并且很难定位的bugs：因为使用bind之后，函数实际上已经不能再有效的使用call，apply，bind（再次）。</p>
+ <br/>
+<p>bind也可以实现柯里化效果呢。</p>
+ <br/>
+<p>形参只有在函数被调用的时候才存在（变成实参）。一个函数可能会被调用多次：每次函数调用开始时，参数才是真实存在的，在函数返回后参数就失去作用域了。</p>
+<br/>
+<p>当某些变量不复存在时，JavaScript不一定会立即回收内存：它只是标记这些条目不再需要保留，垃圾回收进程会定期去回收。此处，闭包！</p>
+<br/>
+<p>静态作用域指的是，在某个作用域内定义了某个函数（而不是调用函数），该作用域包含的所有变量也在该函数的作用域内。在JS中，静态作用域适用于全局作用域，块级作用域以及函数作用域。</p>
+<br/>
+<p>全局作用域问题：</p>
+<p>函数高度依赖它们被调用时的上下文（或者作用域）。整个程序中，任何地方的任何函数，都可以改变name的值（有意或无意）。而name和age这样的变量名太过普通，很可能被用到其他地方，用于其他用途。</p>
+<br/>
+<p>闭包：故意将某个函数定义在一个指定的作用域中，并明确地指出它对该作用域所具备访问权限，通常称为这种形式为闭包（可以认为封闭了函数地作用域）。</p>
+<pre><code>let globalFunc;
+{
+	let blockVar = 'a'; //块级作用域变量
+	globalFunc = function() {
+		console.log(blockVar);
+	}
+}
+globalFunc();
+</code></pre>
+<p>意义：无论在哪里调用globalFunc,它都有权限访问闭包内的变量，这里面隐含了一层重要的含义：当调用globalFunc时，尽管程序已经退出了变量blockVar的作用域，它仍然有权限访问它。在这个例子里，JavaScript注意到函数被定义在指定作用域内（并且这个函数可以在该作用域外被引用），所以该函数会持有该作用域的访问权限。</p>
+<br/>
+<p>在闭包内定义的函数不但可以影响闭包的生命周期，它还允许访问一些正常情况下无法访问到的信息。</p>
+<br/>
+<p>使用var声明的变量，JavaScript不会关心它是否有重复声明。</p>
+<br/>
+<p>在全局作用域中使用严格模式后，它会应用于所有脚本代码，所以使用时要谨慎一点，很多流行的网站在部署前会整合所有的脚本，一旦某个脚本文件中开启了全局严格模式，那么所有的文件都会启用这个模块。所以通常不建议在全局作用域中使用严格模式。</p>
+<br/>
+<p>当数组的元素未被赋值或已被删除时，map,filter,reduce就不会调用所传入的函数</p>
+<pre><code>const a = Array(10).map(x=&gt;5)//[empty × 10]
+
+const arr = [1,2,3,4,5]
+delete arr[2];
+arr.map(x=&gt;1);//[1, 1, empty, 1, 1]
+</code></pre>
+<p>Array.prototype.join方法接收一个分隔符作为参数（在不指定时会用逗号作为默认值），返回连接了所有元素的字符串（包含未定义和删除的元素，这些元素会变成空数组，空元素，undefined或空字符串）：</p>
+<pre><code>const a2 = [1,null,&quot;hello&quot;,&quot;world&quot;,true,undefined];
+delete a2[3];
+a2.join('-');  //&quot;1--hello--true-&quot;
+</code></pre>
+<p>如果不用WeakMap,私有属性将永远不会跑出作用域，即使是它们引用的实例。<br/></p>
+<p>使用数学符号（#）来描述原型方法已经成为一种普遍的约定。例如，大家会经常看到Car.prototype.shift被简单写成Car#shift。</p>
+<br/>
+<p>当使用关键字new来创建一个新的实例时，函数的原型属性就会变得很重要：新创建的对象可以访问其构造器的原型对象。对象实例会将它存储在自己的_proto_属性中。<br/></p>
+<p>关于原型，有一个重要的机制叫做动态调度（“调度”是方法调用的另一种说法）。当试图访问对象的某个属性或方法时，如果它不存在于当前对象中，JavaScript会检查它是否存在于对象原型中。</p>
+<br/>
+<p>静态方法（也叫类方法）：它不与实例绑定。在静态方法中，this绑定的是类本身，但通常使用类名来代替this是公认的最佳实践。</p>
+<br/>
+<p>weakMap跟Map本质上是相同的，除了以下几点：</p>
+<ul>
+<li>key 必须是对象。</li>
+<li>WeakMap中的key可以被垃圾回收。</li>
+<li>WeakMap不能迭代或者清空。</li>
+</ul>
+<p>通常，只要还有地方在引用某个对象，JavaScript就会将它保留在内存中。例如》：如果有一个对象是Map中的key,那么只要这个Map存在，这个对象就会一直在内存中。但WeakMap却不是这样。正因为如此，WeakMap不能被迭代（因为在迭代中，暴露处于垃圾回收过程中的对象，是非常危险的）</p>
+ <br/>
+<p>因为WeakMap具备这些特性，才用它存储对象实例中的私有key。</p>
+<pre><code>const SecretHolder = (function(){
+    const secrets = new WeakMap();
+    return class{
+   	 setSecret(secret){
+   		 secrets.set(this,secret);
+   	 }
+   	 getSecret(){
+   		 return secrets.get(this);
+   	 }
+    }
+})();
+
+const a = new SecretHolder();
+const b = new SecretHolder();
+
+a.setSecret('secret A');
+b.setSecret('secret B');
+
+a.getSecret();  //'secret A'
+b.getSecret();  //'secret B'
+</code></pre>
+<p>这里也可以用普通的Map，但是这样会导致SecretHolder实例中的secret永远不会被垃圾回收！</p>
+ <br/>
+<p>Weak sets只能包含对象，这些对象可能会被垃圾回收，跟WeakMap类似，WeakSet中的值不能被迭代。事实上，weak sets 的唯一用处是判断对象是不是一个set。</p>
+<br/>
+<p>错误可以在调用栈中的任一级别被捕获，如果它们没有被捕获，JavaScript解释器就会强行终止程序.这种错误被称为未被处理的异常或者未被捕获的异常，它会使程序崩溃。</p>
+<br/>
+<p>如果一个类提供了一个符号方法<code>Symbol.iterator</code>,这个方法返回一个具有迭代行为的对象（比如：对象有next方法，同时next方法返回一个包含value和done的对象），那么这个类就是可迭代的</p>
+<br/>
+<p>生成器是使用迭代器来控制其运行的函数。一般来说，函数会获取参数然后返回结果，但是函数调用者并没有办法控制该函数。当调用一个函数时，实际上是放弃了对函数的控制，直到函数返回。有了控制器，就可以在函数执行时对它进行控制。</p>
+<br/>
+<p>生成器提供了两种能力：首先，是控制函数执行的能力，使函数能够分布执行；其次，是与执行中的函数对话的能力。</p>
+<br/>
+<p>生成器与一般函数有两个不同的地方：</p>
+<ul>
+<li>函数可以通过使用域（yield），在其运行的任意时刻将控制权交还给调用方。</li>
+<li>调用生成器的时候，它并不是立即执行。而是会回到迭代器中。函数会在调用迭代器的next方法时执行。</li>
+</ul>
+<br/>
+<p>生成器可以让它和其调用者进行双向交流。表达式可以计算出值，而yield也是一个表达式，所以它一定可以计算出一个值。</p>
+<pre><code>function* interrogate() {
+	const name = yield &quot;heihei&quot;;
+	const color = yield &quot;blackblack&quot;;
+	return `${name}'s favorite color is ${color}.`;
+}
+
+const it = interrogate();
+it.next();//{value: &quot;heihei&quot;, done: false}
+it.next('hei');//{value: &quot;blackblack&quot;, done: false}
+it.next('black');//{value: &quot;hei's favorite color is black.&quot;, done: true}
+
+</code></pre>
+<p>在生成器的任何位置调用return 都会使得done的值变成true，而value的值则是任何被返回的值</p>
+<br/>
+使用生成器的东西并不总会在意done为true时value的值。如果在for...of循环中使用它，那么'c'是不会被打印的。
+<pre><code>function* abc() {
+	yield 'a';
+	yield 'b';
+	return 'c';
+}
+
+const it = abc;
+for(let l of abc()){
+	console.log(l);
+}
+//a
+//b
+</code></pre>
+<p>纯函数：针对相同的输入，函数的返回值始终一样，并且没有副作用，这样它就变成了一个纯函数。<br>
+<br/></p>
+<pre><code>通过封装函数来避免重复是一个如此基础的概念，以至于它都有自己的缩略词DRY(don't repeat yourself)
+
+&lt;br/&gt;
+</code></pre>
+<p>当函数被调用时，它是动态的，不过在调用之前，它与其他变量一样，是静态的。</p>
+<br/>
+<p>管道：好比要频繁执行的一系列独立操作。任何时候当需要按照指定顺序执行一系列函数时，管道都是一个有用的抽象原则。</p>
+<br/>
+<p>必须时刻注意回调函数的作用域：回调函数可以访问闭包内的所有内容。正是由于这个原因，回调函数的实际执行结果可能会跟预期的不一样。</p>
+<br/>
+<p>Node确定其主导地位后，一个叫错误优先回调的约定产生了。由于回调使异常处理变得很棘手，所以需要一个标准化的方式将错误传到回调中。于是就出现了在回调中使用第一个参数来接收错误对象的约定。如果该对象为null或者undefined,就表示没有错误。</p>
+<br/>
+<p>没有办法阻止回调函数被意外的调用两次，或者压根没有被调用。如果寄希望于它被调用且只被调用一次，那么结果只会令人失望，因为JavaScript中没有提供防止这种意外出现的保护机制。</p>
+<br/>
+<p>事件：事件发射器可以广播事件，任何愿意监听（或者“订阅”）这些事件的人都可以去做这件事。</p>
+<br/>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/xing-neng-you-hua-zhi-tu-pian-pian">
+                  <h3 class="post-title">
+                    性能优化之图片篇
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

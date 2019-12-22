@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>bulma | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">bulma</h2>
+            <div class="post-date">2019-07-10</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/bulma.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="概论-bulma只是css类的集合也就是它只是一个简单的css文件也就是可以跟vuereact等完美兼容">概论 bulma只是css类的集合，也就是它只是一个简单的.css文件，也就是可以跟vue，react等完美兼容</h3>
+</blockquote>
+<h4 id="首先bulma有个小的配合使用的-start-package-for-bulma-其实也就是一个可以自动编译sass的小插件啦-配合学习还是非常不错的啦-开始吧">首先，bulma有个小的配合使用的  <a href="https://github.com/jgthms/bulma-start#get-your-feet-wet">start package for bulma</a> ,其实也就是一个可以自动编译.sass的小插件啦。配合学习还是非常不错的啦。开始吧！</h4>
+<br/>
+<hr>
+<hr>
+<hr>
+<blockquote>
+<h3 id="这玩意老实讲大部分跟bootstrap差不多不过相比下优点还是蛮多的">这玩意老实讲大部分跟bootstrap差不多,不过相比下，优点还是蛮多的</h3>
+</blockquote>
+<ol>
+<li>
+<h4 id="bulma仅包含css类嘿嘿不会影响页面的样式会直接对通用标签进行两次样式">bulma仅包含css类，嘿嘿，不会影响页面的样式，会直接对通用标签进行两次样式</h4>
+<ul>
+<li>generic.sass   为页面定义基本样式</li>
+<li>.content class  可用于任何文字内容</li>
+</ul>
+</li>
+<li>
+<h4 id="bulma有39个可以单独引入的文件">bulma有39个可以单独引入的文件</h4>
+<ul>
+<li>都需要先引入 bulma/sass/utilities /_ all.sass</li>
+<li>引入布局  -&gt; 使用bulma列   sass/grid/columns.sass</li>
+<li>引入button   -&gt;   sass/elements/button.sass</li>
+</ul>
+</li>
+<li>
+<h4 id="基于-sass-map-大多数组件都有颜色变化美哭了~~">基于  sass map  ，大多数组件都有颜色变化，美哭了~~</h4>
+</li>
+</ol>
+<br/>
+<hr>
+<hr>
+<hr>
+<blockquote>
+<h3 id="重头戏-可定制">重头戏！ 可定制</h3>
+</blockquote>
+<h4 id="有415个变量存在于28个文件中由于变量都带有-b-default-b">有415个变量存在于28个文件中，由于变量都带有  <b> !default </b></h4>
+<br/>
+<h4 id="所以都是可定制的bulma有两个变量文件">所以都是可定制的,bulma有两个变量文件</h4>
+<ol>
+<li>
+<h4 id="初始变量-可通过文字定义变量">初始变量  可通过文字定义变量</h4>
+</li>
+</ol>
+<ul>
+<li>颜色：<b> $blue: hsl(217,71%,53%) </b></li>
+<li>字体大小  <b> $size-1: 3rem </b></li>
+<li>尺寸   <b> $gap: 32px  </b></li>
+<li>其他变量:  <b> $easing: ease-out</b></li>
+</ul>
+<ol start="2">
+<li>
+<h4 id="派生变量-其中变量是根据上一个文件设置的值计算的">派生变量 .其中变量是根据上一个文件设置的值计算的</h4>
+</li>
+</ol>
+<ul>
+<li>$primary: $turquoise</li>
+<li>$link: $blue</li>
+<li>$info: $cyan</li>
+</ul>
+<blockquote>
+<h3 id="要覆盖任何这些变量只需在导入bulma-之前设置它们">要覆盖任何这些变量，只需在导入Bulma 之前设置它们。</h3>
+</blockquote>
+<pre><code>@charset &quot;utf-8&quot;;
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+// Set your brand colors
+$purple: #8A4D76;
+$pink: #FA7C91;
+$brown: #757763;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$family-sans-serif: &quot;Nunito&quot;, sans-serif;
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $purple;
+$link: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$body-background-color: $beige-lighter;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+// Import only what you need from Bulma
+@import &quot;../node_modules/bulma/sass/utilities/_all.sass&quot;;
+@import &quot;../node_modules/bulma/sass/base/_all.sass&quot;;
+@import &quot;../node_modules/bulma/sass/elements/button.sass&quot;;
+@import &quot;../node_modules/bulma/sass/elements/container.sass&quot;;
+@import &quot;../node_modules/bulma/sass/elements/title.sass&quot;;
+@import &quot;../node_modules/bulma/sass/form/_all.sass&quot;;
+@import &quot;../node_modules/bulma/sass/components/navbar.sass&quot;;
+@import &quot;../node_modules/bulma/sass/layout/hero.sass&quot;;
+@import &quot;../node_modules/bulma/sass/layout/section.sass&quot;;
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1562732416982.PNG" alt=""></figure>
+<br/>
+<hr>
+<hr>
+<hr>
+<blockquote>
+<h2 id="具体使用还是看官方文档啦还是相当详细的呢httpsbulmaiodocumentation">具体使用还是看官方文档啦，还是相当详细的呢！<a href="https://bulma.io/documentation/">https://bulma.io/documentation/</a></h2>
+</blockquote>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/sass">
+                  <h3 class="post-title">
+                    sass
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

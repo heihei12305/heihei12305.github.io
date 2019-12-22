@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-二分查找，大整数乘法及矩阵的乘法 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-二分查找，大整数乘法及矩阵的乘法</h2>
+            <div class="post-date">2019-06-13</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-er-fen-cha-zhao-da-zheng-shu-cheng-fa-ji-ju-zhen-de-cheng-fa.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>1.二分查找</strong><br/><br/><br>
+有序队列  a[0],a[1],a[2],....a[n]<br/><br>
+注：可以重载一个&quot;&lt;&quot;,来表示其他的</p>
+<ul>
+<li>a&lt;b : a&lt;b</li>
+<li>a&gt;b : a&gt;b</li>
+<li>a==b : !(a&lt; b)&amp;&amp;!(b&lt;a)</li>
+<li>a&lt;=b : !(b&lt;a)</li>
+</ul>
+<p>设a[-]的类型是T,有&quot;&lt;&quot;</p>
+<pre><code>template&lt;class T&gt;
+int bisearch(T *a,int l,int r,const T &amp;v)
+{
+	if(r&lt;l)
+		return -1;
+	//l&lt;=r
+	int m = ( r + l ) / 2
+	if(v&lt;a[m])
+	{
+		return bisearch(a,l,m-1,v);
+	}
+	if(a[m]&gt;v)
+	{
+		return bisearch(a,m+1,r,v);
+	}
+	return m;
+}
+</code></pre>
+<p>算法分析：<br/><br>
+分+归并：工作量为0<br/><br>
+最好情况：1次比较<br/><br>
+最坏情况：O(logn)<br/><br/><br>
+<strong>2.大整数乘法</strong><br/><br>
+分治：a<em>b = a1</em> b1* 10^n+(a1* b2+a2* b1)* 10^(n/2)+a2* b2<br>
+T(n) = 4T(n/2) =  = n^2(没改进)<br/><br>
+令  p = a1<em>b1 , q = a2</em> b2  ,  r = (a1 + a2)* (b1 * b2)<br>
+a * b = p*10^n + ( r - p - q)*10^(n/2) + q<br>
+T(n) = 3T(n/2) = n<sup>(log2(3))&lt;n</sup>2   <br/><br/></p>
+<p>补：二分查找的应用问题</p>
+<pre><code>struct TStudent
+{
+	int id;
+	int age;
+	string name;
+};
+//由于bisearch中有&quot;&lt;&quot;,故必须对TStudent重载&quot;&lt;&quot;
+bool operator(const Tstudent &amp; x,Tstudent &amp; y)
+{
+	//按id进行比较
+	return x.id&lt;y.id;
+}
+int n = 50000;
+TStudent *a = new TStudent[n];
+for(int i = 0;i&lt;n;i++)
+{
+		a[i].id = ...;
+		a[i].new = ...;
+		a[]....
+}
+std::sort(a,0,n);
+TStudent v = new int TStudent();
+int pos = biSearch(a,0,n-1,v);
+.....
+delete[] a;//释放内存 
+</code></pre>
+<br/>
+<p><strong>3.大矩阵乘法</strong><br/><br/><br>
+分治平均:</p>
+<ul>
+<li>C11 = A11<em>B11+A12</em>B21</li>
+<li>.....</li>
+<li>C22  =A21<em>B12+A22</em>B22</li>
+</ul>
+<p>乘法-》P(n) = 8 P(n/2) = n^3<br>
+加法-》A(n) = 8A(n/2)+n^2</p>
+<p>如何改进？</p>
+<p>可改进， 改进后 7次n/2次矩阵乘法，但是加法次数增多</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-di-gui-yu-fen-zhi-ce-lue">
+                  <h3 class="post-title">
+                    algorithm-递归与分治策略
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

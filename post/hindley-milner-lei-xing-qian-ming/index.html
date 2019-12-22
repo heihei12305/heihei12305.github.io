@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>HIndley-Milner 类型签名 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">HIndley-Milner 类型签名</h2>
+            <div class="post-date">2019-11-07</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/hindley-milner-lei-xing-qian-ming.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="单纯手打方便学习回顾原文请看">单纯手打，方便学习回顾，<a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch7.html#%E5%88%9D%E8%AF%86%E7%B1%BB%E5%9E%8B">原文请看</a></h3>
+<h3 id="类型签名type-signatures">类型签名(type signatures)</h3>
+</blockquote>
+<p>类型(type)是让所有不同背景的人都能高效沟通的元语言。很大程度上，类型签名是以&quot;HIndley-Milner&quot;系统写就的。<br/><br>
+类型签名在写纯函数时所起的作用非常大。这些签名轻述着函数最不可告人的秘密。短短一行，就能暴露函数的行为和目的。类型签名还衍生出了&quot;自由定理(free theorems)&quot;的概念。因为类型是可以推断的，所以明确的类型签名并不是必要的；不过你完全可以写精确度很高的类型签名，也可以让它们保持通用，抽象。类型签名不但可以用于编译时检测(compile time checks)，还是最好的文档。所以类型签名在函数式编程中扮演着非常重要的角色--重要程度远远超过你的想象。<br/></p>
+<blockquote>
+<h3 id="hindley-milner类型签名">Hindley-Milner类型签名</h3>
+</blockquote>
+<pre><code>// capitalize :: String -&gt; String
+var capitalize = function(s){
+	return toUpperCase(head(s)) + toLowerCase(tail(s));
+}
+
+capitalize(&quot;smurf&quot;);
+// =&gt; &quot;smurf&quot;
+</code></pre>
+<p>这里，<code>capitalize</code> 接受一个 <code>String</code>并返回了一个 <code>String</code>。<br>
+<br/><br>
+在Hindley-Milner系统中，函数都写成类型<code>a-&gt;b</code>这个样子，其中<code>a</code>和<code>b</code>是任意类型的变量。因此，<code>capitalize</code>函数的类型签名可以理解成&quot;一个接受<code>String</code>返回<code>String</code>的函数&quot;。换句话说，它接受一个<code>String</code>类型作为输入，并返回一个<code>String</code>类型的输出。<br/></p>
+<pre><code>
+// match :: Regex -&gt; string -&gt; [String]
+var match = curry(function(reg,s){
+	return s.match(reg);
+});
+
+</code></pre>
+<p>不过在还不完全了解细节的条件下，你尽可以把最后一个类型视作返回值。那么<code>match</code>函数就可以这么理解： 它接受一个<code>Regex</code>和一个<code>String</code>，返回一个<code>[String]</code>。</p>
+<br/>
+<p>对于上面的match函数我们完全可以把它的类型签名这样分组：</p>
+<br/>
+<pre><code>//match :: Regex -&gt; (String-&gt; [String])
+var match = curry(function(reg,s){
+	return s.match(reg);
+});
+</code></pre>
+<p>把最后两个类型包在括号里就能反映更多的信息了。现在我们可以看出<code>match</code>这个函数接受一个<code>Regex</code>作为参数，返回一个从<code>String</code>到<code>[String]</code>的函数。因为 curry 造成的结果就是这样：给<code>match</code>一个<code>Regex</code>，得到一个新函数，能够处理其<code>String</code>参数。</p>
+<br/>
+<p>最后：</p>
+<pre><code>// id :: a -&gt; a
+var id  = function(x){ return x; }
+
+//map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+var map = curry(function(f,xs)){
+	return xs.map(f);
+});
+</code></pre>
+<p>这里的<code>id</code>函数接受任意类型的<code>a</code>并返回一个类型的数据。和普通代码一样，我们也可以在类型签名中使用变量。把变量命名为<code>a</code>和<code>b</code>只是一种约定俗成的习惯，你可以使用任何你喜欢的名称。对于相同的变量名，其类型也一定相同。这是非常重要的原则，所以我们必须重申：<code>a -&gt; b</code>可以是从任意类型中<code>a</code>到任意类型<code>b</code>，但是<code>a -&gt; a</code>必须是同一类型。例如，<code>id</code><br>
+可以是<code>String -&gt; String</code>，也可以是<code>Number -&gt; Number</code>，但不能是<code>String -&gt; Bool</code>。</p>
+<br/>
+<p>相似地，<code>map</code>也使用了变量，只不过这里的<code>b</code>可能与<code>a</code>类型相同，也可能不相同。我们可以这么理解：<code>map</code>接受两个参数，第一个是从任意类型<code>a</code>到任意类型<code>b</code>的函数；第二个是一个数组，元素是任意类型的<code>a</code>;<code>map</code>最后返回的是一个类型<code>b</code>的数组。</p>
+<br/>
+<pre><code>// reduce :: (b -&gt;  a -&gt; b) -&gt; b -&gt; [a] -&gt; b
+var reduce = curry(function(f,x,xs){
+	return xs.reduce(f, x);
+});
+</code></pre>
+<p>&quot;here goes nothing&quot; , 可以看出它的第一个参数是一个函数，这个函数接受一个<code>b</code>和一个<code>a</code>并返回一个<code>b</code>。那么这些<code>a</code>和<code>b</code>是从哪来的呢？很简单，签名中的第二个和第三个参数就是<code>b</code>和元素为<code>a</code>的数组，所以唯一合理的假设就是这里的<code>b</code>和每一个<code>a</code>都将传给前面说的函数作为参数。我们还可以看到，<code>reduce</code>函数最后返回的结果是一个<code>b</code>，也就是说，<code>reduce</code>的第一个参数函数的输出就是<code>reduce</code>函数的输出。</p>
+ <br/>
+<blockquote>
+<h3 id="缩小可能性范围">缩小可能性范围</h3>
+</blockquote>
+<p>一旦引入一个类型变量，就会出现一个奇怪的特性叫做：parametricity。这个特性表明，函数将会以一个统一的行为作用于所有的类型。</p>
+<pre><code>// head :: [a] -&gt; a
+</code></pre>
+<p>注意看 <code>head</code>，可以看到它接受<code>[a]</code>返回<code>a</code>。我们除了知道参数是个数组，其他一概不知；所以函数的功能就只限于操作这个数组上。在它对<code>a</code>一无所知的情况下，它可能对<code>a</code>进行什么操作呢?换句话说，<code>a</code>告诉我们它不是一个特定的类型，这意味着它们可以是任意类型；那么我们的函数对每一个可能的类型的操作都必须保持统一。这就是parametricity的含义。要让我们来猜测<code>head</code>的实现的话，唯一合理的推断就是它返回数组的第一个，或者最后一个，或者某个随机的元素；当然，<code>head</code>这个命名应该能给我们一些线索。</p>
+<blockquote>
+<h3 id="自由定理">自由定理</h3>
+</blockquote>
+<p>类型签名除了能够帮助我们判断函数可能的实现，还能够给我们带来自由定理（free theorems）。</p>
+<br/>
+<pre><code>// head :: [a] -&gt; a
+compose(f,head) == compose(head, map(f));
+
+//filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+compose(map(f),filter(compose(p,f))) == compose(filter(p),map(f));
+</code></pre>
+<p>第一个例子中，等式左边说的是，先获取数组的头部，然后对它调用函数f;等式右边说的是，先对数组中的每一个元素调用f，然后再取其返回结果的头部，这两个表达式是相等的，但是前者要快得多。</p>
+<br/>
+<p>你可能会想，这不是常识么，但计算机是没有常识的。实际上，计算机必须要有一种形式化方法来自动进行类似的代码优化。数学提供了这种方法，能够形式化直观的感觉，这无疑对死板的计算机逻辑非常有用。</p>
+<br/>
+<blockquote>
+<h3 id="类型约束">类型约束</h3>
+</blockquote>
+<p>签名也可以把类型约束成一个特定的接口</p>
+<pre><code>// sort :: ord a =&gt; [a] -&gt; [a]
+</code></pre>
+<p>胖箭头左边表明的是这么一个事实：<code>a</code>一定是个<code>ord</code>对象。也就是说，<code>a</code>必须要实现<code>ord</code>接口。<code>ord</code>到底是什么？它从哪里来？在一门强类型语言中，它可能就是一个自定义的接口，能够让不同的值排序。通过这种方式，我们不仅能够获取关于<code>a</code>的更多信息，了解<code>sort</code>函数具体要干什么，而且还能限制函数的作用范围。我们把这种接口声明叫做类型约束(type constraints)</p>
+<pre><code>// assertEqual :: (Eq a , Show a) =&gt; a -&gt; a -&gt; Assertion
+</code></pre>
+<p>这个例子中有两个约束： <code>Eq</code> 和 <code>Show</code> 。它们保证了我们可以检查不同的<code>a</code>是否相等， 并在有不相等的情况下打印出其中的差异。</p>
+<blockquote>
+<h3 id="总结">总结</h3>
+</blockquote>
+<p>Hindley-Milner 类型签名在函数式编程中无处不在，它们简单易读，写起来也不复杂。但仅仅凭签名就能理解整个程序还是有一定难度的，要想精通这个技能就更要花点时间了。</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/zi-fu-chuan-zhuan-huan-cheng-er-jin-zhi-liu">
+                  <h3 class="post-title">
+                    字符串转换成二进制流
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

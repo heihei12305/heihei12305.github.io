@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>webpack文件监听及热更新原理 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">webpack文件监听及热更新原理</h2>
+            <div class="post-date">2019-11-23</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/webpack-wen-jian-jian-ting-ji-re-geng-xin-yuan-li.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="文件监听">文件监听</h3>
+</blockquote>
+<p>文件监听是在发现源码发生变化时，自动重新构建出新的输出文件。</p>
+<br/>
+<p>在webpack中开启监听模式，有两种方式：</p>
+<ul>
+<li>启动webpack命令时，带上 --watch 参数</li>
+<li>在配置 webpack.config.js中设置 watch: true</li>
+</ul>
+<h3 id="唯一缺陷每次需要手动刷新浏览器">唯一缺陷：每次需要手动刷新浏览器</h3>
+ <br/>
+<blockquote>
+<h3 id="文件监听原理分析">文件监听原理分析</h3>
+</blockquote>
+<p>轮询判断文件的最后编辑时间是否变化</p>
+<br/>
+<p>某个文件发生了变化，并不会立刻告诉监听者，而是先缓存起来，等 aggregateTimeout</p>
+<pre><code>module.export = {
+	//默认为flase，也就是不开启
+	watch: true,
+	//只有开启监听模式，watchOptions才有意义
+	watchOptions: {
+		//默认为空，不监听的文件或者文件夹，支持正则匹配
+		ignored: /node_modules/,
+		//监听到变化发生后会等300ms再去执行，默认300ms
+		aggregateTimeout: 300,
+		//判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
+		poll:1000
+	}
+}
+</code></pre>
+<blockquote>
+<h3 id="更好的方法-热更新wdswebpack-dev-server">更好的方法 热更新(wds)：webpack-dev-server</h3>
+</blockquote>
+<ul>
+<li>方法1.</li>
+</ul>
+<br/>
+<p>wds 通常与 HotModuleReplacementPlugin插件一起使用，wds的一个比较大的优势是，它没有磁盘的io,输出完之后放到内存中，而不是输出为文件，所以构建速度会有一个较大的优势。</p>
+<br/>
+<p>如果报错为 ： <code>'webpack-dev-server' 不是内部或外部命令，也不是可运行的程序 或批处理文件。</code>请先安装依赖：<code>yarn add webpack-dev-server -D</code></p>
+<br/>
+<ul>
+<li>方法2.</li>
+</ul>
+<br/>
+<p>WDM 将 webpack 输出的文件传输给服务器,使用于灵活的定制场景。</p>
+<br/>
+<pre><code>const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+
+const app = express();
+const config = require('./webpack.config.js');
+const compiler = webpack(config);
+
+app.use(webpackDevMiddleware(compiler,{
+	publicPath: config.output.publicPath
+}));
+
+app.listen(3000,function(){
+	console.log('Example app listening on post 3000\n')
+})
+</code></pre>
+<p>在这种情况下，对webpack的配置控制会更加灵活</p>
+<br/>
+<blockquote>
+<h3 id="webpack-热更新原理">webpack 热更新原理</h3>
+</blockquote>
+<ul>
+<li>Webpack Compile: 将JS编译成Bundle</li>
+<li>HMR Server： 将热更新的文件输出给HMR Runtime</li>
+<li>Bundle server: 提供文件在浏览器的访问</li>
+<li>HMR Runtime: 会被注入到浏览器，更新文件的变化</li>
+<li>bundle.js 构建输出的文件</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma">
+                  <h3 class="post-title">
+                    ES6-你真的懂symbol吗？
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

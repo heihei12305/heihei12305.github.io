@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-dp格路问题 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-dp格路问题</h2>
+            <div class="post-date">2019-06-12</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/dynamic-planning-zhi-ge-lu-wen-ti.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>1.格路问题</strong><br/><br/><br>
+<strong>！！复习算法考试所用，代码为老师课堂手写，逻辑没错，应该有点小问题，而且一看就莫得main函数，需要修改才能运行，仅供思路参考</strong><br/><br/><br>
+欲求从左下角到右上角的最短路径<br/><br/><br>
+<img src="https://heihei12305.github.io/post-images/1560338415728.jpg" alt=""><br>
+通过方法<br/><br/><br>
+使得r向右，u向上<br/><br/><br>
+1.r,r,r.....(m个)，u,u,u,u,u,u(n个)<br/><br/><br>
+2.u,u,u,u,u,u(n个)，r,r,r.....(m个)<br/><br/><br>
+一条路径为由m个r，n个u 构成的排列！共（m+n）!/(m!*n!)<br/><br/><br>
+蛮力做法构造（m+n）!/(m!+n!)个路径，需加法（m+n）!/(m!*n!)*（m+n-1）次,比较（m+n）!/(m!*n!)-1次  <br/><br/><br>
+注：（m+n）!/(m!*n!) 为<strong>指数</strong>级别<br/><br/><br>
+下面为实现代码<br/><br/></p>
+<pre><code>	template&lt;class T&gt;
+	struct TPoint{
+		T r,u;//向右，向上的距离
+		T d;//从0到此点的最短路径长
+		int from; // 0:无最短路径  1：左  2：右
+		TPoint():from(0),d(-1){}
+	}；
+	ps: struct与class区别？  只有一点  声明默认等级不同  struct-&gt;public，class-&gt;private
+	分析：p.d= {
+		0 p为起点
+		L(p).d+L(p).r  p为最底排
+		D(p).d+D(p).u   p为最左排的列
+		min(L(p).d+L(p).r,D(p).d+D(p).u)   其他
+	初始化： int m=...,n=...;
+	TPoint&lt;float&gt; **g = new TPoint&lt;float&gt; *[m+1];  实例化 行
+	for(int i = 0;i&lt;=m;i++)   实例化 每个行上的列
+	{
+			g[i] = new TPoint&lt;float&gt;[n+1];
+	}
+	//至此  实例化出g[i][j] ;  0&lt;=i&lt;=m;  0&lt;=j&lt;=n;
+	
+	//初始化二维表格
+	for(int i = 0;i&lt;=m;i++)
+	{
+		for(int j = 0;j&lt;=n;j++)
+		{
+			g[i][j].r = rand(); 
+			g[i][j].u = rand(); 
+		}
+	}
+	//DP方法（动态规划方法）
+	//1.先计算最简单的子问题
+	//最下一排
+	for(int i = 1;i&lt;=m;i++)
+	{
+		g[i][0].d = g[i-1][0].d + g[i-1][0].r;
+		g[i][0].from  = 1;//left
+	}
+	//最左一排
+	for(int j = 1;j&lt;=n;j++)
+	{
+		g[0][j].d = g[0][j-1].d + g[0][j-1].u;
+		g[0][j].from = 2;//down
+	}
+	//自顶向上依次求解问题
+	for(int j = 1;j&lt;=n;j++)
+	{
+		for(int i = 1;i&lt;=m;i++)
+		{
+			//以下计算g[i][j]
+			//定义三个引用p,l,d
+			TPoint&lt;float&gt; &amp;p = g[i][j];
+			TPoint&lt;float&gt; &amp;L = g[i-1][j];
+			TPoint&lt;float&gt; &amp;D = g[i][j-1];
+			float dL = L.d + L.r;
+			float dD = D.d + D.u;
+			if(dL&lt;dD)
+			{
+				p.d = dL;
+				p.from = 1;//left
+			}
+			else{
+				p.d = dD;
+				p.from = 2;//down
+			}
+		}
+	}
+	//构造解
+	//方法一，采用动态数组  stl 中的 vector
+	std::vector&lt;char&gt; v;
+	int i = m , j = n;
+	while(i&gt;0||j&gt;0)
+	{
+		TPoint&lt;float&gt; &amp;P = g[i][j];
+		if(p.from == 1) //左侧
+		{
+			v.push_back('r');
+			i--;
+		}
+		else
+		{
+			v.push_back('n');
+			j--;
+		}
+	}
+	//打印解 //v[k-1],v[k-2].......v[0]
+	int k = v.size();
+	for(int i = k-1;i&gt;=0;i--)
+	{
+		cout&lt;&lt;v[i];
+	}
+	//方法二 采用栈 stack
+	std::stack&lt;char&gt; s;
+	int i = m , j = n;
+	while(i&gt;=0||j&gt;=0)
+	{
+		if(g[i][j].from==1)//left
+		{
+			s.push('r');
+			i--;
+		}
+		else{
+			s.push('u');
+			j--;
+		}
+	}
+	//打印，依次出栈
+	while(!s.emptu())
+	{
+		cout&lt;&lt;s.top();
+		s.pop();
+	}
+	
+	//!!!!来到了重点    c++没有自动的内存回收机制，要手动释放
+	//清理工作，释放内存
+	for(int i = 0;i&lt;=m;i++)
+	{
+		delete[] g[i];
+	}
+	delete[] g;
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/mongodb">
+                  <h3 class="post-title">
+                    mongoDB-非关系型数据库
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

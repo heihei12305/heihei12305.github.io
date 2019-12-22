@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>js里的 ~ 以及 假值 and &amp;&amp; ||  | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">js里的 ~ 以及 假值 and &amp;&amp; || </h2>
+            <div class="post-date">2019-08-27</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-li-de-~-yi-ji-jia-zhi.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="~-它首先将值强制类型转换为32位数字然后执行字为操作非">~ -&gt; 它首先将值强制类型转换为32位数字，然后执行字为操作‘非’</h3>
+</blockquote>
+<br/>
+<h3 id="另外一种解释-返回2的补码大致等于-x1">另外一种解释： 返回2的补码，大致等于<code>-（x+1)</code></h3>
+<br/>
+<p>作用？</p>
+<ol>
+<li>-1 是一个哨位值，js的indexOf 如果没有找到就返回-1, 但是判断的时候的  <code>&gt;= 0</code> 和 <code>== -1</code> 写法不是很好，称为‘对象渗漏’，即在代码中暴露了底层的实现细节，这些细节应该被屏蔽掉。</li>
+</ol>
+<br/>
+<pre><code>//原写法：
+let a = &quot;hello world&quot;
+if(a.indexOf('j') == -1){
+	//没有找到
+}
+
+//利用~改进
+
+if(~a.indexOf('j')){
+	//没有找到
+}
+</code></pre>
+<br/>
+<ol start="2">
+<li>字位截取，我们可以用<code>~~</code>来截取数字值得小数部分。第一个执行<code>ToInt32并反转字位</code>，然后第二个~再进行一次字位反转，将所有字位反转回原来的值。</li>
+</ol>
+<pre><code>~~49.5; // 49
+~~-49.5; // -49
+</code></pre>
+<br/>
+<p><code>~~x</code> 能将值截除为一个32位整数，利用 <code>x | 0</code> 也可以实现相似的效果，但是需要考虑优先级</p>
+<br/>
+<pre><code>~~1E20 /10; //166199296
+1E20 | 0 / 10;//1661992960
+( 1E20 | 0 ) / 10;//166199296
+</code></pre>
+<hr>
+<hr>
+<hr>
+<blockquote>
+<h3 id="es5规范92定义了抽象操作toboolean列举了布尔强制类型转换所有可能出现的结果">ES5规范9.2定义了抽象操作ToBoolean,列举了布尔强制类型转换所有可能出现的结果。</h3>
+</blockquote>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>false</li>
+<li>+0,-0 和 NaN</li>
+<li>&quot;&quot;</li>
+</ul>
+<h3 id="从逻辑上说假值列表以外的都应该是真值">从逻辑上说，假值列表以外的都应该是真值。</h3>
+<ol>
+<li>除了'',其他的字符串都是真值。</li>
+</ol>
+<pre><code>let a  = 'false';
+let b = '0';
+let c = &quot;''&quot;;
+
+let d = Boolean(a &amp;&amp; b &amp;&amp; c );
+d; // true
+</code></pre>
+<ol start="2">
+<li>[],{},fucntion(){}都不在假值列表里，所以他们都是真值。</li>
+</ol>
+<pre><code>let a  = [];
+let b = {};
+let c = function(){};
+
+let d = Boolean(a &amp;&amp; b &amp;&amp; c );
+d; // true
+</code></pre>
+<br/>
+<h3 id="真值列表是无限长的我们只能根据假值列表作为参考可以理解位假值列表以外的值都是真值">真值列表是无限长的，我们只能根据假值列表作为参考，可以理解位假值列表以外的值都是真值。</h3>
+<hr>
+<blockquote>
+<h3 id="和-逻辑运算符不不不称它们为选择器运算符或者操作数选择器运算符更恰当些">|| 和 &amp;&amp; 逻辑运算符？不不不，称它们为&quot;选择器运算符&quot;或者&quot;操作数选择器运算符&quot;更恰当些。</h3>
+</blockquote>
+<p>|| 和 &amp;&amp; 首先会对第一个操作数执行条件判断，如果其不是布尔值，就先进行ToBoolean强制类型转换，然后再执行条件判断。</p>
+<br/>
+<p>对于 || 来说，如果条件判断结果为true就返回第一个操作数（a和c）的值，如果是false就返回第二个操作数的值。<br/></p>
+<p>&amp;&amp;相反的，如果条件判断结果为true就返回第二个操作数（a和c）的值，如果是false就返回第一个操作数的值。<br/></p>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1567471901799.PNG" alt=""></figure>
+<br/>
+<ol>
+<li>常用的 || 用法：设置默认值</li>
+</ol>
+<pre><code>function foo(a,b){
+    a = a || 'hello';
+    b = b || 'world';
+
+    console.log(a + ' ' + b);
+};
+
+foo(1);// '1 world'
+
+</code></pre>
+<br/>
+<ol start="2">
+<li>js代码压缩工具常用的‘守护运算符’：</li>
+</ol>
+<pre><code>
+function foo(){
+    console.log(a);
+};
+
+let a = 1;
+a &amp;&amp; foo(); 
+//当第一个操作数为真值时，&amp;&amp;才会选择第二个操作数作为返回值，即前面的表达式为后面的表达式'把关'
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/js-chuan-zhi-diao-yong-huan-shi-yin-yong-diao-yong">
+                  <h3 class="post-title">
+                    js-传值调用还是引用调用？
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

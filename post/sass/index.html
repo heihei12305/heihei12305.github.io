@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>sass | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">sass</h2>
+            <div class="post-date">2019-07-09</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/sass.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h2 id="简介-sass-是对-css-的扩展让css语言更加强大优雅">简介  Sass 是对 css 的扩展，让css语言更加强大，优雅。</h2>
+</blockquote>
+<br/>
+<blockquote>
+<h2 id="首先说说如何将sass转成css吧">首先说说如何将.sass转成.css吧</h2>
+</blockquote>
+<pre><code>//初始化
+npm init
+npm install node-sass --save-dev
+
+//添加到package.json中,其中文件样式可自定义
+&quot;scripts&quot;: {
+  &quot;css-build&quot;: &quot;node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css&quot;,
+  &quot;css-watch&quot;: &quot;npm run css-build -- --watch&quot;,
+  &quot;start&quot;: &quot;npm run css-watch&quot;
+}
+
+//启动转化
+npm run css-build
+</code></pre>
+<p>sas文件的后缀名是.scss或.sass</p>
+<br/>
+<h2 id="基础语法">基础语法</h2>
+<br/>
+<ol>
+<li>变量： Sass使用$符号来声明变量</li>
+</ol>
+<ul>
+<li>$blue:blue;</li>
+<li>直接使用<br>
+<code>div { color : $blue; }</code>
+<blockquote>
+<p>在Sass中，变量是有作用域的，类似ES6中的let，sass变量支持块级作用域(花括号{}包裹区域)，也就是有全局变量和局部变量之分<br>
+也可以使用 <b> !global </b>  将局部变量转换为全局变量<br>
+<br/></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<br/>
+<p>在sass中，&amp;表示父元素</p>
+<pre><code>$a-color: white !default
+a
+  &amp;:hover
+    color: $a-color
+//输出为
+a:hover {
+  color: white; }
+</code></pre>
+<p>当有多级嵌套样式时，&amp;表示它所以祖先元素的拼接<br>
+此外，&amp;还可以作为选择器的一部分</p>
+<pre><code>$main-color: red
+.main
+  &amp;-content
+    color: $main-color
+//输出为
+.main-content {
+  color: red; }
+</code></pre>
+<hr>
+<hr>
+<hr>
+<h3 id="注释方法">注释方法：</h3>
+<ol>
+<li>多行注释 /* */</li>
+<li>单行注释 //</li>
+<li>！多行注释：/* ! * /   通常用于添加版权信息</li>
+</ol>
+<blockquote>
+<h4 id="区别">区别  ：</h4>
+</blockquote>
+<ul>
+<li>单行注释不会输出到css文件中，但多行注释会</li>
+<li>单行注释和多行注释不会输出到压缩css文件中，但！多行注释会</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h3 id="支持运算">支持运算</h3>
+<h5 id="举个例子">举个例子</h5>
+<pre><code>$num1: 10px
+$num2: 20px
+.side
+  font-size: $num1+$num2
+  height: $num1 - $num2
+  width: $num1%$num2
+	
+输出为：
+.side {
+  font-size: 30px;
+  height: -10px;
+  width: 10px; }
+
+</code></pre>
+<blockquote>
+<p>特殊的除法,只有下面三种情况才被视为除法运算：</p>
+</blockquote>
+<ul>
+<li>如果值被圆括号包裹  （20px / 10px）</li>
+<li>如果值是算术表达式的一部分：（10px+20px/10px）</li>
+<li>如果值的一部分是变量或函数的返回值: $width / 10</li>
+</ul>
+<blockquote>
+<p>跟js一样，+还可以连接字符串</p>
+</blockquote>
+<pre><code> color: e + -resize 
+ 输出为
+ color: e-resize;
+</code></pre>
+<hr>
+<hr>
+<hr>
+<h3 id="控制语句">控制语句</h3>
+<ol>
+<li>
+<h3 id="if-类似于js中的if语句当-if-的表达式返回值不是false或者null时条件成立输出内代码">@if  类似于js中的if语句，当 @if  的表达式返回值不是false或者null时，条件成立，输出{}内代码；</h3>
+</li>
+</ol>
+<pre><code>$num3: 1
+.side-bar
+  @if $num3 &gt; 2
+    color: red
+  @else if $num3 &gt; 0
+    color: black
+  @else
+    color: blue
+		
+		输出为
+		
+		.side-bar {
+  color: black;
+</code></pre>
+<ol start="2">
+<li>
+<h3 id="for-与js类似但是语法有所不同">@for 与js类似，但是语法有所不同</h3>
+</li>
+</ol>
+<ul>
+<li>form   through</li>
+</ul>
+<pre><code>@for $num5 from 1 through 5
+  .lg-#{$num5}
+    font-size: 10px * $num5
+	
+	输出为
+	
+	.lg-1 {
+  font-size: 10px; }
+
+.lg-2 {
+  font-size: 20px; }
+
+.lg-3 {
+  font-size: 30px; }
+
+.lg-4 {
+  font-size: 40px; }
+
+.lg-5 {
+  font-size: 50px; }
+</code></pre>
+<ul>
+<li>from to</li>
+</ul>
+<pre><code>@for $num6 from 0 to 7
+  .ln-#{$num6}
+    width: 10px * $num6
+
+输出为
+
+.ln-0 {
+  width: 0px; }
+
+.ln-1 {
+  width: 10px; }
+
+.ln-2 {
+  width: 20px; }
+
+.ln-3 {
+  width: 30px; }
+
+.ln-4 {
+  width: 40px; }
+
+.ln-5 {
+  width: 50px; }
+
+.ln-6 {
+  width: 60px; }
+
+</code></pre>
+<hr>
+<hr>
+<hr>
+<ol start="3">
+<li>@each 功能与@for类似，但使用语法不同</li>
+</ol>
+<pre><code>@each $icon in user,nav,person
+  .#{$icon}-icon 
+    background-image: url('./images/#{$icon}.png')
+	输出为
+.user-icon {
+  background-image: url(&quot;./images/user.png&quot;); }
+
+.nav-icon {
+  background-image: url(&quot;./images/nav.png&quot;); }
+
+.person-icon {
+  background-image: url(&quot;./images/person.png&quot;); }
+</code></pre>
+<blockquote>
+<p>对于多维数组</p>
+</blockquote>
+<pre><code>@each $font,$size in(large-1,10px),(large-2,20px)
+  .#{$font}
+    font-size: $size
+输出为
+.large-1 {
+  font-size: 10px; }
+
+.large-2 {
+  font-size: 20px; }
+</code></pre>
+<hr>
+<hr>
+<hr>
+<h3 id="代码重用">代码重用</h3>
+<ol>
+<li>
+<h4 id="mixin">MIxin</h4>
+</li>
+</ol>
+<pre><code>@mixin clearfix
+  &amp;:after
+    content: &quot;&quot;
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+
+.mi
+  @include clearfix
+	输出为
+	
+.mi:after {
+	content: &quot;&quot;;
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden; }
+
+</code></pre>
+<ol start="2">
+<li>
+<h4 id="mixin-还可以带参数和默认值">Mixin 还可以带参数和默认值</h4>
+</li>
+</ol>
+<pre><code>@mixin text-font($size,$weight,$color: block)
+  font:
+    size: $size
+    weight: $weight
+  color: $color
+
+p
+  @include text-font(10px,blod)
+	 输出为
+	 
+	 p {
+  font-size: 10px;
+  font-weight: blod;
+  color: block; }
+	
+	
+	 
+	 还可以输出不定长参数呢
+@mixin box-shadow($shadows...)    
+  box-shadow: $shadows;  
+</code></pre>
+<blockquote>
+<h4 id="mixin-可以用-表示而-include-可以用-表示">@mixin 可以用 = 表示，而 @include 可以用 + 表示</h4>
+<h4 id="include-不仅可以用在块内还可以直接用在最外层">@include 不仅可以用在块内，还可以直接用在最外层</h4>
+</blockquote>
+<hr>
+<hr>
+<hr>
+<h3 id="导入外部文件">导入外部文件</h3>
+<pre><code>import &quot;color.scss&quot;
+</code></pre>
+<br/>
+<h5 id="1-博文内容来自-tg">1. 博文内容来自 <a href="http://ghmagical.com/article/page/id/ljjyDx1elX48">TG</a></h5>
+<h5 id="2-博文内容来自bulima">2. 博文内容来自<a href="https://bulma.io/documentation/customize/with-node-sass/">bulima</a></h5>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/vue-infinite-scroll">
+                  <h3 class="post-title">
+                    vue-infinite-scroll
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

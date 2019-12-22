@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>git | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">git</h2>
+            <div class="post-date">2019-07-02</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/git.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>为什么要有版本控制？<br/><br>
+个人-&gt;为了有后悔药吃~~</p>
+<hr>
+<h2 id="git的优势">git的优势</h2>
+<ul>
+<li>大部分操作在本地完成，不需要联网</li>
+<li>完整性保证</li>
+<li>尽可能添加数据而不是删除或修改数据</li>
+<li>分支操作非常快捷流畅</li>
+<li>与linux命令全面兼容</li>
+</ul>
+<h2 id="git结构">git结构</h2>
+<p>工作区 -&gt; 写代码<br>
+暂存区 -&gt; 临时存储<br>
+本地库 -&gt; 历史版本</p>
+<h2 id="git-和-代码托管中心">git 和 代码托管中心</h2>
+<p>代码托管中心的任务：维护远程库</p>
+<ul>
+<li>局域网环境下</li>
+<li>GitLab服务器<br/></li>
+<li>外网环境下</li>
+<li>Github</li>
+<li>码云</li>
+</ul>
+<h2 id="本地库和远程库">本地库和远程库</h2>
+<ul>
+<li>团队内部协作</li>
+<li>跨团队协作</li>
+</ul>
+<ol>
+<li>本地库初始化<br>
+<img src="https://heihei12305.github.io/post-images/1562254113335.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562254124226.PNG" alt=""><br>
+注意：.git目录存放的是本地库相关的子目录和文件，不要删除，也不要胡乱修改<br>
+<br/></li>
+<li>设置签名<br>
+形式:
+<ul>
+<li>用户名：</li>
+<li>Email地址：</li>
+</ul>
+</li>
+</ol>
+<p>作用：区分不用开发人员的身份<br/><br>
+辨析：这里设置的签名和登陆远程库（代码托管中心）的账号，密码没有任何关系。<br/><br>
+命令：<br>
+* 项目级别/仓库级别:仅在当前本地库范围内有效<br>
+* 系统用户级别：等录当前操作系统的用户范围<br>
+* 级别优先级：就近原则</p>
+<p>git status  追踪文件  查看工作区，暂存区状态<br>
+<img src="https://heihei12305.github.io/post-images/1562255500410.PNG" alt=""><br>
+上面显示有一个未追踪的文件<br>
+<br/><br>
+git add   将工作区的&quot;新建/修改&quot;添加到暂存区<br>
+<img src="https://heihei12305.github.io/post-images/1562255637006.PNG" alt=""><br>
+ps:git while convert LF to CRLF  表明  每一行的结尾按照window风格剪出按照unix风格提交<br>
+git commit -m  &quot;commit message&quot; [file name]  将暂存区的内容提交到本地库<br>
+<img src="https://heihei12305.github.io/post-images/1562256413401.PNG" alt=""><br>
+<br/><br>
+git log 显示commit历史信息   最完整</p>
+<ul>
+<li>git log --pretty=oneline   以最简洁的形式显示</li>
+<li>git log --oneline  hash值也只显示一部分了</li>
+<li>git reflog  其中有HEAD@{移动到当前版本需要多少步}<br>
+ps:多屏显示控制方式： 空格向下翻页，b向上翻页，q退出<br>
+<img src="https://heihei12305.github.io/post-images/1562257646998.PNG" alt=""><br>
+<br/> git reset --hard    &lt;操作码&gt;   回退操作<br>
+<br/>其他操作：</li>
+<li>git reset --hard HEAD^  回退一步，有几个^回退几步</li>
+<li>git reset --hard HEAD~n  回退n步<br>
+<img src="https://heihei12305.github.io/post-images/1562420318068.PNG" alt=""><br>
+<br/><br>
+git diff &lt;文件名&gt;  比较文件差异</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1562422401628.PNG" alt=""></figure>
+<hr>
+<hr>
+<h2 id="分支操作">分支操作</h2>
+<ul>
+<li>git branch -v     显示分支个数</li>
+<li>git branch <name> 创建分支</li>
+<li>git checkout <name> 切换到分支</li>
+<li>将分支a做的修改合并到分支b上
+<ul>
+<li>首先 切换到分支b</li>
+<li>然后 git merge  分支a</li>
+</ul>
+</li>
+<li>解决合并冲突
+<ul>
+<li>预备操作：将heihei分支的1.txt某一行改了,并将master分支的同一行也改了<br>
+<img src="https://heihei12305.github.io/post-images/1562423813202.PNG" alt=""><br>
+打开文件就是：<br>
+<img src="https://heihei12305.github.io/post-images/1562424109415.PNG" alt=""><br>
+由我们自己决定选择是哪一个分支的内容，修改完文件后
+<ul>
+<li>git add &lt;文件&gt;</li>
+<li>git add .   将当前文件夹内的文件全部add</li>
+<li>git commit -m&lt;日志&gt;   注意此处没有文件名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+<p>嘿嘿偷一张指令图，原网址<a href="https://juejin.im/post/599e14875188251240632702">一篇文章，教你学会git</a><br>
+<img src="https://heihei12305.github.io/post-images/1562257269842.png" alt=""></p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
+                    others
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/linux-vim-shi-yong">
+                  <h3 class="post-title">
+                    linux-vim使用
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

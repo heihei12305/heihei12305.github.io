@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>性能优化之图片篇 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">性能优化之图片篇</h2>
+            <div class="post-date">2019-10-07</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/xing-neng-you-hua-zhi-tu-pian-pian.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h3 id="来自前端性能优化原理与实践部分望感兴趣者去瞅瞅那本小册很不错呢">来自<a href="https://juejin.im/book/5b936540f265da0a9624b04b/section/5b98ceb46fb9a05d3154f6bd">前端性能优化原理与实践</a>,部分，望感兴趣者去瞅瞅那本小册，很不错呢。</h3>
+<blockquote>
+<h3 id="不同业务场景下的图片方案选型">不同业务场景下的图片方案选型</h3>
+</blockquote>
+<p>时下应用较为广泛的web图片格式有JPEG/JPG ,PNG,WebP,Base64,SVG等。</p>
+<br/>
+<ul>
+<li>
+<h3 id="jpegjpg">JPEG/JPG</h3>
+</li>
+</ul>
+<p>关键字：有损压缩，体积小，加载快，不支持透明<br/></p>
+<p>jpg最大的特点是有损压缩。这种高效的压缩算法使它成为了一种非常轻巧的图片格式。JPG的压缩方式仍然是一种高质量的压缩方式：当我们把图片体积压缩至原有体积的50%以下时，JPG仍然可以保持住60%的品质。JPG格式以24位存储单个图，可以呈现多达1600万种颜色。</p>
+<br/>
+<p>使用场景：JPG适用于呈现色彩丰富的图片，在我们日常开发中，jpg图片经常作为大的背景图，轮播图或Banner图出现。</p>
+<br/>
+<p>jpg的缺陷：当它处理矢量图形和logo等线条感比较强，颜色对比强烈的图像时，人为压缩导致的图片模糊会相当明显。JPEG图像不支持透明度处理，透明图片需要召唤PNG来呈现。</p>
+<br/>
+<ul>
+<li>
+<h3 id="png-8与png-24">PNG-8与PNG-24</h3>
+</li>
+</ul>
+<p>关键字： 无损压缩，质量高，体积大，支持透明</p>
+<br/>
+<p>PNG的优点： PNG(可移植网络图形格式)是一种无损压缩的高保真的图片格式。8和24，这里都是二进制数的位数。8位的PNG最多支种颜色，而24位的可以呈现约1600万种颜色。</p>
+<br/>
+<p>PNG图片具有比JPG更强的色彩表现力，对线条的处理更加细腻，对透明度有良好的支持。它弥补了上文我们提到的JPG的局限性，唯一的BUG就是体积太大。</p>
+<br/>
+<p>什么时候用PNG-8，什么时候用PNG-24？<br/></p>
+<p>在实践中，为了规避体积的问题，我们一般不用PNG去处理比较复杂的图像，当我们遇到适合PNG的场景时，也会优先选择更为小巧的PNG-8。<br/></p>
+<p>考虑到PNG在处理线条和颜色对比度方面的优势，我们主要用它来呈现小的Logo，颜色简单且对比强烈的图片或背景等。<br/></p>
+<ul>
+<li>
+<h3 id="svg">SVG</h3>
+</li>
+</ul>
+<p>关键字： 文本文件，体积小，不失真，兼容性好。<br/></p>
+<p>SVG(可缩放矢量图形）是一种基于XML语法的图像格式。它和本文中提及的其它图片类型有着本质的不同：SVG对图像的处理不是基于像素点，而是基于对图像的形状描述。<br/></p>
+<p>SVG的优势：</p>
+<ul>
+<li>文件体积更小，可压缩性更强。</li>
+<li>图片可无限放大而不失真。</li>
+<li>是文本文件，我们既可以像写代码一样定义SVG,把它写在HTML里，成为DOM的一部分，也可以把对图形的描述写入以.svg为后缀的独立文件。这使得SVG文件可以被非常多的工具读取和修改，具有较强的灵活性。<br>
+<br/></li>
+</ul>
+<p>SVG的局限：</p>
+<ul>
+<li>
+<p>它的渲染成本比较高</p>
+</li>
+<li>
+<p>SVG存在着其他图片格式所没有的学习成本。</p>
+</li>
+<li>
+<h3 id="base64">Base64</h3>
+</li>
+</ul>
+<p>关键字：文本文件，依赖编码，小图标解决方案<br/></p>
+<p>Base64并非一种文件格式，而是一种编码方式。Base64和雪碧图一样，是作为小图标解决方案而存在的。<br/></p>
+<p>前置知识：最经典的小图标解决方案--雪碧图（css Sprites）<br/></p>
+<p>雪碧图，css精灵，css Sprites,图像精灵，说的都是这个东西---一种把小图标和背景图像合并到一张图片上，然后利用css的背景定位来显示其中的每一部分的技术。</p>
+<br/>
+<p>MDN上这么描述：</p>
+<blockquote>
+<p>CSS图像合并（Image sprites） 技术，亦作CSS贴图定位，图像精灵（sprite, 意为精灵），被运用于众多使用大量小图标的网页应用之上。它可取图像的一部分来使用，使得使用一个图像文件替代多个小文件成为可能。相较于一个小图标一个图像文件，单独一张图片所需的HTTP请求更少，对内存和带宽更加友好。</p>
+</blockquote>
+<p>Base64是作为雪碧图的补充而存在的。</p>
+<br/>
+<p>Base64是一种用于传输8 Bit 字节码的编程方式，通过对图片进行Base64编码，我们可以直接将编码结果写入HTML或者写入CSS，从而减少HTTP请求的次数。</p>
+<br/>
+<p>Base64码对应的图片往往是非常小的Logo，这是因为，Base64编码后，图片大小会膨胀为原文件的4/3(这是由Base64的编码原理决定的)。如果我们把大图也编码到HTML或CSS文件中，后者的体积会明显增加。即便我们减少了HTTP请求，也无法弥补这庞大的体积带来的性能开销。<br/></p>
+<p>我们往往在一张图片满足以下条件时会对它应用Base64编码：</p>
+<ul>
+<li>图片的实际尺寸很小</li>
+<li>图片无法以雪碧图的形式与其它小图结合</li>
+<li>图片的更新频率非常低</li>
+</ul>
+<p>推荐利用webpack来进行Base64的编码--webpack的<a href="https://github.com/webpack-contrib/url-loader">url-loader</a>非常聪明，它除了具备基本的Base64转码能力，还可以结合文件大小，帮我们判断图片是否有必要进行Base64编码。</p>
+<br/>
+<ul>
+<li>
+<h3 id="webp">WebP</h3>
+</li>
+</ul>
+<p>关键字：年轻的全能型选手</p>
+<p>WebP于2010年被提出，是Google专为Web开发的一种旨在加快图片加载速度的图片格式，它支持有损压缩和无损压缩。</p>
+<br/>
+<p>WebP的优点：webP像JPEG一样对细节丰富的图片信手拈来，像PNG一样支持透明，像GIF一样可以显示动态图片--它集多种图片文件格式的优点于一身。</p>
+<br/>
+<p>webP的局限：webP的兼容性</p>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1570427641127.PNG" alt=""></figure>
+<br/>
+<p>另外，WebP还会增加服务器的负担--和编码JPG文件相比，编码同样质量的WebP文件会占用更多的计算资源。</p>
+<br/>
+<p>webP的应用场景：限制我们使用WebP的最大问题不是这个图片是否适合用webP呈现，而是浏览器是否允许WebP的问题，即我们上文中谈到的兼容性问题。</p>
+<ul>
+<li>我们可以在站点先进行兼容性的预判，在浏览器的环境支持WebP的情况下，优先使用WebP格式，否则就把图片降级为JPG格式（本质是对图片的链接地址作简单的字符串切割）。</li>
+<li>把判断工作交给后台，由服务器根据HTTP请求头部的Accept字段来决定返回什么格式的图片。当Accept字段包含image/webp时，就返回WebP格式的图片，否则返回原图。</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/myunderscore-pei-he-shi-yong-gitbook-xiao-shu-xi-lie-2">
+                  <h3 class="post-title">
+                    myUnderscore 配合食用gitbook小书系列2
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

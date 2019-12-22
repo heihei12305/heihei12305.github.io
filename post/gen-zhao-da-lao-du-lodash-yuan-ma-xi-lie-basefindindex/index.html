@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>跟着大佬读lodash源码系列-baseFindIndex | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">跟着大佬读lodash源码系列-baseFindIndex</h2>
+            <div class="post-date">2019-08-14</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/gen-zhao-da-lao-du-lodash-yuan-ma-xi-lie-basefindindex.png')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="越看越菜系列">越看越菜系列</h3>
+</blockquote>
+<br/>
+<blockquote>
+<p>用法：根据fromIndex向左或者向右查找符合条件的第一个元素的索引。</p>
+</blockquote>
+<pre><code>function baseFindIndex(array, predicate, fromIndex, fromRight) 
+</code></pre>
+<ol>
+<li>array 指输入的待查找数组</li>
+<li>predicate 指的是查找条件，是一个函数</li>
+<li>fromIndex 查找的起始点</li>
+<li>fromRight 为true时，从右向左查找； 为false或者不填的时候从左向右查找。</li>
+</ol>
+<hr>
+<blockquote>
+<p>源码分析 ：</p>
+</blockquote>
+<pre><code>function baseFindIndex(array, predicate, fromIndex, fromRight) {
+  const { length } = array
+  let index = fromIndex + (fromRight ? 1 : -1)
+
+  while ((fromRight ? index-- : ++index &lt; length)) {
+    if (predicate(array[index], index, array)) {
+      return index
+    }
+  }
+  return -1
+}
+</code></pre>
+<h4 id="先嘀咕一句这代码也太好看了吧都快有我家小骄傲34可爱了">先嘀咕一句，这代码也太好看了吧，都快有我家小骄傲3/4可爱了。</h4>
+<br/>
+<ol>
+<li>
+<h3 id="其中的-fromright-index-index-length-可以解析为-fromright-index-index-length-br-为啥这样-js-基础再来回顾一下运算符汇总表">其中的 <code>fromRight ? index-- : ++index &lt; length</code> 可以解析为  <code>fromRight ? ( index-- ): ( ++index )&lt; length</code>    <br/> 为啥这样？  js 基础再来回顾一下：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">运算符汇总表</a></h3>
+</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1565753583818.png" alt=""></figure>
+<br/>
+<ol start="2">
+<li>
+<h3 id="index-index-以及-let-index-fromindex-fromright-1-1-都是为啥呢"><code>++index index--</code> 以及 <code>let index = fromIndex + (fromRight ? 1 : -1)</code> 都是为啥呢？</h3>
+</li>
+</ol>
+<ul>
+<li>array 的 index 范围是 0 - length - 1 。 也即，<code>index === 0</code> 时，循环应继续 ， 故实际循环次数为  fromIndex + 1 , <code>index--</code> (不妨举例为3) 变化顺序为 4，3，2，1 四次，从 3 + 1开始也正是上面标注的第二句的用途。</li>
+<li>若为从左往右，此时 实际循环次数为 length - fromIndex 。不妨举例 length 为 5 ，此时 &quot; ++ index&quot;变换顺序为 2 , 3 , 4,  <code>let index = fromIndex + (fromRight ? 1 : -1)</code> 使得 fromIndex 从 2 开始</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/input-vs-button">
+                  <h3 class="post-title">
+                    input vs button
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

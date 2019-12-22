@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>mongoose | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">mongoose</h2>
+            <div class="post-date">2019-07-07</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/mongoose.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h2 id="首先来个小例子">首先来个小例子</h2>
+<pre><code>//1.引入模板
+let mongoose = require(&quot;mongoose&quot;);
+mongoose.connect('mongodb://localhost/m_data');
+
+//监听各种状态
+let db = mongoose.connection;
+db.on(&quot;error&quot;,()=&gt;{
+    console.log(&quot;连接失败&quot;)
+});
+
+db.once('open',function(){
+    console.log(&quot;连接成功&quot;)    
+})
+
+
+db.once('close',function(){
+    console.log(&quot;数据库断开成功&quot;)    
+})
+
+//2创建Schema（模式对象）
+let Schema = mongoose.Schema;//定义规则
+let personSchema = new Schema({
+    name:String,
+    age:Number,
+    sex:{
+        type:String,
+        default:&quot;男&quot;
+    },
+    chat:String
+});
+
+//3.创建Model对象
+let personModel = mongoose.model(&quot;person&quot;,personSchema);
+
+//4.插入文档
+personModel.create({
+    name:&quot;姐姐&quot;,
+    age:19,
+    sex:&quot;女&quot;,
+    chat:&quot;hahaha&quot;
+},(err)=&gt;{
+    if(!err){
+        console.log(&quot;插入成功&quot;);
+    }else{
+        throw err;
+    }
+})
+personModel.create({
+    name:&quot;可好看的姐姐呢&quot;,
+    age:19,
+    sex:&quot;女&quot;,
+    chat:&quot;hahaha&quot;
+},(err)=&gt;{
+    if(!err){
+        console.log(&quot;插入成功&quot;);
+    }else{
+        throw err;
+    }
+})
+
+</code></pre>
+<h2 id="然后来个大例子">然后来个大例子</h2>
+<pre><code>//1.引入模板
+let mongoose = require(&quot;mongoose&quot;);
+mongoose.connect('mongodb://localhost/m_data',{useNewUrlParser:true});
+
+//监听各种状态
+let db = mongoose.connection;
+db.on(&quot;error&quot;,()=&gt;{
+    console.log(&quot;连接失败&quot;)
+});
+
+db.once('open',function(){
+    console.log(&quot;连接成功&quot;)    
+})
+
+
+db.once('close',function(){
+    console.log(&quot;数据库断开成功&quot;)    
+})
+
+//2创建Schema（模式对象）
+let Schema = mongoose.Schema;//定义规则
+let personSchema = new Schema({
+    name:String,
+    age:Number,
+    sex:{
+        type:String,
+        default:&quot;男&quot;
+    },
+    chat:String
+});
+
+//3.创建Model对象
+let personModel = mongoose.model(&quot;person&quot;,personSchema);
+
+//4.增删改查
+
+//4.1增加
+// personModel.create([
+//     { name:&quot;可好看的姐姐0呢&quot;, age:190, sex:&quot;女&quot;, chat:&quot;hahaha&quot;},
+//     { name:&quot;可好看的姐姐1呢&quot;, age:191, sex:&quot;女&quot;, chat:&quot;hahaha&quot;},
+//     { name:&quot;可好看的姐姐2呢&quot;, age:192, sex:&quot;女&quot;, chat:&quot;hahaha&quot;},
+//     { name:&quot;可好看的姐姐2呢&quot;, age:193, sex:&quot;女&quot;, chat:&quot;hahaha&quot;}
+// ],(err)=&gt;{
+//     if(!err){
+//         console.log(&quot;插入成功&quot;);
+//     }else{
+//         throw err;
+//     }
+// })
+
+//4.2查找
+
+// personModel.find({},(err,docs)=&gt;{ //{}=&gt;全部
+//     if(!err)
+//     {
+//         console.log(docs);
+//         console.log(typeof docs);
+//     }
+// });
+
+// personModel.find({name:&quot;姐姐&quot;},{name:1},(err,docs)=&gt;{  //查找所有文档把name返回回来
+//     if(!err)
+//     {
+//         console.log(docs);
+//         console.log(typeof docs);
+//     }
+//     else{
+//         console.log(&quot;找寻失败&quot;);
+        
+//     }
+// });
+
+// personModel.find({},&quot;-_id name sex&quot;,{skip:5,limit:5},(err,docs)=&gt;{  //建议还是用大括号的形式
+//     if(!err)
+//     {
+//         console.log(docs);
+//         console.log(typeof docs);
+//     }
+//     else{
+//         console.log(&quot;找寻失败&quot;);
+        
+//     }
+// });
+
+
+//4.3 修改
+// personModel.updateOne({name:&quot;可好看的姐姐呢&quot;},{$set:{age:20}},(err)=&gt;{
+//     if(!err)
+//     {
+//         console.log(&quot;修改成功&quot;);
+//     }
+//     else{
+//         console.log(&quot;修改失败&quot;);
+//     }
+// })
+
+//4.4删除
+//Model.deleteMany()
+//Model.deleteOne()
+//Model.remove()
+
+// personModel.deleteOne({name:&quot;可好看的姐姐呢&quot;},(err)=&gt;{
+//     if(!err){
+//         console.log(&quot;删除成功&quot;);   
+//     }else{
+//         throw err;
+//     }
+// })
+
+//4.5 统计文档个数
+//Model.count();
+
+personModel.countDocuments({},(err,count)=&gt;{
+    if(!err)
+    {
+        console.log(count);
+    }
+})
+
+
+</code></pre>
+<pre><code>//2创建Schema（模式对象）
+let Schema = mongoose.Schema;//定义规则
+let personSchema = new Schema({
+    name:String,
+    age:Number,
+    sex:{
+        type:String,
+        default:&quot;男&quot;
+    },
+    chat:String
+});
+
+//3.创建Model对象
+let personModel = mongoose.model(&quot;person&quot;,personSchema);
+
+let person = new personModel({
+    name:&quot;姐姐&quot;,
+    age:19,
+    sex:&quot;女&quot;,
+    chat:&quot;all&quot;
+});
+person.save((err,product)=&gt;{
+    if(!err){
+        console.log(product);
+    }
+});
+</code></pre>
+<hr>
+<h2 id="基于mongoose实现分页排序">基于mongoose实现分页,排序</h2>
+<pre><code>router.get(&quot;/list&quot;,(req,res,next)=&gt;{
+   //分页功能实现
+    let page = parseInt(req.param(&quot;page&quot;));
+    let pageSize = parseInt(req.param(&quot;pageSize&quot;));
+    let sort = parseInt(req.param(&quot;sort&quot;));//-1降序，1升序
+    let priceLevel = req.param(&quot;priceLevel&quot;);
+    let skip = (page-1)*pageSize;
+
+    let params = {};
+    let priceGt = '',priceLte = '';
+    if(priceLevel!=&quot;all&quot;)
+    {
+        switch (priceLevel){
+            case '0':priceGt = 0;priceLte = 1000;break;
+            case '1':priceGt = 1000;priceLte = 2000;break;
+            case '2':priceGt = 2000;priceLte = 5000;break;
+        }
+        params = {//实现分价格区间展示数据
+            salePrice:{
+                $gt:priceGt,
+                $lte:priceLte
+            }
+        }
+    }
+    
+    let goodsModel = Goods.find(params).skip(skip).limit(pageSize);//实现分页展示数据即每页最多
+    goodsModel.sort({'salePrice':sort});
+    goodsModel.exec((err,doc)=&gt;{
+        if(err){
+            res.json({
+                status:&quot;1&quot;,
+                msg:err.message
+            });
+        }else{
+            res.json({
+                status:&quot;0&quot;,
+                msg:&quot;&quot;,
+                res:{
+                    count:doc.length,
+                    list:doc
+                }
+            })
+        }
+    })
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/LNUW6J11_n" class="tag">
+                    node
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/hang-ban-yu-ding-tong-ji-leetcode5118">
+                  <h3 class="post-title">
+                    航班预定统计-leetcode5118
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

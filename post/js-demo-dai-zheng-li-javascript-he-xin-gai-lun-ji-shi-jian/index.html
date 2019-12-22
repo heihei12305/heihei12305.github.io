@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>js-demo--待整理-JavaScript核心概论及实践 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">js-demo--待整理-JavaScript核心概论及实践</h2>
+            <div class="post-date">2019-10-18</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-demo-dai-zheng-li-javascript-he-xin-gai-lun-ji-shi-jian.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>通常的讲，JS是一门解释型语言，特别在浏览器中的JavaScript，所有的主流浏览器都将JavaScript作为一个解释型的脚本来进行解析。解释型的语言有一定的好处，即可以随时修改代码，无需编译，刷新页面即可重新解释，可以实时看到程序的结果，但是由于每一次都需要解释，程序的开销较大。而编译型的语言则仅需要编译一次，每次都运行编译过的代码即可，但是又丧失了动态性。<br/></p>
+<p>将对象转换为基本类型：通过调用对象的valueOf()方法来取得对象的值，如果和上下文的类型匹配，则使用该值。 如果valueOf取不到值，则需要调用对象的toString()方法，而如果上下文为数值型，则又需要将此字符串转换为数值。</p>
+<br/>
+<p>对象的声明有三种方式：</p>
+<ul>
+<li>通过new操作符作用于Object对象，构造一个新的对象，然后动态的添加属性，从无到有地构建一个对象。</li>
+<li>定义对象地‘类’：原型，然后使用new操作符来批量构建新的对象。</li>
+<li>使用对象字面量</li>
+</ul>
+<pre><code>var add = new Function('x','y','return (x+y)');
+console.log(add(2,4));
+</code></pre>
+<p>function 关键字会调用Function来new一个对象，并将参数表和函数体准确传给Function的构造器。</p>
+<br/>
+<p>函数本身与其他任何内置对象在地位上是没有任何区别的，也就是说，函数本身也是对象。函数跟其他的对象一样，都是作为一个独立的对象而存在于JavaScript的运行系统。</p>
+<br/>
+<p>函数也可以有属性，而这些属性也并不会影响函数本身的功能。</p>
+ <br/>
+<p>闭包：由于在JavaScript中，函数是对象，对象是属性的集合，而属性的值又可以是对象，则在函数内定义函数成为理所当然，如果在函数func内部声明函数inner，然后在函数外部调用inner，这个过程即产生了一个闭包。<br/></p>
+<p>闭包允许你使用存在于外部函数中的变量。然而，它并不是使用该变量创建时的值，相反，它使用外部函数中该变量最后的值。<br/></p>
+<p>闭包存在的问题：</p>
+<ul>
+<li>内存泄漏：JavaScript的解释器都具备垃圾回收机制，一般采用的是引用计数的形式.如果一个对象的引用计数为0，则垃圾回收机制会将其回收，这个过程是自动的。但是，有了闭包的概念后，这个过程变得复杂起来。在闭包中，因为局部变量可能在将来的某个时刻需要被引用，因此垃圾回收机制不会处理这些被外部引用的局部变量。而如果出现循环引用，即对象A引用B,B引用C，C又引用A，这样的情况使得垃圾回收机制得出其引用计数不为0的结论，从而造成了内存泄漏。</li>
+</ul>
+<br/>
+<p>JS中的引用始终指向最终的对象，而并非引用本身。</p>
+<br/>
+<p>在JavaScript中，通过new操作符来作用一个函数，实质上会发生这样的动作。</p>
+<br/>
+<p>首先，创建一个空对象，然后用函数的apply方法，将这个空对象传入作为apply的第一个参数以及上下文参数。这样函数内部的this将会被这个空的对象所替代。</p>
+<pre><code>var triangle = new Shape(&quot;triangle&quot;);
+//上一句相当于下面的代码
+var triangle = {};
+Shape.apply(triangle,[&quot;triangle&quot;]);
+</code></pre>
+<p>执行期上下文的概念贯穿于JavaScript引擎解释代码的全过程，这个概念是一个运行期的概念，执行器上下文一般实现为一个栈。按照ECMAScript的规范，一共有三种类型的代码，全局代码，函数代码以及eval代码。这三种代码均在自身的执行期上下文中求值。全局上下文仅有一个，函数上下文和eval上下文则可能有多个。<br>
+<br/></p>
+<p>活动对象：在JavaScript中，当一个函数被调用的时候，就会产生一个特殊的对象：活动对象。这个对象包含了参数列表和arguments对象等属性。由于活动对象是变量对象的特例，因此，它包含变量对象所有的属性，如变量定义，函数定义等。<br/></p>
+<p>作用域链：作用域链与原型链类似，也是一个对象组成的链，用以在上下文中查找标识符。查找时也与原型链类似，如果激活对象本身具有该变量，则直接使用变量的值，否则向上层搜索，依次类推，直到查找到或者返回undefined。作用域链的主要作用是用以查找自由变量。所谓自由变量是指，在函数中使用的，非函数内部局部变量，也非函数内部定义的函数名，也非形式参数的变量。这些变量通常来自函数的&quot;外层&quot;或者全局作用域。</p>
+<br/>
+<p>内部函数的作用域链，有两个部分，内部函数自身的活动对象，内部函数的一个属性”[[scope]]“，而”[[scope]]“的值为其外函数outter的活动变量。<br/></p>
+<p>事实上，函数的属性&quot;[[scope]]&quot;会在函数对象创建的时候被创建，不论函数的嵌套层次有多深，它的&quot;[[scope]]&quot;总会引用所有位于其外层的上下文中的变量对象（在函数中为活动对象）。</p>
+<br/>
+<p>V8引擎基本概念：</p>
+<ul>
+<li>handle:handle是指向对象的指针，在V8中，所有的对象都通过handle来引用，handle主要用于V8的垃圾回收机制。</li>
+<li>scope：scope是handle的集合，可以包含若干个handle，这样就无需将每个handle逐次释放，而是直接释放整个scope。</li>
+<li>context：context是一个执行器环境，使用context可以将相互分里的JavaScript脚本在同一个V8实例中运行，而互不干涉。在运行JavaScript脚本时，需要显式地指定context对象。</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/js-demo">
+                  <h3 class="post-title">
+                    js--demo-待整理-JavaScript学习指南（犀牛书）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

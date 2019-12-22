@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>webpack-文件指纹策略及将css单独提取出来 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">webpack-文件指纹策略及将css单独提取出来</h2>
+            <div class="post-date">2019-11-27</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/webpack-wen-jian-zhi-wen-ce-lue.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="一般指的是打包后输出的文件名的后缀">一般指的是打包后输出的文件名的后缀。</h3>
+</blockquote>
+<h3 id="文件指纹如何生成">文件指纹如何生成？</h3>
+<ul>
+<li>Hash: 和整个项目的构建相关，只要项目文件有修改，整个项目构建的hash值就会更改。</li>
+<li>Chunhash: 和webpack 打包的chunk有关，不同的entry会生成不同的chunkhash值。</li>
+<li>Contenthash: 根据文件内容来定义hash，文件内容不变，则contenthash不变。</li>
+</ul>
+<br/>
+### JS的文件指纹设置
+<br/>
+<p>设置output的filename，使用 [chunkhash]</p>
+<pre><code>module.exports = {
+	entry:{
+		app:'./src/app.js',
+		search:'./src/search.js'
+	},
+	output:{
+		filename:'[name][chunkhash:8].js',
+		path:__dirname+'/dist'
+	}
+};
+</code></pre>
+<h3 id="css文件的文件指纹设置">css文件的文件指纹设置</h3>
+<br/>
+<p>对于css文件，我们使用 contenthash<br/><br>
+设置 MiniCssExtractPlugin 的 filename</p>
+<pre><code>module.exports = {
+	entry:{
+		app:'./src/app.js',
+		search:'./src/search.js'
+	},
+	output:{
+		new MiniCssExtractPlugin({
+			filename: `[name][contenthash:8].css`
+		})
+	}
+}
+</code></pre>
+<h3 id="图片的文件指纹设置">图片的文件指纹设置</h3>
+<br/>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[ext]</td>
+<td style="text-align:center">资源后缀名</td>
+</tr>
+<tr>
+<td style="text-align:center">[name]</td>
+<td style="text-align:center">文件名称</td>
+</tr>
+<tr>
+<td style="text-align:center">[path]</td>
+<td style="text-align:center">文件的相对路径</td>
+</tr>
+<tr>
+<td style="text-align:center">[folder]</td>
+<td style="text-align:center">文件所在的文件夹</td>
+</tr>
+<tr>
+<td style="text-align:center">[contenthash]</td>
+<td style="text-align:center">文件的内容hash，默认是md5生成</td>
+</tr>
+<tr>
+<td style="text-align:center">[hash]</td>
+<td style="text-align:center">文件内容的Hash，默认是md5生成</td>
+</tr>
+<tr>
+<td style="text-align:center">[emoji]</td>
+<td style="text-align:center">一个随机的指代文件内容的emoj</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<pre><code>const path = require('path');
+
+module.exports = {
+	entry: './src/index.js',
+	output:{
+		filename: 'bundle.js',
+		path:path.resolve(__dirname,'dist')
+	},
+	module:{
+		rules:[
+			{
+				test:/\.(png|svg|jpg|gif)$/,
+				use:[{
+					loader:'file-loader',
+					options:{
+						name:'img/[name][hash:8].[ext]'
+					}
+				}]
+			}
+		]
+	}
+}
+
+</code></pre>
+<br/>
+<p>为了将css独立出来</p>
+<br/>
+<p>安装 <code>mini-css-extract-plugin</code> 插件</p>
+<br/>
+<p>与<code>style-loader</code>插件互斥，因为 <code>mini-css-extract-plugin</code>为了将css样式提取出来，而<code>style-loader</code>则为了将样式写入header中。</p>
+<br/>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/-_Te1R3KSt" class="tag">
+                    leetcode
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/webpack-wen-jian-jian-ting-ji-re-geng-xin-yuan-li">
+                  <h3 class="post-title">
+                    webpack文件监听及热更新原理
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

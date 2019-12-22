@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>ES6-你真的懂symbol吗？ | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">ES6-你真的懂symbol吗？</h2>
+            <div class="post-date">2019-11-16</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/es6-ni-zhen-de-dong-symbol-ma.png')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<p>所见即所得，所见即所碍</p>
+</blockquote>
+<br/>
+<blockquote>
+<h3 id="从一个问题引入你知道现在js中有几种基本数据类型吗分别是什么呢">从一个问题引入，你知道现在js中有几种基本数据类型吗？分别是什么呢？</h3>
+</blockquote>
+<p>作为一道经典面试题，相信各位肯定脱口就来：字符串型，数字型，布尔型，null,undefined,es6新引入的symbol，还处于ECMAScript 标准化过程中的 第三阶段 的bigInt<br/></p>
+<p>那么symbol到底是什么呢？<br/></p>
+<p>接下来，我们会开始进入symbol的世界。</p>
+<br/>
+<p>大概目录：</p>
+<ul>
+<li>symbol基础</li>
+<li>well-konw symbol 暴露内部操作</li>
+<li>元编程</li>
+</ul>
+<p>内容主要来自</p>
+<br/>
+<ul>
+<li>深入理解es6</li>
+<li>你不知道的javaScript下</li>
+<li><a href="https://juejin.im/post/5a0e65c1f265da430702d6b9">[译]ES6 中的元编程：第一部分 —— Symbol，了不起的 Symbol</a></li>
+</ul>
+<h2 id="symbol基础">symbol基础</h2>
+<br/>
+<h3 id="symbol-是完全唯一的">symbol 是完全唯一的</h3>
+<p>在默认情况下，每一个新创建的Symbol都有一个完全唯一的值。如果你新创建了一个Symbol，在JS引擎内部，就会创建一个全新的值。</p>
+<br/>
+<p>Symbol函数接受一个可选的参数，其可以让你添加一段文本描述即将创建的Symbol，这段描述不可用于属性访问，但是建议你在每一次创建 Symbol 时都能加这样一段描述，以便于阅读代码和调试Symbol程序。</p>
+<pre><code>let firstName = Symbol(&quot;first name&quot;);
+let person = { };
+
+person[firstName] = 'Nicholas';
+
+console.log(&quot;first name&quot; in person);  //false
+console.log(person[firstName]); //'Nicholas'
+console.log(firstName); //&quot;Symbol(firstName)&quot;
+</code></pre>
+<p>Symbol 的描述被存储在内部的[[Description]]属性中，只有当调用Symbol的toString()方法时才可以读取这个属性。在执行 <code>console.log()</code>时，隐式调用了 firstName 的 toString() 方法，所以它的描述会被打印到日志中，但不能直接在代码里访问[[Description]]</p>
+<br/>
+<h3 id="symbol-判断">symbol 判断</h3>
+<p>因为symbol是基本数据类型，所以判断symbol首选也最准确的检测方式是 typeof</p>
+<pre><code>console.log(typeof firstName );//'symbol'
+</code></pre>
+<h3 id="symbol共享结构">symbol共享结构</h3>
+<br/>
+<p>有时候我们可能希望在不同的代码中共享同一个Symbol，例如，在你的应用中有两种不同的对象类型，但是你希望它们使用同一个Symbol 属性来表示一个独特的标识符。一般而言，在很大的代码库中或跨文件追踪 Symbol 非常困难而且容易出错，出于这些原因，ECMAScript 6 提出了一个可以随时访问的全局 Symbol 注册表。</p>
+<br/>
+<p>如果想创建一个可共享的Symbole,要使用<code>Symbol.for()方法</code>。它只接受一个参数，也就是即将创建的 Symbol 的字符串标识符，这个参数同样也被用于Symbol的描述。</p>
+<br/>
+<pre><code>let uid = Symbol.for(&quot;uid&quot;);
+let object = {};
+
+object[uid] = &quot;123456&quot;;
+
+console.log(object[uid]); //'123456'
+console.log(uid)
+</code></pre>
+<p>Symbol.for()方法首先在全局 Symbol 注册表中搜索键为&quot;uid&quot;的Symbol是否存在，如果存在，直接返回已有的 Symbol ;否则，创建一个新的Symbol,并使用这个键在Symbol全局注册表中注册，随即返回新创建的Symbol。</p>
+<br/>
+<p>后续再传入同样的键调用 Symbol.for() 会返回相同的Symbol</p>
+<pre><code>let uid = Symbol.for(&quot;uid&quot;);
+let object = {};
+object[uid] = &quot;123456&quot;;
+
+let uid2 = Symbol.for('uid');
+
+console.log(uid === uid2); // true
+</code></pre>
+<p>还有一个与 Symbol 共享有关的特性：可以使用 Symbol.keyFor()方法在Symbol全局注册表中检索与Symbol有关的键。</p>
+<pre><code>let uid = Symbol.for(&quot;uid&quot;);
+let object = {};
+
+object[uid] = &quot;123456&quot;;
+let uid2 = Symbol.for('uid');
+
+console.log(Symbol.keyFor(uid));//&quot;uid&quot;
+console.log(Symbol.keyFor(uid2));//&quot;uid&quot;
+console.log(Symbol.keyFor(uid3));//&quot;undefined&quot;
+</code></pre>
+<br/>
+<p>symbol全局注册表是一个类似全局作用域的共享环境，也就是说你不能假设目前环境中存在哪些键。当使用第三方组件时，尽量使用Symbol键的命名空间以减少命名冲突，也即加上前缀。额外注意的一点是：这个注册中心是跨域的，意味着 iframe 或者sevice worker 中的 Symbol 会与当前 frame Symbol 相等。</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/domapi-wan-quan-zheng-li">
+                  <h3 class="post-title">
+                    DOMAPI完全整理
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

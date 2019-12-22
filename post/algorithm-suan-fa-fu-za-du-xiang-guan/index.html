@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-算法复杂度相关 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-算法复杂度相关</h2>
+            <div class="post-date">2019-06-12</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-suan-fa-fu-za-du-xiang-guan.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>！！复习算法考试所用，代码为老师课堂手写，逻辑没错，应该有点小问题，需要修改才能运行，仅供思路参考</strong><br/><br/><br>
+1.1 算法：解决问题的办法，是由若干条指令组成的有穷序列。<br/><br/><br>
+满足:</p>
+<ul>
+<li>输入(I)：有零个或多个输入</li>
+<li>输出(o):   至少一个输入</li>
+<li>确定性：组成算法的每条指令，必须是明白无误的无歧义。</li>
+<li>有限性：算法每条指令执行次数是有限的，时间有限。</li>
+</ul>
+<p><br/><br/>程序：算法的计算机语言实现，可以无限循环。<br/><br/><br>
+算法的描述：</p>
+<ul>
+<li>自然语言</li>
+<li>类计算机语言，如类c</li>
+<li>计算机语言，如c++,c,java</li>
+<li>混合<br>
+<br/><br/></li>
+</ul>
+<p>1.2 算法复杂度<br/><br>
+例子：设算法输入规模为n,同时求最大最小<br/><br>
+两两比较  =》 大的放偶序，小的放奇序=》最大值肯定在偶数组，最小值肯定在奇数组<br/><br>
+比较次数  n/2+n/2-1+n/2-1<br/><br/></p>
+<p>设算法的输入规模为 n<br>
+C(A,I,n) 包括  T(A,I,n) 时间  ，S(A,I,n) 空间<br>
+即算法复杂度包括时间复杂度和空间复杂度</p>
+<p>设某计算机运行算法的某个实例I</p>
+<table>
+<thead>
+<tr>
+<th>原运算</th>
+<th>O1</th>
+<th>O2</th>
+<th>...On</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用时</td>
+<td>t1</td>
+<td>t2</td>
+<td>...tn</td>
+</tr>
+<tr>
+<td>次数</td>
+<td>e1</td>
+<td>e2</td>
+<td>...ek</td>
+</tr>
+</tbody>
+</table>
+<p><br/>则T(A,I,n) = 累加ei * ti（太菜了，累加符号打不出来）<br/></p>
+<ol>
+<li>最坏  Tmax(A,n) = max T(A,I,n)  I 属于 Dn  Dn : 输入规模为n的全体空间</li>
+<li>最好  Tmin(A,n)  = min T(A,I,n)  I 属于 Dn  Dn : 输入规模为n的全体空间</li>
+<li>平均 Tave(A,n) = 累加 T(A,I,n) * P(I)  I 属于 Dn</li>
+</ol>
+<p><br/><br/>注意：实际中：对时间的考察：对某个主要次数的考察，且单独处理<br>
+<br/>对矩阵乘积 Ann* Bnn=》</p>
+<ol>
+<li>加法运算  A (n) = (n-1)* n^2 = n^3 - n^2</li>
+<li>乘法运算  P(n) = n*n^2</li>
+<li>Aave(n) = Amin(n) = Amax(n)  =n^3 - n^2  //等概率平均</li>
+<li>Pmin(n) = Pmax(n) = n^3</li>
+</ol>
+<p><br/><br/>例如  线性查找元素</p>
+<pre><code>	template&lt;class T&gt;
+	int find(T* a,int n,const T &amp; x)
+	{
+		for(int i = 0;i&lt;n;i++)
+		{
+			return ;
+		}
+		return -1;
+	}
+</code></pre>
+<p>主要运算： 比较&quot;==&quot;,规模 n<br/><br>
+1.最好情况： Tmin(n) = 1;<br/><br>
+2.最坏情况： Tmax(n) = n;<br/><br>
+3.平均  :  Tave(n) = (n+1)/2    &lt;=若等概率</p>
+<p><br/><br/><br>
+<strong>算法是程序设计的灵魂</strong><br>
+<br/><br/><br>
+1.2 复杂度的度量<br/><br>
+一个算法A，输入量为n<br/><br>
+复杂度（cn）=》（时间，空间）{最好，最坏，平均}是非递减函数<br/><br>
+若 C 为函数 f(n)，采用渐进分析方法<br/><br>
+记号 ： O,W,θ,o,w <br/><br>
+<strong>1. O(fn)  f(n)为g(n)上界   g(n)  = O(f(n))  含义 ： g(n)的复杂度不超过f(n) 例如 1/2 * n^2 = O(n^2)</strong><br/><br>
+<strong>2. W(fn)  f(n)为g(n)下界   g(n)  = W(f(n))  含义 ： g(n)的复杂度超过f(n) 例如 2 * n^2 = W(n^2)</strong><br/><br>
+<strong>3. θ(fn)  g(n) = θf(n）含义：g(n)与f(n)同级别</strong><br/><br>
+<strong>4. o(fn)  f(n)为g(n)严格上界  例如 1000n = o(n^2)</strong><br/><br>
+<strong>5. w(fn)  f(n)为g(n)严格下界</strong> <br/><br>
+定理</p>
+<ol>
+<li>g(n) = O(f(n))&lt;=&gt;f(n)  =W(g(n))</li>
+<li>g(n) = θ(f(n))&lt;=&gt;f(n) = θ(f(n))</li>
+<li>g(n) = o(f(n))&lt;=&gt;f(n)  =w(g(n))<br/></li>
+</ol>
+<p><strong>多项式函数复杂度</strong></p>
+<ul>
+<li>设P(n**) = ak* n^k + a（k-1）* n^（k-1）+...a1* n + a0</li>
+<li>则P(n) = θ(n^k)</li>
+<li>当然 P(n) = O(n^k)</li>
+<li>1<em>n^2-10</em>n+9 = θ(n^2) = O(n^2)<br/><br/></li>
+</ul>
+<p><strong>常用的复杂度函数</strong></p>
+<ol>
+<li>logn,n<sup>x(0&lt;x&lt;1),n,n*logn,n</sup>(1+x),n<sup>2,n</sup>3.......  =&gt;多项式级别</li>
+<li>2^n,n!  =&gt;指数级别</li>
+</ol>
+<p>算法的共识：</p>
+<ol>
+<li>容易解决的问题，即多项式级别</li>
+<li>难的问题，即指数级别<br/><br/><br>
+定理：O(f(n)+g(n)) = O(max(f(n),g(n)))</li>
+</ol>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/dynamic-planning-zhi-ge-lu-wen-ti">
+                  <h3 class="post-title">
+                    algorithm-dp格路问题
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

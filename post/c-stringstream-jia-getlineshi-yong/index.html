@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>c++  stringstream() 加 getline()使用 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">c++  stringstream() 加 getline()使用</h2>
+            <div class="post-date">2019-06-10</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/c-stringstream-jia-getlineshi-yong.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>题目是这个：<strong>给出第一个词 first 和第二个词 second，考虑在某些文本 text 中可能以 &quot;first second third&quot; 形式出现的情况，其中 second 紧随 first 出现，third 紧随 second 出现。<br>
+对于每种这样的情况，将第三个词 &quot;third&quot; 添加到答案中，并返回答案。</strong></p>
+<pre><code>class Solution {
+public:
+    vector&lt;string&gt; findOcurrences(string text, string first, string second) {
+        stringstream ss(text);
+        string s;
+        vector&lt;string&gt; strs;
+        vector&lt;string&gt; ans;
+        while(getline(ss,s,' ')){
+            strs.push_back(s);
+            int t = strs.size();
+            if(t&gt;=3&amp;&amp;strs[t-2]==second&amp;&amp;strs[t-3]==first)
+                ans.push_back(s);
+        }
+        return ans;
+    }
+};
+</code></pre>
+<p><strong>c++ stringstream函数使用方法</strong><br>
+1.ss&gt;&gt;tmp 从字符串流中读取一个字符串到tmp中，tmp遇到空格停止，比如输入&quot;jie jie&quot;  那么tmp中就是&quot;jie&quot;，下一次为&quot;jie&quot;<br>
+2.还可以用它进行类型转化,</p>
+<p><strong>c++getline的使用方法</strong><br>
+getline(a,b,c)  a为来源，可以为cin,也可以为本文中的stringstream,b为寄存器，存储取得的值，c为中断方式，默认为换行时中断，可以看看这个里头的<a href="https://blog.csdn.net/xw20084898/article/details/21939811">例子</a></p>
+<pre><code>				//1
+				string s,tmp;
+				getline(cin,s);
+				stringstream ss(s);
+				ss&gt;&gt;tmp;
+
+				//2
+				int n;
+				cin&gt;&gt;n;
+				stringstream str1;
+				str1&lt;&lt;n;  //将n的值读入到str1中
+				string str ;
+				str1&gt;&gt;str; //将字符串中的内容以字符串的形式读入到str中
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/hello-gridea">
+                  <h3 class="post-title">
+                    Hello Gridea
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-回溯n后问题 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-回溯n后问题</h2>
+            <div class="post-date">2019-06-15</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-hui-su-n-hou-wen-ti.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>回溯法有“通用的解题法”之称，用它可以系统的搜索一个问题的所有解或任一解。</strong><br/><br>
+<strong>回溯法是一个既带有系统性又带有跳跃性的搜索算法</strong><br/><br>
+<strong>回溯法的基本思想是在一棵含有问题全部可能解的状态空间树上进行深度优先搜索，<br>
+解为叶子节点。搜索过程中每到达一个结点，就判断该节点为根的子树是否含有问题的解，<br>
+如果确定不含有问题的解，则放弃对该子树的搜索，退回到上层父节点，继续下一步深度优先搜索过程</strong><br/><br>
+<br/>问题描述:在n*n格的棋盘上放置彼此不受攻击的n个皇后，按照国际象棋规则，皇后可以攻击与之处在同一行或者同一列斜线上的棋子。n后问题等价于在n*n格的棋盘上放置n个皇后，任何2个皇后不放在同一行<br>
+或同一列或同一斜线上。<br/><br/><br>
+用n元组x[1:n]表示n后问题的解.其中，x[i]表示皇后i放在棋盘第i行的第x[i]列，由于不允许将2个皇后放置同一列上，所以解向量的x[i]互不相同，可将2个皇后不能放在同意斜线上显约束条件=》（i，j）与（k,l）满足  |i-k| != |j-l|<br/><br/></p>
+<pre><code>class Queen{
+	private:
+		bool Place(int k);
+		void Backtrack(int t);
+		int n;//皇后个数
+		vector&lt;int&gt; x;//当前解
+		long sum;//当前已找到的可行方案数
+};
+boll Queen::Place(int k)
+{
+	for(int i = 1;i&lt;k;i++)
+	{
+		if((abs(k-i)==abs(x[j]-x[k]))||(x(j)==x[k])
+			return false;
+		return true;
+	}
+}
+void Queen::Backtrack(int t)
+{
+	if(t&gt;n)
+		sum++;
+	else
+		for(int i = 1;i&lt;=n;i++)
+		{
+			x[t] = i;
+			if(Place(t))
+				Backtrack(t+1);
+		}
+}
+int nQueen(int n)
+{
+	Queen X;//初始化x
+	X.n = n;
+	X.sum = 0;
+	vector&lt;int&gt;  p(n+1,0)
+	X.x = p;
+	X.Backtrack(1);
+	delete[] p;
+	return X.sum;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-tan-xin-huo-dong-an-pai-zui-you-zhuang-zai">
+                  <h3 class="post-title">
+                    algorithm-贪心活动安排+最优装载
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

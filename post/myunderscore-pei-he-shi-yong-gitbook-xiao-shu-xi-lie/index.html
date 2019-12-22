@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>myUnderscore 配合食用gitbook小书系列 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">myUnderscore 配合食用gitbook小书系列</h2>
+            <div class="post-date">2019-09-27</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/myunderscore-pei-he-shi-yong-gitbook-xiao-shu-xi-lie.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>配合源码地址：<a href="https://github.com/heihei12305/myUnderscore/blob/master/lib/es6-functional.js">heihei12305</a></p>
+<h3 id="写在前面这本小书内容大量源于">写在前面，这本小书内容大量源于</h3>
+<ol>
+<li><a href="https://github.com/heihei12305/Blog-1">讶羽博客系列</a></li>
+<li>JavaScript Es6 函数式编程入门教程</li>
+<li><a href="https://yeyuqiudeng.gitbooks.io/pocket-lodash/content/">对角的lodash源码分析</a></li>
+<li><a href="https://yoyoyohamapi.gitbooks.io/undersercore-analysis/content/">underscore源码分析</a></li>
+</ol>
+<blockquote>
+<h3 id="1-将代码都挂载到_上通过_引用">1. 将代码都挂载到<code>_</code>上，通过<code>_.</code>引用</h3>
+</blockquote>
+<p>目标：</p>
+<ul>
+<li>支持函数式风格调用： <code>_.reverse('hello');</code></li>
+<li>支持面向对象风格调用： <code>_('hello').reverse();</code></li>
+<li>支持链式调用 <code>_.chain([1,2,3,4]).filter((num)=&gt;!num%2).map((num)=&gt;num*num).value();</code></li>
+</ul>
+<p>下面我们一点一点的说吧。<br/></p>
+<blockquote>
+<p>首先为了达到可以用<code>_</code>调用的目的，我们需要先定义出<code>_</code>,也即：</p>
+</blockquote>
+<pre><code>var root = (typeof self == 'object' &amp;&amp; self.self == self &amp;&amp; self) ||
+        (typeof global == 'object' &amp;&amp; global.global == global &amp;&amp; global)||
+        this || {};
+				
+        //在浏览器中，除了window属性，我们也可以通过self属性直接访问到Window对象,同时self还可以支持Web Worker
+        //Node环境中全局变量为 global
+        //node vm（沙盒模型） 中不存在window,也不存在global变量，但我们却可以通过this访问到全局变量
+        //在微信小程序中，window和global都是undefined，加上强制使用严格模式，this为undefined,就多了{}
+
+var _ = function(obj){
+        
+        if(obj instanceof _){
+            return obj;
+        }
+        
+        if(!(this instanceof _)){ // 此处为了实现面向对象风格调用，可以暂时不管
+            return new _(obj);
+        }
+        this._wrapped = obj;
+    };
+
+ //exports.nodeType 防止&lt;div id=&quot;exports&quot;&gt;&lt;/div&gt;产生的window.exports全局变量。
+ 
+    if(typeof exports != 'undefined' &amp;&amp; !exports.nodeType){
+        if((typeof module != 'undefined' &amp;&amp; !module.nodeType &amp;&amp; module.exports)){
+				
+        //在nodeJs中，exports是module.exports 的一个引用，当你使用了module.exports = function(){}
+        //实际上覆盖了module.exports,但是exports并未发生改变，为了避免后面在修改exports而导致不能正确输出
+        //写成这样，将两者保持统一。
+				
+            exports = module.exports = _;
+        } 
+        exports._ = _;
+    }else{
+       //？不太懂部分,将_挂到全局属性_上
+       root._ = _;
+    }
+</code></pre>
+<p>上面代码中，我们首先定义了全局属性，考虑node，浏览器，微信小程序等不同的环境，我们进行了一长串的属性选择。最终获得了我们需要的root属性。然后将<code>_</code>挂到了root上。这一块可以看看讶羽大大的博客写underscore的第一二章部分，<a href="#">回到顶部</a></p>
+<br/>
+<p>有了<code>_</code>，我们就可以开始把我们写的函数都挂到<code>_</code>上了，这个简单，定义的时候这么写就好了 <code>_.reverse = ()=&gt;;</code><br>
+<br/></p>
+<blockquote>
+<h3 id="为了实现面向对象风格调用">为了实现面向对象风格调用。</h3>
+</blockquote>
+<p><br/>示例分析：<code>_([1,2,3])</code>:</p>
+<pre><code>var _ = function(obj){ 
+        if(!(this instanceof _)){ // 此处为了实现面向对象风格调用，可以暂时不管
+            return new _(obj);
+        }
+        this._wrapped = obj;
+				//部分
+    };
+</code></pre>
+<ol>
+<li>执行<code>this instanceof _ ,this</code>指向 <code>window,window instanceof _</code>为 false,!操作符取反，所以执行 <code>new _(obj)</code>.</li>
+<li><code>new _(obj)</code>中，this指向实例对象，<code>window instanceof _ 为 true</code>,取反后，代码接着执行。</li>
+<li>执行 <code>this._wrapped = obj</code>, 函数执行结束。</li>
+<li>总结，<code>_([1,2,3])</code>返回一个对象，为<code>{_wrapped:[1,2,3]}</code>,该对象原型指向<code>_.prototype</code></li>
+</ol>
+<p>也即我们下一步目标：将<code>_</code>上的函数也挂到<code>_.prototype</code>上。<br/></p>
+<p>先把<code>_</code>上的函数获取一下吧。<br/></p>
+<h3 id="functions">functions()</h3>
+<pre><code> //将obj中所有函数均push进names中
+    _.functions = function(obj){
+        var names = [];
+        for(var key in obj){
+            if(_.isFunction(obj[key])){
+                names.push(key);
+            }
+        }
+        return names.sort();
+    }
+</code></pre>
+<h3 id="each">each()</h3>
+<br/>
+<p>一个源于jQuery的通用遍历方法，可用于遍历对象和数组<br>
+<br/>回调函数拥有两个参数：第一个为对象的成员或数组的索引，第二个为对应变量或内容<br>
+<br/>而且可以退出循环</p>
+<pre><code>//数组遍历
+$.each([0,1,2],function(i,n){
+		console.log('item # '+ i + &quot;: &quot; + n)
+})
+//item #0:0
+//item #1:1
+//item #2:2
+
+//对象遍历
+$.each({name;&quot;John&quot;,lang:&quot;JS&quot;},function(i,n){
+		console.log('name: '+ i + &quot;,value: &quot; + n)
+})
+//item name,value:John
+//name:lang,value:JS
+
+//退出循环
+$.each([0,1,2,3,4,5],function(i,n){
+		if(i&gt;2){
+				return false;
+		}
+		console.log(&quot;item #&quot;+i+&quot;: &quot; + n );
+});
+//item #0:0
+//item #1:1
+//item #2:2
+</code></pre>
+<br/>
+<pre><code>_.each = function(obj,callback){
+			var length,i = 0;
+
+			//判断类数组对象和数组
+			if(_.isArrayLike(obj)){
+					//为数组时
+					length = obj.length;
+					for(;i&lt;length;i++){
+							//绑定this到当前遍历元素上，但是call对性能有一丢丢影响
+							if(callback.call(obj[i],obj[i],i) === false){
+									//当回调函数返回false的时候，我们就中止循环
+									break;
+							}
+					}
+			}else{
+					//为对象时
+					for( i in obj){
+							if(callback.call(obj[i],obj[i],i) === false){
+									break;
+							}
+					}
+			}
+			return obj;
+	}
+}
+</code></pre>
+<p>有了上面两个函数，我们就可以来写我们的主角 <code>mixin()</code>了<br/></p>
+<p>回顾一下<br/></p>
+<p>因为<code>_([1,2,3])</code>返回一个为<code>{_wrapped:[1,2,3]}</code>的原型指向<code>_.prototype</code>的对象<br/><br>
+为了调用<code>_</code>函数对象上的方法，我们要把<code>_</code>上的方法复制到<code>_.prototype</code>上<br/></p>
+<pre><code> _.mixin = function(obj){
+        _.each(_.functions(obj),function(name){
+            var func = _[name] = obj[name];
+            //原型链的函数在这里定义！调用的时候就会跳到这里了。
+            _.prototype[name] = function(){
+                var args = [this._wrapped];
+                
+                push.apply(args,arguments);
+
+                return chainResult(this,func.apply(_,args)); //此处为了链式调用可以暂时不管
+            };
+        });
+
+        return _;
+    }
+</code></pre>
+<br/>
+<p>这里我们就可以用对象风格和函数风格来调用我们的函数库里的文件了，现在，我们来实现链式调用。</p>
+<br/>
+<blockquote>
+<h3 id="链式调用">链式调用</h3>
+</blockquote>
+<p>回顾一下：<br/><br>
+链式调用例子 : <code>_.chain([1,2,3,4]).filter((num)=&gt;!num%2).map((num)=&gt;num*num).value();</code></p>
+<p>就依照上面那个函数走好了<br/></p>
+<p>为了实现链式调用，我们首先需要调用<code>_.chain()</code>处理以下我们的参数</p>
+<pre><code> _.chain = function(obj){
+        var instance = _(obj);
+        instance._chain = true;
+        return instance;
+    }
+</code></pre>
+<p>源码很简单，我们把传入的obj处理了一下，结合上面的<code>_</code>函数，<a href="#">回到顶部</a>，传入<code>[1,2,3,4]</code>,返回值会是</p>
+<pre><code>{
+	_wrapped : [1,2,3,4];
+	-chain : true;
+}
+</code></pre>
+<br/>
+<p>然后我们需要一个函数来判断我们刚添加的<code>_chain</code>属性，也即 <code>chainResult()</code></p>
+<pre><code>//为了判断是否有_.chain(),即是否采用链式调用
+    var chainResult = function (instance, obj){
+        return instance._chain?_(obj).chain():obj;
+    }
+</code></pre>
+<p>然后，在我们在<code>mixin()</code>中调用即可：<code>chainResult(this,func.apply(_,args));</code><br/></p>
+<p>回顾一下：</p>
+<pre><code>//mixin()函数部分
+_.prototype[name] = function(){
+		var args = [this._wrapped];
+		push.apply(args,arguments);
+		return chainResult(this,func.apply(_,args));
+};
+        
+</code></pre>
+<p>我们在调用<code>_.prototype</code>上的函数时，会跳转到<code>mixin()</code>中也即我们定义原型链函数的地方，然后return的时候会调用<code>chainResult</code>函数，然后返回值就会被处理，也即被调用的函数都会返回一个带有<code>_chain : true</code>的对象。</p>
+<br/>
+<p>但是我们最后的函数返回值依旧是一个对象，我们需要的是里面的<code>_wrapped</code>,这里就需要我们的<code>_.value()</code>了：</p>
+<pre><code>_.prototype.value = function(){
+        return this._wrapped;
+    }
+</code></pre>
+<br/>
+<blockquote>
+<p>小节结语，这里，我们完成了一个函数库最基础的布置，下面的章节我们开始向我们的函数库填充抽象出的可复用函数啦！</p>
+</blockquote>
+<hr>
+<blockquote>
+<h3 id="类数组之isarraylike">类数组之<code>isArrayLike()</code></h3>
+</blockquote>
+<p>类数组定义：拥有一个length 属性和若干索引属性的对象<br/></p>
+<p>例如：</p>
+<ul>
+<li>arguments</li>
+<li>有length属性的对象</li>
+</ul>
+<pre><code>a = {
+	1:1,
+	2:2,
+	c:3,
+	length:4
+}
+
+console.log(_.isArrayLike(a));//true
+</code></pre>
+<pre><code>_.isArrayLike = function(collection){
+        var length = collection.length;
+        return typeof length == 'number' &amp;&amp; length &gt;= 0 &amp;&amp; length &lt;= MAX_ARRAY_INDEX;
+    }
+</code></pre>
+<br/>
+<p>其中，<code>MAX_ARRAY_INDEX</code>指的是最大安全数</p>
+<p><code>var MAX_ARRAY_INDEX = Math.pow(2,53) - 1;</code></p>
+<p>关于最大安全数，不懂的话可以看看这个<a href="https://github.com/camsong/blog/issues/9">JavaScript 浮点数陷阱及解法 </a></p>
+<blockquote>
+<h3 id="函数判断之isfunction">函数判断之<code>isFunction()</code></h3>
+</blockquote>
+<pre><code> _.isFunction = function(obj){
+        return typeof obj == 'function' || false;
+    }
+</code></pre>
+<p>就是简单判断一个函数而已，不过可以扩展出一个知识点嘿嘿，<br/></p>
+<p>你是怎么看js中的<code>&amp;&amp;,||</code>？<br/></p>
+<p>与其说是逻辑运算符，不如说是属性选择符。</p>
+<ul>
+<li><code>&amp;&amp;</code>执行方式（a&amp;&amp;b）：
+<ul>
+<li>如果a为true，返回b</li>
+<li>否则返回a</li>
+</ul>
+</li>
+<li><code>||</code>执行方式（a || b）:
+<ul>
+<li>如果a为true, 返回a</li>
+<li>否则返回b</li>
+</ul>
+</li>
+</ul>
+<pre><code>'' || [1,2] //[1,2]
+'' &amp;&amp; [1,2] //&quot;&quot;
+
+[1] || [] //[1]
+[1] &amp;&amp; [] //[]
+</code></pre>
+<p>然后把js中为false的属性整理一下啦：<br>
+<br/><br>
+ES5规范9.2定义了抽象操作ToBoolean,列举了布尔强制类型转换所有可能出现的结果。</p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>false</li>
+<li>+0,-0 和 NaN</li>
+<li>&quot;&quot;</li>
+</ul>
+<p>从逻辑上说，假值列表以外的都应该是真值。<br/></p>
+<ul>
+<li>除了'',其他的字符串都是真值。</li>
+</ul>
+<pre><code>let a  = 'false';
+let b = '0';
+let c = &quot;''&quot;;
+
+let d = Boolean(a &amp;&amp; b &amp;&amp; c );
+d; // true
+</code></pre>
+<ul>
+<li><code>[],{},fucntion(){}</code>都不在假值列表里，所以他们都是真值。</li>
+</ul>
+<pre><code>let a  = [];
+let b = {};
+let c = function(){};
+
+let d = Boolean(a &amp;&amp; b &amp;&amp; c );
+d; // true
+</code></pre>
+<br/>
+<p>真值列表是无限长的，我们只能根据假值列表作为参考，可以理解位假值列表以外的值都是真值。</p>
+<br/>
+<ul>
+<li>常用的 || 用法：设置默认值</li>
+</ul>
+<pre><code>function foo(a,b){
+    a = a || 'hello';
+    b = b || 'world';
+
+    console.log(a + ' ' + b);
+};
+
+foo(1);// '1 world'
+
+</code></pre>
+<br/>
+<ul>
+<li>js代码压缩工具常用的‘守护运算符’：</li>
+</ul>
+<pre><code>
+function foo(){
+    console.log(a);
+};
+
+let a = 1;
+a &amp;&amp; foo(); 
+//当第一个操作数为真值时，&amp;&amp;才会选择第二个操作数作为返回值，即前面的表达式为后面的表达式'把关'
+</code></pre>
+<blockquote>
+<h3 id="字符反转-reverse">字符反转 <code>reverse()</code></h3>
+</blockquote>
+<pre><code>_.reverse = function(string){
+        return string.split('').reverse().join('');
+    }
+</code></pre>
+<p>这是一种取巧的做法，过程相当于</p>
+<pre><code>'1234'=&gt;['1','2','3','4']=&gt;['4','3','2','1']=&gt;'4321'
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/leetcode1140-ji-yi-hua-di-gui-bo-yi-shi-zi-you-xi">
+                  <h3 class="post-title">
+                    leetcode1140 记忆化递归+博弈 石子游戏
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

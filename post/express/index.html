@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>node-express | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">node-express</h2>
+            <div class="post-date">2019-06-10</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/express.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>express是目前最流行的node.js后端框架之一&lt;=&gt;相当于jQuery与js的关系。</strong><br>
+功能类似的后端框架  koa.js  egg.js  hapi.js<br>
+<strong>最大优势-&gt;中间件</strong><br>
+初始化：</p>
+<pre><code>let ewpress = require(&quot;express&quot;);
+let app = express();
+</code></pre>
+<ol>
+<li><strong>router</strong>   app.get||post(路径，回调函数)<br>
+例如</li>
+</ol>
+<pre><code>app.get(&quot;/&quot;,(req,res)=&gt;{
+		res.send(&quot;Hello world&quot;);
+});
+app.get(&quot;/jiejie/:name&quot;,(req,res)=&gt;{
+		//res.send(req.params.name);
+		res.send(req.params[&quot;age&quot;])
+});
+</code></pre>
+<ol start="2">
+<li><strong>静态资源库</strong><br>
+这个是真的有点强，一步搭建就出来了。</li>
+</ol>
+<pre><code>app.use(express.static(文件路径(如&quot;./public&quot;)));
+app.get(&quot;/,(req,res)=&gt;{
+			res.send(&quot;Hello world&quot;);
+});
+</code></pre>
+<p>而且，它也解决了很多兼容性的问题，例如 从中读取js文件时，出现的中文可以正常显示。<br>
+不会影响其他页面配置。<br>
+如果你希望所访问的文件存放在一个虚拟的目录，可以为静态资源指定一个挂载路径的方式。<br>
+<code>app.use('/static',express.static('public'))</code><br>
+然后就可以通过带有&quot;/static&quot;前缀地址来访问文件了。<br>
+例如<br>
+<code>http://localhost:3000/static/js/app.js</code></p>
+<ol start="3">
+<li>
+<p><strong>router使用细节</strong></p>
+</li>
+<li>
+<p>app.get(path,callback,[, callback....])</p>
+</li>
+<li>
+<p>send<br>
+可以返回字符串  <code>res.write(&quot;jiejie&quot;)</code><br>
+可以返回json  <code>res.send({name:&quot;jiejie&quot;,age:19});</code><br>
+可以返回html  <code>res.send(&quot;&lt;input type = 'data'&gt;&quot;);</code><br>
+可以设置status  <code>res.status(404).send(&quot;Bad request&quot;);</code><br>
+**注意：send方法只能响应一次，如果需要多次，请使用node原声方法write ,end  **</p>
+</li>
+<li>
+<p><strong>模板引擎-ejs</strong></p>
+<ul>
+<li>
+<pre><code>初始化
+</code></pre>
+</li>
+</ul>
+<pre><code>				//指定视图所在的位置
+			 app.set('views','expressStudy\\views');
+			 //2.注册模板引擎
+			 app.set('view engine','ejs');
+</code></pre>
+<ul>
+<li>了解app.engin(),set函数<a href="%22http://www.expressjs.com.cn/4x/api.html#app.engine%22">链接</a></li>
+<li>node.js中也有自定义模板引擎的定义方法<a href="%22http://www.expressjs.com.cn/advanced/developing-template-engines.html%22">链接</a></li>
+<li>render 函数<br>
+<code>res.render(&quot;list&quot;,dataJson);//传送数据到list.ejs</code></li>
+</ul>
+</li>
+<li>
+<p><strong>应用生成器</strong><br>
+<strong>初试化操作</strong></p>
+</li>
+</ol>
+<pre><code>1.express --view=ejs demo1
+2.cd demo1
+3.npm install
+4. SET DEBUG=demo1:* &amp; npm start
+</code></pre>
+<ul>
+<li>
+<pre><code>  	app.js  整个项目的入口文件，有初始化的配置代码
+</code></pre>
+</li>
+<li>
+<pre><code>  	package.json  package-lock.json   第三方依赖
+</code></pre>
+</li>
+<li>
+<pre><code>    bin/www  工程启动文件（右击，运行）
+</code></pre>
+</li>
+<li>
+<pre><code>    public 存放静态资源文件
+</code></pre>
+</li>
+<li>
+<pre><code>    routes 存放路由文件
+</code></pre>
+</li>
+<li>
+<pre><code>    views  存放模板文件
+</code></pre>
+</li>
+<li>
+<pre><code>    对app.js进行分析
+</code></pre>
+</li>
+</ul>
+<pre><code>//1.引入包文件
+let path = require('path');
+let createError = require('http-errors');
+let express = require('express');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+
+//2.引入路由文件
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+
+let app = express();
+
+// 设置视图引擎
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+//使用包
+app.use(logger('dev'));//使用开发者模式
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+//让用户访问路由
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+// set locals, only providing error in development
+res.locals.message = err.message;
+res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+// render the error page
+res.status(err.status || 500);
+res.render('error');
+});
+
+//向外暴露app文件
+module.exports = app;
+</code></pre>
+<p>生成server文件夹  express server</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/LNUW6J11_n" class="tag">
+                    node
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/c-stringstream-jia-getlineshi-yong">
+                  <h3 class="post-title">
+                    c++  stringstream() 加 getline()使用
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

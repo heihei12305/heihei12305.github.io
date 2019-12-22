@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-dp矩阵连乘 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-dp矩阵连乘</h2>
+            <div class="post-date">2019-06-14</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-dp-ju-zhen-lian-cheng.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>问题描述：给定n个矩阵{A1,A2,A3.....An},其中Ai与Ai+1是可乘的，i=1,2,3....n-1,考察这n个矩阵的连乘积<br>
+若A是一个 p* q 矩阵，B是一个 q* r 矩阵，则其乘积C = A* B 是一个 p* r 矩阵，主要运算量是三重循环，共需要p* q* r次数乘。<br/><br/><br>
+动态规划核心公式   <strong>m[i][j] = min{m[i][k]+m[k+1][j]+Pi-1*PkPj }   i&lt;j   i&lt;=k&lt;j</strong></p>
+<p><strong>许多子问题被重复计算多次，这是该问题可用动态规划求解的一显著特征</strong></p>
+<pre><code>	void MatrixChain(vector&lt;int&gt; &amp;p,int n,vector&lt;vector&lt;int&gt; &gt; &amp;m,vector&lt;vector&lt;int&gt; &gt; &amp;s)
+	{
+		for(int i  =1;i&lt;=n;i++)
+		{
+			m[i][i] = 0;
+		}
+		for(int r = 2;r&lt;=n;r++)//r为 i 和 j之间的距离！！！
+		{
+			for(int i = 1;i&lt;=n-r+1;i++)//这个循环条件要注意哦!，也就是 j&lt;n 啦
+			{
+				int j = i+r-1;
+				m[i][j] = m[i-1][j] + p[i-1]*p[i]*p[j];
+				s[i][j] = i;
+				for(int k = i+1;k&lt;j;k++)
+				{
+					int t = m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j];
+					if(t&lt;m[i][j])
+					{
+						m[i][j] = t;
+						s[i][j] = k;//中断点记录下来了
+					}
+				}
+			}
+		}
+	}
+	
+	
+
+struct symbol
+{
+	int leftParent = 0, rightParent = 0;
+};
+//获取符号位置
+void getExpression(int start, int end, vector&lt;symbol&gt; &amp;symbols, vector&lt;vector&lt;int&gt;&gt; &amp;s)
+{
+	if (start == end) {
+		return;
+	}
+	else
+	{
+		symbols[start].leftParent++;
+		symbols[end + 1].rightParent++;
+	}
+	if (start + 1 == end) {
+		return;
+	}
+	int posi = s[start][end];
+	getExpression(start, posi, symbols,form);
+	getExpression(posi + 1, end, symbols,form);
+}
+//输出表达式
+void Traceback(vector&lt;symbol&gt; symbols, vector&lt;vector&lt;cell&gt;&gt; &amp;s,int n) {
+	getExpression(0, n - 1, symbols, s);
+	for (int i = 0; i &lt; n; i++)
+	{
+		int l = symbols[i].leftParent, r = symbols[i].rightParent;
+		while (r--)
+		{
+			cout &lt;&lt; &quot;)&quot;;
+		}
+		while (l--)
+		{
+			cout &lt;&lt; &quot;(&quot;;
+		}
+		cout &lt;&lt; &quot; &quot; &lt;&lt; 'A'  &lt;&lt; i+1 &lt;&lt; &quot; &quot;;
+	}
+	int  r = symbols[n].rightParent;
+	while (r--)
+	{
+		cout &lt;&lt; &quot;)&quot;;
+	}
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-dp-zui-chang-gong-gong-zi-xu-lie">
+                  <h3 class="post-title">
+                    algorithm-dp最长公共子序列及最大子段和
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-递归与分治策略 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-递归与分治策略</h2>
+            <div class="post-date">2019-06-13</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-di-gui-yu-fen-zhi-ce-lue.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>！！复习算法考试所用，代码为老师课堂手写，逻辑没错，应该有点小问题，需要修改才能运行，仅供思路参考</strong><br/><br/><br>
+<strong>递归</strong><br/><br/><br>
+递归：自身调用自身<br/><br>
+定义：<strong>直接或间接的调用自身的算法称为递归算法，用函数自身给定出定义的函数称为递归函数</strong><br>
+如线性查找<br/></p>
+<pre><code>int find(T *a,int l,int r,const T &amp;x)//其实也就是从0依次往后找，emmm强行递归
+{
+	//在a[l]....a[r] 查找x
+	if(r&lt;l)  return -1;
+	if(l==r&amp;&amp;a[l]==x)
+	{
+		return l;
+	}
+	else {
+		return -1;
+	}
+	int m = (l+r)/2;
+	//区间分为l,...m 和 m+1....r
+	int r1 = find(a,l,m,x);
+	if(r1&gt;=0) return r1;
+	else{
+		return find(a,m+1,r.x);
+	}
+}
+</code></pre>
+<p><br/><br/>同时求最值</p>
+<pre><code>template&lt;class T&gt;
+T getMax(T *a,int l,int r)
+	{//求a[l].....a[r]的最大值
+		if(l==r)
+			return a[l];
+		int m = ( l + r ) / 2;
+		//注：当r&gt;l时，m&gt;=l,m&lt;r
+		T m1 = getMax(a,l,m);
+		T m2 = getMax(a,m+1,r);
+		return m1&gt;m2?m1:m2;
+	}
+</code></pre>
+<p>分析：<br/><br>
+T(n) = 0  n=1<br/><br>
+T(n) = 2T(n/2)+1 = 2^k* T(1) + 2^(k-1) + 2^(k-2)...+1 = n-1  (k = log2(n))   n&gt;1<br/><br/><br>
+同时求最大最小值<br/><br>
+注:stl中有pair<br/><br>
+相当于<br/></p>
+<pre><code>template&lt;class T1,class T2&gt;
+struct pair
+{
+	T1 first;
+	T2 second;
+}
+</code></pre>
+<p><br/><br/>分治求最大及最小</p>
+<pre><code>template&lt;class T&gt;
+pair&lt;T,T&gt; minMax(T *a,int l,int r)
+{
+	//即求a[l]...a[r]的最大值及最小值
+	pair&lt;T,T&gt; v;
+	if(l==r)
+	{
+		v.first = a[l];
+		v.second = a[l];
+		return v;
+	}
+	//下面是 l&lt;r
+	int m = (r+l)/2;
+	pair&lt;T,T&gt; v1 = minMax(a,l,m);
+	pair&lt;T,T&gt; v2 = minMax(a,m+1,r);
+	v.first = v1.first&lt;v2.first?v1.first:v2.first;
+	v.second = v1.second&lt;v2.second?v2.second:v1.second;
+	return v;
+	}
+</code></pre>
+<p>分析：<br/><br>
+T(n) = o n&lt;=1;<br/><br>
+T(n) = aT(n/2)+2 n&gt;1<br/><br>
+递归贼多<br/><br>
+总工作量 T(n) = 2+ 2* 2 + 2^2* 2 +.....2^k* T(1)<br/><br/></p>
+<p>fibonacci 数列<br/><br>
+Fn = 1 n = 0,1<br/><br>
+Fn = Fn-2+Fn-1 n&gt;1<br/></p>
+<p>不能直接采用递归方法，否则会有大量重复运算<br/><br/></p>
+<p>ex:求树高</p>
+<pre><code>	template&lt;class T&gt;
+	struct Node{
+		T data;
+		Node&lt;T&gt; *l,*r;
+	}
+	//树高为层数
+	template&lt;class T&gt;
+	int getH(Node&lt;T&gt; *t)
+	{
+		if(t==NULL)//空树高为0
+		{
+			return 0;
+		}
+		Node&lt;T&gt; *lt = t-&gt;l;
+		Node&lt;T&gt; *rt = t-&gt;r;
+		int lh = getH(lt);
+		int rh = getH(rt);
+		int maxH = lh&gt;rh?lh:rh;
+		return (maxh+1);
+	}
+</code></pre>
+<p><br/><br/><br/><br>
+<strong>分治策略</strong><br/><br>
+分治策略的基本思想 : 问题-&gt;分解-&gt;分解....-&gt;归并<br/></p>
+<pre><code>Divide_and_conquer(P){
+	if(|p|&lt;=n0)  //规模足够小
+	{
+		y = 非递归方法求解p
+		return y;
+	}
+	//分解 p 到 p1,p2,p3.....;
+	for(int i = 1;i&lt;=k;i++)
+	{
+		yi = Divide_and_conquer(pi);
+	}
+	y = Merge(y1....yk);
+	return y;
+}
+</code></pre>
+<p>分析（递归方程）<br/><br>
+T(n) = C(常量) n&lt;=n0 <br/><br>
+T(n) = k* T(n/m) + f(n) n&gt;n0 <br/><br>
+注 :</p>
+<ul>
+<li>n/m 为子问题的规模</li>
+<li>k 为子问题个数</li>
+<li>f(n) = D(n) + M(n）分别为 分解工作量 和 合并工作量</li>
+<li>f(n) = θ(n^d) 或 f(n) = O(n^d)  即分解+合并工作量为多项式级别</li>
+</ul>
+<p><br/>如：同时求最大最小问题中<br/><br>
+T(n) = 2 * T(n/2)+( 0 + 2 )  分别为分解（仅作(l+r)/2,无比较）,比较（两次元素比较）<br>
+<br/><br/><br>
+<strong>归并排序</strong><br/><br>
+a[0].......a[n-1]<br/><br>
+计算中间下标：m = (l+r )/2 无比较，即D(n) = 0<br/><br>
+归并 合并工作量</p>
+<ul>
+<li>Mmax(n)  = n - 1<br/></li>
+<li>Mmin(n) = n/2<br/></li>
+</ul>
+<p>归并排序<br/><br>
+Tmin(n) = 0  n&lt;=1<br/><br>
+Tmin(n) = 2 * Tmin(n/2) + n/2  n&gt;1<br/><br>
+Tmax(n) = 0  n&lt;=1<br/><br>
+Tmax(n) = 2 * Tmax(n/2) + n-1  n&gt;1<br/></p>
+<p>或者</p>
+<ul>
+<li>T(n) = 0  n&lt;=1<br/></li>
+<li>T(n) = 2* T(n/2) + O(n)  n&gt;1<br/></li>
+</ul>
+<p><br/><br/><br>
+快速排序<br/></p>
+<ul>
+<li>最坏 ： T(n) = n*(n-1)/2</li>
+<li>最好 ： T(n) = 2 * T(n/2) + (n-1) = θ(nlogn)</li>
+</ul>
+<p><br/><br/><br>
+密码学中<br/><br>
+如计算 x^64 mod 65537, x^1024 mod 65537,<br>
+且注意到 x^2048 = x^1024* x^1024</p>
+<ul>
+<li>T(n) = 0  n =1</li>
+<li>T(n) = 2* T(n/2)+1  n为偶数</li>
+<li>T(n) = T(n-1)+1  n为奇数</li>
+</ul>
+<p>x^n = x^(n/2)* x^(n/2)  n为偶数<br/><br>
+x^n = x^(n-1)* x  n为奇数<br/></p>
+<p>最有效  非递归模重复平方算法<br/><br/></p>
+<p><strong>主定理</strong><br/><br>
+<strong>设T（n）= C  n =1</strong><br/><br>
+<strong>设T（n）= k*T(n/m) + θ（n<sup>d）（θ（n</sup>d） = D(n)+M(n)  或 O(n^d)    为多项式级别）</strong><br/><br>
+<strong>k&gt;=1 , m&gt;=1</strong><br/><br>
+<strong>存在</strong></p>
+<ul>
+<li><strong>T(n) = θ(n^d)        d&gt;logm(k)</strong></li>
+<li><strong>T(n) = θ(n^d*logn)      d=logm(k)</strong></li>
+<li><strong>T(n) = θ(n^(logm(k)))       d&lt;logm(k)</strong></li>
+</ul>
+<p><br/>如T(n) = 2T(n/2) + θ(n)<br>
+此处  k = 2 ,m = 2 , d =1  =&gt;d=logm(k)  =&gt;T(n) = θ(n^d* logn) = θ(n* logn)<br/></p>
+<p>二分查找（最坏情况）<br/><br>
+T(n) = T(n/2)+1<br>
+此处 k =1, m = 2 , d =0  =&gt;d  = logm(k) =&gt; T(n) = θ(logn)<br/></p>
+<p>同时求最大最小<br/><br>
+T(n) = 2* (T/2) + 2;<br>
+=&gt;k  = 2,m = 2,d = 0  d&lt;log2(2) =&gt;θ(n)<br/><br/><br>
+求解递归方程</p>
+<p>方法一： 直接展开<br>
+<img src="https://heihei12305.github.io/post-images/1560396883760.jpg" alt=""><br>
+对于 f(n) = θ(n^d)<br>
+T(n) = n^d + (k/(m^d))* n^d +......(k/(m<sup>d))</sup>(l-1)* n^d.....<br/><br>
+注：1+r+r<sup>2+.....r</sup>l</p>
+<ul>
+<li>r&lt;1 上式极限为常数</li>
+<li>r=1 上式为l</li>
+<li>r&gt;1 相当于 r^(l+1)</li>
+</ul>
+<p><br/>方法二：运用主定理<br>
+<br/>当 k = m^d 即 d = logm(k)<br>
+=&gt;T(n) = l* n^d + O(n^(logm(k))) = (logm(n))* n^d + θ(n^d) =(logm(n)+1)* n^d = <b>θ(logn* n^d)</b></p>
+<p>当 k &lt; m^d 即 d &gt; logm(k)<br>
+=&gt;<b>T(n) = θ(n^d)  </b></p>
+<p>当 k &gt; m^d 即 d &lt; logm(k)<br>
+=&gt;<b>T(n) = θ(n^logm(k))  </b></p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-suan-fa-fu-za-du-xiang-guan">
+                  <h3 class="post-title">
+                    algorithm-算法复杂度相关
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

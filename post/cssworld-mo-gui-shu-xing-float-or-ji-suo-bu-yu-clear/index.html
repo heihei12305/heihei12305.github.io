@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>cssWorld-魔鬼属性float || 己所不欲clear | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">cssWorld-魔鬼属性float || 己所不欲clear</h2>
+            <div class="post-date">2019-08-31</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/cssworld-mo-gui-shu-xing-float-or-ji-suo-bu-yu-clear.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="浮动的本质是为了实现文字环绕效果">浮动的本质是为了实现文字环绕效果。</h3>
+</blockquote>
+<p>float 布局有时也能满足我们的需求，但是实际上这种布局i一碰就碎。缺少弹性，布局的容错率很糟糕。float 特性：</p>
+<ol>
+<li>
+<p>包裹性</p>
+<ul>
+<li>包裹 ： 假设浮动元素父元素宽度为200px，浮动元素子元素是一个128px宽度的图片， 则此时浮动元素宽度表现为“包裹”，也就是里面图片的宽度128px。</li>
+<li>自适应性。如果浮动元素的子元素不只是一张 128px 宽度的图片，还有一大波普通的文字，则此时浮动元素宽度就自适应父元素的200px宽度，最终表现也为200px。</li>
+</ul>
+</li>
+<li>
+<p>块状化并格式化上下文：</p>
+<ul>
+<li>元素一旦float 的属性不是none,则其diaplay计算值就是block,或者table.</li>
+</ul>
+<pre><code>span{
+	diaplay: block; /* 多余*/
+	float:left;
+}
+span{
+	float: left;
+	vertival-align: middle; /* 多余 */
+}
+</code></pre>
+</li>
+<li>
+<p>破坏文档流</p>
+</li>
+</ol>
+<ul>
+<li>float 属性有一个著名的特性表现，就是会让父元素的高度塌陷（如果父元素没有指明高度的话）。这是css的设计者设定的标准，以使得 float 一开始“只是为了实现文字环绕效果”的目标实现，也即 “破坏文档流”。当然，只是让高度塌陷还不够，这还需要另一个特性，那就是“行框盒子和浮动元素的不可重叠性”，也就是“行框盒子如果和浮动元素的垂直高度有重叠，则行框盒子在正常定位状态下只会跟随浮动元素，而不会发生重叠”。</li>
+</ul>
+<ol start="4">
+<li>没有任何margin合并</li>
+</ol>
+<br/>
+<br/>
+<br/>
+<blockquote>
+<h3 id="clear-己所不欲勿施于人">clear &quot;己所不欲勿施于人&quot;</h3>
+</blockquote>
+<p>官方解释 ： “元素盒子的边不能和前面的浮动元素相邻”，就是设置了 clear 属性的元素自身如何如何。而不是让float元素如何如何。</p>
+<p>clear属性只有块级元素才有效，通常可以利用伪元素来完成清除浮动 :</p>
+<pre><code>.clear:after{
+	content: '';
+	diaplay: table; /*也可以是'block',或者'list-item'*/
+	clear: both;
+}
+</code></pre>
+<br/>
+<p><code>clear: both</code> 的作用本质是让自己不和float 元素在一行显示，并不是真正意义上的清除浮动，因此 float 元素一些不好的特性依然存在。</p>
+<ul>
+<li>如果 <code>clear： both</code> 元素前面元素就是 float 元素，则<code>margin-top</code> 负值即使设成 -9999px ，也不见任何效果。</li>
+<li><code>clear: both</code>后面的元素依旧可能会发生文字环绕的现象。</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/leetcode990">
+                  <h3 class="post-title">
+                    leetcode990-并查集使用
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

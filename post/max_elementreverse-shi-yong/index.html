@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>max_element+reverse使用 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">max_element+reverse使用</h2>
+            <div class="post-date">2019-06-27</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/max_elementreverse-shi-yong.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>以一道题开始吧，嘻嘻。<br/><br/><br>
+<strong>煎饼排序</strong><br/><br/><br>
+问题描述：给定数组 A，我们可以对其进行煎饼翻转：我们选择一些正整数 k &lt;= A.length，然后反转 A 的前 k 个元素的顺序。我们要执行零次或多次煎饼翻转（按顺序一次接一次地进行）以完成对数组 A 的排序。</p>
+<p>返回能使 A 排序的煎饼翻转操作所对应的 k 值序列。任何将数组排序且翻转次数在 10 * A.length 范围内的有效答案都将被判断为正确。</p>
+<p>来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/pancake-sorting</p>
+<p>例如<br/></p>
+<pre><code>输入：[3,2,4,1]
+输出：[4,2,4,3]
+解释：
+我们执行 4 次煎饼翻转，k 值分别为 4，2，4，和 3。
+初始状态 A = [3, 2, 4, 1]
+第一次翻转后 (k=4): A = [1, 4, 2, 3]
+第二次翻转后 (k=2): A = [4, 1, 2, 3]
+第三次翻转后 (k=4): A = [3, 2, 1, 4]
+第四次翻转后 (k=3): A = [1, 2, 3, 4]，此时已完成排序。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/pancake-sorting
+</code></pre>
+<hr>
+<p>题解</p>
+<pre><code>vector&lt;int&gt; pancakeSort(vector&lt;int&gt;&amp; A) {
+	vector&lt;int&gt; res;
+	int n  = A.size();
+	for(int i = 0;i&lt;n-1;i++)
+	{
+		auto it  = max_element(A.begin(),A.end()-i);
+		res.push_back(it-A.begin()+1);
+		reverse(A.begin(),it+1);
+		reverse(A.begin(),A.end()-i);
+		res.push_back(n-i);
+	}
+	return res;
+}
+</code></pre>
+<p><strong>其中值得注意的就是stl中的max_element的使用，会获得最大值的迭代器，用 it-A.begin()+1 即可获得最大值的index</strong><br/><br/></p>
+<p><strong>reverse(a,b)是将[a,b)这个范围的数调转过来，来自于  algorithm 库</strong></p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/xiang-mu-pei-zhi-jie-shao">
+                  <h3 class="post-title">
+                    cli自动生成项目配置介绍
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

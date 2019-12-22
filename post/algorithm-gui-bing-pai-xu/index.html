@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>algorithm-归并排序 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">algorithm-归并排序</h2>
+            <div class="post-date">2019-06-13</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/algorithm-gui-bing-pai-xu.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><strong>归并排序</strong><br/><br/><br>
+基本思想：al.....am.....ar  -&gt;  两边排序 然后再归并<br>
+归并工作量 最好为 n/2,最坏为 n-1  =&gt; T(n) = 2* T(n/2)+θ(n* logn)=&gt;由主定理 T(n) = θ(n* logn)<br/><br/></p>
+<pre><code>//归并
+template&lt;class T&gt;
+merge(T *a,int l,int m,int r,T *c)
+{
+	//[al].....a[m]   ||   a[m+1].....a[r]
+	//c[l].........c[m].....c[r]
+	int i = l,k = l,j = m+1;
+	while(i&lt;=m&amp;&amp;j&lt;=r)
+	{
+		if(a[i]&lt;a[j])
+		{
+			c[k++] = a[i++];
+		}else{
+			c[k++] =a[j++];
+		}
+	}
+	if(i&gt;m)//左侧归并完毕
+	{
+		while(j&lt;=r)
+		{
+			c[k+1] = a[j++];
+		}
+	}else{
+		while(i&lt;=m)
+		{
+			c[k++] = a[i++];
+		}
+	}
+}
+template&lt;class T&gt;
+void Copy(T *c,int l,int r,T *a)
+{
+	//c[l].....c[r]   复制到  a[l].....a[r]
+	for(int i = l;i&lt;=r;i++)
+	{
+		a[i] = c[i];
+	}
+}
+//排序算法
+template&lt;class T&gt;
+MergeSort(T *a,int l,int r,T *c)
+{
+	if(r&lt;=l)  return ;
+	//以下为l&lt;r
+	int m = ( l + r )/2;
+	//[l,m],[m+1,r]
+	MergeSort(a,l,m,c);
+	MergeSort(a,m+1,r,c);
+	Merge(a,l,m,r,c); //有比较，最坏n-1 ，最好 n/2
+	Copy(c,l,r,a); //无比较工作量，仅复制
+}
+//用法  
+int n = 100 0000;
+double *a  =new double[n];
+for(int i = 0;i&lt;n;i++)
+{
+	a[i] = Random();
+}
+double *c  =new double[n];//排序移动方向
+MergeSort(a,0,n-1,c);
+delete[] c;//清除移动方向
+//已排序  a[0]&lt;=...a[n-1]
+输出a[i]...
+delete[] a;
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/GbZwAv-XNd" class="tag">
+                    c++
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/algorithm-er-fen-cha-zhao-da-zheng-shu-cheng-fa-ji-ju-zhen-de-cheng-fa">
+                  <h3 class="post-title">
+                    algorithm-二分查找，大整数乘法及矩阵的乘法
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

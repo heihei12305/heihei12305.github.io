@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>css-基础布局-圣杯布局+双飞翼布局 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">css-基础布局-圣杯布局+双飞翼布局</h2>
+            <div class="post-date">2019-07-29</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/css-ji-chu-bu-ju-sheng-bei-bu-ju-shuang-fei-yi-bu-ju.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h2 id="作用br">作用：<br/></h2>
+</blockquote>
+<h3 id="圣杯布局和双飞翼布局解决的问题都是一样的就是两边顶宽中间自适应的三栏布局中间栏要放在文件流前面以优先渲染-br">圣杯布局和双飞翼布局解决的问题都是一样的，就是两边顶宽，中间自适应的三栏布局，中间栏要放在文件流前面以优先渲染。<br/></h3>
+<blockquote>
+<h2 id="区别-br">区别: <br/></h2>
+</blockquote>
+<h3 id="圣杯布局三栏利用-float-和-负margin-并列br">圣杯布局三栏利用 float 和 负margin 并列<br/></h3>
+<h3 id="利用父容器设置-padding-给两边侧栏腾空间br">利用父容器设置 padding 给两边侧栏腾空间<br/></h3>
+<pre><code>&lt;body&gt;
+ &lt;div id = &quot;father&quot;&gt;
+		&lt;div id=&quot;main&quot;&gt;
+			&lt;p&gt;this is main&lt;/p&gt;
+		&lt;/div&gt;
+		&lt;div id=&quot;left&quot;&gt;left&lt;/div&gt;
+		&lt;div id=&quot;right&quot;&gt;right&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;/body&gt;
+	&lt;style&gt;
+		#father {
+    padding: 0 60px 0 30px;
+    margin: 0;
+		float: left;
+  }
+   #main {
+    width: 100%;
+    height: 300px;
+    background: red;
+  }
+  #left {
+    width: 30px;
+    margin-left: -100%;
+    background: blue;
+    height: 100px;
+    position: relative;
+    right: 30px;
+  }
+   #right {
+    width: 60px;
+    margin-left: -60px;
+    background: yellow;
+    height: 200px;
+    position: relative;
+    left: 60px;
+  }
+	&lt;/style&gt;
+</code></pre>
+<h3 id="双飞翼布局三栏利用-float-和-负margin-并列-br">双飞翼布局三栏利用 float 和 负margin 并列 <br/></h3>
+<h3 id="在中间栏加一层容器利用-margin-给两栏腾空间-br">在中间栏加一层容器，利用 margin 给两栏腾空间 <br/></h3>
+<pre><code>&lt;body&gt;
+ &lt;div id = &quot;father&quot;&gt;
+	 &lt;div id = &quot;container&quot;&gt;
+		&lt;div id=&quot;main&quot;&gt;
+			&lt;p&gt;this is main&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+		&lt;div id=&quot;left&quot;&gt;left&lt;/div&gt;
+		&lt;div id=&quot;right&quot;&gt;right&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;/body&gt;
+	&lt;style&gt;
+	#father {
+    padding: 0;
+    margin: 0;
+		min-width: 630px;
+		float: left;
+  }
+	 #container {
+    width: 100%;
+  }
+ #container #main {
+    height: 300px;
+    background: red;
+    margin: 0 600px 0 30px;
+  }
+  #left {
+    width: 30px;
+    background: blue;
+    height: 100px;
+    margin-left: -100%;
+  }
+  #right {
+    width: 600px;
+    background: yellow;
+    height: 200px;
+    margin-left: -600px;
+  }
+	&lt;/style&gt;
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/node-pa-chong-puppeteer">
+                  <h3 class="post-title">
+                    node爬虫-puppeteer
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

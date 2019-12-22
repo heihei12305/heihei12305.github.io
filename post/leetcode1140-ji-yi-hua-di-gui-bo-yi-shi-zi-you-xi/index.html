@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>leetcode1140 记忆化递归+博弈 石子游戏 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">leetcode1140 记忆化递归+博弈 石子游戏</h2>
+            <div class="post-date">2019-09-24</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/leetcode1140-ji-yi-hua-di-gui-bo-yi-shi-zi-you-xi.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>亚历克斯和李继续他们的石子游戏。许多堆石子 排成一行，每堆都有正整数颗石子 piles[i]。游戏以谁手中的石子最多来决出胜负。<br>
+<br/><br>
+亚历克斯和李轮流进行，亚历克斯先开始。最初，M = 1。<br>
+<br/><br>
+在每个玩家的回合中，该玩家可以拿走剩下的 前 X 堆的所有石子，其中 1 &lt;= X &lt;= 2M。然后，令 M = max(M, X)。<br>
+<br/><br>
+游戏一直持续到所有石子都被拿走。<br>
+<br/><br>
+假设亚历克斯和李都发挥出最佳水平，返回亚历克斯可以得到的最大数量的石头。</p>
+<pre><code>输入：piles = [2,7,9,4,4]
+输出：10
+解释：
+如果亚历克斯在开始时拿走一堆石子，李拿走两堆，接着亚历克斯也拿走两堆。在这种情况下，亚历克斯可以拿到 2 + 4 + 4 = 10 颗石子。 
+如果亚历克斯在开始时拿走两堆石子，那么李就可以拿走剩下全部三堆石子。在这种情况下，亚历克斯可以拿到 2 + 7 = 9 颗石子。
+所以我们返回更大的 10。 
+</code></pre>
+<br/>
+<hr>
+<p>本题中，涉及到了两者之间的博弈问题，同时均发挥最佳水平，这使得解题思路为从后往前求解，而且为了避免重复计算，需要利用对象给计算结果记录下来。</p>
+<br/>
+<pre><code>var stoneGameII = function(piles) {
+    let len = piles.length;
+		//利用对象存储已求得的结果，避免重复调用，js中的对象运用很方便，不像c++，一般数组存储
+    let vec = {};
+    
+		//计算从第i堆石子到最后一堆石子的总石子数
+    let sum = new Array(len);
+    sum[len-1] = piles[len-1];
+    for(let i = len-2;i&gt;=0;i--){
+        sum[i] = sum[i+1] + piles[i];
+    }
+    
+    //记忆化递归
+    dfs = function(i,m){
+				//判断是否已经计算过
+        if(vec.hasOwnProperty([i,m])){
+            return vec[[i,m]];
+        }
+				
+				//如果已经取完，直接返回0
+        if(i &gt; len){
+            return 0;
+        }
+				
+				//如果可以直接取完，则直接取完
+        if(i + m * 2 &gt;= len){
+            return sum[i];
+        }
+        
+				//递归求得此时的最大值
+        let best = 0;
+        for(let x = 1;x &lt; m*2+1; x++){
+						//此处运用了博弈思想，此时的最优策略是 剩余石子减去对手的最优策略
+            best = Math.max(best,sum[i]-dfs(i+x,Math.max(x,m)));
+        }
+        
+				//将计算结果保存
+        vec[[i,m]] = best;
+        return best;
+    }
+    return dfs(0,1);
+};
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
+                    others
+                  </a>
+                
+                  <a href="https://heihei12305.github.io/tag/-_Te1R3KSt" class="tag">
+                    leetcode
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/han-shu-shi-bian-cheng">
+                  <h3 class="post-title">
+                    函数式编程
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>leetcode 725 分隔链表 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">leetcode 725 分隔链表</h2>
+            <div class="post-date">2019-08-21</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/leetcode-725-fen-ge-lian-biao.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="leetcode-725-分隔链表"><a href="https://leetcode-cn.com/problems/split-linked-list-in-parts/">leetcode 725 分隔链表</a></h3>
+</blockquote>
+<br/>
+<blockquote>
+<h3 id="从未想过js分隔个链表这么费劲">从未想过js分隔个链表这么费劲</h3>
+</blockquote>
+<p><br/>给定一个头结点为 root 的链表, 编写一个函数以将链表分隔为 k 个连续的部分。<br>
+<br/><br>
+<br/>每部分的长度应该尽可能的相等: 任意两部分的长度差距不能超过 1，也就是说可能有些部分为 null。<br>
+<br/><br>
+<br/>这k个部分应该按照在链表中出现的顺序进行输出，并且排在前面的部分的长度应该大于或等于后面的长度。<br>
+<br/><br>
+<br/>返回一个符合上述规则的链表的列表。<br>
+<br/><br>
+<br/>举例： 1-&gt;2-&gt;3-&gt;4, k = 5 // 5 结果 <code>[ [1], [2], [3], [4], null ]</code><br>
+<br/><br>
+<br/>示例 1：<br>
+<br/><br>
+<br/>输入:<br>
+<br/>root = <code>[1, 2, 3]</code>, k = 5<br>
+<br/>输出:<code>[[1],[2],[3],[],[]]</code><br>
+<br/>解释:<br>
+<br/>输入输出各部分都应该是链表，而不是数组。<br>
+<br/>例如, 输入的结点 root 的 val= 1, root.next.val = 2, \root.next.next.val = 3, 且 root.next.next.next = null。<br>
+<br/>第一个输出 output[0] 是 output[0].val = 1, output[0].next = null。<br>
+<br/>最后一个元素 output[4] 为 null, 它代表了最后一个部分为空链表。</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} root
+ * @param {number} k
+ * @return {ListNode[]}
+ */
+var splitListToParts = function(root, k) {
+    let tmp = root;
+    let len = 0;
+    let res = [];
+    
+    
+    //长度不得不求
+    while(tmp){
+        tmp = tmp.next;
+        len ++;
+    }
+    
+    
+    let aveLen = Math.floor(len / k);
+    let remainder = len % k;
+    
+    for(let i = 0; i &lt; remainder;i++)
+    {
+       res.push(root);
+            
+        if(root === null){
+            continue;
+        }
+        
+        for(let j = 0;j &lt; aveLen + 1;j++){
+            tmp = root;
+            root = root.next;
+        }
+        tmp.next = null;//贼强
+    }
+    
+    for(let i = remainder; i &lt; k;i++){
+        res.push(root);
+            
+        if(root === null){
+            continue;
+        }
+        
+        for(let j = 0;j &lt; aveLen;j++){
+            tmp = root;
+            root = root.next;
+        }
+        tmp.next = null;
+       
+    }
+    
+    
+    return res;
+    //其实代码谈不上复杂，但是，很强。
+    
+};
+
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
+                    others
+                  </a>
+                
+                  <a href="https://heihei12305.github.io/tag/-_Te1R3KSt" class="tag">
+                    leetcode
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/leetcode-659-fen-ge-shu-zu-wei-lian-xu-zi-xu-lie">
+                  <h3 class="post-title">
+                    leetcode 659-分割数组为连续子序列
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

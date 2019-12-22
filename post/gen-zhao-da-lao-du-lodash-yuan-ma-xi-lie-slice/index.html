@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>跟着大佬读lodash源码系列-slice | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">跟着大佬读lodash源码系列-slice</h2>
+            <div class="post-date">2019-08-10</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/gen-zhao-da-lao-du-lodash-yuan-ma-xi-lie-slice.png')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="越看越菜系列">越看越菜系列</h3>
+</blockquote>
+<h4 id="最近在看对角大佬的读lodash源码第一篇本来看过去了的读lodash源码之从slice看稀疏数组与密集数组后面需要用到slice就想着自己按照思想写一个">最近在看对角大佬的读lodash源码，第一篇本来看过去了的<a href="https://github.com/yeyuqiudeng/pocket-lodash/issues/1">读lodash源码之从slice看稀疏数组与密集数组</a>，后面需要用到slice，就想着自己按照思想写一个</h4>
+<pre><code>function slice(array,start,end){
+    let length = array == null ? 0 : array.length;
+    if(!length)
+    {
+        return [];
+    }
+    if(start&lt;0)
+    {
+        start+=length;
+    }
+    if(end &lt; 0){
+        end+=length;
+    }
+    length = start &gt; end ? 0 : (end - start)
+    
+    let res = [];
+    for(let i = 0 ;i &lt; length;i++){
+        res.push(array[i+start]);
+    }
+    return res;
+}
+
+let array = new Array(10);
+console.log(slice(array,1,7));
+</code></pre>
+<br/>
+<h4 id="跑倒是能跑但是-emmm跟源码一比惨不忍睹丫真的菜的肉眼可见这还是好好看了大佬讲代码之后的照着源码改了一下">跑倒是能跑，但是 emmm跟源码一比，惨不忍睹丫，真的菜的肉眼可见，这还是好好看了大佬讲代码之后的，照着源码改了一下：</h4>
+<pre><code>function slice(array,start,end){
+
+    let length = array == null ? 0 : array.length;
+    if(!length)
+    {
+        return [];
+    }
+    //start 默认为0
+    start = start == null? 0 : start;
+    end = end == null ? length : end;
+
+    if(start&lt;0)
+    {
+        // start+=length;
+        start = -start &gt; length ? 0 : (length + start);
+    }
+    end = end &gt; length ? length : end;
+
+    if(end &lt; 0){//end的值&lt;0不会出现bug
+        end+=length;
+    }
+
+    length = start &gt; end ? 0 : ((end - start) &gt;&gt;&gt; 0);
+    start &gt;&gt;&gt;= 0; // 效果相对于向下取整
+    let index = -1;
+
+    const res = new Array(length);
+    while(++index &lt; length)
+    {
+        res[index] = array[index + start];
+    }
+    return res;
+}
+
+let array = new Array(10);
+console.log(slice(array,1,7));
+</code></pre>
+<br/>
+<hr>
+<br/>
+<pre><code>//输出均为：
+[ undefined, undefined, undefined, undefined, undefined, undefined ]
+</code></pre>
+<br/>
+<h3 id="总结一下-自己的问题emmm人家重点一个没得学到">总结一下 自己的问题（emmm人家重点一个没得学到）</h3>
+<ol>
+<li>
+<h4 id="首先万幸记得了-lodash里的slice特别就特别在它用的是密集数组没得用js原生的稀疏数组具体详细的参见对角大佬的博客">首先，万幸记得了 lodash里的slice特别就特别在它用的是密集数组，没得用js原生的稀疏数组（具体详细的参见对角大佬的博客）。</h4>
+</li>
+<li>
+<h4 id="源码里-0-利用无符号右移向下取整的技巧没得记得">源码里 &gt;&gt;&gt;0  利用无符号右移向下取整的技巧没得记得。</h4>
+</li>
+<li>
+<h4 id="然后对于-startend-参数的处理的一些细节也没得注意到">然后对于 start,end 参数的处理的一些细节也没得注意到。</h4>
+</li>
+</ol>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/cong-js-de-dao-greatergreatergreater">
+                  <h3 class="post-title">
+                    从js的=== 到 &gt;&gt;&gt;
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

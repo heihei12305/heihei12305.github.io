@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>http笔记 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">http笔记</h2>
+            <div class="post-date">2019-09-18</div>
+            
+              <div class="feature-container" style="background-image: url('/post-images/http-bi-ji.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <ol>
+<li>
+<p>http协议定义： 一种无状态的，应用层的，以请求/应答方式运行的协议，它使用可扩展的语义和自描述消息格式，与基于网络的超文本信息系统灵活的互动。</p>
+</li>
+<li>
+<p>ABNF(扩充巴科斯-瑙尔范式)操作符：</p>
+<ul>
+<li>空白字符： 用来分隔定义中的各个元素。</li>
+<li>选择/： 表示多个规则都是可供选择的规则
+<ul>
+<li>start-line = require-line / status-line</li>
+</ul>
+</li>
+<li>值范围 %c##-##
+<ul>
+<li>OCTAL = &quot;0&quot;/&quot;1&quot;/&quot;2&quot;/&quot;3&quot;/&quot;4&quot;/&quot;5&quot;/&quot;6&quot;/&quot;7&quot; 与 OCTAL = %x30-37等价</li>
+</ul>
+</li>
+<li>序列组合（）：将规则组合起来，视为单个元素。</li>
+<li>不定量重复<code>m*n</code>:
+<ul>
+<li>*元素表示零个或多个元素： <code>*(header-field CRLF)</code></li>
+<li>1*元素表示一个或更多元素，2*4元素表示两个至四个元素</li>
+</ul>
+</li>
+<li>可选序列 []:
+<ul>
+<li>[message-body]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ABNF(扩充巴科斯-瑙尔范式) 核心规则：</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>形式定义</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALPHA</td>
+<td>%x41-5A / %x61-7A</td>
+<td>大写和小写ASCII字母（A-Z,a-z）</td>
+</tr>
+<tr>
+<td>DIGIT</td>
+<td>%x30-39</td>
+<td>数字（0-9）</td>
+</tr>
+<tr>
+<td>HEXDIG</td>
+<td>DIGIT / &quot;A&quot; / &quot;B&quot; / &quot;C&quot; / &quot;D&quot; / &quot;E&quot; / &quot;F&quot;</td>
+<td>十六进制数字（0-9，A-F,a-f）</td>
+</tr>
+<tr>
+<td>DQUOTE</td>
+<td>%x22</td>
+<td>双引号</td>
+</tr>
+<tr>
+<td>SP</td>
+<td>%x20</td>
+<td>空格</td>
+</tr>
+<tr>
+<td>HTAB</td>
+<td>%x09</td>
+<td>横向制表符</td>
+</tr>
+<tr>
+<td>WSP</td>
+<td>SP / HTAB</td>
+<td>空格或横向制表符</td>
+</tr>
+<tr>
+<td>LWSP</td>
+<td>*(WSP / CRLF WSP)</td>
+<td>直线空白（晚于换行）</td>
+</tr>
+<tr>
+<td>VCHAR</td>
+<td>%x21-7E</td>
+<td>可见（打印）字符</td>
+</tr>
+<tr>
+<td>CHAR</td>
+<td>%x01-7F</td>
+<td>任何7-位US-ASCII字符，不包括NUL(%x00)</td>
+</tr>
+<tr>
+<td>OCTET</td>
+<td>%x00-FF</td>
+<td>8位数据</td>
+</tr>
+<tr>
+<td>CTL</td>
+<td>%x00-1F / %x7F</td>
+<td>控制字符</td>
+</tr>
+<tr>
+<td>CR</td>
+<td>%x0D</td>
+<td>回车</td>
+</tr>
+<tr>
+<td>LF</td>
+<td>%x0A</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>CRLF</td>
+<td>CRLF</td>
+<td>互联网标准换行</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>&quot;0&quot;/&quot;1&quot;</td>
+<td>二进制数字</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<blockquote>
+<p>http 解决了什么问题</p>
+</blockquote>
+<h3 id="解决www信息交互必须面对的需求">解决www信息交互必须面对的需求</h3>
+<ul>
+<li>低门槛</li>
+<li>可扩展性： 巨大的用户群体， 超长的寿命</li>
+<li>分布式系统下的Hypermedia：大粒度数据的网络传输</li>
+<li>Internet 规模
+<ul>
+<li>无法控制的 scalability
+<ul>
+<li>不可预测的负载，非法格式的数据，恶意消息</li>
+<li>客户端不能保持所有服务器信息， 服务器不能保持多个请求间的状态信息</li>
+</ul>
+</li>
+<li>独立的部署：新老组件共存</li>
+</ul>
+</li>
+<li>向前兼容：自1993年起HTTP0.9\1.0(1996)已经被广泛使用</li>
+</ul>
+<hr>
+<br/>
+<h3 id="评估web架构的关键属性">评估Web架构的关键属性</h3>
+<p>HTTP 协议应当在一下属性中取得可接受的均衡：</p>
+<ol>
+<li>性能Performance: 影响高可用的关键属性</li>
+<li>可伸缩性 Scalability: 支持部署可以相互交互的大量组件</li>
+<li>简单性 Simplicity: 易理解，易实现，易验证</li>
+<li>可见性 Visiable: 对两个组件间的交互进行监视或者仲裁的能力。如缓存，分层设计等</li>
+<li>可移植性 Portability: 在不同的环境下运行的能力</li>
+<li>可靠性 Reliability: 出现部分故障时，对整体影响的程度</li>
+<li>可修改性 Modifiability: 对系统作出修改的难易程度，由可进化性，可定制性，可扩展性，可配置性，可重用性构成。</li>
+</ol>
+<hr>
+<h3 id="响应码分类-1xx">响应码分类： 1xx</h3>
+<p>1xx：请求已收到，需要进一步处理才能完成，HTTP1.0不支持</p>
+<ul>
+<li>100 continue: 上传大文件前使用
+<ul>
+<li>由客户端发起请求中携带<code>Expect: 100-continue</code>头部触发</li>
+</ul>
+</li>
+<li>101 Switch Protocols: 协议升级使用
+<ul>
+<li>由客户端发起请求中携带Upgrade：头部触发，如升级websocket 或者 http/2.0</li>
+</ul>
+</li>
+<li>102 Processing: WebDAV 请求可能包含许多涉及文件操作的子请求，需要很长的时间才能完成请求。该代码表示服务器已经收到并正在处理请求，但无响应可用。这样可以防止客户端超时，并假设请求丢失。</li>
+</ul>
+<br/>
+<p>2xx: 成功处理请求</p>
+<ul>
+<li>200 OK: 成功返回响应</li>
+<li>201 Created: 有新资源在服务器端被成功创建</li>
+<li>202 Accepted: 服务器接受并开始处理请求， 但请求未处理完成。这样一个模糊的概念是有意如此设计，可以覆盖更多的场景。例如异步，需要长时间处理的任务。</li>
+<li>203 Non-Authoritative Information: 当代理服务器修改了 origin server 的原始响应包体时（例如更换了HTML中的元素值），代理服务器可以通过修改200为203的方式告知客户端这一事实，方便客户端为这一行为作出相应的处理。203响应可以被缓存。</li>
+<li>204 No Content: 成功执行了请求且不携带响应包体，并暗示客户端无需更新当前的页面视图。</li>
+<li>205 Reset Content: 成功执行了请求且不携带响应包体，同时指明客户端需要更新当前页面视图。</li>
+<li>206 Partial Content: 使用 range 协议时返回部分响应内容时的响应码。</li>
+<li>207 Multi-Status: RFC4918,在WEBDAY协议中以XML返回多个资源的状态。</li>
+<li>208 Already Reported: RFC5842,为避免相同集合下资源在207响应码下重复上报，使用208可以使用父集合的响应码。</li>
+</ul>
+<br/>
+<p>3xx：重定向使用Location 指向的资源或者缓存中的资源。在RFC2068中规定客户端重定向次数不应超过5次，以防止死循环。</p>
+<ul>
+<li>300 Multiple Choices: 资源有多种表述，通过300返回给客户端后由其自行选择访问哪一种表述。由于缺乏明确的细节，300很少使用。</li>
+<li>301Moved Permanently: 资源永久性的重定向到另一个URL中。</li>
+<li>302 Found：资源临时的重定向到另一个URL中。</li>
+<li>304 没有改变</li>
+</ul>
+<br/>
+<p>4xx：客户端出现错误</p>
+<ul>
+<li>400 Bad Request: 服务器认为客户端出现了错误，但不能明确判断为以下哪种错误时使用此错误码。例如HTTP请求格式错误。</li>
+<li>401 Unauthorized: 用户认证信息缺失或者不正确，导致服务器无法处理请求。</li>
+<li>402 Proxy Authentication Required: 对需要经由代理的请求，认证信息未通过代理服务器的验证。</li>
+<li>403 Forbidden: 服务器理解请求的含义，但没有权限执行此请求。</li>
+<li>404 Not Found: 服务器没有找到相应的资源</li>
+<li>410 Gone: 服务器没有找到对应的资源，且明确的知道该位置永久性找不到该资源。</li>
+<li>405 Method Not Allowed: 服务器不支持请求行中的method方法</li>
+<li>406 Not Acceptable: 对客户端指定的资源表述不存在（例如对语言或者编码有要求），服务器返回表述列表供客户端选择。</li>
+<li>408 Request Timeout: 服务器接受请求超时。</li>
+<li>409 Conflict: 资源冲突，例如上传文件时目标位置已经存在版本更新的资源。</li>
+<li>411 Length Required: 如果请求含有包体且未携带 Content-Length 头部，且不属于 chunk类请求时，返回411。</li>
+<li>412 Range Not Satisfiable: 无法提供Range请求中指定的那段包体。</li>
+<li>417 Expectation Failed: 对于 Expext 请求头部期待的情况无法满足时的响应码。</li>
+<li>421 Misdirected Request: 服务器认为这个请求不该发给它，因为它没有能力处理。</li>
+<li>426 Upgrade Required: 服务端拒绝基于当前HTTP协议提供服务，通过Upgrade头部告知客户端必须升级协议才能继续处理</li>
+<li>428 Precondition Required: 用户请求中缺失了条件类头部，例如 If-Match</li>
+<li>429 Too Many Requests: 客户端发送请求的速率过快</li>
+<li>431 Request Header Fields Too Large: 请求的 HEADER 头部大小超过限制。</li>
+<li>451 Unavailable For Legal Reasons: RFC7725,由于法律原因资源无法访问。</li>
+</ul>
+<hr>
+<p>5xx： 服务器端出现错误</p>
+<ul>
+<li>500 Internal Server Error: 服务器内部错误，且不属于以上错误类型。</li>
+<li>501 Not Implemented: 服务器不支持实现请求所需要的功能。</li>
+<li>502 Bad Gateway: 代理服务器无法获取到合法响应。</li>
+<li>503 Service Unavailable: 服务器资源尚未准备好处理当前请求。</li>
+<li>504 Gateway Timeout; 代理服务器无法及时的从上游获取响应。</li>
+<li>505 HTTP Version Not Supported: 请求使用的HTTP协议版本不支持。</li>
+<li>507 Insufficient Storage: 服务器没有足够的空间处理请求。</li>
+<li>508 Loop Detected: 访问资源时检测到循环</li>
+<li>511 Network Authentication Required: 代理服务器发现客户端需要进行身份验证才能获得网络访问权限。</li>
+</ul>
+<p>潜在规则： 如果服务器接收到一个无法识别的响应码，会按照开头数字的00系列进行处理。例如 555 会按照 500 处理。</p>
+<hr>
+<p>正向代理： 服务于客户端的是正向代理，例如你需要科学上网时在浏览器配置的代理服务器。<br/><br>
+反向代理：服务于服务器端的是反向代理，主要用途是负载均衡和协议适配。</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
+                    others
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/webpack-ji-chu-he-xin-gai-nian">
+                  <h3 class="post-title">
+                    webpack基础核心概念
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

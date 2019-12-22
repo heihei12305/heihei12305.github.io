@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>myUnderscore 配合食用gitbook小书系列2 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">myUnderscore 配合食用gitbook小书系列2</h2>
+            <div class="post-date">2019-09-28</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/myunderscore-pei-he-shi-yong-gitbook-xiao-shu-xi-lie-2.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<p>高阶函数篇:</p>
+</blockquote>
+<p>高阶函数是接受函数作为参数并且/或者返回函数作为输出的函数.<br/></p>
+<p>一般而言,高阶函数通常用于抽象通用的问题.换句话讲,高阶汉书就是定义抽象.<br/></p>
+<p>抽象定义: 在软件工程和计算机科学中,抽象是一种管理计算机系统复杂性的技术.它通过建立一个人与系统进行交互的复杂程度,把更复杂的细节抑制在当前水平之下. <br/><br>
+例如,一个编写涉及数值操作代码的程序员可能并不会对底层硬件中的数字表现方式感兴趣(例如,不在乎它们是16位还是32位整数),包括这些细节在哪里被屏蔽.可以说,它们被抽象出来了,只留下简单的数字给程序员处理.</p>
+<br/>
+<h3 id="every函数"><code>every</code>函数</h3>
+<p>我们经常需要检查数组的内容是否为数字,自定义对象或其他类型.我们通常编写典型的循环方法来解决这些问题.<br/><br>
+下面将这些抽象到every函数中, 它接受两个参数:一个数组和一个函数.<br/><br>
+它使用传入的函数检查数组的所有元素是否为true.</p>
+<pre><code>_.every = (arr,fn)=&gt;{
+	let result = true;
+	for(const value of arr){
+		result = result &amp;&amp; fn(value);
+		if(!result){
+				break;
+		}
+	}
+	return result;
+}
+</code></pre>
+<h3 id="some函数"><code>some</code>函数</h3>
+<p>本函数与上面的every相对应,</p>
+<br/>
+<p>如果数组中的一个元素通过传入的函数返回true,some函数就将返回true.</p>
+<pre><code>_.some = (arr,fn)=&gt;{
+		let result = false;
+		for(const value of arr){
+				result = result || fn(value);
+				if(result){
+						break;
+				}
+		}
+		return result;
+}
+</code></pre>
+<h3 id="sortby函数"><code>sortBy</code>函数</h3>
+<p><code>sortBy</code>函数接受一个名为property的参数并返回一个接受两个参数的新函数 ,本函数适于配合原生sort函数使用</p>
+<pre><code>示例:
+people = {
+					{firsname:'ccfirstNeme',lastname:'aafirstNeme'},
+					{firsname:'bbfirstNeme',lastname:'bbfirstNeme'},
+					{firsname:'aafirstNeme',lastname:'ccfirstNeme'},
+				}
+people.sort(_.sortBy('lastname'))
+</code></pre>
+<p>函数定义为:</p>
+<pre><code>_.sortBy = (property)=&gt;{
+		return (a,b)=&gt;{
+				var result = (a[property] &lt; b[property]) ? -1 : (a[property] &gt; b[property]) ? 1 : 0;
+				return result;
+		}
+}
+</code></pre>
+<p>显然,sortBy函数接受一个属性并返回另一个函数.返回函数作为compareFunction传递给sort函数.此处的问题是,持有着<b>peoperty参数</b>的返回函数是怎么得来的?<br/></p>
+<p>闭包的世界欢迎你.</p>
+<br/>
+<p>在winter大大,重学前端中,大大如此解释闭包:<br/></p>
+<p>闭包翻译自英文单词closure,在计算机领域,它有三个完全不相同的意义:</p>
+<ul>
+<li>编译原理中,它是处理语法产生式的一个步骤;</li>
+<li>计算几何中,它表示包裹平面点集的凸多边形(翻译为凸包);</li>
+<li>在编程语言领域,它表示一种函数.</li>
+</ul>
+<p>我们可以简单理解闭包为一个绑定了执行环境的函数,这个函数并不是印在书本里的一条简单的表达式,闭包与普通函数的区别是,它携带了执行环境,就像人在外星中需要自带吸氧的装备一样,这个函数也带有在程序中生存的环境.<br/></p>
+<p>在古典的闭包定义中,闭包包括两个部分:</p>
+<ul>
+<li>环境部分
+<ul>
+<li>环境</li>
+<li>标识符列表</li>
+</ul>
+</li>
+<li>表达式部分</li>
+</ul>
+<br/>
+<p>对应于js,则是</p>
+<ul>
+<li>环境部分
+<ul>
+<li>环境: 函数的词法环境(执行上下文的一部分)</li>
+<li>标识符列表: 函数中用到的未声明的变量</li>
+</ul>
+</li>
+<li>表达式部分: 函数体</li>
+</ul>
+<p>至此,我们可以认为,JS中的函数完全符合闭包的定义.它的环境部分是函数词法环境部分组成,它的标识符是函数中用到的未声明变量,它的表达式部分就是函数体.</p>
+<p>回到我们的高阶函数来, 闭包有3个可访问的作用域:</p>
+<ul>
+<li>在它自身声明之内声明的变量</li>
+<li>对全局变量的访问</li>
+<li>对外部函数变量的访问(也即上述函数用到的)</li>
+</ul>
+<p>上面说的第三个作用域体现了闭包的一个重要概念,<b>闭包可以记住它的上下文!</b></p>
+<p>下面继续我们的高阶函数吧.</p>
+<br/>
+<h3 id="tap"><code>tap()</code></h3>
+<p>假设你在遍历一个来自服务器的数组,并发现数据错了.因此你想调试一下,看看你数组里究竟包含了什么.<br/><br>
+不要使用命令式的方法,要用函数式的方法.我们需要一种调试方式.</p>
+<pre><code>_.tap = (value)=&gt;
+		(fn)=&gt;{
+				typeof(fn) === 'function' &amp;&amp; fn(value);
+				console.log(value);
+		}
+</code></pre>
+<p>我们可以这样用:</p>
+<pre><code>_.forEach([1,2,3],(a)=&gt;
+	_.tap(a)(()=&gt;{
+		console.log(a);//1 1 2 2 3 3
+	})
+)
+
+</code></pre>
+<h3 id="unary函数">unary函数</h3>
+<p>一个js里比较经典的坑 <code>['1','2','3'].map(parseInt)</code> 的值是什么?<br/></p>
+<p><code>[1,NaN,NaN]</code> <br/></p>
+<p>显然这个结果不是我们所期望的,造成这个的原因是<code>parseInt</code>接受两个参数:<br/></p>
+<p><code>parseInt(string,radix)</code></p>
+<ul>
+<li>string : 要被解析的值,如果参数不是字符串,则将其转换为字符串(使用ToString抽象操作).字符串开头的空白符将会被忽略.</li>
+<li>radix : 一个介于2和36之间的整数(数字系统的基础),表示上述字符串的基数.比如参数'10'表示使用我们通常使用的十进制数值系统.始终指定此参数可以消除阅读该代码时的困惑并且保证转换结果可预测.当未指定基数时,不同的实现会产生不同的结果,通常认为其默认值为10,但是请在使用时总是显示的指定它.</li>
+</ul>
+<br/>
+<p>map 三个参数调用了函数,分别是element,index和 arr. 如意如果把parseInt 传给map 函数,map会把index的值传给parseInt的radix参数,从而导致了上面的结果.<br/></p>
+<p>于是,到了我们的unary函数出场的时候了:<br/></p>
+<pre><code> _.unary = (fn) =&gt;
+		fn.length === 1
+			? fn
+			: (arg) =&gt; fn(arg);
+</code></pre>
+<p>我们检查传入的fn是否有一个长度为1的参数列表(可以通过length属性查看).如果有,就什么都不做,如果没有,就返回一个新数组,它只接受一个参数arg,并用该参数调用fn.<br/></p>
+<p>示例: <code>['1','2','3'].map(unary(parseInt)); // [1,2,3]</code></p>
+<h3 id="once函数">once函数</h3>
+<p>在很多情况下,我们只需要运行一次给定的函数. 比如只想设置一次第三方库,或初始化一次支付设置.</p>
+<pre><code>_.once = (fn) =&gt;{
+        let done = false;
+        return function (){
+            return done ? undefined : ((done = true),fn.apply(this,arguments));
+        }
+    }
+</code></pre>
+<p>上面的once函数接受一个参数fn,并通过调用它的apply方法返回结果.此处注意的重点是,我们声明了一个名为done的变量,初始值为false.返回的函数会形成一个覆盖它的函数作用域.因此,返回的函数会访问并检查done是否为true,如果是,则返回undefined,否则将done设为true(这样就阻止了下一次执行)并用必要的参数调用函数fn</p>
+<br/>
+<p>示例:</p>
+<pre><code>var doPayment = _.once(()=&gt;{
+    console.log(&quot;Payment is done&quot;);
+})
+
+doPayment();//Payment is done
+doPayment();//undefined
+</code></pre>
+<p>这里我们要打个岔好好说说this了</p>
+<p><a href="https://juejin.im/post/5d774b2cf265da03bf0f6c35">js最复杂的机制之一,this</a></p>
+<h3 id="memoized-函数">memoized 函数</h3>
+<p>知道算法里的动态规划不?</p>
+<p><strong>动态规划</strong><br/><br>
+<strong>动态规划的基本思想是将待求解问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，其经过分解的子问题往往不是相互独立的</strong></p>
+<ul>
+<li>其解依赖于子问题</li>
+<li>子问题的求解是重复的</li>
+<li>采用重递归出现的大量重复运算</li>
+</ul>
+<p>如 Fib 数列<br/><br>
+采用动态规划方法<br/></p>
+<ul>
+<li>构造所有子问题的一个表格</li>
+<li>采用自底向上的方法依次求解子问题</li>
+<li>也可以采用自上而下，为避免重复运算，采用 备忘录 或称为 记忆递归 <br/></li>
+</ul>
+<p><code>memoized</code>函数使得函数能够记住其计算结果,避免大量重复计算.</p>
+<pre><code>_.memoized = (fn,hasher) =&gt; {
+	  //这里依旧利用闭包可以记录上下文的特性
+		const lookupTable = {};
+
+		return (key)=&gt;{
+				//为了应对多个参数的情况,可接受传入hasher自定义对象的key
+				var address = hasher ? hasher.apply(this,arguments) : key;
+				
+				return lookupTable[address] || (lookupTable[address] = fn(address));
+		}
+}
+</code></pre>
+<p>示例:</p>
+<pre><code>let fc = _.memoized((n)=&gt;{
+    if(n===0){
+        return 1;
+    }
+    return n*fc(n-1);
+})
+
+console.time(1)
+console.log(fc(10));//3628800
+console.timeEnd(1);//3.876ms
+
+console.time(2);
+console.log(fc(11));//39916800
+console.timeEnd(2);//0.896ms
+
+</code></pre>
+<blockquote>
+<h3 id="数组的函数式编程">数组的函数式编程</h3>
+</blockquote>
+<h3 id="foreach">forEach</h3>
+<p>遍历给定数组并使用当前索引作为参数调用传入的函数</p>
+<pre><code>_.forEach = (array,fn)=&gt;{
+		for(const value of array){
+				fn(value);
+		}
+}
+</code></pre>
+<h3 id="map">map</h3>
+<p>map与forEach非常相似，区别只是用一个新的数组捕获了结果。</p>
+<pre><code>_.map = (array,fn)=&gt;{
+       let results = [];
+       for(const value of array){
+           results.push(fn(value));
+       }
+       return results;
+   }
+</code></pre>
+<h3 id="reduce">reduce</h3>
+<p>设置累加器并遍历数组（记住累加器上一个值）以生成一个单一元素的过程称为归约数组<br/></p>
+<p>reduce  函数会记录以前的运算结果,然后与后面传入的参数一起运算,最后返回一个结果<br/></p>
+<p>注意: <br/></p>
+<p>如果不传入初始值时，只可以遍历数组，但是如果传入初试值，可以遍历数组或者对象<br/><br>
+所以推荐统一传入初始值</p>
+<pre><code>_.reduce = (array,fn,initialValue)=&gt;{
+		//判断是否传入初始值
+		let accumlator = initialValue === undefined ? array[0] : initialValue;
+		
+		if(initialValue === undefined){
+				for(let i = 1,len = array.length;i&lt;len;i++){
+						accumlator = fn(accumlator,array[i]);
+				}
+		}else{
+						for(const value of array){
+								accumlator = fn(accumlator,value);
+						}
+		}
+		return accumlator;
+}
+</code></pre>
+<p>示例:</p>
+<pre><code>let a = [1,2,3,4];
+console.log(_.reduce(a,(acc,next)=&gt;acc+next,0));//10
+</code></pre>
+<h3 id="filter">filter</h3>
+<p>一个简单的过滤器, 因为 for of ,使得其可以适用于数组和对象</p>
+<pre><code>_.filter = (array,fn)=&gt;{
+			let results = [];
+			for(const value of array){
+					(fn(value)) ? results.push(value) : undefined;
+			}
+			return results;
+	}
+</code></pre>
+<h3 id="flatten">flatten</h3>
+<p>把所有嵌套数组连接到一个数组中，也即数组扁平化<br/><br>
+数组扁平化小课堂开课啦：</p>
+<ul>
+<li>完全扁平化：
+<ul>
+<li>
+<p>如果数组的元素都是数字，那么我们可以考虑使用toString方法，<code>[1,[2,[3,4]]].toString().split(',').map((c)=&gt;Number(c));</code></p>
+</li>
+<li>
+<p>利用reduce+递归  <code>flatten = (arr)=&gt;arr.reduce((prev,next)=&gt;prev.concat(Array.isArray(next)?flatten(next):next),[]);</code></p>
+</li>
+<li>
+<p>利用...运算符，</p>
+<p>flatten = (arr)=&gt;{while(arr.some(item=&gt;Array.isArray(item))){<br>
+arr = [].concat(...arr);<br>
+}<br>
+return arr;<br>
+}</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>只去除一层：</p>
+<ul>
+<li>一个很神奇的方法 <code>Function.apply.bind([].concat,[]);</code><br>
+解释:</li>
+</ul>
+<pre><code>flatten = Function.apply.bind([].concat,[]);
+   	 = (arr)=&gt;[].concat.apply([],arr);
+   	 = [].concat(...arr)
+</code></pre>
+<ul>
+<li><code>[].concat(...arr);</code>  <br/></li>
+</ul>
+<p>解释：<code>a = [1,[3,2]] =&gt; [].concat(1,[3,2]) =&gt; [1].concat([3,2]) =&gt;[1,3,2]</code></p>
+<br/>
+<p>因为一层去除结合es6<code>...</code>很容易实现,我们这里只支持完全扁平化</p>
+<pre><code>_.flatten = (arr)=&gt;{
+		while(_.some(arr,item=&gt;Array.isArray(item))){
+				arr = [].concat(...arr);
+		}
+		return arr;
+}
+</code></pre>
+<h3 id="zip">zip</h3>
+<p>按照相应传入的fn规则合并对应数组</p>
+<pre><code>_.zip = (leftArr,rightArr,fn)=&gt;{
+			let index,len,result = [];
+			let [leftArrLen,rightArrLen] = [leftArr.length,rightArr.length];
+			for(index = 0,len = Math.min(leftArrLen,rightArrLen);index&lt;len;index++){
+					result.push(fn(leftArr[index],rightArr[index]));
+			}
+
+			//如果两个数组长度不同，直接在result后面加上多出部分数组
+			if(leftArrLen &gt; rightArrLen){
+					result = result.concat(leftArr.slice(rightArrLen,leftArrLen));
+			}else if(leftArrLen &lt; rightArrLen){
+					result = result.concat(rightArr.slice(leftArrLen,rightArrLen));
+			}
+			return result;
+	}
+</code></pre>
+<p>示例:</p>
+<pre><code>let a = [1,2,3,4];
+let b = [2,1,2];
+console.log(_.zip(a,b,(l,r)=&gt;l+r)); // [ 3, 3, 5, 4 ]
+</code></pre>
+<h3 id="escape和unescape">escape和unescape</h3>
+<p>推荐看讶羽的这篇 <a href="https://github.com/mqyqingfeng/Blog/issues/77">underscore 系列之字符实体与 _.escape</a></p>
+<p>这两个函数是为了转义以及反转义html字符串,替换&amp;,&lt;,&gt;,',&quot;,和`字符为字符实体,防止浏览器误将其解释为标签,以避免XXS攻击.</p>
+<p>我们要转义哪些字符呢?</p>
+<ul>
+<li>&lt; 和 &gt; 因为浏览器会把它看成一个标签的开始或结束.</li>
+<li>&amp; 浏览器会认为&amp;是一个字符实体的开始.例如<code>&amp;lt</code> 浏览器会把它解释成&lt;</li>
+<li>' 和 &quot; 也需要注意, 例如</li>
+</ul>
+<pre><code>function reder(input){
+	return '&lt;input type=&quot;name&quot; value=&quot; '+input+' ''&gt;'
+}
+
+//输入 &quot;&gt; &lt;script&gt;alert(1)&lt;/script&gt;&quot;
+//return -&gt; &lt;input type=&quot;name&quot; value=&quot;&quot;&gt;&lt;script&gt;alert(1)&lt;/scripe&gt;
+</code></pre>
+<ul>
+<li>` 在IE低版本中(&lt;=8),反引号可以用于关闭标签.</li>
+</ul>
+<pre><code>var escapeMap = {
+			'&amp;' : '&amp;amp;',
+			'&lt;' : '&amp;lt;',
+			'&gt;' : '&amp;gt;',
+			'&quot;' : '&amp;quot;',
+			&quot;'&quot; : '&amp;#x27;',
+			'`' : '&amp;#x60;'
+	}
+	//将对象的key和value反转
+	_.invert = (obj)=&gt;{
+			var result = {};
+			var keys = Object.keys(obj);
+			for(var i = 0,len = keys.length ;i &lt; len;i++){
+					result[obj[keys[i]]] = keys[i];
+			}
+			return result;
+	}
+	var unescapeMap = _.invert(escapeMap);
+	//为了防止XXS攻击
+	//转义HTML字符串，替换&amp;，&lt;,&gt;,',&quot;和`字符为字符实体
+	//以及反转义
+	//_.escape('Curly , Larry &amp; Moe');
+	//=&gt;'Curly , Larry &amp;amp; Moe'
+	const createEscaper = (map) =&gt;{
+			var escaper = (match)=&gt;map[match];
+			var source = '(?:'+Object.keys(map).join('|')+')';
+			//source = &quot;(?:&amp;|&lt;|&gt;|&quot;|'|`)&quot;
+			//或者&quot;(?:&amp;amp;|&amp;lt;|&amp;gt;|&amp;quot;|&amp;#x27;|&amp;#x60;)&quot;
+			var testRegexp = RegExp(source);
+			//全局搜索，查找所有匹配项，而不是在第一个匹配项后停止
+			var replaceRegexp = RegExp(source,'g');
+			return (string)=&gt;{
+					string = string == null ? '' : '' + string;
+					//replace 中第二个参数可以是个函数
+					return testRegexp.test(string) ? string.replace(replaceRegexp,escaper):string;
+			}
+	}
+
+	_.escape = createEscaper(escapeMap);
+	_.unescape = createEscaper(unescapeMap);
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/myunderscore-pei-he-shi-yong-gitbook-xiao-shu-xi-lie">
+                  <h3 class="post-title">
+                    myUnderscore 配合食用gitbook小书系列
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

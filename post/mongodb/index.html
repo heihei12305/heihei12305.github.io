@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>mongoDB-非关系型数据库 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">mongoDB-非关系型数据库</h2>
+            <div class="post-date">2019-06-12</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/mongodb.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <ol>
+<li><strong>简介</strong><br/><br/>
+<ul>
+<li>mongoDB是为快速开发互联网Web应用而设计的数据库系统，与node.js配合挺好。<br/><br/></li>
+<li>mongoDB的设计目标是极简，灵活，经常在web应用栈的业务层被运用<br/><br/></li>
+<li>mongoDB的数据模型是面向文档的，类似于JSON的结构，mongoDB这个数据库中存的是各种各样的BSON<br/><br/></li>
+</ul>
+</li>
+<li><strong>安装</strong><br/><br/>
+<ul>
+<li>emmm挺麻烦的，详见<a href="https://www.bilibili.com/video/av24951408/?p=36">视频教程</a>吧。<br/><br/></li>
+</ul>
+</li>
+<li><strong>使用</strong><br/><br/>
+<ul>
+<li>
+<p><strong><a href="http://www.mongoing.com/docs/">mongoDB中文文档</a></strong><br/><br/></p>
+<p>1.初始化	<br/><br/><br>
+cmd<br>
+mongo<br>
+show dbs  显示当前所有的数据库<br>
+use 数据库名  进入到制定数据库中<br>
+db 显示当前所在的数据库<br>
+show collections 显示数据库中的所有集合</p>
+<p>2.创建操作<br/><br/><br>
+db.collection.insert()  例如 db.demos.insert({counter:1000})<br>
+db.collection.insertOne()   将单个文档插入<br>
+db.collection.insertMany(<br>
+[&lt;document 1&gt;,&lt;document 2&gt;,....],<br>
+{<br>
+writeConcern:<document>,<br>
+ordered:<boolean><br>
+}<br>
+)</p>
+<pre><code>  	use first  创建了first数据库
+  	但是只有当数据库被插入数据后  数据库才真正被创建
+  	db.createCollection()   创建集合
+  	show collections  显示已经有的集合
+  	db.collection.drop()  删除集合
+</code></pre>
+<p>3.读操作<br/><br/><br>
+db.collection.find()<br>
+是可以通过条件或者过滤器找到制定文档<br>
+db.collection.find(<br>
+{ age: { $gt : 18} },<br>
+{ name: 1,adress : 1}<br>
+)</p>
+<p>4.更新操作<br/><br/><br>
+db.collection.update()  也只更新一个<br>
+db.collection.updateOne()  更新一个<br>
+db.collection.updaremany()  更新所有符合条件的文档</p>
+<p>5.删除操作<br/><br/><br>
+db.collection.delete();<br>
+db.collection.deleteOne();</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><br/><br/>可视化工具： 下载自带的 <strong>MongoDBCompass</strong>界面挺好看的呢，使用的话我还是觉得cmd来的舒服,可视化工具具体使用流程的话可以看看这个<a href="https://blog.csdn.net/ltuantuan/article/details/80281079">博客</a>呢。<br>
+<br/><br/>js上一般用node的 <strong>mongoose</strong>来操作数据的呢。</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/LNUW6J11_n" class="tag">
+                    node
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/ejs-nodejs">
+                  <h3 class="post-title">
+                    ejs-node.js
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>js-map+leetcode-867转置矩阵 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">js-map+leetcode-867转置矩阵</h2>
+            <div class="post-date">2019-07-20</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-mapleetcode-867-zhuan-zhi-ju-zhen.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<h3 id="js-map-基础语法">js map 基础语法</h3>
+</blockquote>
+<pre><code>let arr = [[1,2,3],[4,5,6]]
+//map会创建一个新数组,也是不会改变原数组,返回数组的长度等于原数组
+let newArr = arr.map((item,i,arr)=&gt;{
+	//item: 当前内容，i下标 arr:原数组
+	//其中第一个一定要有，可以用'_'占位
+	console.log(`item:${item},i:${i},arr:${arr}`)
+})  
+//res:`
+//item:1,2,3,i:0,arr:1,2,3,4,5,6
+//item:4,5,6,i:1,arr:1,2,3,4,5,6
+</code></pre>
+<br/>
+<hr>
+<br/>
+<blockquote>
+<p>举个例子<br>
+<a href="https://leetcode-cn.com/problems/transpose-matrix/">leetcode867</a></p>
+</blockquote>
+<p>给定一个矩阵 A， 返回 A 的转置矩阵。<br/></p>
+<p>矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。<br/></p>
+<p>示例 1：<br/><br/></p>
+<p>输入：[[1,2,3],[4,5,6],[7,8,9]]<br/><br>
+输出：[[1,4,7],[2,5,8],[3,6,9]]<br/><br>
+示例 2：<br/><br/></p>
+<p>输入：[[1,2,3],[4,5,6]]<br/><br>
+输出：[[1,4],[2,5],[3,6]]<br/></p>
+<pre><code>var transpose = function(A) {
+    return A[0].map((_,index)=&gt;A.map(row=&gt;row[index]))
+};  
+</code></pre>
+<blockquote>
+<h3 id="解释输入为上面的arr">解释(输入为上面的arr)：</h3>
+</blockquote>
+<p>1.index = 0时, A.map(row=&gt;row[index]) ，效果为</p>
+<pre><code>let b = arr.map(row=&gt;row[0]);
+console.log(b);
+
+//res:[ 1, 4 ]
+</code></pre>
+<ol start="2">
+<li>外围三重循环，分别把第n列的值取出来，还是很简练的，就是菜鸡想了好久，还是太菜了，记录一下。</li>
+</ol>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/tools-li-yong-reduce-jiang-shu-zu-zhuan-hua-wei-dui-xiang">
+                  <h3 class="post-title">
+                    tools-利用reduce将数组转化为对象
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
