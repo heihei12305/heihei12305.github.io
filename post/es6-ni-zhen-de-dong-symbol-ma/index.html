@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" >
 
-<title>ES6-你真的懂symbol吗？ | heihei12305</title>
+<title>ES6-你真的懂symbol吗❓🦝(上) | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1576985804791">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577018108271">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1576985804791" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1577018108271" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -98,7 +98,7 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">ES6-你真的懂symbol吗？</h2>
+            <h2 class="post-title">ES6-你真的懂symbol吗❓🦝(上)</h2>
             <div class="post-date">2019-11-16</div>
             
               <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/es6-ni-zhen-de-dong-symbol-ma.png')">
@@ -188,6 +188,218 @@ console.log(Symbol.keyFor(uid3));//&quot;undefined&quot;
 </code></pre>
 <br/>
 <p>symbol全局注册表是一个类似全局作用域的共享环境，也就是说你不能假设目前环境中存在哪些键。当使用第三方组件时，尽量使用Symbol键的命名空间以减少命名冲突，也即加上前缀。额外注意的一点是：这个注册中心是跨域的，意味着 iframe 或者sevice worker 中的 Symbol 会与当前 frame Symbol 相等。</p>
+<br/>
+<h2 id="well-konw-symbol-暴露内部操作">well-konw symbol 暴露内部操作</h2>
+<p>ECMAScript5 的一个中心主旨是将JavaScript中的一些“神奇”的部分暴露出来，并详尽定义了这些开发者们中当时模拟不了的功能。ECMAScript6延续了这个传统，新标准中主要通过中原型链上定义了与Symbol相关的属性来暴露更多的语言内部逻辑。</p>
+<br/>
+<p>包括</p>
+<ul>
+<li>Symbol.hasInstance 一个在执行instanceof 时调用的内部方法，用于检测对象的继承信息。</li>
+<li>Symbol.isConcatSpreadable 一个布尔值，用于表示当传递一个集合作为<code>Array.prototype.concat()</code>方法的参数时，是否应该将集合内的元素规整到同级。</li>
+<li>Symbol.iterator 一个返回迭代器的方法。</li>
+<li>Symbol.match 一个在调用<code>String.prototype.match()</code>方法时调用的方法，用于比较字符串。</li>
+<li>Symbol.replace 一个在调用 <code>String.prototype.replace()</code>方法时调用的方法，同于替换字符串的子串。</li>
+<li>Symbol.search 一个在调用<code>String.prototype.search()</code>方法时调用的方法，用于字符串中定位子串。</li>
+<li>Symbol.split 一个在调用<code>String.prototype.split()</code>方法时调用的方法，用于分割字符串。</li>
+<li>Symbol.toPrimitive 一个返回对象原始值的方法。</li>
+<li>Symbol.toStringTag 一个在调用 <code>Object.prototype.toString()</code>方法时使用的字符串，用于创建对象描述。</li>
+<li>Symbol.unscopables 一个定义了一些不可被with语句引用的对象属性名称的对象集合。</li>
+</ul>
+<p>重写一个由<code>well-known Symbol</code>定义的方法，会导致对象内部的默认行为被改变，从而一个普通对象会变成一个奇异对象（exotic object）。但实际上其不会对你的代码产生任何影响，只是在规范中描述对象的方式改变了。</p>
+<br/>
+<h3 id="symbolhasinstance-方法">Symbol.hasInstance 方法</h3>
+<br/>
+<p>每一个函数中都有一个<code>Symbol.hasInstance</code>方法，用于确定对象是否为函数的实例。该方法在<code>Function.prototype</code>中定义，所以所有的函数都继承了<code>instance</code>属性的默认行为。为了确保      <code>Symbol.hasInstance</code>不会被意外重写，该方法被定义为不可写，不可配置并且不可枚举。</p>
+<br/>
+<p><code>Symbol.hasInstance</code>方法只接受一个参数，即要检查的值。如果传入的值是函数的实例，则返回true。</p>
+<pre><code>obj instanceof Array;
+</code></pre>
+<p>等同于</p>
+<pre><code>Array[Symbol.hasInstance](obj);
+</code></pre>
+<p>本质上，ECMAScript6只是将instanceof操作符重新定义为此方法的简写语法。现在引入方法调用后，就可以随意改变instanceof的运行方式了。</p>
+<br/>
+<p>举个🌰，假设你想定义☝️无实例的函数，就可以将<code>Symbol.hasInstance</code>的返回值硬编码为false。</p>
+<pre><code>function MyObject() {
+    //空函数
+}
+
+Object.defineProperty(MyObject,Symbole.hasInstance,{
+    value: function(v) {
+        return false;
+    }
+});
+
+let obj = new MyObject();
+
+console.log(obj instanceof MyObject);   //false
+</code></pre>
+<p>只有通过<code>Object.defineProperty()</code>方法才能够改写一个不可写属性，上面的示例调用方法来改写<code>Symbol.hasInstance</code>,为其定义一个总是返回false的新函数，即使obj实际上确实是MyObject类的实例，在调用过<code>Object.defineProperty()</code>方法之后，instance运算符返回的也是false。</p>
+<br/>
+<p>当然，也可以基于任意条件，通过值检查来确定被检查的是否为实例。举个🌰，可以将1～100的数字定义为一个特殊数字类型的实例，具体实现的代码如下：</p>
+<pre><code>function SpecialNumber() {
+    // 空函数
+}
+
+Object.defineProperty(SpecialNumber,Symbol.hasInstance,{
+    value: function(v) {
+        return (v instance Number) &amp;&amp; (V &gt;= 1 &amp;&amp; V &lt;= 100);
+    }
+});
+
+var two = new Number(2),
+    zero = new Number(0);
+console.log(two instanceof SpecialNumber); //true
+console.log(zero instanceof SpecialNumber); //false
+</code></pre>
+<blockquote>
+<p>也可以重写所有的内建函数（例如Date和Error函数）默认的Symbol.hasInstance属性。但是这样做的后果是代码的运行结果变得不可预期而且有可能令人感到😖，所以我们不推荐你这么做，最好的做法是，只在必要的情况下改写你自己声明的函数的Symbol.hasInstance 属性。</p>
+</blockquote>
+<h3 id="symbolisconcatspreadable属性">Symbol.isConcatSpreadable属性</h3>
+<br/>
+<p>JavaScript数组的<code>concat()</code>方法被设计用于拼接两个数组，使用方法：</p>
+<pre><code>let color1 = ['red','green'],
+    color2 = color1.concat(['blue','black']);
+
+    console.log(color2.length);  //4
+    console.log(color2); //['red','green','blue','black']
+</code></pre>
+<p><code>concat()</code>方法也可以接受非数组参数，此时该方法只会将这些参数逐一添加到数组末尾</p>
+<pre><code>let color1 = ['red','green'],
+    color2 = color1.concat(['blue','black'],'brown');
+
+    console.log(color2.length);  //5
+    console.log(color2); //['red','green','blue','black','brown']
+</code></pre>
+<p>为什么数组参数就要区分对待呢？JavaScript规范声明，凡是传入数组参数，就会自动将它们分解为独立元素。在ECMAScript6标准以前，我们根本无法调整这个特性。<br>
+<br/><br>
+Symbol.isConcatSpreadable 属性是一个布尔值，如果该属性值为true，则表明对象有length属性和数字键，故它的数值型属性值应该被独立添加到<code>concat()</code>调用结果中。它与其他well-known Symbol不同的是，这个Symbol属性默认情况下不会出现在标准对象中，它只是一个可选属性，用于增强作用于特定对象类型的<code>concat()</code>方法的功能，有效简化其默认特性。可以通过以下方法，定义一个<code>在concat()</code>调用中与数组行为相近的新类型。</p>
+<pre><code>let collection = {
+    0: 'Hello',
+    1: 'world',
+    length:2,
+    [Symbol.isConcatSpreadable]: true
+};
+
+let messages = [ 'Hi' ].concat(collection);
+
+console.log(messages); //['Hi,'Hello','world']
+</code></pre>
+<p>在这个示例中，定义来一个类数组对象 collection: 它有一个length属性，还有两个数字键，symbol.isConcatSpreadable属性为true表明属性值应当被当作独立元素添加到数组中。</p>
+<blockquote>
+<p>也可以在派生数组子类时将Symbol.isCaoncatSpreadable设置为false,从而防止元素在调用<code>concat()</code>方法时被分解。</p>
+</blockquote>
+<h3 id="正则相关的symbolmatchsymbolreplacesymbolsearch和symbolsplit属性">正则相关的Symbol.match,Symbol.replace,Symbol.search和Symbol.split属性</h3>
+<br/>
+<p>在JavaScript中，字符串与正则表达式通常一起出现，尤其是字符串类型的几个方法，可以接受正则表达式作为参数：</p>
+<ul>
+<li><code>match(regex)</code> 确定给定字符串是否匹配正则表达式regex</li>
+<li><code>replace(regex,replacement)</code> 将字符串中匹配正则表达式regex的部分替换为replacement</li>
+<li><code>search(regex)</code> 在字符串中定位匹配正则表达式regex的位置索引</li>
+<li><code>split(regex)</code> 按照匹配正则表达式regex的元素将字符串分切，并将结果存入数组中。</li>
+</ul>
+<p>中ECMAScript6中，定义了与上述4个方法相对应的4个Symbol,将语言内建的RegExp对象的原生特性完全外包出来。</p>
+<br/>
+<ul>
+<li>Symbol.match 接受一个字符串类型的参数，如果匹配成功则返回匹配元素的数组，否则返回null。</li>
+<li>Symbol.replace 接受一个字符串类型的参数和一个替换用的字符串，最终依然返回一个字符串。</li>
+<li>Symbol.search 接受一个字符串参数，如果匹配到内容，则返回数字类型的索引位置，否则返回-1。</li>
+<li>Symbol.split 接受一个字符串参数，根据匹配内容将字符串分解，并返回一个包含分解后片段的数组。</li>
+</ul>
+<p>如果可以在对象中定义这些属性，即使不使用正则表达式和以正则表达式为参的方法也可以在对象中实现模式匹配。下面的示例将展示Symbol的实际用法：</p>
+<pre><code>//实际上等价于 /^.{10}$/
+let hasLengthOf10 = {
+    [Symbol.match]: function(value) {
+        return value.length === 10 ? [value] : null;
+    },
+    [Symbol.replace]: function(value, replacement) {
+        return value.length === 10 ? replacement : value;
+    },
+    [Symbol.search]: function(value) {
+        return value.length === 10 ? 0 : -1;
+    },
+    [Symbol.split]: function(value) {
+        return value.length === 10 ? [, ] : [value];
+    }
+};
+
+let message1 = 'Hello world', //11个字符
+    message2 = 'Hello Jshn'; //10个字符
+
+let match1 = message1.match(hasLengthOf10),
+    match2 = message2.match(hasLengthOf10);
+
+console.log(match1,match2); //null [&quot;Hello John&quot;]
+
+let replace1 = message1.replace(hasLengthOf10),
+    replace2 = message2.replace(hasLengthOf10);
+
+console.log(replace1,replace2); //'Hello world' undefined
+
+let search1 = message1.search(hasLengthOf10),
+    search2 = message2.search(hasLengthOf10);
+
+console.log(search1,search2); //-1 0
+
+let split1 = message1.split(hasLengthOf10),
+    split2 = message2.split(hasLengthOf10);
+
+console.log(split1,split2); //['Hello world'] [empty]
+</code></pre>
+<h3 id="symboltoprimitive-方法">Symbol.toPrimitive 方法</h3>
+<br/>
+<p>在JavaScript引擎中，当执行特定操作时，经常会尝试将对象转化为原始值，例如，比较一个字符串和一个对象，如果使用双等号（==）运算符，对象会在比较操作执行前被转化为一个原始值。到底使用哪一个原始值以前由内部决定的，但在ECMAScript6的标准中，通过Symbol,toPrimitive方法可以更改那个暴露出来的值。</p>
+<br/>
+<p>Symbol.toPrimitive 方法被定义在每一个标准类型的原型上，并且规定当对象被转换为原始值时应当执行的操作。每当执行原始值转换时，总会调用Symbol.Primitive方法并传入一个值作为参数，这个值在规范中被称做类型提示（hint）。类型提示参数的值只有三种选择：“number”,&quot;string&quot;或“default”，传递这些参数时，Symbol.toprimitive返回的分别是：数字，字符串或无类型偏好的值。</p>
+<br/>
+<p>对于大多数标准对象，数字模式有以下特性，根据优先级的顺序排列如下：</p>
+<ol>
+<li>调用<code>valueOf()</code>方法，如果结果为原始值，则返回。</li>
+<li>否则，调用<code>toString()方法</code>，如果结果为原始值，则返回。</li>
+<li>如果再无可选的值，则抛出错误。</li>
+</ol>
+<p>同样，对于大多数标准对象，字符串模式有以下优先级排序：</p>
+<ol>
+<li>调用<code>toString()</code>方法，如果结果为原始值，则返回。</li>
+<li>否则，调用<code>valueOf()</code>方法，如果结果为原始值，则返回。</li>
+<li>如果再无可选的值，则抛出错误。</li>
+</ol>
+<p>在大多数情况下，标准对象会将默认模式按数字模式处理（除了Date对象，在这种情况下，会讲默认模式按字符串模式处理）。如果自定义 Symbol.toPrimitive方法，则可以覆盖这些默认的强制转换特性。</p>
+<br/>
+<blockquote>
+<p>默认模式只用于==运算，+元算及给Date构造函数传递一个参数时。在大多数操作中，使用的都是字符串模式或数字模式。</p>
+</blockquote>
+<p>如果要覆写默认的转化特性，可以将函数的Symbol.toPrimitive属性赋值为一个新的函数，举个🌰：</p>
+<pre><code>function Temperature(degrees) {
+    this.degrees = degrees;
+}
+
+Temperature.prototype[Symbol.toPrimitive] = function(hint) {
+    switch(hint) {
+        case &quot;string&quot;:
+            return this.degrees + &quot;\u00b0&quot;; 
+        case &quot;number&quot;:
+            return this.degrees;
+        case &quot;default&quot;:
+            return this.degrees + &quot; degrees&quot;;
+    }
+}
+
+var freezing = new Temperature(32);
+
+console.log(freezing + &quot;!&quot;);   //&quot;32 degrees!&quot;
+console.log(freezing / 2);     //16
+console.log(String(freezing))  //&quot;32°&quot;
+</code></pre>
+<p>新的方法根据参数hint指定的模式返回不同的值（参数hint由JavaScript引擎传入）。在字符串模式下，<code>Temperature()</code>函数返回Unicode的温度符号；在数字模式下，返回相应的数值；在默认模式下，将degress这个单词添加到数字后。</p>
+<br/>
+<p>每一条<code>console.log()</code>语句将触发不同的hint参数值。+运算符触发默认模式，hint被设置为“default”；/运算符触发数字模式，hint被设置为“number”；<code>String()</code>函数触发字符串模式，hint被设置为“string”。针对三种模式返回的值时可行的，但是更常见的做法是，将默认模式设置成与字符串模式或数字模式相同的处理逻辑。</p>
+<br/>
+<blockquote>
+<p>🔒好像有点长了呢（才不是我不想再打字了），剩下部分的留给下吧！</p>
+</blockquote>
+<br/>
+<p>to be continued🖋</p>
 
             </div>
             
