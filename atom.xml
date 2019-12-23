@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2019-12-23T15:22:03.682Z</updated>
+    <updated>2019-12-23T15:40:21.254Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,40 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[webpack-进阶用法🚔]]></title>
+        <id>https://heihei12305.github.io/post/webpack-jin-jie-yong-fa</id>
+        <link href="https://heihei12305.github.io/post/webpack-jin-jie-yong-fa">
+        </link>
+        <updated>2019-12-23T15:30:51.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="自动清理构建目录产物">🏍 自动清理构建目录产物</h2>
+<br/>
+<h3 id="通过-npm-scripts清理构建目录">🚲 通过 <code>npm scripts</code>清理构建目录</h3>
+<pre><code>rm -rf ./dist &amp;&amp; webpack
+rimraf ./dist &amp;&amp; webpack
+</code></pre>
+<p>不过这个 <code>rm -rf</code> 看起来有点😨，不很优雅。</p>
+<br/>
+<h3 id="通过-clean-webpack-plugin-插件">🛵 通过 <code>clean-webpack-plugin</code> 插件</h3>
+<br/>
+<p><b>默认会删除output指定的输出目录</b></p>
+<br/>
+<pre><code>module.exports = {
+    entry:{
+        app:'./src/app.js',
+        search:'./src/search.js'
+    },
+    output:{
+        filename:'[name][chunkhash:8].js',
+        path:__dirname+'/dist'
+    },
+    plugins:[
+        new CleanWebpackPlugin()
+    ]
+};
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[webpack-js,html,css压缩🗜️]]></title>
         <id>https://heihei12305.github.io/post/webpack-jshtmlcss-ya-suo</id>
@@ -1017,30 +1051,6 @@ compose(map(f),filter(compose(p,f))) == compose(filter(p),map(f));
 <h3 id="总结">总结</h3>
 </blockquote>
 <p>Hindley-Milner 类型签名在函数式编程中无处不在，它们简单易读，写起来也不复杂。但仅仅凭签名就能理解整个程序还是有一定难度的，要想精通这个技能就更要花点时间了。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[字符串转换成二进制流]]></title>
-        <id>https://heihei12305.github.io/post/zi-fu-chuan-zhuan-huan-cheng-er-jin-zhi-liu</id>
-        <link href="https://heihei12305.github.io/post/zi-fu-chuan-zhuan-huan-cheng-er-jin-zhi-liu">
-        </link>
-        <updated>2019-11-04T08:50:55.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>this.char2buf = function(str) {
-      var out = new ArrayBuffer(str.length*2);
-      var u16a= new Uint16Array(out);
-      var strs = str.split(&quot;&quot;);
-      for(var i =0 ; i&lt;strs.length;i++){
-          u16a[i]=strs[i].charCodeAt();
-      }
-      return out;
-  }
-</code></pre>
-<p>示例：<br>
-<img src="https://heihei12305.github.io/post-images/1573027364453.PNG" alt=""></p>
-<p>也即输出为 ArrayBuffer 类型。</p>
-<blockquote>
-<p>MDN 中 <code>ArrayBuffer</code> 定义：<code>ArrayBuffer</code>对象用来表示通用的，固定长度的原始二进制数据缓冲区。<code>ArrayBuffer</code>不能直接操作，而是要通过类数组对象或DataView对象来操作。它们会将缓冲区中的数据表示为特定的格式，并通过这些格式来读写缓冲区的内容。</p>
-</blockquote>
 ]]></content>
     </entry>
 </feed>
