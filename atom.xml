@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2019-12-22T12:35:17.108Z</updated>
+    <updated>2019-12-23T15:22:03.682Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,80 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[webpack-js,html,css压缩🗜️]]></title>
+        <id>https://heihei12305.github.io/post/webpack-jshtmlcss-ya-suo</id>
+        <link href="https://heihei12305.github.io/post/webpack-jshtmlcss-ya-suo">
+        </link>
+        <updated>2019-12-23T14:42:33.000Z</updated>
+        <content type="html"><![CDATA[<p>又又又开始继续学习webpack啦！🏷</p>
+<br/>
+<p>本文记录有关webpack压缩🗜️相关的东西。</p>
+<br/>
+<blockquote>
+<p>所见即所得，所见即所碍。</p>
+</blockquote>
+<p>start</p>
+<br/>
+<h3 id="javascript-压缩">JavaScript 压缩</h3>
+<br/>
+<p>内置了<code>uglifyjs-webpack-plugin</code>,所以默认打包出来的js文件已经被压缩。但是我们也可以自行安装该插件去开启并行压缩等。</p>
+<br/>
+<h3 id="css文件压缩">css文件压缩</h3>
+<br/>
+<p>使用 <code>optimize-css-assets-webpack-plugin</code>,同时使用<code>cssnano</code></p>
+<pre><code>module.exports = {
+    entry:{
+        app:'./src/app.js',
+        search:'./src/search.js'
+    },
+    output:{
+        filename:'[name][chunkhash:8].js',
+        path:__dirname+'/dist'
+    }，
+    plugin:[
+        new OptimizeCSSAssentsPlugin({
+            assetNameRegExp:/\.css$/g,
+            cssProcessor:require('cssnano')
+        })
+    ]
+}
+</code></pre>
+<p>匹配到所有的css文件，再通过<code>cssnano</code>对css进行压缩。</p>
+<br/>
+<h3 id="html文件压缩">html文件压缩</h3>
+<br/>
+<p>修改 <code>html-webpack-plugin</code>,设置压缩参数。</p>
+<br/>
+<pre><code>module.exports = {
+    entry:{
+        app:'./src/app.js',
+        search:'./src/search.js'
+    },
+    output:{
+        filename:'[name][chunkhash:8].js',
+        path:__dirname+'/dist'
+    },
+    plugins:[
+        new HtmlWebpackPlugin({
+            template:path.join(__dirname,'src/search.html'),
+            filename:'search.html',
+            chunks:['search'],
+            inject:true,
+            minify:{
+                html5:true,
+                collapseWhitespace:true,
+                preserveLineBreaks:false,
+                minifyCSS:true,
+                minifyJS:true,
+                removeComments:false
+            }
+        })
+    ]
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[react-jsx 备忘]]></title>
         <id>https://heihei12305.github.io/post/react-jsx-bei-wang</id>
@@ -967,122 +1041,6 @@ compose(map(f),filter(compose(p,f))) == compose(filter(p),map(f));
 <blockquote>
 <p>MDN 中 <code>ArrayBuffer</code> 定义：<code>ArrayBuffer</code>对象用来表示通用的，固定长度的原始二进制数据缓冲区。<code>ArrayBuffer</code>不能直接操作，而是要通过类数组对象或DataView对象来操作。它们会将缓冲区中的数据表示为特定的格式，并通过这些格式来读写缓冲区的内容。</p>
 </blockquote>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[判断设备及浏览器类型]]></title>
-        <id>https://heihei12305.github.io/post/pan-duan-she-bei-ji-liu-lan-qi-lei-xing</id>
-        <link href="https://heihei12305.github.io/post/pan-duan-she-bei-ji-liu-lan-qi-lei-xing">
-        </link>
-        <updated>2019-11-04T08:46:47.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>getDevice = function() {
-      var device = {};
-      var ua = navigator.userAgent;
-      var android = ua.match(/(Android);?[\s\/]+([\d.]+)?/);
-      var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
-      var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
-      var iphone = !ipad &amp;&amp; ua.match(/(iPhone\sOS)\s([\d_]+)/);
-      var mobileInfo = ua.match(/Android\s[\S\s]+Build\//);
-      device.ios = device.android = device.iphone = device.ipad = device.androidChrome = false;
-      device.isWeixin = /MicroMessenger/i.test(ua);
-      device.os = &quot;web&quot;;
-      device.deviceName = &quot;PC&quot;;
-      // Android
-      if (android) {
-        device.os = 'android';
-        device.osVersion = android[2];
-        device.android = true;
-        device.androidChrome = ua.toLowerCase().indexOf('chrome') &gt;= 0;
-      }
-      if (ipad || iphone || ipod) {
-        device.os = 'ios';
-        device.ios = true;
-      }
-      // iOS
-      if (iphone &amp;&amp; !ipod) {
-        device.osVersion = iphone[2].replace(/_/g, '.');
-        device.iphone = true;
-      }
-      if (ipad) {
-        device.osVersion = ipad[2].replace(/_/g, '.');
-        device.ipad = true;
-      }
-      if (ipod) {
-        device.osVersion = ipod[3] ? ipod[3].replace(/_/g, '.') : null;
-        device.iphone = true;
-      }
-      // iOS 8+ changed UA
-      if (device.ios &amp;&amp; device.osVersion &amp;&amp; ua.indexOf('Version/') &gt;= 0) {
-        if (device.osVersion.split('.')[0] === '10') {
-          device.osVersion = ua.toLowerCase().split('version/')[1].split(' ')[0];
-        }
-      }
-
-      // 如果是ios, deviceName 就设置为iphone，根据分辨率区别型号
-      if (device.iphone) {
-        device.deviceName = &quot;iphone&quot;;
-        var screenWidth = window.screen.width;
-        var screenHeight = window.screen.height;
-        if (screenWidth === 320 &amp;&amp; screenHeight === 480) {
-          device.deviceName = &quot;iphone 4&quot;;
-        } else if (screenWidth === 320 &amp;&amp; screenHeight === 568) {
-          device.deviceName = &quot;iphone 5/SE&quot;;
-        } else if (screenWidth === 375 &amp;&amp; screenHeight === 667) {
-          device.deviceName = &quot;iphone 6/7/8&quot;;
-        } else if (screenWidth === 414 &amp;&amp; screenHeight === 736) {
-          device.deviceName = &quot;iphone 6/7/8 Plus&quot;;
-        } else if (screenWidth === 375 &amp;&amp; screenHeight === 812) {
-          device.deviceName = &quot;iphone X/S/Max&quot;;
-        }
-      } else if (device.ipad) {
-        device.deviceName = &quot;ipad&quot;;
-      } else if (mobileInfo) {
-        var info = mobileInfo[0];
-        var deviceName = info.split(';')[1].replace(/Build\//g, &quot;&quot;);
-        device.deviceName = deviceName.replace(/(^\s*)|(\s*$)/g, &quot;&quot;);
-      }
-      // 浏览器模式, 获取浏览器信息
-      // TODO 需要补充更多的浏览器类型进来
-      if (ua.indexOf(&quot;Mobile&quot;) == -1) {
-        var agent = navigator.userAgent.toLowerCase() ;
-        var regStr_ie = /msie [\d.]+;/gi ;
-        var regStr_ff = /firefox\/[\d.]+/gi
-        var regStr_chrome = /chrome\/[\d.]+/gi ;
-        var regStr_saf = /safari\/[\d.]+/gi ;
-
-        device.browserName = '未知';
-        //IE
-        if(agent.indexOf(&quot;msie&quot;) &gt; 0) {
-          var browserInfo = agent.match(regStr_ie)[0];
-          device.browserName = browserInfo.split('/')[0];
-          device.browserVersion = browserInfo.split('/')[1];
-        }
-        //firefox
-        if(agent.indexOf(&quot;firefox&quot;) &gt; 0) {
-          var browserInfo = agent.match(regStr_ff)[0];
-          device.browserName = browserInfo.split('/')[0];
-          device.browserVersion = browserInfo.split('/')[1];
-        }
-        //Safari
-        if(agent.indexOf(&quot;safari&quot;) &gt; 0 &amp;&amp; agent.indexOf(&quot;chrome&quot;) &lt; 0) {
-          var browserInfo = agent.match(regStr_saf)[0];
-          device.browserName = browserInfo.split('/')[0];
-          device.browserVersion = browserInfo.split('/')[1];
-        }
-        //Chrome
-        if(agent.indexOf(&quot;chrome&quot;) &gt; 0) {
-          var browserInfo = agent.match(regStr_chrome)[0];
-          device.browserName = browserInfo.split('/')[0];
-          device.browserVersion = browserInfo.split('/')[1];
-        }
-      }
-      // Webview
-      device.webView = (iphone || ipad || ipod) &amp;&amp; ua.match(/.*AppleWebKit(?!.*Safari)/i);
-
-      // Export object
-      return device;
-    }
-	```</code></pre>
 ]]></content>
     </entry>
 </feed>

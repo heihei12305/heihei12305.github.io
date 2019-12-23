@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>chrome调试 | heihei12305</title>
+<title>webpack-js,html,css压缩🗜️ | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -98,36 +98,90 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">chrome调试</h2>
-            <div class="post-date">2019-06-28</div>
+            <h2 class="post-title">webpack-js,html,css压缩🗜️</h2>
+            <div class="post-date">2019-12-23</div>
             
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/chrome-diao-shi.jpg')">
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/webpack-jshtmlcss-ya-suo.PNG')">
               </div>
             
             <div class="post-content">
-              <p><a href="https://www.bilibili.com/video/av33561526/?p=15">视频网址送上</a>  <h6>不过里头只是涉及到了呢嘿嘿</h6><br>
-<br/><br/></p>
-<ol>
-<li>在sources那打开文本，在想要设置的地点左边设置断点然后刷新<br>
-<img src="https://heihei12305.github.io/post-images/1561701818493.PNG" alt=""></li>
-<li>调用函数（如果有的话),然后就会出现<br>
-<img src="https://heihei12305.github.io/post-images/1561701877397.PNG" alt=""></li>
-<li>然后就可以在source那看属性啦<br>
-<img src="https://heihei12305.github.io/post-images/1561702042233.png" alt=""><br>
-4.还可以在console直接查询呢！<br>
-<img src="https://heihei12305.github.io/post-images/1561702105141.PNG" alt=""><br>
-<br/></li>
-</ol>
-<h2 id="倔金社区里头有点好东西的呢嘿嘿">倔金社区里头有点好东西的呢嘿嘿</h2>
-<p><a href="https://juejin.im/post/5d09c39ee51d4576bc1a0e07">分享一些Chrome浏览器的前端调试技巧</a><br>
-<a href="https://juejin.im/book/5c526902e51d4543805ef35e">你不知道的Chrome调试技巧</a></p>
+              <p>又又又开始继续学习webpack啦！🏷</p>
+<br/>
+<p>本文记录有关webpack压缩🗜️相关的东西。</p>
+<br/>
+<blockquote>
+<p>所见即所得，所见即所碍。</p>
+</blockquote>
+<p>start</p>
+<br/>
+<h3 id="javascript-压缩">JavaScript 压缩</h3>
+<br/>
+<p>内置了<code>uglifyjs-webpack-plugin</code>,所以默认打包出来的js文件已经被压缩。但是我们也可以自行安装该插件去开启并行压缩等。</p>
+<br/>
+<h3 id="css文件压缩">css文件压缩</h3>
+<br/>
+<p>使用 <code>optimize-css-assets-webpack-plugin</code>,同时使用<code>cssnano</code></p>
+<pre><code>module.exports = {
+    entry:{
+        app:'./src/app.js',
+        search:'./src/search.js'
+    },
+    output:{
+        filename:'[name][chunkhash:8].js',
+        path:__dirname+'/dist'
+    }，
+    plugin:[
+        new OptimizeCSSAssentsPlugin({
+            assetNameRegExp:/\.css$/g,
+            cssProcessor:require('cssnano')
+        })
+    ]
+}
+</code></pre>
+<p>匹配到所有的css文件，再通过<code>cssnano</code>对css进行压缩。</p>
+<br/>
+<h3 id="html文件压缩">html文件压缩</h3>
+<br/>
+<p>修改 <code>html-webpack-plugin</code>,设置压缩参数。</p>
+<br/>
+<pre><code>module.exports = {
+    entry:{
+        app:'./src/app.js',
+        search:'./src/search.js'
+    },
+    output:{
+        filename:'[name][chunkhash:8].js',
+        path:__dirname+'/dist'
+    },
+    plugins:[
+        new HtmlWebpackPlugin({
+            template:path.join(__dirname,'src/search.html'),
+            filename:'search.html',
+            chunks:['search'],
+            inject:true,
+            minify:{
+                html5:true,
+                collapseWhitespace:true,
+                preserveLineBreaks:false,
+                minifyCSS:true,
+                minifyJS:true,
+                removeComments:false
+            }
+        })
+    ]
+}
+</code></pre>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
-                    others
+                  <a href="https://heihei12305.github.io/tag/webpack" class="tag">
+                    webpack
+                  </a>
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
                   </a>
                 
               </div>
@@ -135,9 +189,9 @@
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/max_elementreverse-shi-yong">
+                <a href="https://heihei12305.github.io/post/react-jsx-bei-wang">
                   <h3 class="post-title">
-                    max_element+reverse使用
+                    react-jsx 备忘
                   </h3>
                 </a>
               </div>
