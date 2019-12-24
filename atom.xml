@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2019-12-24T11:28:47.762Z</updated>
+    <updated>2019-12-24T16:18:27.560Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,142 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[ant-design-pro-vue修改指南🛠]]></title>
+        <id>https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan</id>
+        <link href="https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan">
+        </link>
+        <updated>2019-12-24T15:32:50.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>前一段时间用ant design pro of vue写了俩系统，趁着自己还记得怎么改的，记录一下。</p>
+</blockquote>
+<h3 id="登录框系列">登录框系列</h3>
+<br/>
+<p>系列文件📃在 <code>src/views/user</code>下，因为没有复用很多组件（不像ant design pro😭），</p>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1577202288794.png" alt=""></figure>
+<br/>
+<p>直接修改这三个组件即可😊。</p>
+<br/>
+<blockquote>
+<p>ps:不过这里把请求封装了，而且设计动态权限路由渲染那一套，建议改改形式就好了，其他的谨慎修改。⛏</p>
+</blockquote>
+<br/>
+<h3 id="动态路由系列">动态路由系列</h3>
+<br/>
+<p>系列文件📃在 <code>src/config/router.config.js</code>,此处涉及动态路由列表渲染的具体情况，包括url，列表项名称，page名称等。</p>
+<br/>
+<p>例子：</p>
+<pre><code>// forms
+{
+    path: '/index',
+    redirect: '/index/welcome',
+    component: RouteView,
+    meta: { title: '主页', icon: 'form', permission: [ 'form' ] },
+    children: [
+        {
+        path: '/index/welcome',
+        name: 'welcome',
+        component: () =&gt; import('@/views/form/BasicForm'),
+        meta: { title: '欢迎页', keepAlive: true, permission: [ 'form' ] }
+        }
+    ]
+},
+</code></pre>
+<p>说明：此处路由由forms修改而来，权限列表依旧为form，page名称为主页或者欢迎页。path指的是路由，compont指对应vue组件。🔧</p>
+<br/>
+<h3 id="跨域篇">跨域篇</h3>
+<p>对应文件📃在<code>vue.config.js</code>,把proxy修改到对应后端端口即可。</p>
+<pre><code>//此处代码位于vue.config.js 87行
+devServer: {
+    // development server port 8000
+    port: 8000,
+    // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
+    proxy: {
+      '/api/*': {
+        target:'http://localhost:3000',
+        // target:'http://202.206.212.212:9000',
+        changeOrigin: true
+      }
+    }
+  },
+</code></pre>
+<h3 id="ant组件使用篇">ant组件使用篇</h3>
+<p>官网地址： <a href="http://vue.ant-design.cn/docs/vue/introduce-cn/">ant design vue</a></p>
+<br/>
+<p>在ant design pro vue 中使用方式：</p>
+<ol>
+<li>按需加载在<code>src/core/lazy_lib/components_use.js</code></li>
+</ol>
+<pre><code>//使用示例
+import {
+  Carousel
+} from 'ant-design-vue'
+Vue.use(Carousel)
+</code></pre>
+<p>文件其余部分不动即可，然后就可以直接使用。</p>
+<br/>
+<ol start="2">
+<li>上文中我们引入了<code>Carousel</code>，使用时，我们需要用 <code>a-carousel</code></li>
+</ol>
+<pre><code>&lt;a-carousel 
+    arrows 
+    autoplay
+    &gt;
+    &lt;div
+      slot=&quot;prevArrow&quot;
+      class=&quot;custom-slick-arrow&quot;
+      style=&quot;left: 10px;zIndex: 1&quot;
+    &gt;
+      &lt;a-icon type=&quot;left-circle&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div slot=&quot;nextArrow&quot; class=&quot;custom-slick-arrow&quot; style=&quot;right: 10px&quot;&gt;
+      &lt;a-icon type=&quot;right-circle&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;&lt;h3&gt;重要通知：xxxx新书到啦&lt;/h3&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h3&gt;老师给个优吧！&lt;/h3&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h3&gt;不看错亿呀！图书馆使用指南&lt;/h3&gt;&lt;/div&gt;
+  &lt;/a-carousel&gt;
+</code></pre>
+<br/>
+<h3 id="取消mock篇">取消mock篇</h3>
+<p>使用 ant design pro vue时，请求会被mock全部拦截😢</p>
+<br/>
+<p>取消其实也简单，Mock 在 main.js 中经行引入，你可以查看该文件的源代码，并找到 import './mock' 这样的代码。（去除它 可完整的将项目中的 mock 拦截去除）</p>
+<br/>
+<h3 id="请求发送篇">请求发送篇</h3>
+<br/>
+<p>别问，问就是axios😊<br/></p>
+<p>本来项目就有用，只是它又给再封装📦了一层。<br/></p>
+<p>使用很简单，引入，然后直接使用即可。</p>
+<pre><code>&lt;script&gt;
+import axios from 'axios'
+methods: {
+    getData () {
+        axios.post('/api/admin/salary', {
+        params: {
+            'username': this.$store.getters.userInfo.roleId
+        }
+        }).then(result =&gt; {
+        console.log(result.data.data)
+        this.dataSource = result.data.data
+        for (let i = 0, len = this.dataSource.length; i &lt; len; i++) {
+            this.dataSource[i].key = i
+        }
+        })
+    },
+&lt;/script&gt;
+</code></pre>
+<h3 id="vue基础篇">vue基础篇</h3>
+<p>可能使用到的vue的一些基础属性📖</p>
+<ul>
+<li>mountd  生命周期钩子函数的一个</li>
+<li>computed 计算属性</li>
+<li>data 使用的必须为返回值</li>
+<li>components 使用的组件</li>
+</ul>
+<p>其余具体的 ant 组件相关配置见 ant design 组件库</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[webpack-进阶用法🚔]]></title>
         <id>https://heihei12305.github.io/post/webpack-jin-jie-yong-fa</id>
@@ -948,109 +1084,6 @@ console.log(String(freezing))  //&quot;32°&quot;
         </link>
         <updated>2019-11-08T05:58:31.000Z</updated>
         <content type="html"><![CDATA[<p>asda，待整理</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[HIndley-Milner 类型签名]]></title>
-        <id>https://heihei12305.github.io/post/hindley-milner-lei-xing-qian-ming</id>
-        <link href="https://heihei12305.github.io/post/hindley-milner-lei-xing-qian-ming">
-        </link>
-        <updated>2019-11-07T09:05:42.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<h3 id="单纯手打方便学习回顾原文请看">单纯手打，方便学习回顾，<a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch7.html#%E5%88%9D%E8%AF%86%E7%B1%BB%E5%9E%8B">原文请看</a></h3>
-<h3 id="类型签名type-signatures">类型签名(type signatures)</h3>
-</blockquote>
-<p>类型(type)是让所有不同背景的人都能高效沟通的元语言。很大程度上，类型签名是以&quot;HIndley-Milner&quot;系统写就的。<br/><br>
-类型签名在写纯函数时所起的作用非常大。这些签名轻述着函数最不可告人的秘密。短短一行，就能暴露函数的行为和目的。类型签名还衍生出了&quot;自由定理(free theorems)&quot;的概念。因为类型是可以推断的，所以明确的类型签名并不是必要的；不过你完全可以写精确度很高的类型签名，也可以让它们保持通用，抽象。类型签名不但可以用于编译时检测(compile time checks)，还是最好的文档。所以类型签名在函数式编程中扮演着非常重要的角色--重要程度远远超过你的想象。<br/></p>
-<blockquote>
-<h3 id="hindley-milner类型签名">Hindley-Milner类型签名</h3>
-</blockquote>
-<pre><code>// capitalize :: String -&gt; String
-var capitalize = function(s){
-	return toUpperCase(head(s)) + toLowerCase(tail(s));
-}
-
-capitalize(&quot;smurf&quot;);
-// =&gt; &quot;smurf&quot;
-</code></pre>
-<p>这里，<code>capitalize</code> 接受一个 <code>String</code>并返回了一个 <code>String</code>。<br>
-<br/><br>
-在Hindley-Milner系统中，函数都写成类型<code>a-&gt;b</code>这个样子，其中<code>a</code>和<code>b</code>是任意类型的变量。因此，<code>capitalize</code>函数的类型签名可以理解成&quot;一个接受<code>String</code>返回<code>String</code>的函数&quot;。换句话说，它接受一个<code>String</code>类型作为输入，并返回一个<code>String</code>类型的输出。<br/></p>
-<pre><code>
-// match :: Regex -&gt; string -&gt; [String]
-var match = curry(function(reg,s){
-	return s.match(reg);
-});
-
-</code></pre>
-<p>不过在还不完全了解细节的条件下，你尽可以把最后一个类型视作返回值。那么<code>match</code>函数就可以这么理解： 它接受一个<code>Regex</code>和一个<code>String</code>，返回一个<code>[String]</code>。</p>
-<br/>
-<p>对于上面的match函数我们完全可以把它的类型签名这样分组：</p>
-<br/>
-<pre><code>//match :: Regex -&gt; (String-&gt; [String])
-var match = curry(function(reg,s){
-	return s.match(reg);
-});
-</code></pre>
-<p>把最后两个类型包在括号里就能反映更多的信息了。现在我们可以看出<code>match</code>这个函数接受一个<code>Regex</code>作为参数，返回一个从<code>String</code>到<code>[String]</code>的函数。因为 curry 造成的结果就是这样：给<code>match</code>一个<code>Regex</code>，得到一个新函数，能够处理其<code>String</code>参数。</p>
-<br/>
-<p>最后：</p>
-<pre><code>// id :: a -&gt; a
-var id  = function(x){ return x; }
-
-//map :: (a -&gt; b) -&gt; [a] -&gt; [b]
-var map = curry(function(f,xs)){
-	return xs.map(f);
-});
-</code></pre>
-<p>这里的<code>id</code>函数接受任意类型的<code>a</code>并返回一个类型的数据。和普通代码一样，我们也可以在类型签名中使用变量。把变量命名为<code>a</code>和<code>b</code>只是一种约定俗成的习惯，你可以使用任何你喜欢的名称。对于相同的变量名，其类型也一定相同。这是非常重要的原则，所以我们必须重申：<code>a -&gt; b</code>可以是从任意类型中<code>a</code>到任意类型<code>b</code>，但是<code>a -&gt; a</code>必须是同一类型。例如，<code>id</code><br>
-可以是<code>String -&gt; String</code>，也可以是<code>Number -&gt; Number</code>，但不能是<code>String -&gt; Bool</code>。</p>
-<br/>
-<p>相似地，<code>map</code>也使用了变量，只不过这里的<code>b</code>可能与<code>a</code>类型相同，也可能不相同。我们可以这么理解：<code>map</code>接受两个参数，第一个是从任意类型<code>a</code>到任意类型<code>b</code>的函数；第二个是一个数组，元素是任意类型的<code>a</code>;<code>map</code>最后返回的是一个类型<code>b</code>的数组。</p>
-<br/>
-<pre><code>// reduce :: (b -&gt;  a -&gt; b) -&gt; b -&gt; [a] -&gt; b
-var reduce = curry(function(f,x,xs){
-	return xs.reduce(f, x);
-});
-</code></pre>
-<p>&quot;here goes nothing&quot; , 可以看出它的第一个参数是一个函数，这个函数接受一个<code>b</code>和一个<code>a</code>并返回一个<code>b</code>。那么这些<code>a</code>和<code>b</code>是从哪来的呢？很简单，签名中的第二个和第三个参数就是<code>b</code>和元素为<code>a</code>的数组，所以唯一合理的假设就是这里的<code>b</code>和每一个<code>a</code>都将传给前面说的函数作为参数。我们还可以看到，<code>reduce</code>函数最后返回的结果是一个<code>b</code>，也就是说，<code>reduce</code>的第一个参数函数的输出就是<code>reduce</code>函数的输出。</p>
- <br/>
-<blockquote>
-<h3 id="缩小可能性范围">缩小可能性范围</h3>
-</blockquote>
-<p>一旦引入一个类型变量，就会出现一个奇怪的特性叫做：parametricity。这个特性表明，函数将会以一个统一的行为作用于所有的类型。</p>
-<pre><code>// head :: [a] -&gt; a
-</code></pre>
-<p>注意看 <code>head</code>，可以看到它接受<code>[a]</code>返回<code>a</code>。我们除了知道参数是个数组，其他一概不知；所以函数的功能就只限于操作这个数组上。在它对<code>a</code>一无所知的情况下，它可能对<code>a</code>进行什么操作呢?换句话说，<code>a</code>告诉我们它不是一个特定的类型，这意味着它们可以是任意类型；那么我们的函数对每一个可能的类型的操作都必须保持统一。这就是parametricity的含义。要让我们来猜测<code>head</code>的实现的话，唯一合理的推断就是它返回数组的第一个，或者最后一个，或者某个随机的元素；当然，<code>head</code>这个命名应该能给我们一些线索。</p>
-<blockquote>
-<h3 id="自由定理">自由定理</h3>
-</blockquote>
-<p>类型签名除了能够帮助我们判断函数可能的实现，还能够给我们带来自由定理（free theorems）。</p>
-<br/>
-<pre><code>// head :: [a] -&gt; a
-compose(f,head) == compose(head, map(f));
-
-//filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
-compose(map(f),filter(compose(p,f))) == compose(filter(p),map(f));
-</code></pre>
-<p>第一个例子中，等式左边说的是，先获取数组的头部，然后对它调用函数f;等式右边说的是，先对数组中的每一个元素调用f，然后再取其返回结果的头部，这两个表达式是相等的，但是前者要快得多。</p>
-<br/>
-<p>你可能会想，这不是常识么，但计算机是没有常识的。实际上，计算机必须要有一种形式化方法来自动进行类似的代码优化。数学提供了这种方法，能够形式化直观的感觉，这无疑对死板的计算机逻辑非常有用。</p>
-<br/>
-<blockquote>
-<h3 id="类型约束">类型约束</h3>
-</blockquote>
-<p>签名也可以把类型约束成一个特定的接口</p>
-<pre><code>// sort :: ord a =&gt; [a] -&gt; [a]
-</code></pre>
-<p>胖箭头左边表明的是这么一个事实：<code>a</code>一定是个<code>ord</code>对象。也就是说，<code>a</code>必须要实现<code>ord</code>接口。<code>ord</code>到底是什么？它从哪里来？在一门强类型语言中，它可能就是一个自定义的接口，能够让不同的值排序。通过这种方式，我们不仅能够获取关于<code>a</code>的更多信息，了解<code>sort</code>函数具体要干什么，而且还能限制函数的作用范围。我们把这种接口声明叫做类型约束(type constraints)</p>
-<pre><code>// assertEqual :: (Eq a , Show a) =&gt; a -&gt; a -&gt; Assertion
-</code></pre>
-<p>这个例子中有两个约束： <code>Eq</code> 和 <code>Show</code> 。它们保证了我们可以检查不同的<code>a</code>是否相等， 并在有不相等的情况下打印出其中的差异。</p>
-<blockquote>
-<h3 id="总结">总结</h3>
-</blockquote>
-<p>Hindley-Milner 类型签名在函数式编程中无处不在，它们简单易读，写起来也不复杂。但仅仅凭签名就能理解整个程序还是有一定难度的，要想精通这个技能就更要花点时间了。</p>
 ]]></content>
     </entry>
 </feed>
