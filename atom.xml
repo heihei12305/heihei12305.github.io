@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2019-12-24T16:18:27.560Z</updated>
+    <updated>2019-12-25T15:24:13.518Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -177,6 +177,48 @@ rimraf ./dist &amp;&amp; webpack
         new CleanWebpackPlugin()
     ]
 };
+</code></pre>
+<br/>
+<hr>
+<br/>
+<h2 id="postcss插件自动补全css3前缀">postCss插件自动补全css3前缀🏄‍♀</h2>
+<h3 id="为什么css3需要添加前缀呢">为什么css3需要添加前缀呢？🏊‍♀</h3>
+<p>原因：因为浏览器的标准还没有完全统一，目前来看主要还有四种浏览器内核，分别是：</p>
+<ul>
+<li>⛹️‍♀️Trident(-ms)</li>
+<li>⛹Geko(-moz)</li>
+<li>🤾‍♀Webkit(-webkit)</li>
+<li>🤾‍♂Presto(-o)</li>
+</ul>
+<br/>
+<h3 id="使用autoprefixer插件">使用autoprefixer插件🏊</h3>
+<br/>
+<p>原理：🤼‍♂根据<a href="https://caniuse.com/">Cab I Use规则</a></p>
+<br/>
+<pre><code>module.exports = {
+    module:{
+        rules:[
+            {
+                test:/\.less$/,
+                use:[
+                    'style-loader',
+                    'css-loader',
+                    'less-loader',
+                    {
+                        loader:'postcss-loader',
+                        options:{
+                            plugins:() =&gt; {
+                                require('autoprefixer')({
+                                    browsers:[&quot;last 2 version&quot;,&quot;&gt;1%&quot;,&quot;iOS 7&quot;]
+                                })
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
 </code></pre>
 ]]></content>
     </entry>
