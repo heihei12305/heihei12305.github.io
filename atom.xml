@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2019-12-25T15:24:13.518Z</updated>
+    <updated>2019-12-26T02:51:02.595Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -196,28 +196,28 @@ rimraf ./dist &amp;&amp; webpack
 <p>原理：🤼‍♂根据<a href="https://caniuse.com/">Cab I Use规则</a></p>
 <br/>
 <pre><code>module.exports = {
-    module:{
-        rules:[
-            {
-                test:/\.less$/,
-                use:[
-                    'style-loader',
-                    'css-loader',
-                    'less-loader',
-                    {
-                        loader:'postcss-loader',
-                        options:{
-                            plugins:() =&gt; {
-                                require('autoprefixer')({
-                                    browsers:[&quot;last 2 version&quot;,&quot;&gt;1%&quot;,&quot;iOS 7&quot;]
-                                })
-                            }
-                        }
-                    }
-                ]
+  module:{
+    rules:[
+      {
+        test:/\.less$/,
+        use:[
+          'style-loader',
+          'css-loader',
+          'less-loader',
+           {
+            loader:'postcss-loader',
+            options:{
+              plugins:() =&gt; {
+                require('autoprefixer')({
+                    browsers:[&quot;last 2 version&quot;,&quot;&gt;1%&quot;,&quot;iOS 7&quot;]
+                })
+              }
             }
+          }
         ]
-    }
+       }
+     ]
+  }
 }
 </code></pre>
 ]]></content>
