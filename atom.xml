@@ -2,14 +2,43 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2019-12-26T03:25:08.313Z</updated>
+    <updated>2019-12-31T16:26:19.218Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
     <subtitle>所见即所得，所见即所碍</subtitle>
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, heihei12305</rights>
+    <rights>All rights reserved 2020, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[2019-年度总结]]></title>
+        <id>https://heihei12305.github.io/post/2019-nian-du-zong-jie</id>
+        <link href="https://heihei12305.github.io/post/2019-nian-du-zong-jie">
+        </link>
+        <updated>2019-12-31T15:13:59.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>2月 02-07 开始刷leetcode啦，陆陆续续总数也到345了，不无遗憾的想着356或许更好一些呢<br>
+<img src="https://heihei12305.github.io/post-images/1577808277203.png" alt="" loading="lazy"></li>
+<li>4 月，嘿嘿😄，遇到的她很🉑️呢，庆幸有机会牵手，真的很不错很不错呢，在一起也270天啦，😁，嗯～～快乐。</li>
+<li>6月 06-10 重新开始github,之前一直没弄懂github怎么用的，会了之后发现真想，嗯～～虽然也没怎么向开源社区贡献🌚，至少会用已经有了的轮子了吧，还是很棒的。</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1577808162803.png" alt="" loading="lazy"></figure>
+<ul>
+<li>7月 07-03 加入掘金社区，找到了很喜欢的社区！阅读过的文章汇总957篇，小册已购15本，已看9本（双十一半价太香了，不过小册真滴不错呢）<s>其实👀的沸点更多的多的多</s>虽然写的文章获赞不理想😢</li>
+<li>8月 08-05 开启在极客时间学习之旅，从此地铁路上不再彷徨。地铁配极课时间，仿佛一切刚刚好。订阅7门课程，累计学习79天，学了37小时，学了209门课程。嗯，还是不错的，2020继续加油⛽️<br>
+<img src="https://heihei12305.github.io/post-images/1577808380510.jpeg" alt="" loading="lazy"></li>
+<li>8-10 疯狂准备面试中，你不知道的javaScript，css世界，各种大佬的博客，lodash源码的阅读。慢慢的觉得好像没那么慌张了。</li>
+<li>10 月   10/12 开启第一次面试了呢，可惜没得后续结果了，陆陆续续，慢慢认识到了自己好像不太行～～～ 10/24 收到心仪offer，继续加油！ 10/28 租房子啦，搬家了嘿嘿😁</li>
+<li>11月 入职啦，开启前端实习生生涯。</li>
+<li>12月 各种事情巨多 学校/保定 &lt;-&gt; 公司/北京  两边跑还是很累的， 不过收到第一个月工资还是很开心的呢。</li>
+</ul>
+<h3 id="总结">总结</h3>
+<br/>
+<p>总算是入门前端了，工作前一直没人带，自己摸索还是很不容易的。但是呢，革命尚未成功，同志仍需努力💪。</p>
+<br/>
+<p>2020 你好</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ant-design-pro-vue修改指南🛠]]></title>
         <id>https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan</id>
@@ -22,7 +51,7 @@
 <h3 id="登录框系列">登录框系列</h3>
 <br/>
 <p>系列文件📃在 <code>src/views/user</code>下，因为没有复用很多组件（不像ant design pro😭），</p>
-<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1577202288794.png" alt=""></figure>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1577202288794.png" alt="" loading="lazy"></figure>
 <br/>
 <p>直接修改这三个组件即可😊。</p>
 <br/>
@@ -164,7 +193,8 @@ rimraf ./dist &amp;&amp; webpack
 <br/>
 <p><b>默认会删除output指定的输出目录</b></p>
 <br/>
-<pre><code>module.exports = {
+<pre><code>const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+module.exports = {
     entry:{
         app:'./src/app.js',
         search:'./src/search.js'
@@ -1117,15 +1147,6 @@ console.log(String(freezing))  //&quot;32°&quot;
 </blockquote>
 <br/>
 <p>to be continued🖋</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[DOMAPI完全整理]]></title>
-        <id>https://heihei12305.github.io/post/domapi-wan-quan-zheng-li</id>
-        <link href="https://heihei12305.github.io/post/domapi-wan-quan-zheng-li">
-        </link>
-        <updated>2019-11-08T05:58:31.000Z</updated>
-        <content type="html"><![CDATA[<p>asda，待整理</p>
 ]]></content>
     </entry>
 </feed>

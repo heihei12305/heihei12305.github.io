@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577329991242">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577809574322">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1577329991242" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1577809574322" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -132,7 +132,7 @@ function func(a){//这里是传值，也就是不会有影响啦
 func(a);
 console.log(a);
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1566742496237.PNG" alt=""></figure>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1566742496237.PNG" alt="" loading="lazy"></figure>
 <br/>
 <blockquote>
 <h3 id="2-引用调用-对象和函数">2. 引用调用： 对象和函数。</h3>
@@ -144,7 +144,7 @@ function func(a){//这里是引用调用，会同步的
 func(a);
 console.log(a);
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://heihei12305.github.io/post-images/1566743241395.PNG" alt=""></figure>
+<figure data-type="image" tabindex="2"><img src="https://heihei12305.github.io/post-images/1566743241395.PNG" alt="" loading="lazy"></figure>
 <br/>
 <hr>
 <br/>
@@ -156,7 +156,7 @@ function func(a){
 func(a);
 console.log(a);
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="https://heihei12305.github.io/post-images/1566743391438.PNG" alt=""></figure>
+<figure data-type="image" tabindex="3"><img src="https://heihei12305.github.io/post-images/1566743391438.PNG" alt="" loading="lazy"></figure>
 <p>为什么没变？<br/></p>
 <p>MDN上解释map ： map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。<br/></p>
 <p>这其中函数的参数 a 的值的类型是数组，发生了引用调用，它先是指向传入的a，然后map创建了一个新的数组，它又指向新的数组，这期间并没有改变外界的a。<br/></p>
@@ -194,7 +194,7 @@ function func(obj){
 func(obj);
 console.log(obj.a);
 </code></pre>
-<figure data-type="image" tabindex="4"><img src="https://heihei12305.github.io/post-images/1566744708596.PNG" alt=""></figure>
+<figure data-type="image" tabindex="4"><img src="https://heihei12305.github.io/post-images/1566744708596.PNG" alt="" loading="lazy"></figure>
 <blockquote>
 <h3 id="2-对象想进行传值调用怎么办">2. 对象想进行传值调用怎么办？</h3>
 </blockquote>
@@ -208,7 +208,7 @@ func(b);
 console.log(b);
 console.log(a);
 </code></pre>
-<figure data-type="image" tabindex="5"><img src="https://heihei12305.github.io/post-images/1566744908766.PNG" alt=""></figure>
+<figure data-type="image" tabindex="5"><img src="https://heihei12305.github.io/post-images/1566744908766.PNG" alt="" loading="lazy"></figure>
 <br/>
 <blockquote>
 <p>写在后面：其实上面说的就是深拷贝和浅拷贝了呢。</p>

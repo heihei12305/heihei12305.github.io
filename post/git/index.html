@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577329991242">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577809574322">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1577329991242" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1577809574322" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -140,8 +140,8 @@
 </ul>
 <ol>
 <li>本地库初始化<br>
-<img src="https://heihei12305.github.io/post-images/1562254113335.PNG" alt=""><br>
-<img src="https://heihei12305.github.io/post-images/1562254124226.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562254113335.PNG" alt="" loading="lazy"><br>
+<img src="https://heihei12305.github.io/post-images/1562254124226.PNG" alt="" loading="lazy"><br>
 注意：.git目录存放的是本地库相关的子目录和文件，不要删除，也不要胡乱修改<br>
 <br/></li>
 <li>设置签名<br>
@@ -159,14 +159,14 @@
 * 系统用户级别：等录当前操作系统的用户范围<br>
 * 级别优先级：就近原则</p>
 <p>git status  追踪文件  查看工作区，暂存区状态<br>
-<img src="https://heihei12305.github.io/post-images/1562255500410.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562255500410.PNG" alt="" loading="lazy"><br>
 上面显示有一个未追踪的文件<br>
 <br/><br>
 git add   将工作区的&quot;新建/修改&quot;添加到暂存区<br>
-<img src="https://heihei12305.github.io/post-images/1562255637006.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562255637006.PNG" alt="" loading="lazy"><br>
 ps:git while convert LF to CRLF  表明  每一行的结尾按照window风格剪出按照unix风格提交<br>
 git commit -m  &quot;commit message&quot; [file name]  将暂存区的内容提交到本地库<br>
-<img src="https://heihei12305.github.io/post-images/1562256413401.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562256413401.PNG" alt="" loading="lazy"><br>
 <br/><br>
 git log 显示commit历史信息   最完整</p>
 <ul>
@@ -174,16 +174,16 @@ git log 显示commit历史信息   最完整</p>
 <li>git log --oneline  hash值也只显示一部分了</li>
 <li>git reflog  其中有HEAD@{移动到当前版本需要多少步}<br>
 ps:多屏显示控制方式： 空格向下翻页，b向上翻页，q退出<br>
-<img src="https://heihei12305.github.io/post-images/1562257646998.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562257646998.PNG" alt="" loading="lazy"><br>
 <br/> git reset --hard    &lt;操作码&gt;   回退操作<br>
 <br/>其他操作：</li>
 <li>git reset --hard HEAD^  回退一步，有几个^回退几步</li>
 <li>git reset --hard HEAD~n  回退n步<br>
-<img src="https://heihei12305.github.io/post-images/1562420318068.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562420318068.PNG" alt="" loading="lazy"><br>
 <br/><br>
 git diff &lt;文件名&gt;  比较文件差异</li>
 </ul>
-<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1562422401628.PNG" alt=""></figure>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1562422401628.PNG" alt="" loading="lazy"></figure>
 <hr>
 <hr>
 <h2 id="分支操作">分支操作</h2>
@@ -200,9 +200,9 @@ git diff &lt;文件名&gt;  比较文件差异</li>
 <li>解决合并冲突
 <ul>
 <li>预备操作：将heihei分支的1.txt某一行改了,并将master分支的同一行也改了<br>
-<img src="https://heihei12305.github.io/post-images/1562423813202.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562423813202.PNG" alt="" loading="lazy"><br>
 打开文件就是：<br>
-<img src="https://heihei12305.github.io/post-images/1562424109415.PNG" alt=""><br>
+<img src="https://heihei12305.github.io/post-images/1562424109415.PNG" alt="" loading="lazy"><br>
 由我们自己决定选择是哪一个分支的内容，修改完文件后
 <ul>
 <li>git add &lt;文件&gt;</li>
@@ -215,7 +215,7 @@ git diff &lt;文件名&gt;  比较文件差异</li>
 </ul>
 <br/>
 <p>嘿嘿偷一张指令图，原网址<a href="https://juejin.im/post/599e14875188251240632702">一篇文章，教你学会git</a><br>
-<img src="https://heihei12305.github.io/post-images/1562257269842.png" alt=""></p>
+<img src="https://heihei12305.github.io/post-images/1562257269842.png" alt="" loading="lazy"></p>
 
             </div>
             
