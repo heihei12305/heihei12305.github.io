@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577843618524">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577981506189">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1577843618524" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1577981506189" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -140,6 +140,25 @@ rmir [-p] 目录名称</p>
 <p>cp  [-adfilprsu] 来源档（source）目标档（destination）  复制文件或目录</p>
 <ul>
 <li>-a：相当于 -pdr 的意思，至于 pdr 请参考下列说明；(常用)</li>
+</ul>
+<p>curl</p>
+<ul>
+<li><code>curl https://www.example.com</code>   不带有任何参数，curl 就是发出 GET 请求</li>
+<li>-A 参数指定客户端的用户代理标头，即<code>User-Agent</code>。curl 的默认用户代理字符串是<code>curl/[version]</code>
+<ul>
+<li>Chrome: <code>$ curl -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36' https://google.com</code></li>
+</ul>
+</li>
+<li>-H 直接指定标头，更改 <code>User-Agent</code>
+<ul>
+<li><code>$ curl -H 'User-Agent: php/1.0' https://google.com</code></li>
+</ul>
+</li>
+<li>-b 向服务器发送Cookie
+<ul>
+<li><code>$ curl -b 'foo=bar' https://google.com</code></li>
+</ul>
+</li>
 </ul>
 <hr>
 <p><strong>开始比较系统学习</strong>emmm<br/><br/><br>
