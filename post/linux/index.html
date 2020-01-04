@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1577981506189">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1578126537658">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1577981506189" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1578126537658" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -157,6 +157,19 @@ rmir [-p] 目录名称</p>
 <li>-b 向服务器发送Cookie
 <ul>
 <li><code>$ curl -b 'foo=bar' https://google.com</code></li>
+<li><code>$ curl -b 'foo=bar' -b 'foo2=baz' https://google.com</code></li>
+</ul>
+</li>
+<li>-c 参数将服务器设置的 Cookie 写入一个文件
+<ul>
+<li><code>curl -c cookies.txt https://www.google.com</code></li>
+</ul>
+</li>
+<li>-d 参数用于发送post请求的数据体，使用-d参数以后，HTTP请求会自动加上标头<code>Content-Type : application/x-www-form-urlencoded</code>,并且会自动把请求转化成POST方法，因此可以省略<code>-X POST</code>
+<ul>
+<li><code>curl -d 'login=emma&amp;password=123' -X POST https://google.com</code></li>
+<li><code>curl -d 'login='emma' -d 'password=123' -X POST https://google.com</code></li>
+<li>发送 get请求<code>curl 'http://127.0.0.1:8001/api/v1/goods?page=1&amp;per_page=10'</code></li>
 </ul>
 </li>
 </ul>
