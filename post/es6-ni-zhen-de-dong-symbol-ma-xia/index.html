@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>ES6-你真的懂symbol吗❓😸(下) | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1578135061287">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1578135061287" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/heihei12305" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">ES6-你真的懂symbol吗❓😸(下)</h2>
+            <div class="post-date">2020-01-04</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/es6-ni-zhen-de-dong-symbol-ma-xia.png')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<p>所见即所得，所见即所碍。</p>
+</blockquote>
+<p>继续继续继续啦！😈</p>
+<p>大概目录：</p>
+<ul>
+<li>symbol基础</li>
+<li>well-konwn symbol 暴露内部操作</li>
+<li>元编程</li>
+</ul>
+<p>内容主要来自</p>
+<ul>
+<li>深入理解es6</li>
+<li>你不知道的javaScript下</li>
+<li><a href="https://juejin.im/post/5a0e65c1f265da430702d6b9">[译]ES6 中的元编程：第一部分 —— Symbol，了不起的 Symbol</a></li>
+</ul>
+<h2 id="well-konwn-symbol-暴露内部操作">well-konwn symbol 暴露内部操作😺</h2>
+<h3 id="symboltostringtag-属性">Symbol.toStringTag 属性</h3>
+<p>js有时会同时存在多个全局执行环境，比如在Web浏览器中，如果一个页面包含iframe标签🏷️，就会分别为页面和iframe内嵌页面生成两个全局执行环境。在大多数情况下，由于数据可以在不同环境间来回传递，不太需要担心；但是如果对象在不同对象间传递之后，你想确定它的类型呢？</p>
+<p>首先明确一下概念，领域指的是javaScript的执行环境，每个领域都有自己的全局作用域，有自己的全局对象，在任何领域创建的数组，都是一个正规的数组。然而，如果把这个数组传递到另一个领域中,instanceof Array 语句的检测结果会返回false，此时 Array 已是另一个领域的构造函数，显然被检测的数组不是由这个构造函数创建的。</p>
+<h4 id="针对类型识别问题的解决方案">针对类型识别问题的解决方案</h4>
+<p>Object.prototype 能跨越 iframe 的边界来识别数组</p>
+<pre><code>function isArray(value) {
+    return Object.prototype.toString.call(value) === &quot;[object Array]&quot;;
+}
+
+console.log(isArray([])); //true
+</code></pre>
+<h4 id="在ecmascript6-中定义对象字符串标签️">在ECMAScript6 中定义对象字符串标签🏷️</h4>
+<p>ECMAScript6重新定义了原生对象过去的状态，通过 <code>Symbol.toStringTag</code>这个Symbol改变了调用<code>Object.prototype.toString()</code>时返回的身份标识。这个Symbol所代表的属性在每一个对象中都存在，其定义了调用对象的Object.prototype.toString.call()方法返回的值。对于数组，调用那个函数返回的值通常是&quot;Array&quot;,它正是存储在对象的<code>Symbol.toStringTag</code>属性中。</p>
+<p>同样的，可以为你自己的对象定义<code>Symbol.toStringTag</code>的值：</p>
+<pre><code>function Person(name) {
+    this.name = name;
+}
+
+Person.prototype[Symbol.toStringTag] = &quot;Person&quot;;
+let me = new Person(&quot;heihei&quot;);
+
+console.log(me.toString());                                //&quot;[object Person]&quot;
+console.log(Object.prototype.toString.call(me));   //&quot;[object Person]&quot;
+</code></pre>
+<blockquote>
+<p>除非另有说明，所以对象都会从 <code>Object.prototype</code> 挤成 <code>Symbol.toStringTag</code>这个属性，且默认的属性值为&quot;Object&quot;。</p>
+</blockquote>
+<p>对于开发者定义的对象来说，不限制<code>Symbol.toStringTag</code>属性的值的范围。例如，语言本身不会阻止你使用Array作为<code>Symbol.toStringTag</code>属性的值</p>
+<pre><code>function Person(name){
+    this.name = name;
+}
+
+Person.prototype[Symbol.toStringTag] = &quot;Array&quot;;
+
+Person.prototype.toString = function() {
+    return this.name;
+}
+
+let me = new Person(&quot;heihei&quot;);
+
+console.log(me.toString());                              //&quot;heihei&quot;
+console.log(Object.prototype.toString.call(me))  //&quot;[Object Array]&quot;
+</code></pre>
+<p>在这段代码中，调用Object.prototype.toString() 方法得到的结果是&quot;[object Array]&quot;，跟你从一个真实数组中得到的结果完全一样。这也就意味着，<code>Object.prototype.toString()</code>不是一个十分可靠的识别对象类型的方法。</p>
+<br/>
+<h3 id="symbolunscopables-属性">Symbol.unscopables 属性</h3>
+<blockquote>
+<p>with 语句是 JavaScript 中最有争议的一个语句，设计它的初衷是可以免于编写重复的代码。但由于加入with语句后，代码变得难以理解，它的执行性能很差且容易导致程序出错，因此被大多数开发者所诟病。最终，标准规定，在严格模式下不可以使用with语句；且这条限制同样影响到了类和模块，默认使用严格模式且没有任何退出的方法。</p>
+</blockquote>
+<pre><code>var values = [1,2,2],
+     colors = [&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;],
+     color = &quot;black&quot;;
+
+with(colors) {
+    push(color);
+    push(...values);
+}
+
+console.log(colors);   //&quot;[&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;black&quot;, 1, 2, 2]&quot;
+</code></pre>
+<p>注意上面的代码里有个values变量，但在ECMAScript 6 中，数组中添加了一个values方法。总之，在ECMAScript6环境中，with语句引用的values不是with语句外的变量values,而是数组本身的values方法，这样就脱离代码原本的目标了。因此ECMAScript 6也添加了 <code>Symbol.unscopables</code>这个Symbol来解决这个问题。</p>
+<p><code>Symbol.unscopables</code>这个Symbol通常用于<code>Array.prototype</code>。以在with语句中标示出不创建绑定的属性名。<code>Symbol.unscopables</code>是以对象的形式出现的，它的键是在with语句中要忽略的标识符，其对应的值必须是 true 。这里是数组<code>Symbol.unscopables</code>属性的默认值：</p>
+<pre><code>// 已默认内置到ECMAScript 6中
+Array.prototype[Symbol.unscopables] = Object.assign(Object.create(null),{
+    copyWithin: true,
+    entries: true,
+    fill: true,
+    find: true,
+    findIndex: true,
+    keys: true,
+    values: true
+})
+</code></pre>
+<p>☠️不要为自己创建的对象定义<code>Symbol.unscopables</code>属性，除非在代码中使用了with语句并且正在修改代码库中已有的对象。</p>
+<h2 id="元编程">元编程💻</h2>
+<h3 id="概述️">概述⌨️</h3>
+<blockquote>
+<p>元编程是指操作目标是程序本身的行为特性的编程。换句话说，它是对程序的编程的编程。（体会下上面的well-known api）</p>
+</blockquote>
+<br/>
+<blockquote>
+<p>内省：一种元编程形式，举例来说，如果想要查看对象a和另外一个对象b的关系是否是<code>[[prototype]]</code>链接🔗的，可以使用<code>a.isPrototype(b)</code>。</p>
+</blockquote>
+<p>元编程关注以下几点：</p>
+<ul>
+<li>代码查看自身</li>
+<li>代码修改自身</li>
+<li>代码修改默认语言特性</li>
+</ul>
+<p>元编程的目标是利用语言本身的内省能力使代码的其余本分更具描述性，表达性和灵活性</p>
+<br/>
+<h3 id="元属性">元属性🖥</h3>
+<blockquote>
+<p>元属性以属性访问的形式提供特殊的其他方法无法获取的元信息。</p>
+</blockquote>
+<p>以 new.target 为🌰，关键字new用作属性访问的上下文。显然，new 本身不是一个对象，因此这个功能很特殊。而在构造器调用（通过new触发的函数/方法）内部使用new.target时，new成了一个虚拟上下文，使得new.target能够指向调用new的目标构造器。</p>
+<p>这个是元编程操作的一个明显示例，因为它的目的是从构造器调用内部确定最初new的目标是什么，通用地说用于内省（检查类型/结构）或者静态属性访问。</p>
+<blockquote>
+<p>好吧😨，这个整不来整不来，太吃力了。留个坑，以后回来再填。👻</p>
+</blockquote>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/wtfjs">
+                  <h3 class="post-title">
+                    wtfjs
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

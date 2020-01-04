@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1578126537658">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1578135061287">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1578126537658" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1578135061287" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -123,7 +123,7 @@
 <p>大概目录：</p>
 <ul>
 <li>symbol基础</li>
-<li>well-konw symbol 暴露内部操作</li>
+<li>well-konwn symbol 暴露内部操作</li>
 <li>元编程</li>
 </ul>
 <p>内容主要来自</p>
@@ -193,7 +193,7 @@ console.log(Symbol.keyFor(uid3));//&quot;undefined&quot;
 <br/>
 <p>symbol全局注册表是一个类似全局作用域的共享环境，也就是说你不能假设目前环境中存在哪些键。当使用第三方组件时，尽量使用Symbol键的命名空间以减少命名冲突，也即加上前缀。额外注意的一点是：这个注册中心是跨域的，意味着 iframe 或者sevice worker 中的 Symbol 会与当前 frame Symbol 相等。</p>
 <br/>
-<h2 id="well-konw-symbol-暴露内部操作">well-konw symbol 暴露内部操作</h2>
+<h2 id="well-konwn-symbol-暴露内部操作">well-konwn symbol 暴露内部操作</h2>
 <p>ECMAScript5 的一个中心主旨是将JavaScript中的一些“神奇”的部分暴露出来，并详尽定义了这些开发者们中当时模拟不了的功能。ECMAScript6延续了这个传统，新标准中主要通过中原型链上定义了与Symbol相关的属性来暴露更多的语言内部逻辑。</p>
 <br/>
 <p>包括</p>

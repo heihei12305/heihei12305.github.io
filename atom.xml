@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-01-04T08:29:01.754Z</updated>
+    <updated>2020-01-04T11:02:33.492Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,131 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[ES6-你真的懂symbol吗❓😸(下)]]></title>
+        <id>https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma-xia</id>
+        <link href="https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma-xia">
+        </link>
+        <updated>2020-01-04T08:34:44.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>所见即所得，所见即所碍。</p>
+</blockquote>
+<p>继续继续继续啦！😈</p>
+<p>大概目录：</p>
+<ul>
+<li>symbol基础</li>
+<li>well-konwn symbol 暴露内部操作</li>
+<li>元编程</li>
+</ul>
+<p>内容主要来自</p>
+<ul>
+<li>深入理解es6</li>
+<li>你不知道的javaScript下</li>
+<li><a href="https://juejin.im/post/5a0e65c1f265da430702d6b9">[译]ES6 中的元编程：第一部分 —— Symbol，了不起的 Symbol</a></li>
+</ul>
+<h2 id="well-konwn-symbol-暴露内部操作">well-konwn symbol 暴露内部操作😺</h2>
+<h3 id="symboltostringtag-属性">Symbol.toStringTag 属性</h3>
+<p>js有时会同时存在多个全局执行环境，比如在Web浏览器中，如果一个页面包含iframe标签🏷️，就会分别为页面和iframe内嵌页面生成两个全局执行环境。在大多数情况下，由于数据可以在不同环境间来回传递，不太需要担心；但是如果对象在不同对象间传递之后，你想确定它的类型呢？</p>
+<p>首先明确一下概念，领域指的是javaScript的执行环境，每个领域都有自己的全局作用域，有自己的全局对象，在任何领域创建的数组，都是一个正规的数组。然而，如果把这个数组传递到另一个领域中,instanceof Array 语句的检测结果会返回false，此时 Array 已是另一个领域的构造函数，显然被检测的数组不是由这个构造函数创建的。</p>
+<h4 id="针对类型识别问题的解决方案">针对类型识别问题的解决方案</h4>
+<p>Object.prototype 能跨越 iframe 的边界来识别数组</p>
+<pre><code>function isArray(value) {
+    return Object.prototype.toString.call(value) === &quot;[object Array]&quot;;
+}
+
+console.log(isArray([])); //true
+</code></pre>
+<h4 id="在ecmascript6-中定义对象字符串标签️">在ECMAScript6 中定义对象字符串标签🏷️</h4>
+<p>ECMAScript6重新定义了原生对象过去的状态，通过 <code>Symbol.toStringTag</code>这个Symbol改变了调用<code>Object.prototype.toString()</code>时返回的身份标识。这个Symbol所代表的属性在每一个对象中都存在，其定义了调用对象的Object.prototype.toString.call()方法返回的值。对于数组，调用那个函数返回的值通常是&quot;Array&quot;,它正是存储在对象的<code>Symbol.toStringTag</code>属性中。</p>
+<p>同样的，可以为你自己的对象定义<code>Symbol.toStringTag</code>的值：</p>
+<pre><code>function Person(name) {
+    this.name = name;
+}
+
+Person.prototype[Symbol.toStringTag] = &quot;Person&quot;;
+let me = new Person(&quot;heihei&quot;);
+
+console.log(me.toString());                                //&quot;[object Person]&quot;
+console.log(Object.prototype.toString.call(me));   //&quot;[object Person]&quot;
+</code></pre>
+<blockquote>
+<p>除非另有说明，所以对象都会从 <code>Object.prototype</code> 挤成 <code>Symbol.toStringTag</code>这个属性，且默认的属性值为&quot;Object&quot;。</p>
+</blockquote>
+<p>对于开发者定义的对象来说，不限制<code>Symbol.toStringTag</code>属性的值的范围。例如，语言本身不会阻止你使用Array作为<code>Symbol.toStringTag</code>属性的值</p>
+<pre><code>function Person(name){
+    this.name = name;
+}
+
+Person.prototype[Symbol.toStringTag] = &quot;Array&quot;;
+
+Person.prototype.toString = function() {
+    return this.name;
+}
+
+let me = new Person(&quot;heihei&quot;);
+
+console.log(me.toString());                              //&quot;heihei&quot;
+console.log(Object.prototype.toString.call(me))  //&quot;[Object Array]&quot;
+</code></pre>
+<p>在这段代码中，调用Object.prototype.toString() 方法得到的结果是&quot;[object Array]&quot;，跟你从一个真实数组中得到的结果完全一样。这也就意味着，<code>Object.prototype.toString()</code>不是一个十分可靠的识别对象类型的方法。</p>
+<br/>
+<h3 id="symbolunscopables-属性">Symbol.unscopables 属性</h3>
+<blockquote>
+<p>with 语句是 JavaScript 中最有争议的一个语句，设计它的初衷是可以免于编写重复的代码。但由于加入with语句后，代码变得难以理解，它的执行性能很差且容易导致程序出错，因此被大多数开发者所诟病。最终，标准规定，在严格模式下不可以使用with语句；且这条限制同样影响到了类和模块，默认使用严格模式且没有任何退出的方法。</p>
+</blockquote>
+<pre><code>var values = [1,2,2],
+     colors = [&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;],
+     color = &quot;black&quot;;
+
+with(colors) {
+    push(color);
+    push(...values);
+}
+
+console.log(colors);   //&quot;[&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;black&quot;, 1, 2, 2]&quot;
+</code></pre>
+<p>注意上面的代码里有个values变量，但在ECMAScript 6 中，数组中添加了一个values方法。总之，在ECMAScript6环境中，with语句引用的values不是with语句外的变量values,而是数组本身的values方法，这样就脱离代码原本的目标了。因此ECMAScript 6也添加了 <code>Symbol.unscopables</code>这个Symbol来解决这个问题。</p>
+<p><code>Symbol.unscopables</code>这个Symbol通常用于<code>Array.prototype</code>。以在with语句中标示出不创建绑定的属性名。<code>Symbol.unscopables</code>是以对象的形式出现的，它的键是在with语句中要忽略的标识符，其对应的值必须是 true 。这里是数组<code>Symbol.unscopables</code>属性的默认值：</p>
+<pre><code>// 已默认内置到ECMAScript 6中
+Array.prototype[Symbol.unscopables] = Object.assign(Object.create(null),{
+    copyWithin: true,
+    entries: true,
+    fill: true,
+    find: true,
+    findIndex: true,
+    keys: true,
+    values: true
+})
+</code></pre>
+<p>☠️不要为自己创建的对象定义<code>Symbol.unscopables</code>属性，除非在代码中使用了with语句并且正在修改代码库中已有的对象。</p>
+<h2 id="元编程">元编程💻</h2>
+<h3 id="概述️">概述⌨️</h3>
+<blockquote>
+<p>元编程是指操作目标是程序本身的行为特性的编程。换句话说，它是对程序的编程的编程。（体会下上面的well-known api）</p>
+</blockquote>
+<br/>
+<blockquote>
+<p>内省：一种元编程形式，举例来说，如果想要查看对象a和另外一个对象b的关系是否是<code>[[prototype]]</code>链接🔗的，可以使用<code>a.isPrototype(b)</code>。</p>
+</blockquote>
+<p>元编程关注以下几点：</p>
+<ul>
+<li>代码查看自身</li>
+<li>代码修改自身</li>
+<li>代码修改默认语言特性</li>
+</ul>
+<p>元编程的目标是利用语言本身的内省能力使代码的其余本分更具描述性，表达性和灵活性</p>
+<br/>
+<h3 id="元属性">元属性🖥</h3>
+<blockquote>
+<p>元属性以属性访问的形式提供特殊的其他方法无法获取的元信息。</p>
+</blockquote>
+<p>以 new.target 为🌰，关键字new用作属性访问的上下文。显然，new 本身不是一个对象，因此这个功能很特殊。而在构造器调用（通过new触发的函数/方法）内部使用new.target时，new成了一个虚拟上下文，使得new.target能够指向调用new的目标构造器。</p>
+<p>这个是元编程操作的一个明显示例，因为它的目的是从构造器调用内部确定最初new的目标是什么，通用地说用于内省（检查类型/结构）或者静态属性访问。</p>
+<blockquote>
+<p>好吧😨，这个整不来整不来，太吃力了。留个坑，以后回来再填。👻</p>
+</blockquote>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[wtfjs]]></title>
         <id>https://heihei12305.github.io/post/wtfjs</id>
@@ -1853,91 +1978,6 @@ module.exports = {
 <br/>
 <p>与<code>style-loader</code>插件互斥，因为 <code>mini-css-extract-plugin</code>为了将css样式提取出来，而<code>style-loader</code>则为了将样式写入header中。</p>
 <br/>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[webpack文件监听及热更新原理]]></title>
-        <id>https://heihei12305.github.io/post/webpack-wen-jian-jian-ting-ji-re-geng-xin-yuan-li</id>
-        <link href="https://heihei12305.github.io/post/webpack-wen-jian-jian-ting-ji-re-geng-xin-yuan-li">
-        </link>
-        <updated>2019-11-23T11:40:13.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<h3 id="文件监听">文件监听</h3>
-</blockquote>
-<p>文件监听是在发现源码发生变化时，自动重新构建出新的输出文件。</p>
-<br/>
-<p>在webpack中开启监听模式，有两种方式：</p>
-<ul>
-<li>启动webpack命令时，带上 --watch 参数</li>
-<li>在配置 webpack.config.js中设置 watch: true</li>
-</ul>
-<h3 id="唯一缺陷每次需要手动刷新浏览器">唯一缺陷：每次需要手动刷新浏览器</h3>
- <br/>
-<blockquote>
-<h3 id="文件监听原理分析">文件监听原理分析</h3>
-</blockquote>
-<p>轮询判断文件的最后编辑时间是否变化</p>
-<br/>
-<p>某个文件发生了变化，并不会立刻告诉监听者，而是先缓存起来，等 aggregateTimeout</p>
-<pre><code>module.export = {
-	//默认为flase，也就是不开启
-	watch: true,
-	//只有开启监听模式，watchOptions才有意义
-	watchOptions: {
-		//默认为空，不监听的文件或者文件夹，支持正则匹配
-		ignored: /node_modules/,
-		//监听到变化发生后会等300ms再去执行，默认300ms
-		aggregateTimeout: 300,
-		//判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
-		poll:1000
-	}
-}
-</code></pre>
-<blockquote>
-<h3 id="更好的方法-热更新wdswebpack-dev-server">更好的方法 热更新(wds)：webpack-dev-server</h3>
-</blockquote>
-<ul>
-<li>方法1.</li>
-</ul>
-<br/>
-<p>wds 通常与 HotModuleReplacementPlugin插件一起使用，wds的一个比较大的优势是，它没有磁盘的io,输出完之后放到内存中，而不是输出为文件，所以构建速度会有一个较大的优势。</p>
-<br/>
-<p>如果报错为 ： <code>'webpack-dev-server' 不是内部或外部命令，也不是可运行的程序 或批处理文件。</code>请先安装依赖：<code>yarn add webpack-dev-server -D</code></p>
-<br/>
-<ul>
-<li>方法2.</li>
-</ul>
-<br/>
-<p>WDM 将 webpack 输出的文件传输给服务器,使用于灵活的定制场景。</p>
-<br/>
-<pre><code>const express = require('express');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-
-const app = express();
-const config = require('./webpack.config.js');
-const compiler = webpack(config);
-
-app.use(webpackDevMiddleware(compiler,{
-	publicPath: config.output.publicPath
-}));
-
-app.listen(3000,function(){
-	console.log('Example app listening on post 3000\n')
-})
-</code></pre>
-<p>在这种情况下，对webpack的配置控制会更加灵活</p>
-<br/>
-<blockquote>
-<h3 id="webpack-热更新原理">webpack 热更新原理</h3>
-</blockquote>
-<ul>
-<li>Webpack Compile: 将JS编译成Bundle</li>
-<li>HMR Server： 将热更新的文件输出给HMR Runtime</li>
-<li>Bundle server: 提供文件在浏览器的访问</li>
-<li>HMR Runtime: 会被注入到浏览器，更新文件的变化</li>
-<li>bundle.js 构建输出的文件</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
