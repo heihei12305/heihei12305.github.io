@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>nginx 部署 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1578840709039">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1578840709039" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/heihei12305" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">nginx 部署</h2>
+            <div class="post-date">2020-01-11</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/nginx-bu-shu.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h2 id="启动停止和重新加载配置">启动，停止和重新加载配置</h2>
+<p>一旦启动nginx，就可以通过 -s 文件 来进行控制</p>
+<blockquote>
+<p>nginx -s 信号</p>
+</blockquote>
+<p>信号可以是以下之一：</p>
+<ul>
+<li>stop 快速关机</li>
+<li>quit 正常关机</li>
+<li>reload 重新加载配置文件</li>
+<li>reopen 重新打开日志文件</li>
+</ul>
+<h2 id="配置文件的结构">配置文件的结构</h2>
+<p>nginx 由配置文件中指定的指令控制的模块组成。伪指令分为简单伪指令和块伪指令。<br>
+一个简单的指令由名称和参数组成，这些名称和参数之间用空格分隔，并以分号（；）结尾。<br>
+块指令的结果与简单指令的结构相同，但是它是用括号（{,}）起来的附加指令。如果块指令在花括号内有其他其他指令，则称为上下文。<br>
+放置在任何上下文外部的配置文件中的指令都被视为在主上下文中。<br>
+#符号 后的其余行都被视为注释</p>
+<h2 id="提供静态内容">提供静态内容</h2>
+<p>Web服务器的一项重要任务是分发文件（例如图像或静态HTML页面）。</p>
+<pre><code>user  nginx;
+worker_processes  1;
+
+events {
+  worker_connections  4096;  ## Default: 1024
+}
+
+http {
+  include  mime.types;
+  server {
+    listen 3000;
+    location /# {
+      try_files $uri /#/index.html; # l/#/index.html 路径不是真实的文件路径，而是访问的 url 路径
+    }
+    location = /#/index.html { # 上面的 location 都导流到了这里
+      alias /usr/AD/ad_web/index.html; # 这里是真实的文件路径
+      access_log              off;
+      add_header              Cache-Control &quot;no-cache, no-store&quot;;
+      expires                 -1;
+      etag                    on;
+    }
+    location /static/ { # 静态文件
+      # http://test.com/produk-digital/static/css/main.css
+      # 会被解析成
+      # /Users/youxingzhi/shopee/sniper/build/static/css/main.css
+      # 如果换成 root 则会解析成
+      # /Users/youxingzhi/shopee/sniper/build/static/produk-digital/static/css/main.css
+      alias                 /usr/AD/ad_web/static/;
+      access_log              off;
+      etag                    on;
+      gzip                    on;
+      include                 gzip_params;
+    }
+  }
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN" class="tag">
+                    others
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma-xia">
+                  <h3 class="post-title">
+                    ES6-你真的懂symbol吗❓😸(下)
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
