@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-01-12T14:51:51.281Z</updated>
+    <updated>2020-01-14T15:32:36.511Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,36 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[iTerm2 快捷命令]]></title>
+        <id>https://heihei12305.github.io/post/iterm2-kuai-jie-ming-ling</id>
+        <link href="https://heihei12305.github.io/post/iterm2-kuai-jie-ming-ling">
+        </link>
+        <updated>2020-01-14T14:46:12.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>command + t 新建标签🏷️<br>
+<img src="https://heihei12305.github.io/post-images/1579014351285.gif" alt="" loading="lazy"></li>
+<li>command + w	关闭标签🏷️<br>
+<img src="https://heihei12305.github.io/post-images/1579014370912.gif" alt="" loading="lazy"></li>
+<li>command + 数字 切换标签🏷️<br>
+<img src="https://heihei12305.github.io/post-images/1579014398577.gif" alt="" loading="lazy"></li>
+<li>command + 左右键	切换标签🏷️<br>
+<img src="https://heihei12305.github.io/post-images/1579014539217.gif" alt="" loading="lazy"></li>
+<li>command + enter	切换全屏<br>
+<img src="https://heihei12305.github.io/post-images/1579014417459.gif" alt="" loading="lazy"></li>
+<li>command + d 垂直分屏<br>
+<img src="https://heihei12305.github.io/post-images/1579015306805.gif" alt="" loading="lazy"></li>
+<li>command + shift + d 水平分屏<br>
+<img src="https://heihei12305.github.io/post-images/1579015319876.gif" alt="" loading="lazy"></li>
+<li>ctrl + u	清除当前行<br>
+<img src="https://heihei12305.github.io/post-images/1579015405233.gif" alt="" loading="lazy"></li>
+<li>ctrl + l	清屏<br>
+<img src="https://heihei12305.github.io/post-images/1579015398236.gif" alt="" loading="lazy"></li>
+<li>ctrl + a	到行首 ctrl + e	到行尾<br>
+<img src="https://heihei12305.github.io/post-images/1579015391632.gif" alt="" loading="lazy"></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[nginx 部署]]></title>
         <id>https://heihei12305.github.io/post/nginx-bu-shu</id>
@@ -1906,23 +1936,6 @@ componentWillUpdate(nextProps, nextState) {
 <li>组件第一次存在于DOM中，函数是不会被执行的，如果已经存在于DOM中，函数才会被执行。</li>
 <li></li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[mysql  学习记录]]></title>
-        <id>https://heihei12305.github.io/post/mysql-xue-xi-ji-lu</id>
-        <link href="https://heihei12305.github.io/post/mysql-xue-xi-ji-lu">
-        </link>
-        <updated>2019-12-06T12:05:29.000Z</updated>
-        <content type="html"><![CDATA[<p>mysql 文件夹  C:\Users\24241\Downloads\mysql-8.0\mysql-8.0.18-winx64\bin<br>
-root 登陆  mysql -u root -p<br>
-查询用户名密码  select host,user,authentication_string from mysql.user;<br>
-创建数据库 CREATE DATABASE 数据库名;<br>
-显示当前数据库 show databases;<br>
-使用数据库  use 数据库名；</p>
-<p>创建数据表  CREATE TABLE table_name (column_name column_type);<br>
-删除数据表  DROP TABLE table_name ;</p>
-<p>mac mysql 密码 q1w2e3r4</p>
 ]]></content>
     </entry>
 </feed>

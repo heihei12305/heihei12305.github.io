@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1578840709039">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1579015950616">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1578840709039" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1579015950616" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -191,6 +191,7 @@ git diff &lt;文件名&gt;  比较文件差异</li>
 <li>git branch -v     显示分支个数</li>
 <li>git branch <name> 创建分支</li>
 <li>git checkout <name> 切换到分支</li>
+<li><strong>git pull origin growing-dev</strong> 拉取其他分支</li>
 <li>将分支a做的修改合并到分支b上
 <ul>
 <li>首先 切换到分支b</li>
@@ -216,6 +217,19 @@ git diff &lt;文件名&gt;  比较文件差异</li>
 <br/>
 * git clone 不指定分支
     * git clone -b dev_jk http://10.1.1.11/service/tmall-service.git  指定分支
+<h2 id="合并请求发送流程">合并请求发送流程</h2>
+<h3 id="step-1-获取并检出这个合并请求的分支">step 1 获取并检出这个合并请求的分支</h3>
+<pre><code>git fetch origin
+git checkout -b feature/growing-dev origin/feature/growing-dev
+</code></pre>
+<h3 id="step-2-本地查看更改">step 2 本地查看更改</h3>
+<h3 id="step-3-合并分支并修复出现的任何冲突">step 3 合并分支并修复出现的任何冲突</h3>
+<pre><code>git checkout growing-dev
+git merge --no-ff feature/growing-dev
+</code></pre>
+<h3 id="step-4-将合并结果推送到-gitlab">step 4 将合并结果推送到 GitLab</h3>
+<pre><code>git push origin growing-dev
+</code></pre>
 <p>嘿嘿偷一张指令图，原网址<a href="https://juejin.im/post/599e14875188251240632702">一篇文章，教你学会git</a><br>
 <img src="https://heihei12305.github.io/post-images/1562257269842.png" alt="" loading="lazy"></p>
 
