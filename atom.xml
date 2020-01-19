@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-01-15T01:31:09.180Z</updated>
+    <updated>2020-01-19T07:52:46.176Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,58 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[👀github博客不能翻页？快速生成gitbook了解一下]]></title>
+        <id>https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia</id>
+        <link href="https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia">
+        </link>
+        <updated>2020-01-19T06:47:54.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="预期效果先来一波">预期效果先来一波</h3>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1579417038963.gif" alt="" loading="lazy"></figure>
+<p>😼是不是心动啦，各位大佬的github博客质量那是相当高，就是不能翻页，看完一个还要回到首页READMEl链接🔗，感觉不太友好。尤其像我这样不是第一遍看👀，想回顾一下的🧍‍♂️，感觉无法实现快速翻阅效果。</p>
+<p>让我们开始吧！</p>
+<h3 id="首先找到你喜欢的github项目star-fork-一条龙我寻思着这个就不用再多余赘述了吧">首先，找到你喜欢的github项目，star, fork 一条龙，我寻思着这个就不用再多余赘述了吧。</h3>
+<hr>
+<h3 id="然后打开-gitbook注册登陆创建空间巴拉巴拉的-看下面的">然后打开 gitbook，注册登陆，创建空间，巴拉巴拉的。 👇看下面的📃</h3>
+<figure data-type="image" tabindex="2"><img src="https://heihei12305.github.io/post-images/1579417640747.gif" alt="" loading="lazy"></figure>
+<h3 id="然后就是简单的创建space环节了-gitbook可以免费创建一个组织一个-个人空间-想必是可以满足大多数人的需求的呢">然后就是🔜，简单的创建space环节了。gitbook可以免费创建一个组织，一个 个人空间 ，想必是可以满足大多数人的需求的呢！😸</h3>
+<figure data-type="image" tabindex="3"><img src="https://heihei12305.github.io/post-images/1579417946901.gif" alt="" loading="lazy"></figure>
+<h3 id="最后就是简单快速的链接github仓库一键生成了">最后，就是简单快速的链接🔗github仓库，一键生成了！</h3>
+<blockquote>
+<p>因为比较慢，分成多个gif展示了</p>
+</blockquote>
+<ol>
+<li>🔗链接进行中</li>
+</ol>
+<figure data-type="image" tabindex="4"><img src="https://heihei12305.github.io/post-images/1579418320995.gif" alt="" loading="lazy"></figure>
+<ol start="2">
+<li>选择仓库</li>
+</ol>
+<figure data-type="image" tabindex="5"><img src="https://heihei12305.github.io/post-images/1579418436486.gif" alt="" loading="lazy"></figure>
+<ol start="3">
+<li>✅，成果展示！<br>
+<img src="https://heihei12305.github.io/post-images/1579419486223.gif" alt="" loading="lazy"></li>
+<li>gitbook 也有提供可阅读外链呢！为了不影响各位大大的blog star数量，我就不贴我自己做的gitbook 阅读链接🔗了！大家可以自行star, fork制作呢！<br>
+<img src="https://heihei12305.github.io/post-images/1579419767657.gif" alt="" loading="lazy"></li>
+</ol>
+<hr>
+<h3 id="总结">总结：</h3>
+<p>使用gitbook优势:</p>
+<ul>
+<li>方便阅读，方便阅读，方便阅读！github不能翻页真滴难受。</li>
+<li>加载速度较 github 快很多</li>
+<li>方便快速回忆性浏览</li>
+</ul>
+<p>使用gitbook劣势：</p>
+<ul>
+<li>无法看到 大佬 blog 底下的评论</li>
+<li>gitbook制作需要翻墙</li>
+</ul>
+<p>最佳实践：<br>
+第一次👀时，建议在github上，star，fork一条龙，比较大佬们都付出了巨大精力来写这些blog。blog价值很高，需要多次回顾，建议搞成个gitbook小书，方便阅读。</p>
+<p>🙏谢谢阅读！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[iTerm2 快捷命令]]></title>
         <id>https://heihei12305.github.io/post/iterm2-kuai-jie-ming-ling</id>
@@ -1730,212 +1782,6 @@ const App = () =&gt; {
 	}
 &lt;/div&gt;
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[react 学习笔记]]></title>
-        <id>https://heihei12305.github.io/post/react-xue-xi-bi-ji</id>
-        <link href="https://heihei12305.github.io/post/react-xue-xi-bi-ji">
-        </link>
-        <updated>2019-12-12T06:06:47.000Z</updated>
-        <content type="html"><![CDATA[<p>备忘：</p>
-<ul>
-<li>
-<p>脚手架 npm i create-react-app</p>
-</li>
-<li>
-<p>创建 npx create-react-app [项目名]</p>
-</li>
-<li>
-<p>pwa serviceWorker 离线应用</p>
-</li>
-<li>
-<p>jsx 同时解析 html 和 js ： 遇到 &lt; 按照 html，遇到 { 按照 js</p>
-</li>
-<li>
-<p>类名为 className，不能直接写class</p>
-</li>
-<li>
-<p>fragment 在最外面套一层，不会影响布局（直接套div报错）</p>
-</li>
-<li>
-<p>jsx return 为 html时，外面套上括号可支持换行</p>
-</li>
-<li>
-<p>修改列表的值的时候，先用临时变量获取，然后修改，然后重新赋值。不允许直接操作原数据！虽然不报错，但是后期性能优化会遇到巨大障碍。</p>
-</li>
-<li>
-<p>jsx的几个坑</p>
-<ul>
-<li>注释：<code>{/*第一次写注释*/}</code> 也可以写 // 不过需要换行，建议写上面那个</li>
-<li>在jsx中css样式使用class要用className(防止与class混淆)</li>
-<li>input中输入的value默认不会被解析为html，可使用 <code>dangerouslySetlnnerHTML = { {__html: item} }</code>来解析为html</li>
-<li>label辅助标签，为了不与js中的for重复，需要使用htmlFor来代替for完成对标input的id功能。</li>
-</ul>
-</li>
-<li>
-<p>vscode 中的快速生成插件 simple react</p>
-<ul>
-<li>imr <code>import React from 'react'</code>;</li>
-<li>imrc <code>import React,{ Component } from 'react'</code>;</li>
-<li>impt <code>import Protypes from 'prop-types'</code>;</li>
-<li>impc <code>import React, { PureComponent } from 'react'</code></li>
-<li>cc</li>
-</ul>
-</li>
-</ul>
-<pre><code>class | extends Component {
-	state = { | },
-	render() {
-		return ( | );
-	}
-}
-
-export default |;
-</code></pre>
-<ul>
-<li>ccc</li>
-</ul>
-<pre><code>class | extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { | };
-	}
-	render() {
-		return ( | );
-	}
-}
-
-export default |;
-</code></pre>
-<ul>
-<li>sfc</li>
-</ul>
-<pre><code>const | = props =&gt; {
-	return ( | );
-};
-
-export default |;
-</code></pre>
-<ul>
-<li>cdm</li>
-</ul>
-<pre><code>componentDidMount() {
-	|
-}
-</code></pre>
-<ul>
-<li>cwm</li>
-</ul>
-<pre><code>//WARING! To be deprecated in React v17. Use new lifecycle  static getDerivedStateFeomProps instead
-componentWillReceiveProps(nextProps) {
-	|
-}
-</code></pre>
-<ul>
-<li>gds</li>
-</ul>
-<pre><code>static getDerivedStateFromProps(nextProps, preStat) {
-	|
-}
-</code></pre>
-<ul>
-<li>scu</li>
-</ul>
-<pre><code>shouldComponentUpdate(nextProps, nextState) {
-	|
-}
-</code></pre>
-<ul>
-<li>cwu</li>
-</ul>
-<pre><code>//WARING! To be deprecated in React v17. Use componentDidUpdate instead
-componentWillUpdate(nextProps, nextState) {
-	|
-}
-</code></pre>
-<ul>
-<li>cdu</li>
-</ul>
-<pre><code>componentDidUpdate(prevProps, prevSatte) {
-	|
-}
-</code></pre>
-<ul>
-<li>cwun</li>
-</ul>
-<pre><code>componentWillUnmount() {
-	|
-}
-</code></pre>
-<ul>
-<li>cdc</li>
-</ul>
-<pre><code>componentDidCatch(error, info) {
-	|
-}
-</code></pre>
-<ul>
-<li>gsdu</li>
-</ul>
-<pre><code>getSnapshotBeforeUpdate(prevProps, prevState) {
-	|
-}
-</code></pre>
-<ul>
-<li>ss</li>
-</ul>
-<pre><code>this.setState({ | : | });
-</code></pre>
-<ul>
-<li>ssf</li>
-</ul>
-<pre><code>this.setState(prevState =&gt; {
-	return { | : prevState.| }
-});
-</code></pre>
-<ul>
-<li>ren</li>
-</ul>
-<pre><code>render() {
-	return (
-		|
-	);
-}
-</code></pre>
-<ul>
-<li>rprop</li>
-</ul>
-<pre><code>class | extends Component {
-	state = { | },
-	render() {
-		return this.props.render({
-			|: this.state.|
-		})
-	}
-}
-</code></pre>
-<ul>
-<li>hoc</li>
-</ul>
-<pre><code>function | (|) {
-	return class extends Component {
-		constructor(props) {
-			super(props);
-		}
-		
-		render() {
-			return &lt; | { ...this.props} /&gt;
-		}
-	};
-}
-</code></pre>
-<ul>
-<li>proto-type 可检验传值类型</li>
-<li>必须传递 可用 <code>prototype.string.isrequired</code></li>
-<li>组件第一次存在于DOM中，函数是不会被执行的，如果已经存在于DOM中，函数才会被执行。</li>
-<li></li>
-</ul>
 ]]></content>
     </entry>
 </feed>
