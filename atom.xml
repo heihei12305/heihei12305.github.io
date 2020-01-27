@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-01-19T07:52:46.176Z</updated>
+    <updated>2020-01-27T09:26:05.132Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -11,6 +11,53 @@
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, heihei12305</rights>
     <entry>
+        <title type="html"><![CDATA[2019/1/27-2020/2/27 --一个月春招突击计划]]></title>
+        <id>https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua</id>
+        <link href="https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua">
+        </link>
+        <updated>2020-01-27T09:12:24.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="当前处境">当前处境：</h3>
+<ul>
+<li>
+<p>武汉出事，全国戒严，也不知道什么时候能去公司，有点心疼房租，不对跑题了，可能在家会待的久一些。</p>
+</li>
+<li>
+<p>书基本看的差不多了，然后 极客时间 专栏也差不多了。</p>
+</li>
+<li>
+<p>技术栈到位</p>
+</li>
+<li>
+<p>项目到位</p>
+</li>
+</ul>
+<p>突击一个月，只奔大厂去。</p>
+<h3 id="一个月目标">一个月目标</h3>
+<ul>
+<li>leetcode 400</li>
+<li>重学前端 三刷</li>
+<li>css世界 三刷</li>
+<li>趣谈网络协议 三刷</li>
+<li>javaScript核心原理解析 二刷</li>
+<li>你不知道的jsvaScript 三刷</li>
+<li>各种面试题集</li>
+<li>讶羽博客汇总 三刷</li>
+<li>wtfjs 三刷</li>
+</ul>
+<p>###具体安排：</p>
+<p>因为时间并不是很确定，暂定</p>
+<p>在家时：</p>
+<ul>
+<li>上午 重学前端  音频➕文字 &amp; wtfjs</li>
+<li>下午leetcode 2道左右 &amp; 各种面经</li>
+<li>晚上 红宝书 阅读 ｜ css选择器世界阅读 &amp; 讶羽博客汇总</li>
+</ul>
+<blockquote>
+<p>所见即所得，所见即所碍。春招，加油⛽️</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[👀github博客不能翻页？快速生成gitbook了解一下]]></title>
         <id>https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia</id>
         <link href="https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia">
@@ -18,7 +65,7 @@
         <updated>2020-01-19T06:47:54.000Z</updated>
         <content type="html"><![CDATA[<h3 id="预期效果先来一波">预期效果先来一波</h3>
 <figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1579417038963.gif" alt="" loading="lazy"></figure>
-<p>😼是不是心动啦，各位大佬的github博客质量那是相当高，就是不能翻页，看完一个还要回到首页READMEl链接🔗，感觉不太友好。尤其像我这样不是第一遍看👀，想回顾一下的🧍‍♂️，感觉无法实现快速翻阅效果。</p>
+<p>😼是不是心动啦，各位大佬的github博客质量那是相当高，就是不能翻页，看完一个还要回到首页README链接🔗，感觉不太友好。尤其像我这样不是第一遍看👀，想回顾一下的🧍‍♂️，无法满足快速翻阅的需求。</p>
 <p>让我们开始吧！</p>
 <h3 id="首先找到你喜欢的github项目star-fork-一条龙我寻思着这个就不用再多余赘述了吧">首先，找到你喜欢的github项目，star, fork 一条龙，我寻思着这个就不用再多余赘述了吧。</h3>
 <hr>
@@ -41,7 +88,7 @@
 <ol start="3">
 <li>✅，成果展示！<br>
 <img src="https://heihei12305.github.io/post-images/1579419486223.gif" alt="" loading="lazy"></li>
-<li>gitbook 也有提供可阅读外链呢！为了不影响各位大大的blog star数量，我就不贴我自己做的gitbook 阅读链接🔗了！大家可以自行star, fork制作呢！<br>
+<li>gitbook 也有提供可阅读外链呢！为了不影响各位大大blog 的star数量，我就不贴我自己做的gitbook 阅读链接🔗了！大家可以自行star, fork制作呢！<br>
 <img src="https://heihei12305.github.io/post-images/1579419767657.gif" alt="" loading="lazy"></li>
 </ol>
 <hr>
@@ -58,7 +105,7 @@
 <li>gitbook制作需要翻墙</li>
 </ul>
 <p>最佳实践：<br>
-第一次👀时，建议在github上，star，fork一条龙，比较大佬们都付出了巨大精力来写这些blog。blog价值很高，需要多次回顾，建议搞成个gitbook小书，方便阅读。</p>
+第一次👀时，建议在github上，star，fork一条龙，毕竟大佬们都付出了巨大精力来写这些blog。如果blog价值很高，需要多次回顾，建议搞成gitbook小书，方便阅读。</p>
 <p>🙏谢谢阅读！</p>
 ]]></content>
     </entry>
@@ -1688,99 +1735,6 @@ module.exports = {
         })
     ]
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[react-jsx 备忘]]></title>
-        <id>https://heihei12305.github.io/post/react-jsx-bei-wang</id>
-        <link href="https://heihei12305.github.io/post/react-jsx-bei-wang">
-        </link>
-        <updated>2019-12-19T07:29:19.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<h2 id="本文仅作备忘详情请查看官方文档">本文仅作备忘，详情请查看<a href="https://zh-hans.reactjs.org/docs/jsx-in-depth.html">官方文档</a></h2>
-</blockquote>
-<h3 id="用户定义的组件必须以大写字母开头">用户定义的组件必须以大写字母开头</h3>
-<p>以小写字母开头的元素代表一个HTML内置组件，比如<code>&lt;div&gt;</code>或者<code>&lt;span&gt;</code>会生成对应的字符串<code>'div'</code>或者<code>'span'</code>传递给<code>React.createElement</code>（作为参数）。大写字母开头的元素则对应着在JavaScript引入或自定义的组件，如<code>&lt;Foo /&gt;</code>会编译为<code>React.createElement(Foo)</code>。</p>
-<br/>
-<p>我们建议使用大写字母开头命名自定义组件。如果你确实需要一个以小写字母开头的组件，则在JSX中使用它之前，必须将它赋值给一个小写字母开头的变量。</p>
-<br/>
-<p>例如，以下的代码将无法按预期进行：</p>
-<pre><code>import React from 'react';
-
-//错误！组件应该以大写字母开头：
-function hello(props) {
-	//正确！这种&lt;div&gt;的使用是合法的，因为div是一个有效的HTML标签
-	return &lt;div&gt;Hello {props.toWhat}&lt;/div&gt;
-}
-
-function HelloWorld() {
-	//错误！React会认为&lt;hello /&gt;是一个HTML标签，因为它没有以大写字母开头；
-	return &lt;hello toWhat=&quot;World&quot; /&gt;
-}
-</code></pre>
-<h3 id="属性展开">属性展开</h3>
-<br/>
-<p>如果你已经有了一个props对象，你可以使用展开运算符<code>...</code>来在JSX中传递整个props对象。以下两个组件是等价的：</p>
-<pre><code>function App1() {
-	return &lt;Greeting firstName=&quot;Ben&quot; lastName=&quot;Hector&quot;&gt;;
-}
-function App2() {
-	const props = {firstName: 'Ben',lastName: 'Hector'};
-	return &lt;Greeting {...props} /&gt;
-}
-</code></pre>
-<p>你还可以选择只保留当前组件需要接收的props，并使用展开运算符将其他props传递下去。</p>
-<pre><code>const Button = props =&gt; {
-	const { kind,...other } = props;
-	const className = kind === 'primary' ? 'primaryButton' : 'SecondaryButton';
-	return &lt;button className={className} {...other} /&gt;;
-};
-
-const App = () =&gt; {
-	return (
-		&lt;div&gt;
-			&lt;Button kind=&quot;primary&quot; onClick={() =&gt; console.log(&quot;clicked!&quot;)}&gt;
-				Hello World!
-			&lt;/Button&gt;
-		&lt;/div&gt;
-	);
-};
-</code></pre>
-<h3 id="布尔类型null以及undefined将被忽略">布尔类型，Null以及Undefined将被忽略</h3>
-<br/>
-<p><code>false</code>,<code>null</code>,<code>undefined</code>.<code>true</code>是合法的子元素。但它们并不会被渲染。以下的JSX表达式渲染结果相同：</p>
-<pre><code>&lt;div /&gt;
-
-&lt;div&gt;&lt;/div&gt;
-
-&lt;div&gt;{false}&lt;/div&gt;
-
-&lt;div&gt;{null}&lt;/div&gt;
-
-&lt;div&gt;{undefined}&lt;/div&gt;
-
-&lt;div&gt;{true}&lt;/div&gt;
-</code></pre>
-<p>这有助于依据特定条件来渲染其他的React元素。例如，在以下JSX中，仅当<code>showHeader</code>为<code>true</code>时，才会渲染<code>&lt;Header /&gt;</code>组件：</p>
-<pre><code>&lt;div&gt;
-	{showHeader &amp;&amp; &lt;Header /&gt;}
-	&lt;Content /&gt;
-&lt;/div&gt;
-</code></pre>
-<p>值得注意的是一些&quot;falsy&quot;值，仍然会被React渲染。例如，以下代码并不会像你预期那样工作，因为当<code>props.messages</code>是空数组时，<code>0</code>仍然会被渲染：</p>
-<pre><code>&lt;div&gt;
-	{props.message.length &amp;&amp;
-		&lt;MessageList messages={props.messages} /&gt;
-	}
-&lt;/div&gt;
-</code></pre>
-<p>要解决这个问题，确保 &amp;&amp; 之前的布尔表达式总是布尔值：</p>
-<pre><code>&lt;div&gt;
-	{props.message.length &gt;0  &amp;&amp;
-		&lt;MessageList messages={props.messages} /&gt;
-	}
-&lt;/div&gt;
 </code></pre>
 ]]></content>
     </entry>

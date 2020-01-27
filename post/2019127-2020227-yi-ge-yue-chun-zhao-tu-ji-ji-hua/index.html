@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>leetcode1140 记忆化递归+博弈 石子游戏 | heihei12305</title>
+<title>2019/1/27-2020/2/27 --一个月春招突击计划 | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -102,76 +102,52 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">leetcode1140 记忆化递归+博弈 石子游戏</h2>
-            <div class="post-date">2019-09-24</div>
+            <h2 class="post-title">2019/1/27-2020/2/27 --一个月春招突击计划</h2>
+            <div class="post-date">2020-01-27</div>
             
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/leetcode1140-ji-yi-hua-di-gui-bo-yi-shi-zi-you-xi.jpg')">
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua.jpg')">
               </div>
             
             <div class="post-content">
-              <p>亚历克斯和李继续他们的石子游戏。许多堆石子 排成一行，每堆都有正整数颗石子 piles[i]。游戏以谁手中的石子最多来决出胜负。<br>
-<br/><br>
-亚历克斯和李轮流进行，亚历克斯先开始。最初，M = 1。<br>
-<br/><br>
-在每个玩家的回合中，该玩家可以拿走剩下的 前 X 堆的所有石子，其中 1 &lt;= X &lt;= 2M。然后，令 M = max(M, X)。<br>
-<br/><br>
-游戏一直持续到所有石子都被拿走。<br>
-<br/><br>
-假设亚历克斯和李都发挥出最佳水平，返回亚历克斯可以得到的最大数量的石头。</p>
-<pre><code>输入：piles = [2,7,9,4,4]
-输出：10
-解释：
-如果亚历克斯在开始时拿走一堆石子，李拿走两堆，接着亚历克斯也拿走两堆。在这种情况下，亚历克斯可以拿到 2 + 4 + 4 = 10 颗石子。 
-如果亚历克斯在开始时拿走两堆石子，那么李就可以拿走剩下全部三堆石子。在这种情况下，亚历克斯可以拿到 2 + 7 = 9 颗石子。
-所以我们返回更大的 10。 
-</code></pre>
-<br/>
-<hr>
-<p>本题中，涉及到了两者之间的博弈问题，同时均发挥最佳水平，这使得解题思路为从后往前求解，而且为了避免重复计算，需要利用对象给计算结果记录下来。</p>
-<br/>
-<pre><code>var stoneGameII = function(piles) {
-    let len = piles.length;
-		//利用对象存储已求得的结果，避免重复调用，js中的对象运用很方便，不像c++，一般数组存储
-    let vec = {};
-    
-		//计算从第i堆石子到最后一堆石子的总石子数
-    let sum = new Array(len);
-    sum[len-1] = piles[len-1];
-    for(let i = len-2;i&gt;=0;i--){
-        sum[i] = sum[i+1] + piles[i];
-    }
-    
-    //记忆化递归
-    dfs = function(i,m){
-				//判断是否已经计算过
-        if(vec.hasOwnProperty([i,m])){
-            return vec[[i,m]];
-        }
-				
-				//如果已经取完，直接返回0
-        if(i &gt; len){
-            return 0;
-        }
-				
-				//如果可以直接取完，则直接取完
-        if(i + m * 2 &gt;= len){
-            return sum[i];
-        }
-        
-				//递归求得此时的最大值
-        let best = 0;
-        for(let x = 1;x &lt; m*2+1; x++){
-						//此处运用了博弈思想，此时的最优策略是 剩余石子减去对手的最优策略
-            best = Math.max(best,sum[i]-dfs(i+x,Math.max(x,m)));
-        }
-        
-				//将计算结果保存
-        vec[[i,m]] = best;
-        return best;
-    }
-    return dfs(0,1);
-};
-</code></pre>
+              <h3 id="当前处境">当前处境：</h3>
+<ul>
+<li>
+<p>武汉出事，全国戒严，也不知道什么时候能去公司，有点心疼房租，不对跑题了，可能在家会待的久一些。</p>
+</li>
+<li>
+<p>书基本看的差不多了，然后 极客时间 专栏也差不多了。</p>
+</li>
+<li>
+<p>技术栈到位</p>
+</li>
+<li>
+<p>项目到位</p>
+</li>
+</ul>
+<p>突击一个月，只奔大厂去。</p>
+<h3 id="一个月目标">一个月目标</h3>
+<ul>
+<li>leetcode 400</li>
+<li>重学前端 三刷</li>
+<li>css世界 三刷</li>
+<li>趣谈网络协议 三刷</li>
+<li>javaScript核心原理解析 二刷</li>
+<li>你不知道的jsvaScript 三刷</li>
+<li>各种面试题集</li>
+<li>讶羽博客汇总 三刷</li>
+<li>wtfjs 三刷</li>
+</ul>
+<p>###具体安排：</p>
+<p>因为时间并不是很确定，暂定</p>
+<p>在家时：</p>
+<ul>
+<li>上午 重学前端  音频➕文字 &amp; wtfjs</li>
+<li>下午leetcode 2道左右 &amp; 各种面经</li>
+<li>晚上 红宝书 阅读 ｜ css选择器世界阅读 &amp; 讶羽博客汇总</li>
+</ul>
+<blockquote>
+<p>所见即所得，所见即所碍。春招，加油⛽️</p>
+</blockquote>
 
             </div>
             
@@ -181,18 +157,14 @@
                     others
                   </a>
                 
-                  <a href="https://heihei12305.github.io/tag/-_Te1R3KSt" class="tag">
-                    leetcode
-                  </a>
-                
               </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/han-shu-shi-bian-cheng">
+                <a href="https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia">
                   <h3 class="post-title">
-                    函数式编程
+                    👀github博客不能翻页？快速生成gitbook了解一下
                   </h3>
                 </a>
               </div>
