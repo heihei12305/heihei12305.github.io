@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>js 异常+闭包 | heihei12305</title>
+<title>http-proxy-middleware 跨域跨域跨域 | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -102,72 +102,26 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">js 异常+闭包</h2>
-            <div class="post-date">2019-08-18</div>
+            <h2 class="post-title">http-proxy-middleware 跨域跨域跨域</h2>
+            <div class="post-date">2020-02-16</div>
             
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/js-yichang.jpg')">
+              <div class="feature-container" style="background-image: url('/post-images/http-proxy-middleware-kua-yu-kua-yu-kua-yu.jpeg')">
               </div>
             
             <div class="post-content">
-              <blockquote>
-<h3 id="异常">异常</h3>
-</blockquote>
-<ol>
-<li>ReferenceError 同作用域判别失败相关，例如RHS查询在所以嵌套的作用域中遍历寻找不到所需的变量。</li>
-<li>TypeError 则代表作用域判别成功了，但是对结果的操作是非法或不合理的。比如试图对一个非函数类型的值进行函数调用，或者引用 null 或 undefined 类型的值中的属性。</li>
-</ol>
-<br/>
-<pre><code>
-foo(); // TypeError
-bar(); // ReferenceError
+              <p>配置 https 跨域<br>
+src/setupProxy.js</p>
+<pre><code>const proxy = require('http-proxy-middleware');
 
-var foo = function bar() {
-	//...
-}
+module.exports = function(app) {
+  app.use(proxy('/v1/token', {
+     target: 'https://oauth.aliyun.com/',
+     &quot;secure&quot;: false,
+     &quot;changeOrigin&quot;: true
+    }));
+};
 
-
-//经过提升后，实际会被理解成
-
-var foo;
-
-foo(); // TypeError
-bar(); // ReferenceError
-
-foo = function() {
-	var bar = ...self...
-}
 </code></pre>
-<blockquote>
-<h3 id="闭包-在自身的词法作用域以外执行">闭包  -&gt; 在自身的词法作用域以外执行</h3>
-</blockquote>
-<pre><code>for( var i = 1; i&lt;= 5;i++){
-	setTimeout( function timer() {
-		console.log(i)
-	},i*1000);
-}
-</code></pre>
-<br/>
-<h3 id="每秒一次输出五次6">每秒一次输出五次6</h3>
-<br/>
-<h3 id="原因-延迟函数的回调会在循环结束时才执行-事实上当定时器运行时即便每个迭代中执行的是settimeout-0-所有的回调函数依然是循环结束时才会被执行">原因： 延迟函数的回调会在循环结束时才执行。事实上，当定时器运行时，即便每个迭代中执行的是setTimeout(... , 0 ),所有的回调函数依然是循环结束时才会被执行。</h3>
-<pre><code>//解决方法
-for(var i = 1; i&lt;=5 ; i++){
-	(function(j){
-		setTimeout( function timer() {
-			console.log( j );
-		}, j* 1000)
-	})(i);
-}
-
-ES6:
-for(let i = 1;i &lt;= 5;i++ ){
-	setTimeout( function timer() {
-		console.log( 1 );
-	},i*1000);
-}
-</code></pre>
-<br/>
-<h3 id="解释-为每个迭代都生成一个新的作用域使得延迟函数的回调可以将新的作用域封闭在每个迭代内部每次迭代中都会含有一个具有正确值的变量供我们访问">解释： 为每个迭代都生成一个新的作用域，使得延迟函数的回调可以将新的作用域封闭在每个迭代内部，每次迭代中都会含有一个具有正确值的变量供我们访问。</h3>
 
             </div>
             
@@ -182,9 +136,9 @@ for(let i = 1;i &lt;= 5;i++ ){
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/ge-chong-ying-wen-fan-yi-hui-zong-bao-han-pdf-fan-yi-zhu-yao-zhen-dui-ying-wen-lun-wen">
+                <a href="https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua">
                   <h3 class="post-title">
-                    各种英文翻译汇总（包含pdf翻译，主要针对英文论文）
+                    2019/1/27-2020/2/27 --一个月春招突击计划
                   </h3>
                 </a>
               </div>

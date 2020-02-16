@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-01-27T09:26:05.132Z</updated>
+    <updated>2020-02-16T11:56:35.831Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,27 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[http-proxy-middleware 跨域跨域跨域]]></title>
+        <id>https://heihei12305.github.io/post/http-proxy-middleware-kua-yu-kua-yu-kua-yu</id>
+        <link href="https://heihei12305.github.io/post/http-proxy-middleware-kua-yu-kua-yu-kua-yu">
+        </link>
+        <updated>2020-02-16T09:44:37.000Z</updated>
+        <content type="html"><![CDATA[<p>配置 https 跨域<br>
+src/setupProxy.js</p>
+<pre><code>const proxy = require('http-proxy-middleware');
+
+module.exports = function(app) {
+  app.use(proxy('/v1/token', {
+     target: 'https://oauth.aliyun.com/',
+     &quot;secure&quot;: false,
+     &quot;changeOrigin&quot;: true
+    }));
+};
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2019/1/27-2020/2/27 --一个月春招突击计划]]></title>
         <id>https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua</id>
@@ -44,13 +65,13 @@
 <li>讶羽博客汇总 三刷</li>
 <li>wtfjs 三刷</li>
 </ul>
-<p>###具体安排：</p>
+<h3 id="具体安排">具体安排：</h3>
 <p>因为时间并不是很确定，暂定</p>
 <p>在家时：</p>
 <ul>
 <li>上午 重学前端  音频➕文字 &amp; wtfjs</li>
 <li>下午leetcode 2道左右 &amp; 各种面经</li>
-<li>晚上 红宝书 阅读 ｜ css选择器世界阅读 &amp; 讶羽博客汇总</li>
+<li>晚上 红宝书 阅读 ｜ css选择器世界阅读 &amp; <s>讶羽博客汇总</s> ✅  掘金小册 性能优化-修言</li>
 </ul>
 <blockquote>
 <p>所见即所得，所见即所碍。春招，加油⛽️</p>
@@ -1660,80 +1681,6 @@ module.exports = {
        }
      ]
   }
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[webpack-js,html,css压缩🗜️]]></title>
-        <id>https://heihei12305.github.io/post/webpack-jshtmlcss-ya-suo</id>
-        <link href="https://heihei12305.github.io/post/webpack-jshtmlcss-ya-suo">
-        </link>
-        <updated>2019-12-23T14:42:33.000Z</updated>
-        <content type="html"><![CDATA[<p>又又又开始继续学习webpack啦！🏷</p>
-<br/>
-<p>本文记录有关webpack压缩🗜️相关的东西。</p>
-<br/>
-<blockquote>
-<p>所见即所得，所见即所碍。</p>
-</blockquote>
-<p>start</p>
-<br/>
-<h3 id="javascript-压缩">JavaScript 压缩</h3>
-<br/>
-<p>内置了<code>uglifyjs-webpack-plugin</code>,所以默认打包出来的js文件已经被压缩。但是我们也可以自行安装该插件去开启并行压缩等。</p>
-<br/>
-<h3 id="css文件压缩">css文件压缩</h3>
-<br/>
-<p>使用 <code>optimize-css-assets-webpack-plugin</code>,同时使用<code>cssnano</code></p>
-<pre><code>module.exports = {
-    entry:{
-        app:'./src/app.js',
-        search:'./src/search.js'
-    },
-    output:{
-        filename:'[name][chunkhash:8].js',
-        path:__dirname+'/dist'
-    }，
-    plugin:[
-        new OptimizeCSSAssentsPlugin({
-            assetNameRegExp:/\.css$/g,
-            cssProcessor:require('cssnano')
-        })
-    ]
-}
-</code></pre>
-<p>匹配到所有的css文件，再通过<code>cssnano</code>对css进行压缩。</p>
-<br/>
-<h3 id="html文件压缩">html文件压缩</h3>
-<br/>
-<p>修改 <code>html-webpack-plugin</code>,设置压缩参数。</p>
-<br/>
-<pre><code>module.exports = {
-    entry:{
-        app:'./src/app.js',
-        search:'./src/search.js'
-    },
-    output:{
-        filename:'[name][chunkhash:8].js',
-        path:__dirname+'/dist'
-    },
-    plugins:[
-        new HtmlWebpackPlugin({
-            template:path.join(__dirname,'src/search.html'),
-            filename:'search.html',
-            chunks:['search'],
-            inject:true,
-            minify:{
-                html5:true,
-                collapseWhitespace:true,
-                preserveLineBreaks:false,
-                minifyCSS:true,
-                minifyJS:true,
-                removeComments:false
-            }
-        })
-    ]
 }
 </code></pre>
 ]]></content>
