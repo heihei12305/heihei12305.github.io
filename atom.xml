@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-02-16T11:57:34.314Z</updated>
+    <updated>2020-02-27T13:09:50.166Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, heihei12305</rights>
     <entry>
         <title type="html"><![CDATA[http-proxy-middleware 跨域跨域跨域]]></title>
-        <id>https://heihei12305.github.io/post/http-proxy-middleware-kua-yu-kua-yu-kua-yu</id>
-        <link href="https://heihei12305.github.io/post/http-proxy-middleware-kua-yu-kua-yu-kua-yu">
+        <id>https://heihei12305.github.io/post/http-proxy-middleware-kua-yu-kua-yu-kua-yu/</id>
+        <link href="https://heihei12305.github.io/post/http-proxy-middleware-kua-yu-kua-yu-kua-yu/">
         </link>
         <updated>2020-02-16T09:44:37.000Z</updated>
         <content type="html"><![CDATA[<p>配置 https 跨域<br>
@@ -33,8 +33,8 @@ module.exports = function(app) {
     </entry>
     <entry>
         <title type="html"><![CDATA[2019/1/27-2020/2/27 --一个月春招突击计划]]></title>
-        <id>https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua</id>
-        <link href="https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua">
+        <id>https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua/</id>
+        <link href="https://heihei12305.github.io/post/2019127-2020227-yi-ge-yue-chun-zhao-tu-ji-ji-hua/">
         </link>
         <updated>2020-01-27T09:12:24.000Z</updated>
         <content type="html"><![CDATA[<h3 id="当前处境">当前处境：</h3>
@@ -80,8 +80,8 @@ module.exports = function(app) {
     </entry>
     <entry>
         <title type="html"><![CDATA[👀github博客不能翻页？快速生成gitbook了解一下]]></title>
-        <id>https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia</id>
-        <link href="https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia">
+        <id>https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia/</id>
+        <link href="https://heihei12305.github.io/post/github-bo-ke-bu-neng-fan-ye-kuai-su-sheng-cheng-gitbook-liao-jie-yi-xia/">
         </link>
         <updated>2020-01-19T06:47:54.000Z</updated>
         <content type="html"><![CDATA[<h3 id="预期效果先来一波">预期效果先来一波</h3>
@@ -132,8 +132,8 @@ module.exports = function(app) {
     </entry>
     <entry>
         <title type="html"><![CDATA[iTerm2 快捷命令]]></title>
-        <id>https://heihei12305.github.io/post/iterm2-kuai-jie-ming-ling</id>
-        <link href="https://heihei12305.github.io/post/iterm2-kuai-jie-ming-ling">
+        <id>https://heihei12305.github.io/post/iterm2-kuai-jie-ming-ling/</id>
+        <link href="https://heihei12305.github.io/post/iterm2-kuai-jie-ming-ling/">
         </link>
         <updated>2020-01-14T14:46:12.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -162,8 +162,8 @@ module.exports = function(app) {
     </entry>
     <entry>
         <title type="html"><![CDATA[nginx 部署]]></title>
-        <id>https://heihei12305.github.io/post/nginx-bu-shu</id>
-        <link href="https://heihei12305.github.io/post/nginx-bu-shu">
+        <id>https://heihei12305.github.io/post/nginx-bu-shu/</id>
+        <link href="https://heihei12305.github.io/post/nginx-bu-shu/">
         </link>
         <updated>2020-01-11T11:15:19.000Z</updated>
         <content type="html"><![CDATA[<h2 id="启动停止和重新加载配置">启动，停止和重新加载配置</h2>
@@ -226,8 +226,8 @@ http {
     </entry>
     <entry>
         <title type="html"><![CDATA[ES6-你真的懂symbol吗❓😸(下)]]></title>
-        <id>https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma-xia</id>
-        <link href="https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma-xia">
+        <id>https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma-xia/</id>
+        <link href="https://heihei12305.github.io/post/es6-ni-zhen-de-dong-symbol-ma-xia/">
         </link>
         <updated>2020-01-04T08:34:44.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
@@ -351,8 +351,8 @@ Array.prototype[Symbol.unscopables] = Object.assign(Object.create(null),{
     </entry>
     <entry>
         <title type="html"><![CDATA[wtfjs]]></title>
-        <id>https://heihei12305.github.io/post/wtfjs</id>
-        <link href="https://heihei12305.github.io/post/wtfjs">
+        <id>https://heihei12305.github.io/post/wtfjs/</id>
+        <link href="https://heihei12305.github.io/post/wtfjs/">
         </link>
         <updated>2020-01-02T16:07:12.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
@@ -1439,8 +1439,8 @@ true;
     </entry>
     <entry>
         <title type="html"><![CDATA[2019-年度总结]]></title>
-        <id>https://heihei12305.github.io/post/2019-nian-du-zong-jie</id>
-        <link href="https://heihei12305.github.io/post/2019-nian-du-zong-jie">
+        <id>https://heihei12305.github.io/post/2019-nian-du-zong-jie/</id>
+        <link href="https://heihei12305.github.io/post/2019-nian-du-zong-jie/">
         </link>
         <updated>2019-12-31T15:13:59.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -1474,8 +1474,8 @@ true;
     </entry>
     <entry>
         <title type="html"><![CDATA[ant-design-pro-vue修改指南🛠]]></title>
-        <id>https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan</id>
-        <link href="https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan">
+        <id>https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan/</id>
+        <link href="https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan/">
         </link>
         <updated>2019-12-24T15:32:50.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
@@ -1610,8 +1610,8 @@ methods: {
     </entry>
     <entry>
         <title type="html"><![CDATA[webpack-进阶用法🚔]]></title>
-        <id>https://heihei12305.github.io/post/webpack-jin-jie-yong-fa</id>
-        <link href="https://heihei12305.github.io/post/webpack-jin-jie-yong-fa">
+        <id>https://heihei12305.github.io/post/webpack-jin-jie-yong-fa/</id>
+        <link href="https://heihei12305.github.io/post/webpack-jin-jie-yong-fa/">
         </link>
         <updated>2019-12-23T15:30:51.000Z</updated>
         <content type="html"><![CDATA[<h2 id="自动清理构建目录产物">🏍 自动清理构建目录产物</h2>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>字符串转换成二进制流 | heihei12305</title>
+<title>面试记录 | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -102,49 +102,48 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">字符串转换成二进制流</h2>
-            <div class="post-date">2019-11-04</div>
-            
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/zi-fu-chuan-zhuan-huan-cheng-er-jin-zhi-liu.jpg')">
-              </div>
+            <h2 class="post-title">面试记录</h2>
+            <div class="post-date">2020-02-20</div>
             
             <div class="post-content">
-              <pre><code>this.char2buf = function(str) {
-      var out = new ArrayBuffer(str.length*2);
-      var u16a= new Uint16Array(out);
-      var strs = str.split(&quot;&quot;);
-      for(var i =0 ; i&lt;strs.length;i++){
-          u16a[i]=strs[i].charCodeAt();
-      }
-      return out;
-  }
-</code></pre>
-<p>示例：<br>
-<img src="https://heihei12305.github.io/post-images/1573027364453.PNG" alt="" loading="lazy"></p>
-<p>也即输出为 ArrayBuffer 类型。</p>
-<blockquote>
-<p>MDN 中 <code>ArrayBuffer</code> 定义：<code>ArrayBuffer</code>对象用来表示通用的，固定长度的原始二进制数据缓冲区。<code>ArrayBuffer</code>不能直接操作，而是要通过类数组对象或DataView对象来操作。它们会将缓冲区中的数据表示为特定的格式，并通过这些格式来读写缓冲区的内容。</p>
-</blockquote>
+              <h3 id="字节一面">字节一面</h3>
+<h4 id="用时共一小时">用时共一小时</h4>
+<ul>
+<li>提了一嘴项目，解释了一下</li>
+<li>css 实现一个长方形，宽度挤满页面，长度是宽度两倍。 ❌ （然后直接说不擅长css,后来面试也就没问css了）</li>
+<li>浏览器事件循环机制（event-loop），然后给了个还挺复杂promise和setTimeout，问输出值  （一半一半吧，他想知道的宏任务，微任务答出来了，输出值有问题）</li>
+<li>知道捕获和冒泡吗？（✅）</li>
+<li>知道http状态码吗？302指的什么意思？（✅）</li>
+<li>http tcp udp  (✅)</li>
+<li>进程和线程分别是什么，有什么区别（✅）</li>
+<li>浏览器是单线程的吗？它的其他线程可以说出来几个吗？（✅）</li>
+<li>（写代码）实现判断二叉树中是否有从根节点到叶子节点value累加为n （✅）</li>
+<li>（写代码）一个单链表，拿倒数第K个的指针引用 （✅）</li>
+<li>（写代码）两个版本号比较返回大的那个（格式：xxx.xxx.xxx），如果是数字怎么判断，如果是字母呢？（✅）</li>
+</ul>
+<h3 id="字节二面">字节二面</h3>
+<h4 id="用时共五十分钟">用时共五十分钟</h4>
+<ul>
+<li>听说上次面试你缓存答的不是很好，下来有看嘛……我……？一面有问？😭  ❌</li>
+<li>http2有了解嘛 ❌&amp; ✅（太紧张没想起来啥，没答好）</li>
+<li>（写代码）实现一个body下的所有tagName统计并记录出现次数，然后再从中拿到出现次数第k大的元素的tagName和times(次数)   ✅&amp;❌  （最后快排没写出来……emmm, 太菜了）</li>
+<li>聊聊你的项目吧，介绍一下出现的背景，即大概实现机制</li>
+<li>后端的egg有深入了解嘛  ❌ （不过说了下个计划深入node）</li>
+<li>班级一年班长经历能聊聊嘛</li>
+<li>平时怎么学习的呀……</li>
+<li>为什么选择从事前端这个行业……</li>
+</ul>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://heihei12305.github.io/tag/kf3EVHwJn5/" class="tag">
-                    tools
+                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN/" class="tag">
+                    others
                   </a>
                 
               </div>
             
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/pan-duan-she-bei-ji-liu-lan-qi-lei-xing/">
-                  <h3 class="post-title">
-                    判断设备及浏览器类型
-                  </h3>
-                </a>
-              </div>
             
 
             
