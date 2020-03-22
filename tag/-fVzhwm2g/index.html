@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>amd,cmd,commonJs和es6对比 | heihei12305</title>
+<title>源码学习 | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,12 +13,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-  
-
-  
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -101,72 +95,33 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">amd,cmd,commonJs和es6对比</h2>
-            <div class="post-date">2019-06-29</div>
-            
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/amdcmdcommonjs-he-es6-dui-bi.jpg')">
-              </div>
-            
-            <div class="post-content">
-              <p><strong>问题</strong></p>
-<ol>
-<li>什么是AMD,CMD,CommonJs?</li>
-<li>它们之间有什么区别</li>
-<li>项目当中都是如何应用的。</li>
-</ol>
-<hr>
-<ul>
-<li>AMD是RequireJs在推广过程中对模块定义的规范化产出</li>
-<li>AMD是概念，requireJs是AMD的产物</li>
-<li>异步模块定义 特点依赖前置</li>
-</ul>
-<hr>
-<ul>
-<li>CMD是SeaJS在推广过程中对模块定义的规范化产出</li>
-<li>所有的模块都通过define定义，通过require引入依赖</li>
-<li>同步概念，即用即返回</li>
-</ul>
-<hr>
-<ul>
-<li>CommonJs规范-module.exports</li>
-<li>前端不支持，一般用于node后端</li>
-</ul>
-<hr>
-<ul>
-<li>ES6特性  export/import  导入导出</li>
-</ul>
-
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://heihei12305.github.io/tag/LNUW6J11_n/" class="tag">
-                    node
-                  </a>
-                
-              </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/chrome-diao-shi/">
-                  <h3 class="post-title">
-                    chrome调试
-                  </h3>
+          <h2 class="current-tag">标签: 源码学习</h2>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="https://heihei12305.github.io/post/05px-bian-kuang-sheng-cheng-ji-zhu/">
+                  <h2 class="post-title">lodash源码系列-concat</h2>
                 </a>
+                <div class="post-date">
+                  2020-03-08
+                </div>
+                <div class="post-abstract">
+                  
+                </div>
               </div>
-            
-
-            
               
-                <div id="gitalk-container" data-aos="fade-in"></div>
+                <a class="right" href="https://heihei12305.github.io/post/05px-bian-kuang-sheng-cheng-ji-zhu/">
+                  <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/05px-bian-kuang-sheng-cheng-ji-zhu.jpeg')">
+                  </div>
+                </a>
               
+            </article>
+          
 
-              
-            
-
-          </div>
+          <div class="pagination-container">
+  
+  
+</div>
 
         </div>
       </div>
@@ -188,29 +143,6 @@ var app = new Vue({
 })
 
 </script>
-
-
-
-  
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-    <script>
-
-      var gitalk = new Gitalk({
-        clientID: '9150e9a5fa9f29008507',
-        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
-        repo: 'heihei12305.github.io',
-        owner: 'heihei12305',
-        admin: ['heihei12305'],
-        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      })
-
-      gitalk.render('gitalk-container')
-
-    </script>
-  
-
-  
 
 
 
