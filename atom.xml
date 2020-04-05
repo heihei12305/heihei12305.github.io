@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-03-22T14:13:22.280Z</updated>
+    <updated>2020-04-05T01:25:31.266Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -11,9 +11,51 @@
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, heihei12305</rights>
     <entry>
+        <title type="html"><![CDATA[electron初体验 - 番茄钟开发]]></title>
+        <id>https://heihei12305.github.io/post/electron-chu-ti-yan-fan-qie-zhong-kai-fa/</id>
+        <link href="https://heihei12305.github.io/post/electron-chu-ti-yan-fan-qie-zhong-kai-fa/">
+        </link>
+        <updated>2020-04-04T15:02:00.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>今天猛的发现, 上一篇博客居然是近一个月了。心里有点感概，时间真的不经意间遛的飞快。</p>
+</blockquote>
+<h3 id="前言">前言</h3>
+<p>最近突然发现electron，一个可以开发桌面端应用的js框架，很感兴趣，开整开整！</p>
+<h4 id="预期目标">预期目标😇</h4>
+<ul>
+<li>整点好玩的东西出来</li>
+<li>借此了解下node，原生UI</li>
+<li>放飞想象力，js很强很强💪</li>
+</ul>
+<h3 id="why-electron">why electron</h3>
+<ul>
+<li>这是一个没有ie的世界，只需要对chrome负责，可以大胆使用chrome的最新的Feature
+<ul>
+<li>
+<p>纯天然lazy load  <code>loading=&quot;lazy&quot;</code> demo页： <a href="https://mathiasbynens.be/demo/img-loading-lazy">https://mathiasbynens.be/demo/img-loading-lazy</a></p>
+</li>
+<li>
+<p>BigInt</p>
+</li>
+<li>
+<p>flat, padStart 等新特性</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用的库">使用的库</h3>
+<ul>
+<li>timer.js</li>
+<li>progressbar.js</li>
+</ul>
+<p>不想写了，😭，放个github链接算了：<br>
+<a href="https://github.com/heihei12305/Pomodoro-">https://github.com/heihei12305/Pomodoro-</a></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[lodash源码系列-concat]]></title>
-        <id>https://heihei12305.github.io/post/05px-bian-kuang-sheng-cheng-ji-zhu/</id>
-        <link href="https://heihei12305.github.io/post/05px-bian-kuang-sheng-cheng-ji-zhu/">
+        <id>https://heihei12305.github.io/post/lodash_concat/</id>
+        <link href="https://heihei12305.github.io/post/lodash_concat/">
         </link>
         <updated>2020-03-08T08:20:44.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
@@ -1595,142 +1637,6 @@ true;
 <p>总算是入门前端了，工作前一直没人带，自己摸索还是很不容易的。但是呢，革命尚未成功，同志仍需努力💪。</p>
 <br/>
 <p>2020 你好</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ant-design-pro-vue修改指南🛠]]></title>
-        <id>https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan/</id>
-        <link href="https://heihei12305.github.io/post/ant-design-pro-vue-xiu-gai-zhi-nan/">
-        </link>
-        <updated>2019-12-24T15:32:50.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>前一段时间用ant design pro of vue写了俩系统，趁着自己还记得怎么改的，记录一下。</p>
-</blockquote>
-<h3 id="登录框系列">登录框系列</h3>
-<br/>
-<p>系列文件📃在 <code>src/views/user</code>下，因为没有复用很多组件（不像ant design pro😭），</p>
-<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1577202288794.png" alt="" loading="lazy"></figure>
-<br/>
-<p>直接修改这三个组件即可😊。</p>
-<br/>
-<blockquote>
-<p>ps:不过这里把请求封装了，而且设计动态权限路由渲染那一套，建议改改形式就好了，其他的谨慎修改。⛏</p>
-</blockquote>
-<br/>
-<h3 id="动态路由系列">动态路由系列</h3>
-<br/>
-<p>系列文件📃在 <code>src/config/router.config.js</code>,此处涉及动态路由列表渲染的具体情况，包括url，列表项名称，page名称等。</p>
-<br/>
-<p>例子：</p>
-<pre><code>// forms
-{
-    path: '/index',
-    redirect: '/index/welcome',
-    component: RouteView,
-    meta: { title: '主页', icon: 'form', permission: [ 'form' ] },
-    children: [
-        {
-        path: '/index/welcome',
-        name: 'welcome',
-        component: () =&gt; import('@/views/form/BasicForm'),
-        meta: { title: '欢迎页', keepAlive: true, permission: [ 'form' ] }
-        }
-    ]
-},
-</code></pre>
-<p>说明：此处路由由forms修改而来，权限列表依旧为form，page名称为主页或者欢迎页。path指的是路由，compont指对应vue组件。🔧</p>
-<br/>
-<h3 id="跨域篇">跨域篇</h3>
-<p>对应文件📃在<code>vue.config.js</code>,把proxy修改到对应后端端口即可。</p>
-<pre><code>//此处代码位于vue.config.js 87行
-devServer: {
-    // development server port 8000
-    port: 8000,
-    // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
-    proxy: {
-      '/api/*': {
-        target:'http://localhost:3000',
-        // target:'http://202.206.212.212:9000',
-        changeOrigin: true
-      }
-    }
-  },
-</code></pre>
-<h3 id="ant组件使用篇">ant组件使用篇</h3>
-<p>官网地址： <a href="http://vue.ant-design.cn/docs/vue/introduce-cn/">ant design vue</a></p>
-<br/>
-<p>在ant design pro vue 中使用方式：</p>
-<ol>
-<li>按需加载在<code>src/core/lazy_lib/components_use.js</code></li>
-</ol>
-<pre><code>//使用示例
-import {
-  Carousel
-} from 'ant-design-vue'
-Vue.use(Carousel)
-</code></pre>
-<p>文件其余部分不动即可，然后就可以直接使用。</p>
-<br/>
-<ol start="2">
-<li>上文中我们引入了<code>Carousel</code>，使用时，我们需要用 <code>a-carousel</code></li>
-</ol>
-<pre><code>&lt;a-carousel 
-    arrows 
-    autoplay
-    &gt;
-    &lt;div
-      slot=&quot;prevArrow&quot;
-      class=&quot;custom-slick-arrow&quot;
-      style=&quot;left: 10px;zIndex: 1&quot;
-    &gt;
-      &lt;a-icon type=&quot;left-circle&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div slot=&quot;nextArrow&quot; class=&quot;custom-slick-arrow&quot; style=&quot;right: 10px&quot;&gt;
-      &lt;a-icon type=&quot;right-circle&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div&gt;&lt;h3&gt;重要通知：xxxx新书到啦&lt;/h3&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;h3&gt;老师给个优吧！&lt;/h3&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;h3&gt;不看错亿呀！图书馆使用指南&lt;/h3&gt;&lt;/div&gt;
-  &lt;/a-carousel&gt;
-</code></pre>
-<br/>
-<h3 id="取消mock篇">取消mock篇</h3>
-<p>使用 ant design pro vue时，请求会被mock全部拦截😢</p>
-<br/>
-<p>取消其实也简单，Mock 在 main.js 中经行引入，你可以查看该文件的源代码，并找到 import './mock' 这样的代码。（去除它 可完整的将项目中的 mock 拦截去除）</p>
-<br/>
-<h3 id="请求发送篇">请求发送篇</h3>
-<br/>
-<p>别问，问就是axios😊<br/></p>
-<p>本来项目就有用，只是它又给再封装📦了一层。<br/></p>
-<p>使用很简单，引入，然后直接使用即可。</p>
-<pre><code>&lt;script&gt;
-import axios from 'axios'
-methods: {
-    getData () {
-        axios.post('/api/admin/salary', {
-        params: {
-            'username': this.$store.getters.userInfo.roleId
-        }
-        }).then(result =&gt; {
-        console.log(result.data.data)
-        this.dataSource = result.data.data
-        for (let i = 0, len = this.dataSource.length; i &lt; len; i++) {
-            this.dataSource[i].key = i
-        }
-        })
-    },
-&lt;/script&gt;
-</code></pre>
-<h3 id="vue基础篇">vue基础篇</h3>
-<p>可能使用到的vue的一些基础属性📖</p>
-<ul>
-<li>mountd  生命周期钩子函数的一个</li>
-<li>computed 计算属性</li>
-<li>data 使用的必须为返回值</li>
-<li>components 使用的组件</li>
-</ul>
-<p>其余具体的 ant 组件相关配置见 ant design 组件库</p>
 ]]></content>
     </entry>
 </feed>

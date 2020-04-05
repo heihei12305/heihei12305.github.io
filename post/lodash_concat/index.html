@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>mysql  学习记录 | heihei12305</title>
+<title>lodash源码系列-concat | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -102,32 +102,141 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">mysql  学习记录</h2>
-            <div class="post-date">2019-12-06</div>
+            <h2 class="post-title">lodash源码系列-concat</h2>
+            <div class="post-date">2020-03-08</div>
             
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/mysql-xue-xi-ji-lu.jpg')">
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/lodash_concat.jpeg')">
               </div>
             
             <div class="post-content">
-              <p>mysql 文件夹  C:\Users\24241\Downloads\mysql-8.0\mysql-8.0.18-winx64\bin<br>
-root 登陆  mysql -u root -p<br>
-查询用户名密码  select host,user,authentication_string from mysql.user;<br>
-创建数据库 CREATE DATABASE 数据库名;<br>
-显示当前数据库 show databases;<br>
-使用数据库  use 数据库名；</p>
-<p>创建数据表  CREATE TABLE table_name (column_name column_type);<br>
-删除数据表  DROP TABLE table_name ;</p>
-<p>mac mysql 密码 q1w2e3r4</p>
-<p>导出库表结构<br>
-mysqldump -u用戶名 -p -d 数据库名 表名 &gt; 脚本名;</p>
-<p>mysqldump 与 mysql <strong>同级</strong>！别再进去啦</p>
+              <blockquote>
+<p>所见即所得，所见即所碍</p>
+</blockquote>
+<p>系列概述：</p>
+<ul>
+<li>阅读lodash源码，并做适当笔记</li>
+<li>手抄一份，学习其中实现的小技巧</li>
+<li>尽量比较出与原生方法的区别</li>
+</ul>
+<h3 id="1-函数效果">1. 函数效果</h3>
+<h4 id="测试代码">测试代码</h4>
+<pre><code>const _ = require('lodash')
+
+const vec = [1,2,3,4,5];
+const a = {
+ a: 1
+}
+const vec2 = _.concat(vec,2,a);
+console.log(vec); //[ 1, 2, 3, 4, 5 ]
+console.log(vec2);  //[ 1, 2, 3, 4, 5, 2, { a: 1 } ]
+a.a = 2;
+console.log(vec2); //[ 1, 2, 3, 4, 5, 2, { a: 2 } ]
+</code></pre>
+<h4 id="效果描述">效果描述：</h4>
+<p><code>_.concat(array, [values])</code><br>
+创建一个新数组，将array与任何数组 或 值 连接在一起</p>
+<p>注意：</p>
+<ol>
+<li>产生一个新的数组（⚠️这一定程度上导致了较push性能不是很好）</li>
+<li>浅拷贝</li>
+</ol>
+<h3 id="2-手抄代码">2. 手抄代码</h3>
+<h4 id="导入功能代码">导入功能代码：</h4>
+<p>列举</p>
+<ul>
+<li>arrayPush</li>
+<li>baseFlatten</li>
+<li>copyArray</li>
+<li>isArray</li>
+</ul>
+<p>比较有趣的地方：</p>
+<p>拷贝数组</p>
+<pre><code>fucntion copyArray(source, array) {
+    let index = -1, length = source.length;
+    //利用短路求值特性，实现守护功能
+    array || (array = Array(length);
+    while(++index &lt; length) {
+        array[index] = source[index];
+    }
+    return array;
+}
+</code></pre>
+<p>数组扁平化 （细节待flatten再说）</p>
+<pre><code>function baseFlatten(array, depth, predicate, isStrict, result) {
+    const index = -1, length = array.length;
+
+    predicate || (predicate = isFlattenable);
+    result || (result = []);
+
+    while(++index &lt; length) {
+        let value = array[index];
+        if(depth &gt; 0 &amp;&amp; predicate(value)) {
+            if(depth &gt; 1) {
+                //递归啦递归啦
+                baseFlatten(value, depth-1, predicate, isStrict, result);
+            } else {
+                arrPush(result, value);
+            }
+        } else if(!isStrict) {
+            // 什么数据会触发这个呢？ ⚠️待解决
+            result[result.length] = value;
+        }
+    }
+    return rsult;
+}
+</code></pre>
+<h4 id="主要代码">主要代码</h4>
+<pre><code>function concat() {
+    let length = arguments.length;
+    if(!length) {
+        return [];
+    }
+
+    let args = Array(length - 1),
+            array = argument[0],
+            index = length;
+
+    //细品，比平时少了个变量，但一切刚刚好，👍
+    while (index--) {
+        args[index - 1] = arguments[index];
+    }
+
+    return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));
+
+}
+</code></pre>
+<h3 id="3-技巧总结">3. 技巧总结</h3>
+<ul>
+<li>短路求值</li>
+</ul>
+<pre><code>//例
+predicate || (predicate = isFlattenable);
+</code></pre>
+<ul>
+<li>赋值，从后向前</li>
+</ul>
+<pre><code>//例
+
+while (index--) {
+    args[index - 1] = arguments[index];
+}
+</code></pre>
+<p>不过这种单纯赋值操作，更直观的还是用slice, splice来实现吧</p>
+<pre><code>//例
+vec.slice(1);
+vec.splice(1)
+</code></pre>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://heihei12305.github.io/tag/_5Ki66sLtN/" class="tag">
-                    others
+                  <a href="https://heihei12305.github.io/tag/-fVzhwm2g/" class="tag">
+                    源码学习
+                  </a>
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD/" class="tag">
+                    前端
                   </a>
                 
               </div>
@@ -135,9 +244,9 @@ mysqldump -u用戶名 -p -d 数据库名 表名 &gt; 脚本名;</p>
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/webpack-wen-jian-zhi-wen-ce-lue/">
+                <a href="https://heihei12305.github.io/post/http-proxy-middleware-kua-yu-kua-yu-kua-yu/">
                   <h3 class="post-title">
-                    webpack-文件指纹策略及将css单独提取出来
+                    http-proxy-middleware 跨域跨域跨域
                   </h3>
                 </a>
               </div>
