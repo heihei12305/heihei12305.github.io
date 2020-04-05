@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>es2019有什么新功能？ | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1586073788595">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1586073788595" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/heihei12305" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">es2019有什么新功能？</h2>
+            <div class="post-date">2020-04-05</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/es10-de-xin-te-xing-hui-zong.png')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<p>本文类似一篇翻译，原文在这：<a href="https://medium.com/@selvaganesh93/javascript-whats-new-in-ecmascript-2019-es2019-es10-35210c6e7f4b">https://medium.com/@selvaganesh93/javascript-whats-new-in-ecmascript-2019-es2019-es10-35210c6e7f4b</a></p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://heihei12305.github.io/post-images/1586059508146.png" alt="" loading="lazy"></figure>
+<h3 id="1-arrayflat">1. Array.Flat()</h3>
+<h4 id="简介">简介</h4>
+<p>数组扁平化，可以设置层级，具体推荐阅读讶羽的这篇blog:<a href="https://github.com/mqyqingfeng/Blog/issues/36">https://github.com/mqyqingfeng/Blog/issues/36</a></p>
+<h4 id="简要实例">简要实例</h4>
+<pre><code>[1,[2,[3]]].flat() // [1, 2 ,[3]]
+[1,[2,[3]]].flat(2) //[1, 2, 3]
+[1,[2,[3]]].flat(Infinity) //[1,2,3]
+</code></pre>
+<h3 id="2-arrayflatmap">2. Array.flatMap()</h3>
+<h4 id="简介-2">简介</h4>
+<p>相当于在原有map的基础上叠加了flat功能, 不过无法设置层级只能扁平一层</p>
+<h4 id="简要实例-2">简要实例</h4>
+<pre><code>const arr = [1, 2, 3];
+arr.map(x =&gt; [x, x*2]); //[[1,2],[3,4],[5,6]]
+arr.map(x =&gt; [x, x*2]).flat(); // [1, 2, 2, 4, 3, 6]
+</code></pre>
+<h3 id="3-objectfromentries">3. Object.fromEntries()</h3>
+<h4 id="简介-3">简介</h4>
+<p>fromEntries方法将键值对列表转换为对象。</p>
+<blockquote>
+<p>注意 Object.fromEntries 仅接受可迭代，它只会接受Map或Array</p>
+</blockquote>
+<h4 id="简要实例-3">简要实例</h4>
+<pre><code>const arr = [['a',1],['b',2]];
+Object.fromEntries(arr);//{a: 1, b: 2}
+</code></pre>
+<h3 id="4-stringtrimstart-stringtrimend">4. String.trimStart() &amp; String.trimEnd()</h3>
+<h4 id="简介-4">简介</h4>
+<p>去除头部或者尾部空格</p>
+<p>为什么有了trimLeft &amp; trimRight还会有trimStart &amp; trimEnd呢？</p>
+<blockquote>
+<p>为了与 String.prototype.padStart 等函数保持一致，标准方法名称为trimStart。 但是，出于 Web 兼容性原因，trimLeft 仍然是 trimStart 的别名。在某些引擎中，这意味着：<code>String.prototype.trimLeft.name === &quot;trimStart&quot;;</code></p>
+<p align="right">--MDN</p>
+</blockquote>
+<h4 id="简要实例-4">简要实例</h4>
+<pre><code>'    a'.trimStart(); //'a'
+'a    '.trimEnd()
+</code></pre>
+<h3 id="5-可选捕获参数">5. 可选捕获参数</h3>
+<h4 id="简介-5">简介</h4>
+<p>catch可以不用必须带有时用不上的参数啦。</p>
+<pre><code>try{
+
+}catch(unUsed) {
+
+}
+</code></pre>
+<p>像上文的代码，如果你使用了 eslint 或者其它的工具则会报告一个警告或者错误，但是又不得不写，就很难受……</p>
+<p><code>catch(e){}</code>和<code>catch{}</code>底层处理肯定大有可究之处，可惜笔者学艺不精，分析不下去，😭</p>
+<blockquote>
+<p>ecma对应链接：<a href="https://tc39.es/proposal-optional-catch-binding/">https://tc39.es/proposal-optional-catch-binding/</a></p>
+</blockquote>
+<h4 id="简要实例-5">简要实例</h4>
+<pre><code>try{
+
+}catch{
+
+}
+</code></pre>
+<h3 id="6-functiontostring">6. Function.toString()</h3>
+<h4 id="简介-6">简介</h4>
+<p>该toString()方法返回一个表示函数源代码的字符串。</p>
+<h4 id="简要实例-6">简要实例</h4>
+<pre><code>function func(){
+console.log(1)
+//lalal
+    //lal
+}
+func.toString()
+//  &quot;function func(){
+//  //console.log(1)
+//  //lalal
+//     //lal
+}&quot;
+</code></pre>
+<h3 id="7-symboldescription">7. Symbol.description</h3>
+<h4 id="简介-7">简介</h4>
+<p>只读description属性是一个字符串，返回Symbol对象的可选描述。</p>
+<h4 id="简要实例-7">简要实例</h4>
+<pre><code>const sym = Symbol('heihei');
+sym.description // &quot;heihei&quot;
+</code></pre>
+<h3 id="8-格式良好的jsonstringify">8, 格式良好的JSON.stringify()</h3>
+<h4 id="简介-8">简介</h4>
+<p>返回JSON.stringify返回格式错误的Unicode字符串</p>
+<h4 id="简要实例-8">简要实例</h4>
+<pre><code>JSON.stringify('\uD834\uDF06') //&quot;&quot;𝌆&quot;&quot;
+</code></pre>
+<h3 id="9-数组排序的稳定性">9, 数组排序的稳定性</h3>
+<h4 id="简介-9">简介</h4>
+<p>以前，v8对10个及以上元素的数组使用不稳定的quickSort(这块可以看讶羽的<a href="https://github.com/mqyqingfeng/Blog/issues/52">https://github.com/mqyqingfeng/Blog/issues/52</a>), 从V8 v7.0/chrome 70 开始，V8使用稳定的<em>Timsort</em>算法<br>
+评分相同的用户将保持其排序顺序</p>
+<h4 id="简要实例-9">简要实例</h4>
+<pre><code>const usersList = [
+    {name:'heihei1',rating: 1},
+    {name:'heihei2',rating: 2},
+    {name:'heihei3',rating: 1},
+    {name:'heihei4',rating: 2}
+]
+usersList.sort((a,b)=&gt;a.rating-b.rating)
+// 0: {name: &quot;heihei1&quot;, rating: 1}
+// 1: {name: &quot;heihei3&quot;, rating: 1}
+// 2: {name: &quot;heihei2&quot;, rating: 2}
+// 3: {name: &quot;heihei4&quot;, rating: 2}
+</code></pre>
+<h3 id="10-json-ecmascript">10, JSON ⊂ ECMAScript</h3>
+<h4 id="简介-10">简介</h4>
+<p>将ECMA-262语法扩展为JSON的超集。ecma对应链接 <a href="https://tc39.es/proposal-json-superset/">https://tc39.es/proposal-json-superset/</a></p>
+<blockquote>
+<p>JSON语法由ECMA-404定义，并由RFC 7159永久固定，但是ECMA-262 的DoubleStringCharacter和SingleStringCharacter生产可以扩展为允许不转义的U + 2028 LINE SEPARATOR和U + 2029 PARAGRAPH SEPARATOR字符。</p>
+<p align="right"> --原文直接搬运</p>
+</blockquote>
+<h4 id="简要实例-10">简要实例</h4>
+<pre><code>const usersList = [
+    {name:'heihei1',rating: 1},
+    {name:'heihei2',rating: 2},
+    {name:'heihei3',rating: 1},
+    {name:'heihei4',rating: 2}
+]
+usersList.sort((a,b)=&gt;a.rating-b.rating)
+// 0: {name: &quot;heihei1&quot;, rating: 1}
+// 1: {name: &quot;heihei3&quot;, rating: 1}
+// 2: {name: &quot;heihei2&quot;, rating: 2}
+// 3: {name: &quot;heihei4&quot;, rating: 2}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD/" class="tag">
+                    前端
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/electron-chu-ti-yan-fan-qie-zhong-kai-fa/">
+                  <h3 class="post-title">
+                    electron初体验 - 番茄钟开发
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
