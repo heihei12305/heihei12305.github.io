@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1586171887938">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1586184278938">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://heihei12305.github.io">
-        <img src="https://heihei12305.github.io/images/avatar.png?v=1586171887938" class="site-logo">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1586184278938" class="site-logo">
         <h1 class="site-title">heihei12305</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -109,7 +109,8 @@
               </div>
             
             <div class="post-content">
-              <p>在 getter 中收集依赖，在 setter 中触发依赖</p>
+              <h3 id="依赖收集">依赖收集</h3>
+<p>在 getter 中收集依赖，在 setter 中触发依赖</p>
 <pre><code>fucntion defineReactive(data, key, val) {
     const dep = [] //新增
     Object.defineProperty(data, key {
@@ -134,8 +135,8 @@
 </code></pre>
 <p>这里我们新增了数组dep，用来存储被收集的依赖。<br>
 然后在set被触发时，循环dep以触发收集到的依赖</p>
-<p>更好的解耦版本<br>
-把依赖收集的代码封装成一个Dep类，它专门帮助我们使用这个类，我们可以收集依赖，删除依赖或者向依赖发送通知等。</p>
+<h3 id="更好的解耦版本">更好的解耦版本</h3>
+<p>把依赖收集的代码封装成一个Dep类，它专门帮助我们使用这个类，我们可以收集依赖，删除依赖或者向依赖发送通知等。</p>
 <pre><code>export default class Dep {
     constructor () {
         this.subs = [];
@@ -146,6 +147,10 @@
     }
 
     removeSub(sub) {
+       remove(this.subs, sub);
+    }
+
+    depend () {
         if(window.target) {
             this.addSub(window.target);
         }
@@ -188,6 +193,54 @@ function defineReactive (data, key, val) {
 }
 </code></pre>
 <p>依赖收集到哪了？收集到Dep中了。</p>
+<h3 id="watcher">Watcher</h3>
+<p>watcher是一个中介角色，数据发生变化时通知它，然后它再通知到其他地方。</p>
+<pre><code>export default class watcher {
+    constructor (vm, expOrFn, cb) {
+        this.vm = vm;
+        // 执行this.getter(), 就可以读取data.a.b.c的内容
+        this.getter = parsePath(expOrFn);
+        this.cb = cb;
+        this.value = this.get();
+    }
+
+    get() {
+        window.target = this;
+        let value = this.getter.call(this.vm, this.vm);
+        window.target = undefined;
+        return value;
+    }
+
+    update () {
+        const oldValue = this.value;
+        this.value = this.get();
+        this.cb.call(this.vm. this.value, oldValue);
+    }
+}
+</code></pre>
+<p>先在window.target赋一个this, 也就是当前watcher实例，然后再读一下 data.a.b.c的值，这肯定会触发getter。<br>
+触发了getter, 就会触发依赖收集逻辑，按上文介绍的，会从window.target中读取一个依赖并添加到Dep中。<br>
+这就导致，只要先在window.target中赋一个this，然后再读一下值，去触发getter，就可以把this主动加到keypath的Dep中。</p>
+<p>parsePath 实现也很机智</p>
+<pre><code>/**
+* 解析简单路径
+**/
+
+const bailRE = /[^\w.$]/;
+export function parsePath (path) {
+    if(bailRE.test(psth)) {
+        return ;
+    }
+    const segments = path.split('.');
+    return function (obj) {
+        for(let i = 0,len = segments.length;i&lt;len;i++) {
+            if(!obj) return ;
+            obj = obj[segments[i]];
+        }
+        return obj;
+    }
+}
+</code></pre>
 
             </div>
             
