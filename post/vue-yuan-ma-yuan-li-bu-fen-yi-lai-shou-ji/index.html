@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>webpack-进阶用法🚔 | heihei12305</title>
+<title>vue 源码原理部分  依赖收集 | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -102,91 +102,109 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">webpack-进阶用法🚔</h2>
-            <div class="post-date">2019-12-23</div>
+            <h2 class="post-title">vue 源码原理部分  依赖收集</h2>
+            <div class="post-date">2020-04-06</div>
             
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/webpack-jin-jie-yong-fa.jpg')">
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/vue-yuan-ma-yuan-li-bu-fen-yi-lai-shou-ji.png')">
               </div>
             
             <div class="post-content">
-              <h2 id="自动清理构建目录产物">🏍 自动清理构建目录产物</h2>
-<br/>
-<h3 id="通过-npm-scripts清理构建目录">🚲 通过 <code>npm scripts</code>清理构建目录</h3>
-<pre><code>rm -rf ./dist &amp;&amp; webpack
-rimraf ./dist &amp;&amp; webpack
-</code></pre>
-<p>不过这个 <code>rm -rf</code> 看起来有点😨，不很优雅。</p>
-<br/>
-<h3 id="通过-clean-webpack-plugin-插件">🛵 通过 <code>clean-webpack-plugin</code> 插件</h3>
-<br/>
-<p><b>默认会删除output指定的输出目录</b></p>
-<br/>
-<pre><code>const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-module.exports = {
-    entry:{
-        app:'./src/app.js',
-        search:'./src/search.js'
-    },
-    output:{
-        filename:'[name][chunkhash:8].js',
-        path:__dirname+'/dist'
-    },
-    plugins:[
-        new CleanWebpackPlugin()
-    ]
-};
-</code></pre>
-<br/>
-<hr>
-<br/>
-<h2 id="postcss插件自动补全css3前缀">postCss插件自动补全css3前缀🏄‍♀</h2>
-<h3 id="为什么css3需要添加前缀呢">为什么css3需要添加前缀呢？🏊‍♀</h3>
-<p>原因：因为浏览器的标准还没有完全统一，目前来看主要还有四种浏览器内核，分别是：</p>
-<ul>
-<li>⛹️‍♀️Trident(-ms)</li>
-<li>⛹Geko(-moz)</li>
-<li>🤾‍♀Webkit(-webkit)</li>
-<li>🤾‍♂Presto(-o)</li>
-</ul>
-<br/>
-<h3 id="使用autoprefixer插件">使用autoprefixer插件🏊</h3>
-<br/>
-<p>原理：🤼‍♂根据<a href="https://caniuse.com/">Cab I Use规则</a></p>
-<br/>
-<pre><code>module.exports = {
-  module:{
-    rules:[
-      {
-        test:/\.less$/,
-        use:[
-          'style-loader',
-          'css-loader',
-          'less-loader',
-           {
-            loader:'postcss-loader',
-            options:{
-              plugins:() =&gt; {
-                require('autoprefixer')({
-                    browsers:[&quot;last 2 version&quot;,&quot;&gt;1%&quot;,&quot;iOS 7&quot;]
-                })
-              }
+              <p>在 getter 中收集依赖，在 setter 中触发依赖</p>
+<pre><code>fucntion defineReactive(data, key, val) {
+    const dep = [] //新增
+    Object.defineProperty(data, key {
+        enumerable: true,
+        configurable: true,
+        get: fucntion() {
+            dep.push(window.target) //新增
+            return val;
+        },
+        set: function(newVal) {
+            if(val === newVal) {
+                return ;
             }
-          }
-        ]
-       }
-     ]
-  }
+
+            for(let i = 0;i &lt; dep.length; i++) {
+                dep[i](newVal, val);
+            }
+            val = newVal;
+        }
+    })
 }
 </code></pre>
+<p>这里我们新增了数组dep，用来存储被收集的依赖。<br>
+然后在set被触发时，循环dep以触发收集到的依赖</p>
+<p>更好的解耦版本<br>
+把依赖收集的代码封装成一个Dep类，它专门帮助我们使用这个类，我们可以收集依赖，删除依赖或者向依赖发送通知等。</p>
+<pre><code>export default class Dep {
+    constructor () {
+        this.subs = [];
+    }
+
+    addSub (sub) {
+        this.subs.push(sub);
+    }
+
+    removeSub(sub) {
+        if(window.target) {
+            this.addSub(window.target);
+        }
+    }
+
+    notify () {
+        const subs = this.subs.slice();
+        for(let i = 0, len = subs.length;i&lt;len;i++) {
+            subs[i].update();
+        }
+    }
+}
+
+function remove (arr, item) {
+    if(arr.length) {
+        const index = arr.indexOf(item);
+        if(index &gt; -1) {
+            return arr.splice(index, 1);
+        }
+    }
+}
+
+function defineReactive (data, key, val) {
+    const dep = new Dep();
+    Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get: function () {
+            dep.depend();
+            return val;
+        },
+        set: function () {
+            if(val === newVal) {
+                return;
+            }
+            val = newVal;
+            dep.notify(); //新增
+        }
+    })
+}
+</code></pre>
+<p>依赖收集到哪了？收集到Dep中了。</p>
 
             </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://heihei12305.github.io/tag/-fVzhwm2g/" class="tag">
+                    源码学习
+                  </a>
+                
+              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/webpack-jshtmlcss-ya-suo/">
+                <a href="https://heihei12305.github.io/post/es10-de-xin-te-xing-hui-zong/">
                   <h3 class="post-title">
-                    webpack-js,html,css压缩🗜️
+                    es2019有什么新功能？
                   </h3>
                 </a>
               </div>
