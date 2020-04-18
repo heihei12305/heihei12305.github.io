@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>前端比较有用的一些知识问题汇总 | heihei12305</title>
+<title>深入浅出React和Redux笔记📒 | heihei12305</title>
 <meta name="description" content="所见即所得，所见即所碍">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -102,23 +102,29 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">前端比较有用的一些知识问题汇总</h2>
-            <div class="post-date">2019-06-21</div>
+            <h2 class="post-title">深入浅出React和Redux笔记📒</h2>
+            <div class="post-date">2020-04-18</div>
             
-              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/qian-duan-bi-jiao-you-yong-de-yi-xie-zhi-shi-wen-ti-hui-zong.jpg')">
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/shen-ru-qian-chu-react-he-redux-bi-ji.png')">
               </div>
             
             <div class="post-content">
-              <p><b><a href="https://segmentfault.com/a/1190000019523323">前端项目中常见的CSS问题</a></b><br/><br/><br>
-<b><a href="https://yhlben.github.io/front-end-navigation/">前端导航</a></b><br/><br/><br>
-<b><a href="https://segmentfault.com/a/1190000019542534">20个让你效率更高的css技巧</a></b></p>
+              <p>即使现在我们还是要说在HTML中直接使用onclick很不专业，原因如下</p>
+<ul>
+<li>onclik 添加的事件处理函数在全局环境下执行，这污染了全局环境，很容易产生意料不到的后果；</li>
+<li>给很多DOM元素添加onclick事件，可能会影响网页的性能，毕竟，网页需要的事件处理函数越多，性能就会越低；</li>
+<li>对于使用onclick的DOM元素，如果要动态的从DOM元素中删除的话，需要把对应的时间处理器注销，如果忘了可能会造成内存泄露，这样的bug很难被发现。</li>
+</ul>
+<p>上面说的这些问题，在JSX中都不存在。<br>
+首先，onClick挂载的每个函数，都可以控制在组件范围内，不会污染全局空间。<br>
+我们在JSX中看到一个组件使用了onClick，但并没有产生直接使用onclick(注意是onclick而不是onClick)的HTML,而是使用了事件委托的方式处理点击事件，无论有多少个onClick出现，其实最后都只在DOM树上添加了一个事件处理函数，挂在最顶层的DOM节点上。所有的点击事件都被这个事件处理函数捕获，然后根据具体组件分配给特定函数，使用事件委托的性能当然要比为每个onClick都挂载一个事件处理函数要高。</p>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://heihei12305.github.io/tag/m9B4OKsMiD/" class="tag">
-                    前端
+                  <a href="https://heihei12305.github.io/tag/eqlIhN1ck/" class="tag">
+                    react
                   </a>
                 
               </div>
@@ -126,9 +132,9 @@
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://heihei12305.github.io/post/pdf2htmlex/">
+                <a href="https://heihei12305.github.io/post/vue-yuan-ma-yuan-li-bu-fen-yi-lai-shou-ji/">
                   <h3 class="post-title">
-                    pdf2htmlex-&gt;变成了html离翻译还远嘛？？！！
+                    vue 源码原理部分  依赖收集
                   </h3>
                 </a>
               </div>
