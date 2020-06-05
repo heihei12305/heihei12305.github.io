@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>抓住春招的小尾巴，21届前端 百度&amp;字节&amp;阿里面经 | heihei12305</title>
+<meta name="description" content="所见即所得，所见即所碍">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://heihei12305.github.io/favicon.ico?v=1591354199962">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heihei12305.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://heihei12305.github.io">
+        <img src="https://heihei12305.github.io/images/avatar.png?v=1591354199962" class="site-logo">
+        <h1 class="site-title">heihei12305</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/heihei12305" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      所见即所得，所见即所碍
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://heihei12305.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">抓住春招的小尾巴，21届前端 百度&amp;字节&amp;阿里面经</h2>
+            <div class="post-date">2020-06-05</div>
+            
+              <div class="feature-container" style="background-image: url('https://heihei12305.github.io/post-images/zhua-zhu-chun-zhao-de-xiao-wei-ba-21-jie-qian-duan-bai-du-andzi-jie-anda-li-mian-jing.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <blockquote>
+<p>背景描述： 今年三月初入职网易，近期因业务调整从网易离职，然后裸辞后就直接上了（周五离职，然后周六开始面，连续七天。。。），打算争取一下最后的直接转正机会。</p>
+</blockquote>
+<h3 id="最后结果百度二面后收到oc此时距离裸辞5天字节正常流程三面hr收到offer此时距离裸辞10天决定入职阿里走完技术面共四轮技术面看反馈是交叉面已经过了等待hr面">最后结果：百度二面后收到oc（此时距离裸辞5天）；字节正常流程三面+hr，收到offer（此时距离裸辞10天），决定入职；阿里走完技术面（共四轮技术面），看反馈是交叉面已经过了，等待hr面</h3>
+<p>其中基本没有特殊的面试题，都比较友好常规。</p>
+<p>记不住具体的了，混一起说了。。。</p>
+<h3 id="js-方面">js 方面</h3>
+<ul>
+<li>for of / for in 区别，for of原理，为什么引入迭代器，对象什么时候可以使用for of？ symbol.iterator 返回的数据类型是什么？一般使用for in需要注意什么？为什么要用obj.hasOwnproperty？</li>
+<li>promise用过么，一个特别麻烦的promise+setTimeout让把输出结果写出来。它解决了什么问题？ es7引入的async的原理是什么？生成器函数的原理是什么？</li>
+<li>js 的垃圾回收能说说么，为什么要分为旧生代和新生代。内存泄漏是怎么发生的？</li>
+<li>闭包是什么？它是怎么形成的，能从词法分析角度说说么？</li>
+<li>new 绑定过程</li>
+</ul>
+<pre><code>Function.prototype.a = 1; 
+Object.prototype.b = 2; 
+function Test(){} 
+let t = new Test(); 
+t.a? t.b?
+</code></pre>
+<ul>
+<li>this 相关，输出结果是什么，为什么？</li>
+</ul>
+<pre><code>var obj = { 
+
+  fn: function(){ 
+       console.log(this) //this-&gt; 
+       return ()=&gt;{ 
+           console.log(this) // this-&gt; 
+           (function(){console.log(this)})(); //this-&gt;window 
+           setTimeout(function(){console.log(this)},1);  //this-&gt; 
+       } 
+  } 
+} 
+
+obj.fn()();
+</code></pre>
+<ul>
+<li>词法分析相关，输出结果是什么，为什么？（其实这个变了好多次，从简单到难。。。）</li>
+</ul>
+<pre><code>var a = 1; 
+
+(function(a){ 
+
+     alert(a++); 
+   let a = 2; 
+})(a); 
+
+
+alert(++a); 
+
+//1,3; NAN,2; NAN,2; 1,2
+</code></pre>
+<ul>
+<li>let const var 区别，为什么下面代码不会报错？</li>
+</ul>
+<pre><code>const a = {};
+a.b = 1;
+</code></pre>
+<ul>
+<li>symbol.iterator symbol.hasInstance, symbol.toPrimitive 的作用是什么？</li>
+</ul>
+<h3 id="css-问的确实不多">css 问的确实不多</h3>
+<p>flex用的多么？flex-shrink flex-grow 是什么意思？</p>
+<h3 id="浏览器相关">浏览器相关</h3>
+<ul>
+<li>说说从输入url到页面出现经历了什么，越详细越好</li>
+<li>csrf xss 分别是什么？</li>
+<li>http缓存说一下</li>
+<li>https的原理能不能说一下</li>
+<li>说说你知道的http状态码吧</li>
+</ul>
+<h3 id="vue相关">vue相关</h3>
+<ul>
+<li>vue与react区别</li>
+<li>vue变换侦测原理</li>
+<li>vue为什么引入虚拟dom</li>
+<li>vue 3.0 出现了什么新东西</li>
+<li>vue虚拟dom与传统二叉树有什么区别</li>
+<li>vue的key的作用是什么</li>
+</ul>
+<h3 id="算法题部分">算法题部分</h3>
+<ul>
+<li>
+<p><code>[{id:1, name: 1, parent:1000}, {id:1, name: 1, parent:1000}]</code>把它变成树形结构，要求o(n)复杂度</p>
+</li>
+<li>
+<p>手写 柯里化函数</p>
+</li>
+<li>
+<p>实现indexOf函数</p>
+</li>
+<li>
+<p><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/">无重复字符的最长子串</a></p>
+</li>
+<li>
+<p><a href="https://leetcode-cn.com/problems/assign-cookies/">分发饼干</a></p>
+</li>
+<li>
+<p>想不起来了，都是easy&amp;middle难度反正。。。</p>
+</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://heihei12305.github.io/post/shen-ru-qian-chu-react-he-redux-bi-ji/">
+                  <h3 class="post-title">
+                    深入浅出React和Redux笔记📒
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '9150e9a5fa9f29008507',
+        clientSecret: 'c550fa8477e645285d24c5aadea4af51277e237a',
+        repo: 'heihei12305.github.io',
+        owner: 'heihei12305',
+        admin: ['heihei12305'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

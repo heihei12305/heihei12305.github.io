@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heihei12305.github.io</id>
     <title>heihei12305</title>
-    <updated>2020-04-18T08:19:22.858Z</updated>
+    <updated>2020-06-05T10:50:22.906Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heihei12305.github.io"/>
     <link rel="self" href="https://heihei12305.github.io/atom.xml"/>
@@ -10,6 +10,116 @@
     <logo>https://heihei12305.github.io/images/avatar.png</logo>
     <icon>https://heihei12305.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, heihei12305</rights>
+    <entry>
+        <title type="html"><![CDATA[抓住春招的小尾巴，21届前端 百度&字节&阿里面经]]></title>
+        <id>https://heihei12305.github.io/post/zhua-zhu-chun-zhao-de-xiao-wei-ba-21-jie-qian-duan-bai-du-andzi-jie-anda-li-mian-jing/</id>
+        <link href="https://heihei12305.github.io/post/zhua-zhu-chun-zhao-de-xiao-wei-ba-21-jie-qian-duan-bai-du-andzi-jie-anda-li-mian-jing/">
+        </link>
+        <updated>2020-06-05T10:10:43.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>背景描述： 今年三月初入职网易，近期因业务调整从网易离职，然后裸辞后就直接上了（周五离职，然后周六开始面，连续七天。。。），打算争取一下最后的直接转正机会。</p>
+</blockquote>
+<h3 id="最后结果百度二面后收到oc此时距离裸辞5天字节正常流程三面hr收到offer此时距离裸辞10天决定入职阿里走完技术面共四轮技术面看反馈是交叉面已经过了等待hr面">最后结果：百度二面后收到oc（此时距离裸辞5天）；字节正常流程三面+hr，收到offer（此时距离裸辞10天），决定入职；阿里走完技术面（共四轮技术面），看反馈是交叉面已经过了，等待hr面</h3>
+<p>其中基本没有特殊的面试题，都比较友好常规。</p>
+<p>记不住具体的了，混一起说了。。。</p>
+<h3 id="js-方面">js 方面</h3>
+<ul>
+<li>for of / for in 区别，for of原理，为什么引入迭代器，对象什么时候可以使用for of？ symbol.iterator 返回的数据类型是什么？一般使用for in需要注意什么？为什么要用obj.hasOwnproperty？</li>
+<li>promise用过么，一个特别麻烦的promise+setTimeout让把输出结果写出来。它解决了什么问题？ es7引入的async的原理是什么？生成器函数的原理是什么？</li>
+<li>js 的垃圾回收能说说么，为什么要分为旧生代和新生代。内存泄漏是怎么发生的？</li>
+<li>闭包是什么？它是怎么形成的，能从词法分析角度说说么？</li>
+<li>new 绑定过程</li>
+</ul>
+<pre><code>Function.prototype.a = 1; 
+Object.prototype.b = 2; 
+function Test(){} 
+let t = new Test(); 
+t.a? t.b?
+</code></pre>
+<ul>
+<li>this 相关，输出结果是什么，为什么？</li>
+</ul>
+<pre><code>var obj = { 
+
+  fn: function(){ 
+       console.log(this) //this-&gt; 
+       return ()=&gt;{ 
+           console.log(this) // this-&gt; 
+           (function(){console.log(this)})(); //this-&gt;window 
+           setTimeout(function(){console.log(this)},1);  //this-&gt; 
+       } 
+  } 
+} 
+
+obj.fn()();
+</code></pre>
+<ul>
+<li>词法分析相关，输出结果是什么，为什么？（其实这个变了好多次，从简单到难。。。）</li>
+</ul>
+<pre><code>var a = 1; 
+
+(function(a){ 
+
+     alert(a++); 
+   let a = 2; 
+})(a); 
+
+
+alert(++a); 
+
+//1,3; NAN,2; NAN,2; 1,2
+</code></pre>
+<ul>
+<li>let const var 区别，为什么下面代码不会报错？</li>
+</ul>
+<pre><code>const a = {};
+a.b = 1;
+</code></pre>
+<ul>
+<li>symbol.iterator symbol.hasInstance, symbol.toPrimitive 的作用是什么？</li>
+</ul>
+<h3 id="css-问的确实不多">css 问的确实不多</h3>
+<p>flex用的多么？flex-shrink flex-grow 是什么意思？</p>
+<h3 id="浏览器相关">浏览器相关</h3>
+<ul>
+<li>说说从输入url到页面出现经历了什么，越详细越好</li>
+<li>csrf xss 分别是什么？</li>
+<li>http缓存说一下</li>
+<li>https的原理能不能说一下</li>
+<li>说说你知道的http状态码吧</li>
+</ul>
+<h3 id="vue相关">vue相关</h3>
+<ul>
+<li>vue与react区别</li>
+<li>vue变换侦测原理</li>
+<li>vue为什么引入虚拟dom</li>
+<li>vue 3.0 出现了什么新东西</li>
+<li>vue虚拟dom与传统二叉树有什么区别</li>
+<li>vue的key的作用是什么</li>
+</ul>
+<h3 id="算法题部分">算法题部分</h3>
+<ul>
+<li>
+<p><code>[{id:1, name: 1, parent:1000}, {id:1, name: 1, parent:1000}]</code>把它变成树形结构，要求o(n)复杂度</p>
+</li>
+<li>
+<p>手写 柯里化函数</p>
+</li>
+<li>
+<p>实现indexOf函数</p>
+</li>
+<li>
+<p><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/">无重复字符的最长子串</a></p>
+</li>
+<li>
+<p><a href="https://leetcode-cn.com/problems/assign-cookies/">分发饼干</a></p>
+</li>
+<li>
+<p>想不起来了，都是easy&amp;middle难度反正。。。</p>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[深入浅出React和Redux笔记📒]]></title>
         <id>https://heihei12305.github.io/post/shen-ru-qian-chu-react-he-redux-bi-ji/</id>
@@ -619,70 +729,6 @@ module.exports = function(app) {
 <li>ctrl + a	到行首 ctrl + e	到行尾<br>
 <img src="https://heihei12305.github.io/post-images/1579015391632.gif" alt="" loading="lazy"></li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[nginx 部署]]></title>
-        <id>https://heihei12305.github.io/post/nginx-bu-shu/</id>
-        <link href="https://heihei12305.github.io/post/nginx-bu-shu/">
-        </link>
-        <updated>2020-01-11T11:15:19.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="启动停止和重新加载配置">启动，停止和重新加载配置</h2>
-<p>一旦启动nginx，就可以通过 -s 文件 来进行控制</p>
-<blockquote>
-<p>nginx -s 信号</p>
-</blockquote>
-<p>信号可以是以下之一：</p>
-<ul>
-<li>stop 快速关机</li>
-<li>quit 正常关机</li>
-<li>reload 重新加载配置文件</li>
-<li>reopen 重新打开日志文件</li>
-</ul>
-<h2 id="配置文件的结构">配置文件的结构</h2>
-<p>nginx 由配置文件中指定的指令控制的模块组成。伪指令分为简单伪指令和块伪指令。<br>
-一个简单的指令由名称和参数组成，这些名称和参数之间用空格分隔，并以分号（；）结尾。<br>
-块指令的结果与简单指令的结构相同，但是它是用括号（{,}）起来的附加指令。如果块指令在花括号内有其他其他指令，则称为上下文。<br>
-放置在任何上下文外部的配置文件中的指令都被视为在主上下文中。<br>
-#符号 后的其余行都被视为注释</p>
-<h2 id="提供静态内容">提供静态内容</h2>
-<p>Web服务器的一项重要任务是分发文件（例如图像或静态HTML页面）。</p>
-<pre><code>user  nginx;
-worker_processes  1;
-
-events {
-  worker_connections  4096;  ## Default: 1024
-}
-
-http {
-  include  mime.types;
-  server {
-    listen 3000;
-    location /# {
-      try_files $uri /#/index.html; # l/#/index.html 路径不是真实的文件路径，而是访问的 url 路径
-    }
-    location = /#/index.html { # 上面的 location 都导流到了这里
-      alias /usr/AD/ad_web/index.html; # 这里是真实的文件路径
-      access_log              off;
-      add_header              Cache-Control &quot;no-cache, no-store&quot;;
-      expires                 -1;
-      etag                    on;
-    }
-    location /static/ { # 静态文件
-      # http://test.com/produk-digital/static/css/main.css
-      # 会被解析成
-      # /Users/youxingzhi/shopee/sniper/build/static/css/main.css
-      # 如果换成 root 则会解析成
-      # /Users/youxingzhi/shopee/sniper/build/static/produk-digital/static/css/main.css
-      alias                 /usr/AD/ad_web/static/;
-      access_log              off;
-      etag                    on;
-      gzip                    on;
-      include                 gzip_params;
-    }
-  }
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
